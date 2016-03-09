@@ -1,0 +1,19 @@
+Package: rebi
+Version: 0.0.5
+Maintainer: 'Najko Jahn' <najko.jahn@uni-bielefeld.de>
+Author: Najko Jahn
+License: GPL-3
+Title: rebi -- R Interface for Europe PMC RESTful Web Service
+URL: http://github.com/njahn82/rebi/
+BugReports: http://github.com/njahn82/rebi/issues
+Description: R Interface to Europe PMC RESTful Web Service.
+LazyLoad: yes
+LazyData: yes
+Depends:
+    R (>= 3.00)
+Imports:
+    httr,
+    jsonlite,
+    plyr
+RoxygenNote: 5.0.1
+Suggests: testthat
