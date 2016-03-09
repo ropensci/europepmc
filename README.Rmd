@@ -39,18 +39,19 @@ my_data$hit_count
 head(my_data$md)
 ```
 
-Get first 500 PLOS Genetics articles that cross-reference EMBL
+Get first PLOS Genetics articles that cross-reference EMBL
 
 ```{r}
 my_data <- epmc_search(query = 'ISSN:1553-7404 HAS_EMBL:y')
 head(my_data$md)
 ```
 
-Get first 500 articles with DataCite DOIs
+Get list of ids that represent articles referencing DataCite DOIs
 
 ```{r}
-my_data <- epmc_search(query = "ACCESSION_TYPE:doi", n_pages = 1)
-head(my_data)
+my_data <- epmc_search(query = "ACCESSION_TYPE:doi", n_pages = 1, 
+                       id_list = TRUE)
+head(my_data$md)
 my_data$hit_count
 ```
 
@@ -63,7 +64,7 @@ epmc_details(ext_id = "24270414")
 Show author details including orcid, if available
 
 ```{r}
-my_data <- epmc_details(ext_id = "PMC4145202", data_src = "PMC")
+my_data <- epmc_details(ext_id = "14756321")
 my_data$author_details
 ```
 
@@ -86,7 +87,7 @@ epmc_refs("PMC3166943", data_src = "pmc")
 Summary of links found
 
 ```{r}
-epmc_db_count(12368864)
+epmc_db_count("12368864")
 ```
 
 Select database and get links:

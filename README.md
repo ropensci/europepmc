@@ -98,7 +98,7 @@ head(my_data$md)
 #> 6           10.1093/nar/gkv208     7
 ```
 
-Get first 500 PLOS Genetics articles that cross-reference EMBL
+Get first PLOS Genetics articles that cross-reference EMBL
 
 
 ```r
@@ -169,224 +169,20 @@ head(my_data$md)
 #> 6 10.1371/journal.pgen.1005085
 ```
 
-Get first 500 articles with DataCite DOIs
+Get list of ids that represent articles referencing DataCite DOIs
 
 
 ```r
-my_data <- epmc_search(query = "ACCESSION_TYPE:doi", n_pages = 1)
-head(my_data)
-#> $hit_count
-#> [1] 4262
-#> 
-#> $md
-#>          id source     pmid      pmcid
-#> 1  26474846    MED 26474846 PMC4693979
-#> 2  26725519    MED 26725519 PMC4698588
-#> 3  26734726    MED 26734726 PMC4703221
-#> 4  26751378    MED 26751378 PMC4709234
-#> 5  26751577    MED 26751577 PMC4709135
-#> 6  26731720    MED 26731720 PMC4701503
-#> 7  26424727    MED 26424727 PMC4678253
-#> 8  26731133    MED 26731133 PMC4700860
-#> 9  26286666    MED 26286666 PMC4675875
-#> 10 26731268    MED 26731268 PMC4701222
-#> 11 26754108    MED 26754108 PMC4709947
-#> 12 26231183    MED 26231183 PMC4678251
-#> 13 26735915    MED 26735915 PMC4703396
-#> 14 26416980    MED 26416980 PMC4693975
-#> 15 26728943    MED 26728943 PMC4700566
-#> 16 26745870    MED 26745870 PMC4706432
-#> 17 26508768    MED 26508768 PMC4678255
-#> 18 26405218    MED 26405218 PMC4678252
-#> 19 26727264    MED 26727264 PMC4699701
-#> 20 26578585    MED 26578585 PMC4702871
-#> 21 26871706    MED 26871706 PMC4752336
-#> 22 26871589    MED 26871589 PMC4752347
-#> 23 26900210    MED 26900210 PMC4748012
-#> 24 26890485    MED 26890485 PMC4759450
-#> 25 26911566    MED 26911566 PMC4765150
-#>                                                                                                                                                title
-#> 1                                                                                           An Exon-Capture System for the Entire Class Ophiuroidea.
-#> 2                                 Multi-scale Characterisation of the 3D Microstructure of a Thermally-Shocked Bulk Metallic Glass Matrix Composite.
-#> 3                                                Nociceptive Local Field Potentials Recorded from the Human Insula Are Not Specific for Nociception.
-#> 4                                                                            Neurokernel: An Open Source Platform for Emulating the Fruit Fly Brain.
-#> 5                                                                       A Probabilistic Atlas of Diffuse WHO Grade II Glioma Locations in the Brain.
-#> 6                                                   Factors Controlling the Stable Nitrogen Isotopic Composition (δ15N) of Lipids in Marine Animals.
-#> 7                                                                                           Fast Dating Using Least-Squares Criteria and Algorithms.
-#> 8                                                                          Pantheon 1.0, a manually verified dataset of globally famous biographies.
-#> 9  Polygamy and an absence of fine-scale structure in Dendroctonus ponderosae (Hopk.) (Coleoptera: Curcilionidae) confirmed using molecular markers.
-#> 10                                                    The Gut Microbiome Is Altered in a Letrozole-Induced Mouse Model of Polycystic Ovary Syndrome.
-#> 11                                                                               Long-term recovery from acute cold shock in Caenorhabditis elegans.
-#> 12                      An Efficient Independence Sampler for Updating Branches in Bayesian Markov chain Monte Carlo Sampling of Phylogenetic Trees.
-#> 13            Cross-Regulation between the phz1 and phz2 Operons Maintain a Balanced Level of Phenazine Biosynthesis in Pseudomonas aeruginosa PAO1.
-#> 14                                                        The Roles of Compensatory Evolution and Constraint in Aminoacyl tRNA Synthetase Evolution.
-#> 15           Co-linearity and divergence of the A subgenome of Brassica juncea compared with other Brassica species carrying different A subgenomes.
-#> 16         Marine Fouling Assemblages on Offshore Gas Platforms in the Southern North Sea: Effects of Depth and Distance from Shore on Biodiversity.
-#> 17                                                Testing for Depéret's Rule (Body Size Increase) in Mammals using Combined Extinct and Extant Data.
-#> 18                                                                                    Quantifying Age-dependent Extinction from Species Phylogenies.
-#> 19                                                                 Geniculo-Cortical Projection Diversity Revealed within the Mouse Visual Thalamus.
-#> 20                                                                                              Gene3D: expanding the utility of domain assignments.
-#> 21                              Developing a Physiologically-Based Pharmacokinetic Model Knowledgebase in Support of Provisional Model Construction.
-#> 22                                           Cisplatin-Induced Non-Oliguric Acute Kidney Injury in a Pediatric Experimental Animal Model in Piglets.
-#> 23                                                                   Conversion of Verbal Response Scales: Robustness Across Demographic Categories.
-#> 24                                                                                         Quantifying Transmission Investment in Malaria Parasites.
-#> 25                                          Structure-based Markov random field model for representing evolutionary constraints on functional sites.
-#>                                                                                                                                    authorString
-#> 1                                                                                        Hugall AF, O'Hara TD, Hunjan S, Nilsen R, Moussalli A.
-#> 2                                                                            Zhang W, Bodey AJ, Sui T, Kockelmann W, Rau C, Korsunsky AM, Mi J.
-#> 3                                               Liberati G, Klöcker A, Safronova MM, Ferrão Santos S, Ribeiro Vaz JG, Raftopoulos C, Mouraux A.
-#> 4                                                                                                                           Givon LE, Lazar AA.
-#> 5       Parisot S, Darlix A, Baumann C, Zouaoui S, Yordanova Y, Blonski M, Rigau V, Chemouny S, Taillandier L, Bauchet L, Duffau H, Paragios N.
-#> 6                                                                       Svensson E, Schouten S, Hopmans EC, Middelburg JJ, Sinninghe Damsté JS.
-#> 7                                                                                                           To TH, Jung M, Lycett S, Gascuel O.
-#> 8                                                                                                       Yu AZ, Ronen S, Hu K, Lu T, Hidalgo CA.
-#> 9                                                                    Janes JK, Roe AD, Rice AV, Gorrell JC, Coltman DW, Langor DW, Sperling FA.
-#> 10                                                                                                Kelley ST, Skarra DV, Rivera AJ, Thackray VG.
-#> 11                                                                                                                      Robinson JD, Powell JR.
-#> 12                                                                                                         Aberer AJ, Stamatakis A, Ronquist F.
-#> 13                                                                                       Cui Q, Lv H, Qi Z, Jiang B, Xiao B, Liu L, Ge Y, Hu X.
-#> 14                                                                                                            Adrion JR, White PS, Montooth KL.
-#> 15                                                                    Zou J, Hu D, Liu P, Raman H, Liu Z, Liu X, Parkin IA, Chalhoub B, Meng J.
-#> 16                                                                                                     van der Stap T, Coolen JW, Lindeboom HJ.
-#> 17                                   Bokma F, Godinot M, Maridet O, Ladevèze S, Costeur L, Solé F, Gheerbrant E, Peigné S, Jacques F, Laurin M.
-#> 18                                                                                                          Alexander HK, Lambert A, Stadler T.
-#> 19                                                                                Leiwe MN, Hendry AC, Bard AD, Eglen SJ, Lowe AS, Thompson ID.
-#> 20                                                      Lam SD, Dawson NL, Das S, Sillitoe I, Ashford P, Lee D, Lehtinen S, Orengo CA, Lees JG.
-#> 21 Lu J, Goldsmith MR, Grulke CM, Chang DT, Brooks RD, Leonard JA, Phillips MB, Hypes ED, Fair MJ, Tornero-Velez R, Johnson J, Dary CC, Tan YM.
-#> 22           Santiago MJ, Fernández SN, Lázaro A, González R, Urbano J, López J, Solana MJ, Toledo B, Del Castillo J, Tejedor A, López-Herce J.
-#> 23                                                                      DeJonge T, Veenhoven R, Moonen L, Kalmijn W, van Beuningen J, Arends L.
-#> 24                                                                                                Greischar MA, Mideo N, Read AF, Bjørnstad ON.
-#> 25                                                                                                                             Jeong CS, Kim D.
-#>          journalTitle issue journalVolume pubYear journalIssn pageInfo
-#> 1       Mol Biol Evol     1            33    2016   0737-4038  281-294
-#> 2             Sci Rep  <NA>             6    2016   2045-2322    18545
-#> 3           PLoS Biol     1            14    2016   1544-9173 e1002345
-#> 4            PLoS One     1            11    2016   1932-6203 e0146581
-#> 5            PLoS One     1            11    2016   1932-6203 e0144200
-#> 6            PLoS One     1            11    2016   1932-6203 e0146321
-#> 7           Syst Biol     1            65    2016   1063-5157    82-97
-#> 8            Sci Data  <NA>             3    2016   2052-4463   150075
-#> 9    Heredity (Edinb)     1           116    2016   0018-067x    68-74
-#> 10           PLoS One     1            11    2016   1932-6203 e0146509
-#> 11      BMC Cell Biol     1            17    2016   1471-2121        2
-#> 12          Syst Biol     1            65    2016   1063-5157  161-176
-#> 13           PLoS One     1            11    2016   1932-6203 e0144447
-#> 14      Mol Biol Evol     1            33    2016   0737-4038  152-161
-#> 15       BMC Genomics     1            17    2016   1471-2164       18
-#> 16           PLoS One     1            11    2016   1932-6203 e0146324
-#> 17          Syst Biol     1            65    2016   1063-5157   98-108
-#> 18          Syst Biol     1            65    2016   1063-5157    35-50
-#> 19           PLoS One     1            11    2016   1932-6203 e0144846
-#> 20  Nucleic Acids Res    d1            44    2016   0305-1048   d404-9
-#> 21   PLoS Comput Biol     2            12    2016   1553-734x e1004495
-#> 22           PLoS One     2            11    2016   1932-6203 e0149013
-#> 23      Soc Indic Res  <NA>           126    2016   0303-8300  331-358
-#> 24   PLoS Comput Biol     2            12    2016   1553-734x e1004718
-#> 25 BMC Bioinformatics     1            17    2016   1471-2105       99
-#>                              pubType isOpenAccess inEPMC inPMC hasPDF
-#> 1  journal article; research-article            Y      Y     N      Y
-#> 2  journal article; research-article            Y      Y     N      Y
-#> 3  journal article; research-article            Y      Y     N      Y
-#> 4  journal article; research-article            Y      Y     N      Y
-#> 5  journal article; research-article            Y      Y     N      Y
-#> 6  journal article; research-article            Y      Y     N      Y
-#> 7  journal article; research-article            Y      Y     N      Y
-#> 8        journal article; data-paper            Y      Y     N      Y
-#> 9  journal article; research-article            Y      Y     N      Y
-#> 10 journal article; research-article            Y      Y     N      Y
-#> 11 journal article; research-article            Y      Y     N      Y
-#> 12 journal article; research-article            Y      Y     N      Y
-#> 13 journal article; research-article            Y      Y     N      Y
-#> 14 journal article; research-article            Y      Y     N      Y
-#> 15 journal article; research-article            Y      Y     N      Y
-#> 16 journal article; research-article            Y      Y     N      Y
-#> 17 journal article; research-article            Y      Y     N      Y
-#> 18 journal article; research-article            Y      Y     N      Y
-#> 19 journal article; research-article            Y      Y     N      Y
-#> 20 journal article; research-article            Y      Y     N      Y
-#> 21 journal article; research-article            Y      Y     N      Y
-#> 22 journal article; research-article            Y      Y     N      Y
-#> 23 journal article; research-article            Y      Y     N      Y
-#> 24 journal article; research-article            Y      Y     N      Y
-#> 25 journal article; research-article            Y      Y     N      Y
-#>    hasBook hasSuppl citedByCount hasReferences hasTextMinedTerms
-#> 1        N        N            0             N                 Y
-#> 2        N        N            0             N                 Y
-#> 3        N        N            0             N                 Y
-#> 4        N        N            0             N                 Y
-#> 5        N        N            0             N                 Y
-#> 6        N        N            0             N                 Y
-#> 7        N        N            0             N                 Y
-#> 8        N        N            0             N                 Y
-#> 9        N        N            0             N                 Y
-#> 10       N        N            0             N                 Y
-#> 11       N        N            0             N                 Y
-#> 12       N        N            0             N                 Y
-#> 13       N        N            0             N                 Y
-#> 14       N        Y            0             N                 Y
-#> 15       N        N            0             N                 Y
-#> 16       N        N            0             N                 Y
-#> 17       N        N            0             N                 Y
-#> 18       N        N            0             N                 Y
-#> 19       N        N            0             N                 Y
-#> 20       N        N            0             N                 Y
-#> 21       N        N            0             N                 Y
-#> 22       N        N            0             N                 Y
-#> 23       N        N            0             N                 Y
-#> 24       N        N            0             N                 Y
-#> 25       N        N            0             N                 Y
-#>    hasDbCrossReferences hasLabsLinks epmcAuthMan hasTMAccessionNumbers
-#> 1                     N            Y           N                     Y
-#> 2                     N            N           N                     Y
-#> 3                     N            N           N                     Y
-#> 4                     N            N           N                     Y
-#> 5                     N            N           N                     Y
-#> 6                     N            Y           N                     Y
-#> 7                     N            Y           N                     Y
-#> 8                     N            N           N                     Y
-#> 9                     N            Y           N                     Y
-#> 10                    N            N           N                     Y
-#> 11                    N            N           N                     Y
-#> 12                    N            Y           N                     Y
-#> 13                    N            N           N                     Y
-#> 14                    N            Y           N                     Y
-#> 15                    N            Y           N                     Y
-#> 16                    N            Y           N                     Y
-#> 17                    N            Y           N                     Y
-#> 18                    N            Y           N                     Y
-#> 19                    N            N           N                     Y
-#> 20                    N            N           N                     Y
-#> 21                    N            N           N                     Y
-#> 22                    N            N           N                     Y
-#> 23                    N            N           N                     Y
-#> 24                    N            N           N                     Y
-#> 25                    N            N           N                     Y
-#>    luceneScore                          doi
-#> 1          NaN        10.1093/molbev/msv216
-#> 2          NaN            10.1038/srep18545
-#> 3          NaN 10.1371/journal.pbio.1002345
-#> 4          NaN 10.1371/journal.pone.0146581
-#> 5          NaN 10.1371/journal.pone.0144200
-#> 6          NaN 10.1371/journal.pone.0146321
-#> 7          NaN        10.1093/sysbio/syv068
-#> 8          NaN        10.1038/sdata.2015.75
-#> 9          NaN          10.1038/hdy.2015.71
-#> 10         NaN 10.1371/journal.pone.0146509
-#> 11         NaN    10.1186/s12860-015-0079-z
-#> 12         NaN        10.1093/sysbio/syv051
-#> 13         NaN 10.1371/journal.pone.0144447
-#> 14         NaN        10.1093/molbev/msv206
-#> 15         NaN    10.1186/s12864-015-2343-1
-#> 16         NaN 10.1371/journal.pone.0146324
-#> 17         NaN        10.1093/sysbio/syv075
-#> 18         NaN        10.1093/sysbio/syv065
-#> 19         NaN 10.1371/journal.pone.0144846
-#> 20         NaN          10.1093/nar/gkv1231
-#> 21         NaN 10.1371/journal.pcbi.1004495
-#> 22         NaN 10.1371/journal.pone.0149013
-#> 23         NaN                         <NA>
-#> 24         NaN 10.1371/journal.pcbi.1004718
-#> 25         NaN    10.1186/s12859-016-0948-2
+my_data <- epmc_search(query = "ACCESSION_TYPE:doi", n_pages = 1, 
+                       id_list = TRUE)
+head(my_data$md)
+#>         id source     pmid      pmcid
+#> 1 26474846    MED 26474846 PMC4693979
+#> 2 26725519    MED 26725519 PMC4698588
+#> 3 26734726    MED 26734726 PMC4703221
+#> 4 26751378    MED 26751378 PMC4709234
+#> 5 26751577    MED 26751577 PMC4709135
+#> 6 26731720    MED 26731720 PMC4701503
 my_data$hit_count
 #> [1] 4262
 ```
@@ -475,10 +271,22 @@ Show author details including orcid, if available
 
 
 ```r
-my_data <- epmc_details(ext_id = "PMC4145202", data_src = "PMC")
-#> Error in epmc_details(ext_id = "PMC4145202", data_src = "PMC"): nothing found, please check your query
+my_data <- epmc_details(ext_id = "14756321")
 my_data$author_details
-#> NULL
+#>      fullName firstName  lastName initials authorId.type
+#> 1    Rosso MG   Mario G     Rosso       MG          <NA>
+#> 2        Li Y      Yong        Li        Y          <NA>
+#> 3  Strizhov N   Nicolai  Strizhov        N          <NA>
+#> 4     Reiss B     Bernd     Reiss        B         ORCID
+#> 5    Dekker K      Koen    Dekker        K          <NA>
+#> 6 Weisshaar B     Bernd Weisshaar        B         ORCID
+#>        authorId.value
+#> 1                <NA>
+#> 2                <NA>
+#> 3                <NA>
+#> 4 0000-0002-2521-4000
+#> 5                <NA>
+#> 6 0000-0002-7635-3473
 ```
 
 ## Get citation counts and citing publications
@@ -657,7 +465,7 @@ Summary of links found
 
 
 ```r
-epmc_db_count(12368864)
+epmc_db_count("12368864")
 #>     dbName count
 #> 1     EMBL     5
 #> 2 INTERPRO     1
