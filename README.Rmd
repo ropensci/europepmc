@@ -1,0 +1,117 @@
+# rebi - R Interface to Europe PMC RESTful Web Service
+
+```{r echo=FALSE}
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE,
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+[![Build Status](https://travis-ci.org/njahn82/rebi.svg?branch=master)](https://travis-ci.org/njahn82/rebi)
+
+rebi facilitates access to [Europe PMC RESTful Web Service](http://europepmc.org/RestfulWebService). 
+
+Europe PubMed Central, one of the largest literature databases for life-science 
+publications,  indexes more than 30 millions publications, including 25
+millions from PubMed. It gives also access to full texts, if available.
+
+## Installation
+
+The latest development version can be installed using [devtools](https://github.com/hadley/devtools) package:
+
+```{r, eval = FALSE}
+require(devtools)
+install_github("njahn82/rebi")
+```
+
+## Search Europe PMC
+
+Europe PMC provides comprehensive guidance on how to search:
+<http://europepmc.org/help>
+
+```{r}
+my_data <- epmc_search(query='Gabi-Kat')
+# number of records
+my_data$hit_count
+# first six records
+head(my_data$md)
+```
+
+Get first 500 PLOS Genetics articles that cross-reference EMBL
+
+```{r}
+my_data <- epmc_search(query = 'ISSN:1553-7404 HAS_EMBL:y')
+head(my_data$md)
+```
+
+Get first 500 articles with DataCite DOIs
+
+```{r}
+my_data <- epmc_search(query = "ACCESSION_TYPE:doi", n_pages = 1)
+head(my_data)
+my_data$hit_count
+```
+
+## Get article details
+
+```{r}
+epmc_details(ext_id = "24270414")
+```
+
+Show author details including orcid, if available
+
+```{r}
+my_data <- epmc_details(ext_id = "PMC4145202", data_src = "PMC")
+my_data$author_details
+```
+
+## Get citation counts and citing publications
+
+```{r}
+my_cites <- epmc_citations("9338777")
+my_cites$hit_count
+head(my_cites$citations)
+```
+
+## Get reference section
+
+```{r}
+epmc_refs("PMC3166943", data_src = "pmc")
+```
+
+## Retrieve links to other EBI databases
+
+Summary of links found
+
+```{r}
+epmc_db_count(12368864)
+```
+
+Select database and get links:
+
+```{r}
+epmc_db("12368864", db = "embl")
+```
+
+
+## Get text-mined terms
+
+Summary of text-mined terms
+
+```{r}
+epmc_tm_count("25249410")
+```
+
+Select semantic type to retrieve the terms:
+
+```{r}
+epmc_tm("25249410", semantic_type = "GO_TERM")
+```
+
+
+## References
+
+Europe PMC: a full-text literature database for the life sciences and platform 
+for innovation. (2014). Nucleic Acids Research, 43(D1), D1042–D1048. doi:[10.1093/nar/gku1061](http://doi.org/10.1093/nar/gku1061)

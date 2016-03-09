@@ -47,7 +47,7 @@
 #' @return list of 3 including link count and metadata of cross-references.
 #' @examples
 #'   \dontrun{
-#'   epmc_db_details("12368864", db = "uniprot", n_pages = 2)
+#'   epmc_db("12368864", db = "uniprot", n_pages = 2)
 #'   epmc_db("25249410", db = "embl")
 #'   epmc_db("14756321", db = "uniprot")
 #'   }
