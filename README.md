@@ -10,7 +10,7 @@
 rebi facilitates access to [Europe PMC RESTful Web
 Service](http://europepmc.org/RestfulWebService).
 
-[Europe PMC]((http://europepmc.org/) covers life science literature and it
+[Europe PMC](http://europepmc.org/) covers life science literature and it
 gives access to open access full texts. Coverage is not only restricted to
 Europe, but articles and abstracts are indexed from all over the world. As a
 partner in the [PMC International
