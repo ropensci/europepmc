@@ -14,6 +14,7 @@ Depends:
 Imports:
     httr,
     jsonlite,
-    plyr
+    plyr,
+    xml2
 RoxygenNote: 5.0.1
 Suggests: testthat

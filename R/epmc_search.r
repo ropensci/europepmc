@@ -69,11 +69,14 @@ rebi_GET <- function(path = NULL, query = NULL, ...) {
     stop("Nothing to search")
   uri <- "http://www.ebi.ac.uk"
   # call api
-  req <- httr::GET(uri, path = path , query = query)
+  req <- httr::GET(uri, path = path, query = query)
   # check for http status
-  httr::warn_for_status(req)
+  httr::stop_for_status(req)
   # load json into r
   out <- httr::content(req, "text")
+  # valid json
+  if(!jsonlite::validate(out))
+    stop("Upps, nothing to parse, please check your query")
   doc <- jsonlite::fromJSON(out)
   if (!exists("doc"))
     stop("No json to parse", call. = FALSE)

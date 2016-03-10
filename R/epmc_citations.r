@@ -23,8 +23,8 @@
 #' @param n_pages Number of pages to be returned. By default, this function
 #'   returns 25 records for each page.
 #'
-#' @return List of 3, citation count, metadata of citing documents (data.frame)
-#'   and summary of request parameter
+#' @return List of 2, citation count and metadata of citing documents
+#'   (data.frame)
 #' @export
 #'
 #' @examples
