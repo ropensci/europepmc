@@ -30,8 +30,8 @@ Europe PubMed Central supports:
 returns 25 records for each page.}
 }
 \value{
-List of 3, citation count, metadata of citing documents (data.frame)
-  and summary of request parameter
+List of 2, citation count and metadata of citing documents
+  (data.frame)
 }
 \description{
 The function finds citations to a publication in the Europe PMC index. It
@@ -39,8 +39,8 @@ retrieves the citation count and some metadata about the citing publications.
 }
 \examples{
 \dontrun{
-epmc_refs("PMC3166943", data_src = "pmc")
-epmc_refs("25378340")
+epmc_citations("PMC3166943", data_src = "pmc")
+epmc_citations("9338777")
 }
 }
 

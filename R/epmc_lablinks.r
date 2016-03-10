@@ -24,6 +24,8 @@
 #'     \item{pat}{Biological Patents}
 #'     \item{pmc}{PubMed Central}
 #'     }
+#' @param lab_id identifier of the external link service. Use Europe PMC's
+#'   advanced search form to find an id.
 #' @param n_pages Number of pages to be returned. By default, this function
 #'   returns 10 records for each page.
 #'

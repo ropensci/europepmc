@@ -4,15 +4,29 @@
 
 [![Build Status](https://travis-ci.org/njahn82/rebi.svg?branch=master)](https://travis-ci.org/njahn82/rebi)
 
-rebi facilitates access to [Europe PMC RESTful Web Service](http://europepmc.org/RestfulWebService). 
+rebi facilitates access to [Europe PMC RESTful Web
+Service](http://europepmc.org/RestfulWebService).
 
-Europe PubMed Central, one of the largest literature databases for life-science 
-publications,  indexes more than 30 millions publications, including 25
-millions from PubMed. It gives also access to full texts, if available.
+[Europe PMC]((http://europepmc.org/) covers life science literature and it
+gives access to open access full texts. Coverage is not only restricted to
+Europe, but articles and abstracts are indexed from all over the world. As a
+partner in the [PMC International
+(PMCi)](http://www.ncbi.nlm.nih.gov/pmc/about/pmci/), Europe PMC ingests all
+PubMed content and extends its index with other sources, including Agricola, a
+bibliographic database of citations to the agricultural literature, or
+Biological Patents.
+
+![Index coverage](https://europepmc.org/wicket/resource/uk.bl.ukpmc.web.pages.faq.Help/images/EuropePMCContent-ver-4BB17F003F8F38DF2D3BBE48AB5896C6.png)
+
+For more background, see:
+
+Europe PMC: a full-text literature database for the life sciences and platform 
+for innovation. (2014). Nucleic Acids Research, 43(D1), D1042–D1048. doi:[10.1093/nar/gku1061](http://doi.org/10.1093/nar/gku1061)
 
 ## Installation
 
-The latest development version can be installed using [devtools](https://github.com/hadley/devtools) package:
+The latest development version can be installed using
+[devtools](https://github.com/hadley/devtools) package:
 
 
 ```r
@@ -22,17 +36,36 @@ install_github("njahn82/rebi")
 
 ## Search Europe PMC
 
-Europe PMC provides comprehensive guidance on how to search:
-<http://europepmc.org/help>
+The search covers both metadata (e.g. abstracts or title) and full texts. To
+build your query, please refer to the comprehensive guidance on how to search
+Europe PMC: <http://europepmc.org/help>. After you have created your query,
+simply paste the text string out of the search box and provide the string as
+argument to the `query` parameter.
+
+The search function helps to get a general overview about additional
+information types that are offered by Europe PMC and which can be retrieved
+through other `rebi`-functions. Columns inform whether open access full texts
+(`isOpenAccess`), cross-links to other EBI databases (`hasDbCrossReferences`),
+text-mined terms (`hasTextMinedTerms`) or references (`hasReferences`) are
+available.
+
+By default, `epmc_search` returns 1.000 records as a maximum. This equals 50
+result pages that are returned by the API. To adjust it, simply use the
+`n_pages` parameter.
+
+Either list of publication ids (`id_list = TRUE`) or key metadata
+information  (`id_list = FALSE`, default option) are returned.
+
+For instance, search for abstracts and full texts that mention `Gabi-Kat`:
 
 
 ```r
-my_data <- epmc_search(query='Gabi-Kat')
+my_data <- epmc_search(query = 'Gabi-Kat')
 # number of records
 my_data$hit_count
 #> [1] 237
 # first six records
-head(my_data$md)
+head(my_data$data)
 #>         id source     pmid      pmcid
 #> 1 26842807    MED 26842807 PMC4740857
 #> 2 26824478    MED 26824478 PMC4733102
@@ -98,12 +131,12 @@ head(my_data$md)
 #> 6           10.1093/nar/gkv208     7
 ```
 
-Get PLOS Genetics articles that cross-reference EMBL
+Get PLOS Genetics (ISSN:1553-7404) articles that cross-reference EMBL:
 
 
 ```r
 my_data <- epmc_search(query = 'ISSN:1553-7404 HAS_EMBL:y')
-head(my_data$md)
+head(my_data$data)
 #>         id source     pmid      pmcid
 #> 1 25664770    MED 25664770 PMC4335487
 #> 2 26379286    MED 26379286 PMC4574769
@@ -169,13 +202,13 @@ head(my_data$md)
 #> 6 10.1371/journal.pgen.1005085
 ```
 
-Get list of ids that represent articles referencing DataCite DOIs
+Get list of ids that represent articles referencing DataCite DOIs:
 
 
 ```r
 my_data <- epmc_search(query = "ACCESSION_TYPE:doi", n_pages = 1, 
                        id_list = TRUE)
-head(my_data$md)
+head(my_data$data)
 #>         id source     pmid      pmcid
 #> 1 26474846    MED 26474846 PMC4693979
 #> 2 26725519    MED 26725519 PMC4698588
@@ -184,15 +217,15 @@ head(my_data$md)
 #> 5 26751577    MED 26751577 PMC4709135
 #> 6 26731720    MED 26731720 PMC4701503
 my_data$hit_count
-#> [1] 4247
+#> [1] 4267
 ```
 
-Search by ORCID
+Use [ORCID](http://orcid.org/) to search for personal publications:
 
 
 ```r
 my_data <- epmc_search(query = 'AUTHORID:"0000-0002-7635-3473"', n_pages = 1) 
-head(my_data$md)
+head(my_data$data)
 #>         id source     pmid      pmcid
 #> 1 26717955    MED 26717955 PMC4762388
 #> 2 26676716    MED 26676716       <NA>
@@ -255,9 +288,14 @@ my_data$hit_count
 
 ## Get article details
 
+In addition to key metadata, `epmc_details` also returns full metadata
+providing more comprehensive information on the article-level. By default,
+PubMed / Medline index is searched.
+
+
 
 ```r
-epmc_details(ext_id = "24270414")
+epmc_details(ext_id = "24270414") 
 #> $basic
 #>         id source     pmid      pmcid
 #> 1 24270414    MED 24270414 PMC3859427
@@ -333,7 +371,7 @@ epmc_details(ext_id = "24270414")
 #> 1 R01DK076077 NIDDK NIH HHS      DK       0
 ```
 
-Show author details including orcid, if available
+Show author details including ORCID:
 
 
 ```r
@@ -357,12 +395,14 @@ my_data$author_details
 
 ## Get citation counts and citing publications
 
+Citing publications from the Europe PMC index can be retrieved like this:
+
 
 ```r
 my_cites <- epmc_citations("9338777")
 my_cites$hit_count
 #> [1] 178
-head(my_cites$citations)
+head(my_cites$data)
 #>         id source
 #> 1  9728985    MED
 #> 2  9728986    MED
@@ -400,7 +440,14 @@ head(my_cites$citations)
 #> 6           J. Virol.    2000     74     1     49-56          104 <NA>
 ```
 
+Please note, that citation counts are often smaller than those held by toll-
+access services such as Web of Science or Scopus because the number of
+reference sections indexed for Europe PMC considerably differs due to the
+lack of full text accessibility.
+
 ## Get reference section
+
+Europe PMC indexes more than 5 million reference sections.
 
 
 ```r
@@ -408,7 +455,7 @@ epmc_refs("PMC3166943", data_src = "pmc")
 #> $hit_count
 #> [1] 18
 #> 
-#> $references
+#> $data
 #>          id source    citationType
 #> 1  10802651    MED JOURNAL ARTICLE
 #> 2      <NA>   <NA>            <NA>
@@ -525,9 +572,18 @@ epmc_refs("PMC3166943", data_src = "pmc")
 #> 18                                                                                <NA>
 ```
 
+Tip: add `has_reflist:y` to your search string in `epmc_search` to make sure
+you only get publications whose reference sections are accessible through
+Europe PMC. 
+
 ## Retrieve links to other EBI databases
 
-Summary of links found
+Cross-links to EBI databases are either manually curated (ENA, InterPro, PDB,
+IntAct, ChEMBL, ChEBI and ArrayExpress) or automatically gathered through
+text-mining (European Nucleotide Archive, UniProt, PDB, OMIM, RefSNP, RefSeq,
+Pfam, InterPro, Ensembl, ArrayExpress and data DOIs).
+
+Before retrieving the links, please check availability and sources first:
 
 
 ```r
@@ -538,6 +594,9 @@ epmc_db_count("12368864")
 #> 3  UNIPROT  5320
 ```
 
+Add `has_xrefs:y` or to your search string in `epmc_search` to make sure
+you only get publications with cross-references to EBI databases. 
+
 Select database and get links:
 
 
@@ -546,7 +605,7 @@ epmc_db("12368864", db = "embl")
 #> $hit_count
 #> [1] 5
 #> 
-#> $references
+#> $data
 #>      info1                                                       info2
 #> 1 AE014187 Plasmodium falciparum 3D7 chromosome 14, complete sequence.
 #> 2 AE014186 Plasmodium falciparum 3D7 chromosome 11, complete sequence.
@@ -564,10 +623,14 @@ epmc_db("12368864", db = "embl")
 #> [1] "embl"
 ```
 
-
 ## Get text-mined terms
 
-Summary of text-mined terms
+Text-mined terms that can be accessed via Europe PMC are mapped against
+controlled vocabularies such as [Gene
+Ontology](http://www.ebi.ac.uk/QuickGO/).  
+
+Before retrieving these terms, please check availability and vocabularies
+first:
 
 
 ```r
@@ -582,7 +645,7 @@ epmc_tm_count("25249410")
 #> 7     organism    27
 ```
 
-Select semantic type to retrieve the terms:
+Select vocabulary to retrieve the terms:
 
 
 ```r
@@ -590,7 +653,7 @@ epmc_tm("25249410", semantic_type = "GO_TERM")
 #> $hit_count
 #> [1] 17
 #> 
-#> $tm_terms
+#> $data
 #>                             term count              altName dbName    dbId
 #> 1                     chromosome    25          chromosomes     GO 0005694
 #> 2                   biosynthesis    16 formation, synthesis     GO 0009058
@@ -611,8 +674,130 @@ epmc_tm("25249410", semantic_type = "GO_TERM")
 #> 17             enzyme activities     1                          GO 0003824
 ```
 
+## Links to external sources
 
-## References
+With the External Link services, Europe PMC allows third parties to publish
+links from Europe PMC to other webpages. Current External Link providers,
+whose id can be found through Europe PMC's Advanced Search interface, include
+Wikipedia, Dryad Digital Repository or the institutional repo of Bielefeld
+University. For more information, see <http://europepmc.org/labslink>.
 
-Europe PMC: a full-text literature database for the life sciences and platform 
-for innovation. (2014). Nucleic Acids Research, 43(D1), D1042–D1048. doi:[10.1093/nar/gku1061](http://doi.org/10.1093/nar/gku1061)
+Check availability and number of links:
+
+
+```r
+epmc_lablinks_count("PMC3986813", data_src = "pmc")
+#>       providerName linksCount
+#> 1 EBI Train Online          1
+#> 2        Wikipedia          1
+```
+
+Get links to PANGEA (`lab_id = "1342"`)
+
+
+```r
+epmc_lablinks("24023770", lab_id = "1342")
+#> $hit_count
+#> [1] 13
+#> 
+#> $data
+#>                                                                                                                                                                                                title
+#> 1  Related to: Schewe, I (2010). Biochemical investigation of multicorer sediment profile PS74/106-3. Alfred Wegener Institute, Helmholtz Center for Polar and Marine Research, Bremerhaven, PANGAEA
+#> 2  Related to: Schewe, I (2010). Biochemical investigation of multicorer sediment profile PS74/107-2. Alfred Wegener Institute, Helmholtz Center for Polar and Marine Research, Bremerhaven, PANGAEA
+#> 3  Related to: Schewe, I (2010). Biochemical investigation of multicorer sediment profile PS74/108-2. Alfred Wegener Institute, Helmholtz Center for Polar and Marine Research, Bremerhaven, PANGAEA
+#> 4  Related to: Schewe, I (2010). Biochemical investigation of multicorer sediment profile PS74/109-2. Alfred Wegener Institute, Helmholtz Center for Polar and Marine Research, Bremerhaven, PANGAEA
+#> 5  Related to: Schewe, I (2010). Biochemical investigation of multicorer sediment profile PS74/113-2. Alfred Wegener Institute, Helmholtz Center for Polar and Marine Research, Bremerhaven, PANGAEA
+#> 6  Related to: Schewe, I (2010). Biochemical investigation of multicorer sediment profile PS74/116-2. Alfred Wegener Institute, Helmholtz Center for Polar and Marine Research, Bremerhaven, PANGAEA
+#> 7  Related to: Schewe, I (2010). Biochemical investigation of multicorer sediment profile PS74/118-2. Alfred Wegener Institute, Helmholtz Center for Polar and Marine Research, Bremerhaven, PANGAEA
+#> 8  Related to: Schewe, I (2010). Biochemical investigation of multicorer sediment profile PS74/119-2. Alfred Wegener Institute, Helmholtz Center for Polar and Marine Research, Bremerhaven, PANGAEA
+#> 9  Related to: Schewe, I (2010). Biochemical investigation of multicorer sediment profile PS74/120-2. Alfred Wegener Institute, Helmholtz Center for Polar and Marine Research, Bremerhaven, PANGAEA
+#> 10 Related to: Schewe, I (2010). Biochemical investigation of multicorer sediment profile PS74/121-1. Alfred Wegener Institute, Helmholtz Center for Polar and Marine Research, Bremerhaven, PANGAEA
+#> 11 Related to: Schewe, I (2010). Biochemical investigation of multicorer sediment profile PS74/127-2. Alfred Wegener Institute, Helmholtz Center for Polar and Marine Research, Bremerhaven, PANGAEA
+#> 12 Related to: Schewe, I (2010). Biochemical investigation of multicorer sediment profile PS74/128-2. Alfred Wegener Institute, Helmholtz Center for Polar and Marine Research, Bremerhaven, PANGAEA
+#> 13 Related to: Schewe, I (2010). Biochemical investigation of multicorer sediment profile PS74/129-3. Alfred Wegener Institute, Helmholtz Center for Polar and Marine Research, Bremerhaven, PANGAEA
+#>                                         url lab_id lab_name
+#> 1  http://dx.doi.org/10.1594/PANGAEA.744673   1342  PANGAEA
+#> 2  http://dx.doi.org/10.1594/PANGAEA.744674   1342  PANGAEA
+#> 3  http://dx.doi.org/10.1594/PANGAEA.744675   1342  PANGAEA
+#> 4  http://dx.doi.org/10.1594/PANGAEA.744676   1342  PANGAEA
+#> 5  http://dx.doi.org/10.1594/PANGAEA.744677   1342  PANGAEA
+#> 6  http://dx.doi.org/10.1594/PANGAEA.744678   1342  PANGAEA
+#> 7  http://dx.doi.org/10.1594/PANGAEA.744679   1342  PANGAEA
+#> 8  http://dx.doi.org/10.1594/PANGAEA.744680   1342  PANGAEA
+#> 9  http://dx.doi.org/10.1594/PANGAEA.744681   1342  PANGAEA
+#> 10 http://dx.doi.org/10.1594/PANGAEA.744682   1342  PANGAEA
+#> 11 http://dx.doi.org/10.1594/PANGAEA.744683   1342  PANGAEA
+#> 12 http://dx.doi.org/10.1594/PANGAEA.744684   1342  PANGAEA
+#> 13 http://dx.doi.org/10.1594/PANGAEA.744685   1342  PANGAEA
+#>                                     lab_description
+#> 1  Data Publisher for Earth & Environmental Science
+#> 2  Data Publisher for Earth & Environmental Science
+#> 3  Data Publisher for Earth & Environmental Science
+#> 4  Data Publisher for Earth & Environmental Science
+#> 5  Data Publisher for Earth & Environmental Science
+#> 6  Data Publisher for Earth & Environmental Science
+#> 7  Data Publisher for Earth & Environmental Science
+#> 8  Data Publisher for Earth & Environmental Science
+#> 9  Data Publisher for Earth & Environmental Science
+#> 10 Data Publisher for Earth & Environmental Science
+#> 11 Data Publisher for Earth & Environmental Science
+#> 12 Data Publisher for Earth & Environmental Science
+#> 13 Data Publisher for Earth & Environmental Science
+```
+
+## Full text access
+
+Full texts are in XML format and are only provided for the Open Access subset
+of Europe PMC. They can be retrieved by the PMCID.
+
+
+```r
+epmc_ftxt("PMC3257301")
+#> {xml_document}
+#> <article>
+#> [1] <front>\n  <journal-meta>\n    <journal-id journal-id-type="nlm-ta"> ...
+#> [2] <body>\n  <sec id="s1">\n    <title>Introduction</title>\n    <p>Atm ...
+#> [3] <back>\n  <ack>\n    <p>We would like to thank Dr. C. Gourlay and Dr ...
+```
+
+Books, fetched through the PMID or the 'NBK' book number, can also be loaded
+as XML into R for further text-mining activities.
+
+
+```r
+epmc_ftxt_book("NBK32884")
+#> {xml_document}
+#> <book-part>
+#> [1] <book-meta>\n  <?showBookmeta?>\n  <book-id pub-id-type="pmcid">erta ...
+#> [2] <book-part-meta>\n  <title-group>\n    <title>Table of Contents</tit ...
+#> [3] <body>\n  <list list-type="simple">\n    <list-item>\n      <?toc-ta ...
+```
+
+Please check full-text availability before.
+
+## Other ways to access Europe PubMed Central
+
+### Other APIs
+
+- Data dumps: <https://europepmc.org/FtpSite>
+- OAI service: <https://europepmc.org/OaiService>
+- SOAP web service: <https://europepmc.org/SoapWebServices>
+- Grants RESTful (Grist) API: <https://europepmc.org/GristAPI>
+
+### Other R clients
+
+- use rOpenSci's `oai` to get metadata and full text via Europe PMC's OAI interface: <https://github.com/ropensci/oai>
+- use rOpenSci's `rentrez` to interact with [NCBI databases](http://www.ncbi.nlm.nih.gov/) such as [PubMed](http://www.ncbi.nlm.nih.gov/pubmed): <https://github.com/ropensci/rentrez>
+- rOpenSci's `fulltext` package gives access to supplementary material of open access life-science publications in Europe PMC: <https://github.com/ropensci/fulltext>
+
+## Meta
+
+Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+
+License: GPL-3
+
+Please use the issue tracker for bug reporting and feature requests.
+
+---
+
+[![rofooter](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)

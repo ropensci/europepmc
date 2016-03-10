@@ -4,7 +4,7 @@
 #'   Europe PMC RESTful Web Service.
 #' @details Europe PMC supports the following semantic types:
 #'     \describe{
-#'     \item{ACCESSION}{accession IDs for DNA or protein sequences}}
+#'     \item{ACCESSION}{accession IDs for DNA or protein sequences}
 #'     \item{CHEMICAL}{chemicals}
 #'     \item{DISEASE}{diseases}
 #'     \item{EFO}{Experimental Factor Ontology

@@ -6,7 +6,40 @@
 \usage{
 epmc_refs(ext_id = NULL, data_src = "med", n_pages = 20)
 }
+\arguments{
+\item{ext_id}{publication identifier}
+
+\item{data_src}{data source, by default Pubmed/MedLine index will be searched.
+The following three letter codes represents the sources
+Europe PubMed Central supports:
+\describe{
+  \item{agr}{Agricola is a bibliographic database of citations to the
+  agricultural literature created by the US National Agricultural Library
+  and its co-operators.}
+  \item{cba}{Chinese Biological Abstracts}
+  \item{ctx}{CiteXplore}
+  \item{eth}{EthOs Theses, i.e. PhD theses (British Library)}
+  \item{hir}{NHS Evidence}
+  \item{med}{PubMed/Medline NLM}
+  \item{nbk}{Europe PMC Book metadata}
+  \item{pat}{Biological Patents}
+  \item{pmc}{PubMed Central}
+  }}
+
+\item{n_pages}{Number of pages to be returned. By default, this function
+returns 25 records for each page.}
+}
+\value{
+List of 3, citation count, metadata of citing documents (data.frame)
+  and summary of request parameter
+}
 \description{
 Get references for a given publication
+}
+\examples{
+\dontrun{
+epmc_refs("PMC3166943", data_src = "pmc")
+epmc_refs("25378340")
+}
 }
 

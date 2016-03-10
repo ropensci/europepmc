@@ -50,7 +50,7 @@ Other sources Europe PubMed Central supports are:
  }}
 
 \item{n_pages}{Number of pages to be returned. By default, this function
-returns 25 records for each page.}
+returns 10 records for each page.}
 }
 \value{
 list of 3 including link count and metadata of cross-references.
@@ -61,7 +61,9 @@ Europe PMC RESTful Web Service.
 }
 \examples{
   \dontrun{
-  epmc_db_details("12368864", db = "uniprot", n_pages = 2)
+  epmc_db("12368864", db = "uniprot", n_pages = 2)
+  epmc_db("25249410", db = "embl")
+  epmc_db("14756321", db = "uniprot")
   }
 }
 

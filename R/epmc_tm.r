@@ -3,7 +3,7 @@
 #' Retrieve a count and list of terms Europe PubMed Central has text-mined from
 #' full text publications.
 #'
-#' #' @param ext_id publication identifier
+#' @param ext_id publication identifier
 #' @param data_src data source, by default Pubmed/MedLine index will be searched.
 #'   The following three letter codes represents the sources
 #'   Europe PubMed Central supports:
@@ -20,10 +20,10 @@
 #'     \item{pat}{Biological Patents}
 #'     \item{pmc}{PubMed Central}
 #'     }
-#' @semantic_type Specify the semantic type you wish to retrieve. The following
-#'   types are supported:
+#' @param semantic_type controlled vocabulary. Specify the semantic type you
+#'   wish to retrieve. The following types are supported:
 #'     \describe{
-#'     \item{ACCESSION}{accession IDs for DNA or protein sequences}}
+#'     \item{ACCESSION}{accession IDs for DNA or protein sequences}
 #'     \item{CHEMICAL}{chemicals}
 #'     \item{DISEASE}{diseases}
 #'     \item{EFO}{Experimental Factor Ontology
