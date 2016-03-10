@@ -33,11 +33,11 @@ epmc_search <- function(query = NULL, id_list = FALSE, n_pages = 50){
     stop("No query provided")
   path = "europepmc/webservices/rest/search"
   q <- list(query = query, format = "json")
-  out <- rebi_GET(path = path, query = q)
-  hitCount <- out$hitCount
+  doc <- rebi_GET(path = path, query = q)
+  hitCount <- doc$hitCount
   if(hitCount == 0)
     stop("nothing found, please check your query")
-  no_pages <- rebi_pageing(hitCount = hitCount)
+  no_pages <- rebi_pageing(hitCount = hitCount, pageSize = doc$request$pageSize)
   # limit number of pages that will be retrieved
   if(max(no_pages) > n_pages) no_pages <- 1:n_pages
   pages = list()
@@ -60,7 +60,7 @@ epmc_search <- function(query = NULL, id_list = FALSE, n_pages = 50){
   # remove nested lists from data.frame, get these infos with epmc_details
   md <- result[, !(names(result) %in% fix_list(result))]
   # return
-  list(hit_count = hitCount, md = md)
+  list(hit_count = hitCount, data = md)
 }
 
 # Implementing GET method and json parser for EPMC
@@ -81,11 +81,11 @@ rebi_GET <- function(path = NULL, query = NULL, ...) {
 }
 
 # Calculate pages. Each page consists of 25 records.
-rebi_pageing <- function(hitCount) {
-  if (all.equal((hitCount / 25), as.integer(hitCount / 25)) == TRUE) {
-    1:(hitCount / 25)
+rebi_pageing <- function(hitCount, pageSize) {
+  if (all.equal((hitCount / pageSize), as.integer(hitCount / pageSize)) == TRUE) {
+    1:(hitCount / pageSize)
   } else {
-    1:(hitCount / 25 + 1)
+    1:(hitCount / pageSize + 1)
   }
 }
 

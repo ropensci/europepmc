@@ -12,9 +12,9 @@ test_that("epmc_tm returns", {
   expect_output(str(c), "List of 2")
 
   #correct class metadata
-  expect_is(a$tm_terms, "data.frame")
-  expect_is(b$tm_terms, "data.frame")
-  expect_is(c$tm_terms, "data.frame")
+  expect_is(a$data, "data.frame")
+  expect_is(b$data, "data.frame")
+  expect_is(c$data, "data.frame")
   expect_is(a$hit_count, "integer")
 
   # fails correctly

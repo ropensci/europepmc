@@ -12,12 +12,12 @@ test_that("epmc_db returns", {
   expect_output(str(c), "List of 3")
 
   #correct class metadata
-  expect_is(a$references, "data.frame")
-  expect_is(b$references, "data.frame")
-  expect_is(c$references, "data.frame")
+  expect_is(a$data, "data.frame")
+  expect_is(b$data, "data.frame")
+  expect_is(c$data, "data.frame")
   expect_is(a$hit_count, "integer")
 
-  expect_equal(nrow(a$references), 50)
+  expect_equal(nrow(a$data), 50)
 
   # fails correctly
   expect_error(epmc_db("14756321"), "Please restrict reponse to a database")

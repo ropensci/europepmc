@@ -14,10 +14,10 @@ test_that("epmc_citations returns", {
   expect_output(str(d), "List of 2")
 
   #correct class metadata
-  expect_is(a$citations, "data.frame")
-  expect_is(b$citations, "data.frame")
-  expect_is(c$citations, "data.frame")
-  expect_is(d$citations, "data.frame")
+  expect_is(a$data, "data.frame")
+  expect_is(b$data, "data.frame")
+  expect_is(c$data, "data.frame")
+  expect_is(d$data, "data.frame")
   expect_is(a$hit_count, "integer")
 
   # fails correctly

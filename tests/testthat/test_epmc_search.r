@@ -16,15 +16,15 @@ test_that("epmc_search returns", {
   expect_output(str(e), "List of 2")
 
   #correct class metadata
-  expect_is(a$md, "data.frame")
-  expect_is(b$md, "data.frame")
-  expect_is(c$md, "data.frame")
-  expect_is(d$md, "data.frame")
-  expect_is(e$md, "data.frame")
+  expect_is(a$data, "data.frame")
+  expect_is(b$data, "data.frame")
+  expect_is(c$data, "data.frame")
+  expect_is(d$data, "data.frame")
+  expect_is(e$data, "data.frame")
 
   #are diminsions correct?
-  expect_equal(nrow(e$md), 50)
-  expect_equal(ncol(e$md), 4)
+  expect_equal(nrow(e$data), 50)
+  expect_equal(ncol(e$data), 4)
 
   # fails correctly
   expect_error(epmc_search("123haha"), "nothing found, please check your query")

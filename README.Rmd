@@ -39,7 +39,7 @@ my_data$hit_count
 head(my_data$md)
 ```
 
-Get first PLOS Genetics articles that cross-reference EMBL
+Get PLOS Genetics articles that cross-reference EMBL
 
 ```{r}
 my_data <- epmc_search(query = 'ISSN:1553-7404 HAS_EMBL:y')
@@ -51,6 +51,14 @@ Get list of ids that represent articles referencing DataCite DOIs
 ```{r}
 my_data <- epmc_search(query = "ACCESSION_TYPE:doi", n_pages = 1, 
                        id_list = TRUE)
+head(my_data$md)
+my_data$hit_count
+```
+
+Search by ORCID
+
+```{r}
+my_data <- epmc_search(query = 'AUTHORID:"0000-0002-7635-3473"', n_pages = 1) 
 head(my_data$md)
 my_data$hit_count
 ```

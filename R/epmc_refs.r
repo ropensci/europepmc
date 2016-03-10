@@ -39,7 +39,7 @@ epmc_refs <- function(ext_id = NULL, data_src = "med", n_pages = 20) {
   hitCount <- doc$hitCount
   if(doc$hitCount == 0)
     stop("No references found")
-  no_pages <- rebi_pageing(hitCount = hitCount)
+  no_pages <- rebi_pageing(hitCount = hitCount, pageSize = doc$request$pageSize)
   # limit number of pages that will be retrieved
   if(max(no_pages) > n_pages) no_pages <- 1:n_pages
   pages = list()
@@ -54,5 +54,5 @@ epmc_refs <- function(ext_id = NULL, data_src = "med", n_pages = 20) {
   #combine all into one
   result <- jsonlite::rbind.pages(pages)
   # return
-  list(hit_count = hitCount, references = result)
+  list(hit_count = hitCount, data = result)
 }

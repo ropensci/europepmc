@@ -98,7 +98,7 @@ head(my_data$md)
 #> 6           10.1093/nar/gkv208     7
 ```
 
-Get first PLOS Genetics articles that cross-reference EMBL
+Get PLOS Genetics articles that cross-reference EMBL
 
 
 ```r
@@ -184,7 +184,73 @@ head(my_data$md)
 #> 5 26751577    MED 26751577 PMC4709135
 #> 6 26731720    MED 26731720 PMC4701503
 my_data$hit_count
-#> [1] 4262
+#> [1] 4247
+```
+
+Search by ORCID
+
+
+```r
+my_data <- epmc_search(query = 'AUTHORID:"0000-0002-7635-3473"', n_pages = 1) 
+head(my_data$md)
+#>         id source     pmid      pmcid
+#> 1 26717955    MED 26717955 PMC4762388
+#> 2 26676716    MED 26676716       <NA>
+#> 3 26377912    MED 26377912 PMC4573686
+#> 4 25730202    MED 25730202 PMC4336690
+#> 5 26343971    MED 26343971       <NA>
+#> 6 25891958    MED 25891958       <NA>
+#>                                                                                                                                          title
+#> 1                           Natural variation in flavonol accumulation in Arabidopsis is determined by the flavonol glucosyltransferase BGLU6.
+#> 2   Diversification, evolution and methylation of short interspersed nuclear element families in sugar beet and related Amaranthaceae species.
+#> 3                                                  SMRT sequencing only de novo assembly of the sugar beet (Beta vulgaris) chloroplast genome.
+#> 4 Fast forward genetics to identify mutations causing a high light tolerant phenotype in Chlamydomonas reinhardtii by whole-genome-sequencing.
+#> 5    The Structural Features of Thousands of T-DNA Insertion Sites Are Consistent with a Double-Strand Break Repair-Based Insertion Mechanism.
+#> 6         TRANSPARENT TESTA 13 is a tonoplast P3A -ATPase required for vacuolar deposition of proanthocyanidins in Arabidopsis thaliana seeds.
+#>                                                                                                    authorString
+#> 1                                           Ishihara H, Tohge T, Viehöver P, Fernie AR, Weisshaar B, Stracke R.
+#> 2 Schwichtenberg K, Wenke T, Zakrzewski F, Seibt KM, Minoche A, Dohm JC, Weisshaar B, Himmelbauer H, Schmidt T.
+#> 3                                                                      Stadermann KB, Weisshaar B, Holtgräwe D.
+#> 4                                               Schierenbeck L, Ries D, Rogge K, Grewe S, Weisshaar B, Kruse O.
+#> 5                                        Kleinboelting N, Huep G, Appelhagen I, Viehoever P, Li Y, Weisshaar B.
+#> 6                  Appelhagen I, Nordholt N, Seidel T, Spelt K, Koes R, Quattrochio F, Sagasser M, Weisshaar B.
+#>         journalTitle issue journalVolume pubYear journalIssn  pageInfo
+#> 1          J Exp Bot     5            67    2016   0022-0957 1505-1517
+#> 2            Plant J     2            85    2016   0960-7412   229-244
+#> 3 BMC Bioinformatics     1            16    2015   1471-2105       295
+#> 4       BMC Genomics     1            16    2015   1471-2164        57
+#> 5          Mol Plant    11             8    2015   1674-2052 1651-1664
+#> 6            Plant J     5            82    2015   0960-7412   840-849
+#>                                                               pubType
+#> 1                                   journal article; research-article
+#> 2                                                     journal article
+#> 3 journal article; research support, non-u.s. gov't; research-article
+#> 4 journal article; research support, non-u.s. gov't; research-article
+#> 5                   journal article; research support, non-u.s. gov't
+#> 6                   journal article; research support, non-u.s. gov't
+#>   isOpenAccess inEPMC inPMC hasPDF hasBook hasSuppl citedByCount
+#> 1            Y      Y     N      Y       N        Y            0
+#> 2         <NA>      N     N      N       N        N            0
+#> 3            Y      Y     N      Y       N        N            0
+#> 4            Y      Y     N      Y       N        N            0
+#> 5         <NA>      N     N      N       N        N            0
+#> 6         <NA>      N     N      N       N        N            0
+#>   hasReferences hasTextMinedTerms hasDbCrossReferences hasLabsLinks
+#> 1             N                 Y                    Y            N
+#> 2             N                 N                    N            N
+#> 3             Y                 Y                    Y            N
+#> 4             Y                 Y                    N            N
+#> 5             N                 N                    N            N
+#> 6             N                 N                    Y            N
+#>   epmcAuthMan hasTMAccessionNumbers luceneScore                        doi
+#> 1           N                     Y         NaN         10.1093/jxb/erv546
+#> 2           N                     N         NaN          10.1111/tpj.13103
+#> 3           N                     N         NaN  10.1186/s12859-015-0726-6
+#> 4           N                     Y         NaN  10.1186/s12864-015-1232-y
+#> 5           N                     N         NaN 10.1016/j.molp.2015.08.011
+#> 6           N                     N         NaN          10.1111/tpj.12854
+my_data$hit_count
+#> [1] 124
 ```
 
 ## Get article details

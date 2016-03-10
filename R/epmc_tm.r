@@ -55,7 +55,7 @@ epmc_tm <- function(ext_id = NULL, data_src = "med", semantic_type = NULL,
   hitCount <- doc$hitCount
   if(doc$hitCount == 0)
     stop("Sorry, no text-mined terms found")
-  no_pages <- rebi_pageing(hitCount = hitCount)
+  no_pages <- rebi_pageing(hitCount = hitCount, pageSize = doc$request$pageSize)
   # limit number of pages that will be retrieved
   if(max(no_pages) > n_pages) no_pages <- 1:n_pages
   pages = list()
@@ -71,5 +71,5 @@ epmc_tm <- function(ext_id = NULL, data_src = "med", semantic_type = NULL,
   #combine all into one
   result <- jsonlite::rbind.pages(pages)
   # return
-  list(hit_count = hitCount, tm_terms = result)
+  list(hit_count = hitCount, data = result)
 }

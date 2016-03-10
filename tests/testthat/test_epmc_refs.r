@@ -12,12 +12,12 @@ test_that("epmc_refs returns", {
   expect_output(str(c), "List of 2")
 
   #correct class metadata
-  expect_is(a$references, "data.frame")
-  expect_is(b$references, "data.frame")
-  expect_is(c$references, "data.frame")
+  expect_is(a$data, "data.frame")
+  expect_is(b$data, "data.frame")
+  expect_is(c$data, "data.frame")
   expect_is(a$hit_count, "integer")
 
-  expect_equal(nrow(c$references), 100)
+  expect_equal(nrow(c$data), 100)
 
   # fails correctly
   expect_error(epmc_refs("14756321"), "No references found")
