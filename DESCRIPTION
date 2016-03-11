@@ -8,18 +8,19 @@ URL: http://github.com/njahn82/rebi/
 BugReports: http://github.com/njahn82/rebi/issues
 Description: R Interface to Europe PMC RESTful Web Service. Europe PMC covers
     life science literature and it gives access to open access full texts.
-    Coverage is not restricted to Europe, but articles and abstracts are indexed
-    from all over the world. As a partner in the PMC International (PMCi),
-    Europe PMC ingests all PubMed content and extends its index with other
-    sources, including Agricola, a bibliographic database of citations to the
-    agricultural literature, or Biological Patents.
-    In addition to bibliographic data, rebi gives automated access to
-    citations and references that were indexed by Europe PMC Links between
-    life-science  literature and other EBI databases, including ENA, PDB or
-    ChEMBL are also accessible. External links provide a mechanism to link out
-    to external providers such as Wikipedia or research data repositories.
+    Coverage is not only restricted to Europe, but articles and abstracts are
+    indexed from all over the world. As a partner in the PMC International
+    (PMCi), Europe PMC ingests all PubMed content and extends its index with
+    other sources, including Agricola, a bibliographic database of citations to
+    the agricultural literature, or Biological Patents. In addition to
+    bibliographic data, rebi gives automated access to citations and references
+    that were indexed by Europe PMC. Links between life-science literature and
+    other EBI databases, including ENA, PDB or ChEMBL are also accessible.
+    External links provide a mechanism to link out to external providers such as
+    Wikipedia or research data repositories.
 LazyLoad: yes
 LazyData: yes
+VignetteBuilder: knitr
 Depends:
   R (>= 3.00)
 Imports:
@@ -29,4 +30,6 @@ Imports:
     xml2
 RoxygenNote: 5.0.1
 Suggests:
-    testthat
+    testthat,
+    knitr,
+    rmarkdown
