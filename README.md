@@ -3,7 +3,7 @@
 
 
 [![Build Status](https://travis-ci.org/njahn82/rebi.svg?branch=master)](https://travis-ci.org/njahn82/rebi)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/njahn82/rebi?
+[![Build status](https://ci.appveyor.com/api/projects/status/nm7ixfn2twuu1y45/branch/master?svg=true)](https://ci.appveyor.com/project/njahn82/rebi/branch/master)
 [![codecov.io](https://codecov.io/github/njahn82/rebi/coverage.svg?branch=master)](https://codecov.io/github/njahn82/rebi?branch=master)
 
 
