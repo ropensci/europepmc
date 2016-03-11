@@ -21,4 +21,6 @@ test_that("epmc_refs returns", {
 
   # fails correctly
   expect_error(epmc_refs("14756321"), "No references found")
+  expect_error(epmc_refs("13814508", n_pages = "abc"))
+  expect_error(epmc_refs("13814508", data_src = "abc"))
 })

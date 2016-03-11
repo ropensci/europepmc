@@ -56,9 +56,19 @@ epmc_db <- function(ext_id = NULL, data_src = "med", db = NULL,
                             n_pages = 20) {
   if (is.null(ext_id))
     stop("Please provide a publication id")
+  if (!is.numeric(n_pages))
+    stop("n_pages must be of type 'numeric'")
   # build request
   if (is.null(db))
     stop("Please restrict reponse to a database")
+  if (!toupper(db) %in% supported_db)
+    stop(paste0("Data source '", db, "' not supported. Try one of the
+                following sources: ", paste0(supported_db, collapse =", ")
+    ))
+  if (!tolower(data_src) %in% supported_data_src)
+    stop(paste0("Data source '", data_src, "' not supported. Try one of the
+                following sources: ", paste0(supported_data_src, collapse =", ")
+    ))
   path = paste("europepmc/webservices/rest", data_src, ext_id, "databaseLinks",
                db, "json", sep ="/")
   doc <- rebi_GET(path = path)
@@ -84,3 +94,8 @@ epmc_db <- function(ext_id = NULL, data_src = "med", db = NULL,
   # return
   list(hit_count = hitCount, data = result, db = db)
 }
+
+# supported dbs
+
+supported_db <- c("CHEBI", "CHEMBL", "EMBL", "INTACT", "INTERPRO", "OMIM",
+                  "PDB", "UNIPROT")

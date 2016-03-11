@@ -7,7 +7,7 @@
 epmc_search(query = NULL, id_list = FALSE, n_pages = 50)
 }
 \arguments{
-\item{query}{search query (character vector). For more information how to
+\item{query}{search query (character vector). For more information on how to
 build a search query, see \url{http://europepmc.org/Help}}
 
 \item{id_list}{Should only IDs (e.g. PMID) and sources be retrieved for the

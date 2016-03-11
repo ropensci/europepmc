@@ -28,4 +28,5 @@ test_that("epmc_search returns", {
 
   # fails correctly
   expect_error(epmc_search("123haha"), "nothing found, please check your query")
+  expect_error(epmc_search(query = 'ISSN:1553-7404', n_pages = "abc"))
 })

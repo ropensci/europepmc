@@ -27,6 +27,10 @@
 epmc_tm_count <- function(ext_id = NULL, data_src = "med"){
   if (is.null(ext_id))
     stop("Please provide a publication id")
+  if (!tolower(data_src) %in% supported_data_src)
+    stop(paste0("Data source '", data_src, "' not supported. Try one of the
+                following sources: ", paste0(supported_data_src, collapse =", ")
+    ))
   # build request
   path = paste("europepmc/webservices/rest", data_src, ext_id, "textMinedTerms",
                "/json", sep ="/")

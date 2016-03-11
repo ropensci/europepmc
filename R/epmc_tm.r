@@ -45,6 +45,16 @@ epmc_tm <- function(ext_id = NULL, data_src = "med", semantic_type = NULL,
                     n_pages = 20) {
   if (is.null(ext_id))
     stop("Please provide a publication id")
+  if (!is.numeric(n_pages))
+    stop("n_pages must be of type 'numeric'")
+  if (!tolower(data_src) %in% supported_data_src)
+    stop(paste0("Data source '", data_src, "' not supported. Try one of the
+                following sources: ", paste0(supported_data_src, collapse =", ")
+    ))
+  if (!toupper(semantic_type) %in% supported_semantic_types)
+    stop(paste0("Controlled vocabulary '", semantic_type, "' not supported. Try
+                 one of the following types: ",
+                paste0(supported_semantic_types, collapse =", ")))
   # build request
   if (is.null(semantic_type))
     stop("Please Specify the semantic type you wish to retrieve text-mined terms
@@ -73,3 +83,8 @@ epmc_tm <- function(ext_id = NULL, data_src = "med", semantic_type = NULL,
   # return
   list(hit_count = hitCount, data = result)
 }
+
+# check semantic types
+
+supported_semantic_types <- c("ACCESSION", "CHEMICAL", "DISEASE", "EFO",
+                              "GENE_PROTEIN", "GO_TERM", "ORGANISM")

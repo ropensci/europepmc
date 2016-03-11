@@ -12,4 +12,5 @@ test_that("epmc_db_count returns", {
   # fails correctly
   expect_error(epmc_db_count("22326070"),
                "Nothing found")
+  expect_error(epmc_db_count("13814508", data_src = "abc"))
 })

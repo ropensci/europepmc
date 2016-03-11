@@ -22,4 +22,6 @@ test_that("epmc_citations returns", {
 
   # fails correctly
   expect_error(epmc_citations("13814508"), "This article has not been cited yet")
+  expect_error(epmc_citations("13814508", n_pages = "abc"))
+  expect_error(epmc_citations("13814508", data_src = "abc"))
 })

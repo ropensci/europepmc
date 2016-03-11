@@ -20,4 +20,7 @@ test_that("epmc_tm returns", {
   # fails correctly
   expect_error(epmc_tm("14756321", semantic_type = "GO_TERM"),
                "Sorry, no text-mined terms found")
+  expect_error(epmc_tm("13814508", n_pages = "abc"))
+  expect_error(epmc_tm("13814508", data_src = "abc"))
+  expect_error(epmc_tm("25249410", semantic_type = "GO_TERMs"))
 })

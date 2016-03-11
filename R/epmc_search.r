@@ -5,7 +5,7 @@
 #'
 #' @seealso \url{http://europepmc.org/Help}
 #'
-#' @param query search query (character vector). For more information how to
+#' @param query search query (character vector). For more information on how to
 #'   build a search query, see \url{http://europepmc.org/Help}
 #' @param id_list Should only IDs (e.g. PMID) and sources be retrieved for the
 #'   given search terms?
@@ -31,6 +31,8 @@ epmc_search <- function(query = NULL, id_list = FALSE, n_pages = 50){
   # check
   if (is.null(query))
     stop("No query provided")
+  if (!is.numeric(n_pages))
+    stop("n_pages must be of type 'numeric'")
   path = "europepmc/webservices/rest/search"
   q <- list(query = query, format = "json")
   doc <- rebi_GET(path = path, query = q)

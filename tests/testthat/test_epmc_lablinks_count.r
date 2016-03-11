@@ -12,4 +12,5 @@ test_that("epmc_lablinks_count returns", {
   # fails correctly
   expect_error(epmc_lablinks_count("239393"),
                "Sorry, no links available")
+  expect_error(epmc_lablinks_count("13814508", data_src = "abc"))
 })

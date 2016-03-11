@@ -50,6 +50,10 @@
 epmc_details <- function(ext_id = NULL, data_src = "med") {
   if (is.null(ext_id))
     stop("Please provide a publication id")
+  if (!tolower(data_src) %in% supported_data_src)
+    stop(paste0("Data source '", data_src, "' not supported. Try one of the
+                following sources: ", paste0(supported_data_src, collapse =", ")
+                ))
   # build request
   path = "europepmc/webservices/rest/search"
   if(data_src == "pmc") {
@@ -76,3 +80,7 @@ epmc_details <- function(ext_id = NULL, data_src = "med") {
   )
   out
 }
+
+# check data sources
+supported_data_src <- c("agr", "cba", "ctx", "eth", "hir", "med", "nbk", "pat",
+                        "pmc")

@@ -14,4 +14,5 @@ test_that("epmc_tm_count returns", {
   # fails correctly
   expect_error(epmc_tm_count("14756321"),
                "Sorry, no text-mined terms found")
+  expect_error(epmc_tm_count("13814508", data_src = "abc"))
 })

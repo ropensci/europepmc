@@ -49,6 +49,12 @@ epmc_lablinks <- function(ext_id = NULL, data_src = "med", lab_id = NULL,
                     n_pages = 20) {
   if (is.null(ext_id))
     stop("Please provide a publication id")
+  if (!is.numeric(n_pages))
+    stop("n_pages must be of type 'numeric'")
+  if (!tolower(data_src) %in% supported_data_src)
+    stop(paste0("Data source '", data_src, "' not supported. Try one of the
+                following sources: ", paste0(supported_data_src, collapse =", ")
+    ))
   # build request
   if (is.null(lab_id))
     stop("Please restrict your query to one external link provider. You'll find

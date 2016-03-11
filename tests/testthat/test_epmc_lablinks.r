@@ -23,4 +23,6 @@ test_that("epmc_lablinks returns", {
   expect_error(epmc_lablinks("13814508"),
                "Please restrict your query to one external link provider. You'll find
          all providers in Europe PMC's advanced search form.")
+  expect_error(epmc_lablinks("13814508", n_pages = "abc"))
+  expect_error(epmc_lablinks("13814508", data_src = "abc"))
 })
