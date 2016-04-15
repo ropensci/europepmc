@@ -10,6 +10,7 @@ test_that("epmc_ftxt returns", {
   expect_is(b, "xml_document")
 
   # fails correctly
-  expect_error(epmc_ftxt("23448176", data_src = "med"),
-               "Full texts can only be provided for publications indexed in 'pmc'")
+  expect_error(epmc_ftxt("23448176"))
+  expect_error(epmc_ftxt("2PMC3448176"))
+  expect_error(epmc_ftxt("PMC3476"))
 })

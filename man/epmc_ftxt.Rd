@@ -9,8 +9,6 @@ epmc_ftxt(ext_id = NULL, data_src = "pmc")
 \arguments{
 \item{ext_id}{publication identifier. All full text publications have
 external IDs starting 'PMC___'.}
-
-\item{data_src}{data source. For full texts, only 'pmc' is accepted.}
 }
 \value{
 xml_document
