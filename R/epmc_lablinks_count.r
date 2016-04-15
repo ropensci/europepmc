@@ -39,7 +39,7 @@ epmc_lablinks_count <- function(ext_id = NULL, data_src = "med"){
                 following sources: ", paste0(supported_data_src, collapse =", ")
     ))
   # build request
-  path = paste("europepmc/webservices/rest", data_src, ext_id, "labsLinks",
+  path = paste(rest_path(), data_src, ext_id, "labsLinks",
                "/json", sep ="/")
   doc <- rebi_GET(path = path)
   hitCount <- doc$hitCount

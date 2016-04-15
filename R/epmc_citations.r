@@ -42,7 +42,7 @@ epmc_citations <- function(ext_id = NULL, data_src = "med", n_pages = 20) {
                 following sources: ", paste0(supported_data_src, collapse =", ")
     ))
   # build request
-  path = paste("europepmc/webservices/rest", data_src, ext_id, "citations",
+  path = paste(rest_path(), data_src, ext_id, "citations",
                "json", sep ="/")
   doc <- rebi_GET(path = path)
   hitCount <- doc$hitCount
@@ -53,7 +53,7 @@ epmc_citations <- function(ext_id = NULL, data_src = "med", n_pages = 20) {
   if(max(no_pages) > n_pages) no_pages <- 1:n_pages
   pages = list()
   for(i in no_pages){
-    out <- rebi_GET(path = paste("europepmc/webservices/rest", data_src, ext_id,
+    out <- rebi_GET(path = paste(rest_path(), data_src, ext_id,
                                "citations", "json", i, sep ="/"))
     message("Retrieving page ", i)
     result <- plyr::ldply(out$citationList, data.frame,

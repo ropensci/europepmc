@@ -69,7 +69,7 @@ epmc_db <- function(ext_id = NULL, data_src = "med", db = NULL,
     stop(paste0("Data source '", data_src, "' not supported. Try one of the
                 following sources: ", paste0(supported_data_src, collapse =", ")
     ))
-  path = paste("europepmc/webservices/rest", data_src, ext_id, "databaseLinks",
+  path = paste(rest_path(), data_src, ext_id, "databaseLinks",
                db, "json", sep ="/")
   doc <- rebi_GET(path = path)
   hitCount <- doc$hitCount
@@ -80,7 +80,7 @@ epmc_db <- function(ext_id = NULL, data_src = "med", db = NULL,
   if(max(no_pages) > n_pages) no_pages <- 1:n_pages
   pages = list()
   for(i in no_pages){
-    out <- rebi_GET(path = paste("europepmc/webservices/rest", data_src, ext_id,
+    out <- rebi_GET(path = paste(rest_path(), data_src, ext_id,
                                  "databaseLinks", db, "json", i, sep ="/"))
     message("Retrieving page ", i)
     result <- plyr::ldply(
@@ -95,7 +95,7 @@ epmc_db <- function(ext_id = NULL, data_src = "med", db = NULL,
   list(hit_count = hitCount, data = result, db = db)
 }
 
-# supported dbs
 
+# supported dbs
 supported_db <- c("CHEBI", "CHEMBL", "EMBL", "INTACT", "INTERPRO", "OMIM",
                   "PDB", "UNIPROT")

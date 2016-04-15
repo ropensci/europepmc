@@ -18,9 +18,8 @@ epmc_ftxt_book <- function(ext_id = NULL) {
   if (is.null(ext_id))
     stop("Please provide an id. All book full texts are accessible either by the
          PMID or the 'NBK' book number")
-  uri <- "http://www.ebi.ac.uk"
   # call api
-  req <- httr::GET(uri, path = paste("europepmc/webservices/rest", ext_id,
+  req <- httr::GET(base_uri(), path = paste(rest_path(), ext_id,
     "bookXML", sep = "/"))
   # check for http status
   httr::stop_for_status(req)

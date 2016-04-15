@@ -59,7 +59,7 @@ epmc_lablinks <- function(ext_id = NULL, data_src = "med", lab_id = NULL,
   if (is.null(lab_id))
     stop("Please restrict your query to one external link provider. You'll find
          all providers in Europe PMC's advanced search form.")
-  path = paste("europepmc/webservices/rest", data_src, ext_id, "labsLinks",
+  path = paste(rest_path(), data_src, ext_id, "labsLinks",
                lab_id, "json", sep ="/")
   doc <- rebi_GET(path = path)
   hitCount <- doc$hitCount
@@ -70,7 +70,7 @@ epmc_lablinks <- function(ext_id = NULL, data_src = "med", lab_id = NULL,
   if(max(no_pages) > n_pages) no_pages <- 1:n_pages
   pages = list()
   for(i in no_pages){
-    out <- rebi_GET(path = paste("europepmc/webservices/rest", data_src, ext_id,
+    out <- rebi_GET(path = paste(rest_path(), data_src, ext_id,
                                  "labsLinks", lab_id, i, "json", sep ="/"))
     message("Retrieving page ", i)
     result <- plyr::ldply(

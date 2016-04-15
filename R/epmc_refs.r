@@ -39,7 +39,7 @@ epmc_refs <- function(ext_id = NULL, data_src = "med", n_pages = 20) {
                 following sources: ", paste0(supported_data_src, collapse =", ")
     ))
   # build request
-  path = paste("europepmc/webservices/rest", data_src, ext_id, "references",
+  path = paste(rest_path(), data_src, ext_id, "references",
                "json", sep ="/")
   doc <- rebi_GET(path = path)
   hitCount <- doc$hitCount

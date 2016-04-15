@@ -55,7 +55,7 @@ epmc_details <- function(ext_id = NULL, data_src = "med") {
                 following sources: ", paste0(supported_data_src, collapse =", ")
                 ))
   # build request
-  path = "europepmc/webservices/rest/search"
+  path = paste0(rest_path(), "/search")
   if(data_src == "pmc") {
     q <- list(query = paste0("PMCID:", ext_id), format = "json",
             resulttype = "core")
@@ -80,7 +80,3 @@ epmc_details <- function(ext_id = NULL, data_src = "med") {
   )
   out
 }
-
-# check data sources
-supported_data_src <- c("agr", "cba", "ctx", "eth", "hir", "med", "nbk", "pat",
-                        "pmc")
