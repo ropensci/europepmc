@@ -20,5 +20,5 @@
 #' \url{http://doi.org/10.1093/nar/gku1061}.
 #'
 #' @import plyr jsonlite httr xml2
-#' @name rebi-package
+#' @name rebi
 NULL
