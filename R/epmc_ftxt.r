@@ -14,7 +14,7 @@
 #'   epmc_ftxt("PMC3257301")
 #'   epmc_ftxt("PMC3639880")
 #'   }
-epmc_ftxt <- function(ext_id = NULL, data_src = "pmc") {
+epmc_ftxt <- function(ext_id = NULL) {
   if (is.null(ext_id))
     stop("Please provide a PMCID, i.e. ids starting with 'PMC'")
   if (!substring(ext_id, 1, 3) == "PMC")

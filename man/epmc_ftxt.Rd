@@ -4,7 +4,7 @@
 \alias{epmc_ftxt}
 \title{Fetch Europe PMC full texts}
 \usage{
-epmc_ftxt(ext_id = NULL, data_src = "pmc")
+epmc_ftxt(ext_id = NULL)
 }
 \arguments{
 \item{ext_id}{publication identifier. All full text publications have
