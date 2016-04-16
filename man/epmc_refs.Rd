@@ -40,6 +40,7 @@ Get references for a given publication
 \dontrun{
 epmc_refs("PMC3166943", data_src = "pmc")
 epmc_refs("25378340")
+epmc_refs("21753913")
 }
 }
 

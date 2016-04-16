@@ -28,6 +28,7 @@
 #' \dontrun{
 #' epmc_refs("PMC3166943", data_src = "pmc")
 #' epmc_refs("25378340")
+#' epmc_refs("21753913")
 #' }
 epmc_refs <- function(ext_id = NULL, data_src = "med", n_pages = 20) {
   if (is.null(ext_id))

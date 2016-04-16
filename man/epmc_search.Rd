@@ -4,17 +4,23 @@
 \alias{epmc_search}
 \title{Search Europe PMC publication database}
 \usage{
-epmc_search(query = NULL, id_list = FALSE, n_pages = 50)
+epmc_search(query = NULL, batch_size = 100, limit = 1000,
+  id_list = FALSE, verbose = TRUE)
 }
 \arguments{
 \item{query}{search query (character vector). For more information on how to
 build a search query, see \url{http://europepmc.org/Help}}
 
+\item{batch_size}{Size of pages to be returned. By default, this function
+returns 100  records for each page.}
+
+\item{limit}{Maximum number of recors to be retrieved. By default, 100 are
+returned.}
+
 \item{id_list}{Should only IDs (e.g. PMID) and sources be retrieved for the
 given search terms?}
 
-\item{n_pages}{Number of pages to be returned. By default, this function
-returns 25 records for each page.}
+\item{verbose}{print some information on what is going on.}
 }
 \value{
 List of two, number of hits and the retrieved metadata as data.frame
@@ -36,6 +42,9 @@ my.data <- epmc_search(query = 'EXT_ID:22246381')
 
 #Get only PLOS Genetics article with EMBL database references
 my.data <- epmc_search(query = 'ISSN:1553-7404 HAS_EMBL:y')
+#Limit search to 250 PLOS Genetics articles
+my.data <- epmc_search(query = 'ISSN:1553-7404', limit = 250)
+
 }
 }
 \seealso{
