@@ -9,6 +9,10 @@ rest_path <- function() "europepmc/webservices/rest"
 supported_data_src <- c("agr", "cba", "ctx", "eth", "hir", "med", "nbk", "pat",
                         "pmc")
 
+# default batch size
+batch_size <- function() 1000
+
+
 # Common methods:
 
 # Implementing GET method and json parser for EPMC

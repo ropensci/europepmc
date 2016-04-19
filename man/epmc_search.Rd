@@ -4,18 +4,14 @@
 \alias{epmc_search}
 \title{Search Europe PMC publication database}
 \usage{
-epmc_search(query = NULL, batch_size = 100, limit = 1000,
-  id_list = FALSE, verbose = TRUE)
+epmc_search(query = NULL, limit = 25, id_list = FALSE, verbose = TRUE)
 }
 \arguments{
 \item{query}{search query (character vector). For more information on how to
 build a search query, see \url{http://europepmc.org/Help}}
 
-\item{batch_size}{Size of pages to be returned. By default, this function
-returns 100  records for each page.}
-
-\item{limit}{Maximum number of recors to be retrieved. By default, 100 are
-returned.}
+\item{limit}{limit the number of records you wish to retrieve.
+By default, 25 are returned.}
 
 \item{id_list}{Should only IDs (e.g. PMID) and sources be retrieved for the
 given search terms?}

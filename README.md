@@ -6,7 +6,6 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/nm7ixfn2twuu1y45/branch/master?svg=true)](https://ci.appveyor.com/project/njahn82/rebi/branch/master)
 [![codecov.io](https://codecov.io/github/njahn82/rebi/coverage.svg?branch=master)](https://codecov.io/github/njahn82/rebi?branch=master)
 
-
 rebi facilitates access to [Europe PMC RESTful Web
 Service](http://europepmc.org/RestfulWebService).
 
@@ -52,9 +51,8 @@ through other `rebi`-functions. Columns inform whether open access full texts
 text-mined terms (`hasTextMinedTerms`) or references (`hasReferences`) are
 available.
 
-By default, `epmc_search` returns 1.000 records as a maximum. This equals 50
-result pages that are returned by the API. To adjust it, simply use the
-`n_pages` parameter.
+By default, `epmc_search` returns 1.000 records. To adjust the limit, simply use 
+the `limit` parameter.
 
 Either list of publication ids (`id_list = TRUE`) or key metadata
 information  (`id_list = FALSE`, default option) are returned.
@@ -63,75 +61,66 @@ For instance, search for abstracts and full texts that mention `Gabi-Kat`:
 
 
 ```r
+library(rebi)
 my_data <- epmc_search(query = 'Gabi-Kat')
-# number of records
-my_data$hit_count
-#> [1] 237
 # first six records
-head(my_data$data)
+head(my_data)
 #>         id source     pmid      pmcid
 #> 1 26842807    MED 26842807 PMC4740857
-#> 2 26824478    MED 26824478 PMC4733102
-#> 3 26343971    MED 26343971       <NA>
-#> 4 26493293    MED 26493293 PMC4737287
-#> 5 25262228    MED 25262228 PMC4265151
-#> 6 25779053    MED 25779053 PMC4402529
-#>                                                                                                                                       title
-#> 1       Precocious leaf senescence by functional loss of PROTEIN S-ACYL TRANSFERASE14 involves the NPR1-dependent salicylic acid signaling.
-#> 2                 The Early-Acting Peroxin PEX19 Is Redundantly Encoded, Farnesylated, and Essential for Viability in Arabidopsis thaliana.
-#> 3 The Structural Features of Thousands of T-DNA Insertion Sites Are Consistent with a Double-Strand Break Repair-Based Insertion Mechanism.
-#> 4                                    The RNA helicase, eIF4A-1, is required for ovule development and cell size homeostasis in Arabidopsis.
-#> 5                                                       PERK-KIPK-KCBP signalling negatively regulates root growth in Arabidopsis thaliana.
-#> 6                        The nuclease FAN1 is involved in DNA crosslink repair in Arabidopsis thaliana independently of the nuclease MUS81.
-#>                                                                       authorString
-#> 1                        Zhao XY, Wang JG, Song SJ, Wang Q, Kang H, Zhang Y, Li S.
-#> 2         McDonnell MM, Burkhart SE, Stoddard JM, Wright ZJ, Strader LC, Bartel B.
-#> 3           Kleinboelting N, Huep G, Appelhagen I, Viehoever P, Li Y, Weisshaar B.
-#> 4                                            Bush MS, Crowe N, Zheng T, Doonan JH.
-#> 5 Humphrey TV, Haasen KE, Aldea-Brydges MG, Sun H, Zayed Y, Indriolo E, Goring DR.
-#> 6                                                  Herrmann NJ, Knoll A, Puchta H.
-#>        journalTitle journalVolume pubYear journalIssn  pageInfo
-#> 1           Sci Rep             6    2016   2045-2322     20309
-#> 2          PLoS One            11    2016   1932-6203  e0148335
-#> 3         Mol Plant             8    2015   1674-2052 1651-1664
-#> 4           Plant J            84    2015   0960-7412  989-1004
-#> 5         J Exp Bot            66    2015   0022-0957     71-83
-#> 6 Nucleic Acids Res            43    2015   0305-1048 3653-3666
-#>                                                               pubType
-#> 1                                   journal article; research-article
-#> 2                                   journal article; research-article
-#> 3                   journal article; research support, non-u.s. gov't
-#> 4                                   journal article; research-article
-#> 5 journal article; research support, non-u.s. gov't; research-article
-#> 6 journal article; research support, non-u.s. gov't; research-article
-#>   isOpenAccess inEPMC inPMC hasPDF hasBook hasSuppl citedByCount
-#> 1            Y      Y     N      Y       N        N            0
-#> 2            Y      Y     N      Y       N        N            0
-#> 3         <NA>      N     N      N       N        N            0
-#> 4            Y      Y     N      Y       N        N            0
-#> 5            Y      Y     N      Y       N        Y            1
-#> 6            Y      Y     N      Y       N        Y            0
-#>   hasReferences hasTextMinedTerms hasDbCrossReferences hasLabsLinks
-#> 1             N                 N                    N            N
-#> 2             N                 N                    N            N
-#> 3             N                 N                    N            N
-#> 4             N                 N                    N            N
-#> 5             Y                 Y                    N            N
-#> 6             Y                 Y                    N            N
-#>   epmcAuthMan hasTMAccessionNumbers luceneScore
-#> 1           N                     N         NaN
-#> 2           N                     N         NaN
-#> 3           N                     N         NaN
-#> 4           N                     N         NaN
-#> 5           N                     N         NaN
-#> 6           N                     N         NaN
-#>                            doi issue
-#> 1            10.1038/srep20309  <NA>
-#> 2 10.1371/journal.pone.0148335     1
-#> 3   10.1016/j.molp.2015.08.011    11
-#> 4            10.1111/tpj.13062     5
-#> 5           10.1093/jxb/eru390     1
-#> 6           10.1093/nar/gkv208     7
+#> 2 26930070    MED 26930070 PMC4773003
+#> 3 26824478    MED 26824478 PMC4733102
+#> 4 27064270    MED 27064270 PMC4814454
+#> 5 27015278    MED 27015278 PMC4807768
+#> 6 26343971    MED 26343971       <NA>
+#>                                                                                                                                                                                                                  title
+#> 1                                                                                  Precocious leaf senescence by functional loss of PROTEIN S-ACYL TRANSFERASE14 involves the NPR1-dependent salicylic acid signaling.
+#> 2 The Arabidopsis Domain of Unknown Function 1218 (DUF1218) Containing Proteins, MODIFYING WALL LIGNIN-1 and 2 (At1g31720/MWL-1 and At4g19370/MWL-2) Function Redundantly to Alter Secondary Cell Wall Lignin Content.
+#> 3                                                                                            The Early-Acting Peroxin PEX19 Is Redundantly Encoded, Farnesylated, and Essential for Viability in Arabidopsis thaliana.
+#> 4                                                                                          Photosystem II Repair and Plant Immunity: Lessons Learned from Arabidopsis Mutant Lacking the THYLAKOID LUMEN PROTEIN 18.3.
+#> 5                                                                                                    MicroProtein-Mediated Recruitment of CONSTANS into a TOPLESS Trimeric Complex Represses Flowering in Arabidopsis.
+#> 6                                                                            The Structural Features of Thousands of T-DNA Insertion Sites Are Consistent with a Double-Strand Break Repair-Based Insertion Mechanism.
+#>                                                                    authorString
+#> 1                     Zhao XY, Wang JG, Song SJ, Wang Q, Kang H, Zhang Y, Li S.
+#> 2                    Mewalal R, Mizrachi E, Coetzee B, Mansfield SD, Myburg AA.
+#> 3      McDonnell MM, Burkhart SE, Stoddard JM, Wright ZJ, Strader LC, Bartel B.
+#> 4 Järvi S, Isojärvi J, Kangasjärvi S, Salojärvi J, Mamedov F, Suorsa M, Aro EM.
+#> 5        Graeff M, Straub D, Eguen T, Dolde U, Rodrigues V, Brandt R, Wenkel S.
+#> 6        Kleinboelting N, Huep G, Appelhagen I, Viehoever P, Li Y, Weisshaar B.
+#>      journalTitle journalVolume pubYear journalIssn  pageInfo
+#> 1         Sci Rep             6    2016   2045-2322     20309
+#> 2        PLoS One            11    2016   1932-6203  e0150254
+#> 3        PLoS One            11    2016   1932-6203  e0148335
+#> 4 Front Plant Sci             7    2016   1664-462x       405
+#> 5      PLoS Genet            12    2016   1553-7390  e1005959
+#> 6       Mol Plant             8    2015   1674-2052 1651-1664
+#>                                             pubType isOpenAccess inEPMC
+#> 1                 journal article; research-article            Y      Y
+#> 2                 journal article; research-article            Y      Y
+#> 3                 journal article; research-article            Y      Y
+#> 4                 journal article; research-article            Y      Y
+#> 5                 journal article; research-article            Y      Y
+#> 6 journal article; research support, non-u.s. gov't         <NA>      N
+#>   inPMC hasPDF hasBook hasSuppl citedByCount hasReferences
+#> 1     N      Y       N        N            0             N
+#> 2     N      Y       N        N            0             N
+#> 3     N      Y       N        N            0             N
+#> 4     N      Y       N        N            0             N
+#> 5     N      Y       N        N            0             N
+#> 6     N      N       N        N            0             N
+#>   hasTextMinedTerms hasDbCrossReferences hasLabsLinks epmcAuthMan
+#> 1                 Y                    N            N           N
+#> 2                 Y                    N            N           N
+#> 3                 Y                    N            N           N
+#> 4                 Y                    N            N           N
+#> 5                 Y                    N            N           N
+#> 6                 N                    N            N           N
+#>   hasTMAccessionNumbers luceneScore                          doi issue
+#> 1                     N         NaN            10.1038/srep20309  <NA>
+#> 2                     N         NaN 10.1371/journal.pone.0150254     3
+#> 3                     N         NaN 10.1371/journal.pone.0148335     1
+#> 4                     N         NaN      10.3389/fpls.2016.00405  <NA>
+#> 5                     N         NaN 10.1371/journal.pgen.1005959     3
+#> 6                     N         NaN   10.1016/j.molp.2015.08.011    11
 ```
 
 Get PLOS Genetics (ISSN:1553-7404) articles that cross-reference EMBL:
@@ -139,154 +128,102 @@ Get PLOS Genetics (ISSN:1553-7404) articles that cross-reference EMBL:
 
 ```r
 my_data <- epmc_search(query = 'ISSN:1553-7404 HAS_EMBL:y')
-head(my_data$data)
+head(my_data)
 #>         id source     pmid      pmcid
-#> 1 25664770    MED 25664770 PMC4335487
-#> 2 26379286    MED 26379286 PMC4574769
-#> 3 26241656    MED 26241656 PMC4524724
-#> 4 26115430    MED 26115430 PMC4483262
+#> 1 26982327    MED 26982327 PMC4794157
+#> 2 26115430    MED 26115430 PMC4483262
+#> 3 25664770    MED 25664770 PMC4335487
+#> 4 25875245    MED 25875245 PMC4395465
 #> 5 26427027    MED 26427027 PMC4591017
-#> 6 25951176    MED 25951176 PMC4423873
-#>                                                                                                                                             title
-#> 1                                    Tribolium castaneum RR-1 cuticular protein TcCPR4 is required for formation of pore canals in rigid cuticle.
-#> 2                                                  Recurrent Domestication by Lepidoptera of Genes from Their Parasites Mediated by Bracoviruses.
-#> 3                             Retrohoming of a Mobile Group II Intron in Human Cells Suggests How Eukaryotes Limit Group II Intron Proliferation.
-#> 4                       Genetic Changes to a Transcriptional Silencer Element Confers Phenotypic Diversity within and between Drosophila Species.
-#> 5                    Functional Impact and Evolution of a Novel Human Polymorphic Inversion That Disrupts a Gene and Creates a Fusion Transcript.
-#> 6 Natural Variation Identifies ICARUS1, a Universal Gene Required for Cell Proliferation and Growth at High Temperatures in Arabidopsis thaliana.
-#>                                                                                                                                              authorString
-#> 1                                                                                                          Noh MY, Muthukrishnan S, Kramer KJ, Arakane Y.
-#> 2                                Gasmi L, Boulain H, Gauthier J, Hua-Van A, Musset K, Jakubowska AK, Aury JM, Volkoff AN, Huguet E, Herrero S, Drezen JM.
-#> 3                                                                                                   Truong DM, Hewitt FC, Hanson JH, Cui X, Lambowitz AM.
-#> 4                                                                                      Johnson WC, Ordway AJ, Watada M, Pruitt JN, Williams TM, Rebeiz M.
-#> 5                     Puig M, Castellano D, Pantano L, Giner-Delgado C, Izquierdo D, Gayà-Vidal M, Lucas-Lledó JI, Esko T, Terao C, Matsuda F, Cáceres M.
-#> 6 Zhu W, Ausin I, Seleznev A, Méndez-Vigo B, Picó FX, Sureshkumar S, Sundaramoorthi V, Bulach D, Powell D, Seemann T, Alonso-Blanco C, Balasubramanian S.
+#> 6 26495848    MED 26495848 PMC4619825
+#>                                                                                                                                                     title
+#> 1                                                             Hybrid Dysgenesis in Drosophila simulans Associated with a Rapid Invasion of the P-Element.
+#> 2                               Genetic Changes to a Transcriptional Silencer Element Confers Phenotypic Diversity within and between Drosophila Species.
+#> 3                                            Tribolium castaneum RR-1 cuticular protein TcCPR4 is required for formation of pore canals in rigid cuticle.
+#> 4 MAPK signaling pathway alters expression of midgut ALP and ABCC genes and causes resistance to Bacillus thuringiensis Cry1Ac toxin in diamondback moth.
+#> 5                            Functional Impact and Evolution of a Novel Human Polymorphic Inversion That Disrupts a Gene and Creates a Fusion Transcript.
+#> 6                                                                                                     Virus Satellites Drive Viral Evolution and Ecology.
+#>                                                                                                                          authorString
+#> 1                                                                                               Hill T, Schlötterer C, Betancourt AJ.
+#> 2                                                                  Johnson WC, Ordway AJ, Watada M, Pruitt JN, Williams TM, Rebeiz M.
+#> 3                                                                                      Noh MY, Muthukrishnan S, Kramer KJ, Arakane Y.
+#> 4                                    Guo Z, Kang S, Chen D, Wu Q, Wang S, Xie W, Zhu X, Baxter SW, Zhou X, Jurat-Fuentes JL, Zhang Y.
+#> 5 Puig M, Castellano D, Pantano L, Giner-Delgado C, Izquierdo D, Gayà-Vidal M, Lucas-Lledó JI, Esko T, Terao C, Matsuda F, Cáceres M.
+#> 6                      Frígols B, Quiles-Puchalt N, Mir-Sanchis I, Donderis J, Elena SF, Buckling A, Novick RP, Marina A, Penadés JR.
 #>   journalTitle issue journalVolume pubYear journalIssn pageInfo
-#> 1   PLoS Genet     2            11    2015   1553-7390 e1004963
-#> 2   PLoS Genet     9            11    2015   1553-7390 e1005470
-#> 3   PLoS Genet     8            11    2015   1553-7390 e1005422
-#> 4   PLoS Genet     6            11    2015   1553-7390 e1005279
+#> 1   PLoS Genet     3            12    2016   1553-7390 e1005920
+#> 2   PLoS Genet     6            11    2015   1553-7390 e1005279
+#> 3   PLoS Genet     2            11    2015   1553-7390 e1004963
+#> 4   PLoS Genet     4            11    2015   1553-7390 e1005124
 #> 5   PLoS Genet    10            11    2015   1553-7390 e1005495
-#> 6   PLoS Genet     5            11    2015   1553-7390 e1005085
+#> 6   PLoS Genet    10            11    2015   1553-7390 e1005609
 #>                                                                                                         pubType
-#> 1                                           journal article; research support, non-u.s. gov't; research-article
-#> 2                                           journal article; research support, non-u.s. gov't; research-article
+#> 1                                                                             journal article; research-article
+#> 2 journal article; research support, non-u.s. gov't; research support, u.s. gov't, non-p.h.s.; research-article
 #> 3                                           journal article; research support, non-u.s. gov't; research-article
 #> 4 journal article; research support, non-u.s. gov't; research support, u.s. gov't, non-p.h.s.; research-article
 #> 5                                           journal article; research support, non-u.s. gov't; research-article
 #> 6                                           journal article; research support, non-u.s. gov't; research-article
 #>   isOpenAccess inEPMC inPMC hasPDF hasBook hasSuppl citedByCount
-#> 1            Y      Y     N      Y       N        N            1
+#> 1            Y      Y     N      Y       N        N            0
 #> 2            Y      Y     N      Y       N        N            0
-#> 3            Y      Y     N      Y       N        N            0
-#> 4            Y      Y     N      Y       N        N            0
+#> 3            Y      Y     N      Y       N        N            1
+#> 4            Y      Y     N      Y       N        N            1
 #> 5            Y      Y     N      Y       N        N            0
 #> 6            Y      Y     N      Y       N        N            0
 #>   hasReferences hasTextMinedTerms hasDbCrossReferences hasLabsLinks
-#> 1             Y                 Y                    Y            N
+#> 1             N                 Y                    Y            Y
 #> 2             Y                 Y                    Y            N
-#> 3             Y                 Y                    Y            N
-#> 4             Y                 Y                    Y            N
-#> 5             Y                 Y                    Y            N
+#> 3             Y                 Y                    Y            Y
+#> 4             Y                 Y                    Y            Y
+#> 5             Y                 Y                    Y            Y
 #> 6             Y                 Y                    Y            Y
 #>   epmcAuthMan hasTMAccessionNumbers luceneScore
 #> 1           N                     Y         NaN
-#> 2           N                     Y         NaN
+#> 2           N                     N         NaN
 #> 3           N                     Y         NaN
-#> 4           N                     N         NaN
+#> 4           N                     Y         NaN
 #> 5           N                     Y         NaN
 #> 6           N                     Y         NaN
 #>                            doi
-#> 1 10.1371/journal.pgen.1004963
-#> 2 10.1371/journal.pgen.1005470
-#> 3 10.1371/journal.pgen.1005422
-#> 4 10.1371/journal.pgen.1005279
+#> 1 10.1371/journal.pgen.1005920
+#> 2 10.1371/journal.pgen.1005279
+#> 3 10.1371/journal.pgen.1004963
+#> 4 10.1371/journal.pgen.1005124
 #> 5 10.1371/journal.pgen.1005495
-#> 6 10.1371/journal.pgen.1005085
+#> 6 10.1371/journal.pgen.1005609
 ```
 
-Get list of ids that represent articles referencing DataCite DOIs:
+Count hits before with `epmc_hits` to define limit. For example, get list of ids
+that represent articles referencing DataCite DOIs:
 
 
 ```r
-my_data <- epmc_search(query = "ACCESSION_TYPE:doi", n_pages = 1, 
+query <- "ACCESSION_TYPE:doi"
+epmc_hits(query)
+#> [1] 4748
+# set limit to 10 records
+my_data <- epmc_search(query = "ACCESSION_TYPE:doi", limit = 10, 
                        id_list = TRUE)
-head(my_data$data)
+head(my_data)
 #>         id source     pmid      pmcid
-#> 1 26474846    MED 26474846 PMC4693979
-#> 2 26725519    MED 26725519 PMC4698588
-#> 3 26734726    MED 26734726 PMC4703221
-#> 4 26751378    MED 26751378 PMC4709234
-#> 5 26751577    MED 26751577 PMC4709135
-#> 6 26731720    MED 26731720 PMC4701503
-my_data$hit_count
-#> [1] 4267
+#> 1 26805866    MED 26805866 PMC4772172
+#> 2 26861373    MED 26861373 PMC4772231
+#> 3 26880343    MED 26880343 PMC4754017
+#> 4 26895485    MED 26895485 PMC4764516
+#> 5 26895333    MED 26895333 PMC4760976
+#> 6 26894589    MED 26894589 PMC4760680
+attr(my_data, "hit_count")
+#> [1] 4748
 ```
 
 Use [ORCID](http://orcid.org/) to search for personal publications:
 
 
 ```r
-my_data <- epmc_search(query = 'AUTHORID:"0000-0002-7635-3473"', n_pages = 1) 
-head(my_data$data)
-#>         id source     pmid      pmcid
-#> 1 26717955    MED 26717955 PMC4762388
-#> 2 26676716    MED 26676716       <NA>
-#> 3 26377912    MED 26377912 PMC4573686
-#> 4 25730202    MED 25730202 PMC4336690
-#> 5 26343971    MED 26343971       <NA>
-#> 6 25891958    MED 25891958       <NA>
-#>                                                                                                                                          title
-#> 1                           Natural variation in flavonol accumulation in Arabidopsis is determined by the flavonol glucosyltransferase BGLU6.
-#> 2   Diversification, evolution and methylation of short interspersed nuclear element families in sugar beet and related Amaranthaceae species.
-#> 3                                                  SMRT sequencing only de novo assembly of the sugar beet (Beta vulgaris) chloroplast genome.
-#> 4 Fast forward genetics to identify mutations causing a high light tolerant phenotype in Chlamydomonas reinhardtii by whole-genome-sequencing.
-#> 5    The Structural Features of Thousands of T-DNA Insertion Sites Are Consistent with a Double-Strand Break Repair-Based Insertion Mechanism.
-#> 6         TRANSPARENT TESTA 13 is a tonoplast P3A -ATPase required for vacuolar deposition of proanthocyanidins in Arabidopsis thaliana seeds.
-#>                                                                                                    authorString
-#> 1                                           Ishihara H, Tohge T, Viehöver P, Fernie AR, Weisshaar B, Stracke R.
-#> 2 Schwichtenberg K, Wenke T, Zakrzewski F, Seibt KM, Minoche A, Dohm JC, Weisshaar B, Himmelbauer H, Schmidt T.
-#> 3                                                                      Stadermann KB, Weisshaar B, Holtgräwe D.
-#> 4                                               Schierenbeck L, Ries D, Rogge K, Grewe S, Weisshaar B, Kruse O.
-#> 5                                        Kleinboelting N, Huep G, Appelhagen I, Viehoever P, Li Y, Weisshaar B.
-#> 6                  Appelhagen I, Nordholt N, Seidel T, Spelt K, Koes R, Quattrochio F, Sagasser M, Weisshaar B.
-#>         journalTitle issue journalVolume pubYear journalIssn  pageInfo
-#> 1          J Exp Bot     5            67    2016   0022-0957 1505-1517
-#> 2            Plant J     2            85    2016   0960-7412   229-244
-#> 3 BMC Bioinformatics     1            16    2015   1471-2105       295
-#> 4       BMC Genomics     1            16    2015   1471-2164        57
-#> 5          Mol Plant    11             8    2015   1674-2052 1651-1664
-#> 6            Plant J     5            82    2015   0960-7412   840-849
-#>                                                               pubType
-#> 1                                   journal article; research-article
-#> 2                                                     journal article
-#> 3 journal article; research support, non-u.s. gov't; research-article
-#> 4 journal article; research support, non-u.s. gov't; research-article
-#> 5                   journal article; research support, non-u.s. gov't
-#> 6                   journal article; research support, non-u.s. gov't
-#>   isOpenAccess inEPMC inPMC hasPDF hasBook hasSuppl citedByCount
-#> 1            Y      Y     N      Y       N        Y            0
-#> 2         <NA>      N     N      N       N        N            0
-#> 3            Y      Y     N      Y       N        N            0
-#> 4            Y      Y     N      Y       N        N            0
-#> 5         <NA>      N     N      N       N        N            0
-#> 6         <NA>      N     N      N       N        N            0
-#>   hasReferences hasTextMinedTerms hasDbCrossReferences hasLabsLinks
-#> 1             N                 Y                    Y            N
-#> 2             N                 N                    N            N
-#> 3             Y                 Y                    Y            N
-#> 4             Y                 Y                    N            N
-#> 5             N                 N                    N            N
-#> 6             N                 N                    Y            N
-#>   epmcAuthMan hasTMAccessionNumbers luceneScore                        doi
-#> 1           N                     Y         NaN         10.1093/jxb/erv546
-#> 2           N                     N         NaN          10.1111/tpj.13103
-#> 3           N                     N         NaN  10.1186/s12859-015-0726-6
-#> 4           N                     Y         NaN  10.1186/s12864-015-1232-y
-#> 5           N                     N         NaN 10.1016/j.molp.2015.08.011
-#> 6           N                     N         NaN          10.1111/tpj.12854
-my_data$hit_count
-#> [1] 124
+my_data <- epmc_search(query = 'AUTHORID:"0000-0002-7635-3473"') 
+attr(my_data, "hit_count")
+#> [1] 125
 ```
 
 ## Get article details
@@ -592,7 +529,7 @@ Before retrieving the links, please check availability and sources first:
 ```r
 epmc_db_count("12368864")
 #>     dbName count
-#> 1     EMBL     5
+#> 1     EMBL    10
 #> 2 INTERPRO     1
 #> 3  UNIPROT  5320
 ```
@@ -606,21 +543,31 @@ Select database and get links:
 ```r
 epmc_db("12368864", db = "embl")
 #> $hit_count
-#> [1] 5
+#> [1] 10
 #> 
 #> $data
-#>      info1                                                       info2
-#> 1 AE014187 Plasmodium falciparum 3D7 chromosome 14, complete sequence.
-#> 2 AE014186 Plasmodium falciparum 3D7 chromosome 11, complete sequence.
-#> 3 AE001362  Plasmodium falciparum 3D7 chromosome 2, complete sequence.
-#> 4 AE014188 Plasmodium falciparum 3D7 chromosome 12, complete sequence.
-#> 5 AE014185 Plasmodium falciparum 3D7 chromosome 10, complete sequence.
-#>     info3 info4
-#> 1 3291871     5
-#> 2 2038337     5
-#> 3  947102     5
-#> 4 2271478     5
-#> 5 1687655     5
+#>       info1                                                       info2
+#> 1  AE014187 Plasmodium falciparum 3D7 chromosome 14, complete sequence.
+#> 2  AE014186 Plasmodium falciparum 3D7 chromosome 11, complete sequence.
+#> 3  LN999943  Plasmodium falciparum 3D7 chromosome 2, complete sequence.
+#> 4  AE001362  Plasmodium falciparum 3D7 chromosome 2, complete sequence.
+#> 5  LN999947 Plasmodium falciparum 3D7 chromosome 12, complete sequence.
+#> 6  AE014185 Plasmodium falciparum 3D7 chromosome 10, complete sequence.
+#> 7  LN999944 Plasmodium falciparum 3D7 chromosome 10, complete sequence.
+#> 8  LN999945 Plasmodium falciparum 3D7 chromosome 11, complete sequence.
+#> 9  LN999946 Plasmodium falciparum 3D7 chromosome 14, complete sequence.
+#> 10 AE014188 Plasmodium falciparum 3D7 chromosome 12, complete sequence.
+#>      info3 info4
+#> 1  3291871    10
+#> 2  2038337    10
+#> 3   947102    10
+#> 4   947102    10
+#> 5  2271494    10
+#> 6  1687655    10
+#> 7  1687656    10
+#> 8  2038340    10
+#> 9  3291936    10
+#> 10 2271478    10
 #> 
 #> $db
 #> [1] "embl"
@@ -693,6 +640,7 @@ epmc_lablinks_count("PMC3986813", data_src = "pmc")
 #>       providerName linksCount
 #> 1 EBI Train Online          1
 #> 2        Wikipedia          1
+#> 3       BioStudies          1
 ```
 
 Get links to PANGEA (`lab_id = "1342"`)

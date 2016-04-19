@@ -7,24 +7,20 @@ test_that("epmc_search returns", {
   c <- epmc_search(query = 'EXT_ID:22246381')
   d <- epmc_search(query = 'ISSN:1553-7404 HAS_EMBL:y')
   e <- epmc_search(query = 'ISSN:1553-7404', id_list= TRUE, limit = 250)
-
-  #correct class
-  expect_output(str(a), "List of 2")
-  expect_output(str(b), "List of 2")
-  expect_output(str(c), "List of 2")
-  expect_output(str(d), "List of 2")
-  expect_output(str(e), "List of 2")
+  f <- epmc_search(query = 'ISSN:1553-7404 HAS_EMBL:y', limit = 25)
 
   #correct class metadata
-  expect_is(a$data, "data.frame")
-  expect_is(b$data, "data.frame")
-  expect_is(c$data, "data.frame")
-  expect_is(d$data, "data.frame")
-  expect_is(e$data, "data.frame")
+  expect_is(a, "data.frame")
+  expect_is(b, "data.frame")
+  expect_is(c, "data.frame")
+  expect_is(d, "data.frame")
+  expect_is(e, "data.frame")
 
   #are diminsions correct?
-  expect_equal(nrow(e$data), 250)
-  expect_equal(ncol(e$data), 4)
+  expect_equal(nrow(e), 250)
+  expect_equal(ncol(e), 4)
+  expect_equal(nrow(f), 25)
+
 
   # fails correctly
   expect_error(epmc_search("123haha"), "nothing found, please check your query")

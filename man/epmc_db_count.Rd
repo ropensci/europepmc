@@ -16,7 +16,8 @@ epmc_db_count(ext_id = NULL, data_src = "med")
 data.frame with counts for each database
 }
 \description{
-This function returns the number of database links for each EBI database from
+This function returns the number of EBI database links associated with a
+publication,
   Europe PMC RESTful Web Service.
 }
 \details{

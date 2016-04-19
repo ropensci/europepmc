@@ -1,6 +1,7 @@
 #' Retrieve the number of database links from Europe PMC publication database
 #'
-#' This function returns the number of database links for each EBI database from
+#' This function returns the number of EBI database links associated with a
+#' publication,
 #'   Europe PMC RESTful Web Service.
 #' @details Europe PMC supports cross-references between literature and the
 #'   following databases:
