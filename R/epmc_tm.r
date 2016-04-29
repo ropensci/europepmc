@@ -51,14 +51,14 @@ epmc_tm <- function(ext_id = NULL, data_src = "med", semantic_type = NULL,
     stop(paste0("Data source '", data_src, "' not supported. Try one of the
                 following sources: ", paste0(supported_data_src, collapse =", ")
     ))
+  if (is.null(semantic_type))
+    stop("Please Specify the semantic type you wish to retrieve text-mined terms
+         for")
   if (!toupper(semantic_type) %in% supported_semantic_types)
     stop(paste0("Controlled vocabulary '", semantic_type, "' not supported. Try
                  one of the following types: ",
                 paste0(supported_semantic_types, collapse =", ")))
   # build request
-  if (is.null(semantic_type))
-    stop("Please Specify the semantic type you wish to retrieve text-mined terms
-         for")
   path = paste(rest_path(), data_src, ext_id, "textMinedTerms",
                semantic_type, "json", sep ="/")
   doc <- rebi_GET(path = path)
