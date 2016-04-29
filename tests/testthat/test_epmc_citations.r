@@ -5,7 +5,7 @@ test_that("epmc_citations returns", {
   a <- epmc_citations("PMC3166943", data_src = "pmc")
   b <- epmc_citations("9338777")
   c <- epmc_citations("PMC3166943", data_src = "pmc")
-  d <- epmc_citations("7535888", n_pages = 1)
+  d <- epmc_citations("7535888", limit = 25)
 
   #correct dimensions and class
   expect_output(str(a), "List of 2")
@@ -21,7 +21,6 @@ test_that("epmc_citations returns", {
   expect_is(a$hit_count, "integer")
 
   # fails correctly
-  expect_error(epmc_citations("13814508"), "This article has not been cited yet")
-  expect_error(epmc_citations("13814508", n_pages = "abc"))
+  expect_error(epmc_citations("13814508"), "No citing documents found")
   expect_error(epmc_citations("13814508", data_src = "abc"))
 })

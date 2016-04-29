@@ -39,36 +39,7 @@ epmc_search <- function(query = NULL, limit = 25, id_list = FALSE,
   # get results found
   hit_count <- epmc_hits(query = query)
   #prepare queries
-  limit <- ifelse(hit_count <= limit, hit_count, limit)
-  if (limit > batch_size()) {
-    if (all.equal(limit / batch_size(), as.integer(limit / batch_size())) == TRUE) {
-      page_max <- limit / batch_size()
-      last_chunk <- batch_size()
-    } else {
-      page_max <- as.integer(limit / batch_size()) + 1
-      last_chunk <- limit - ((page_max - 1) * batch_size())
-    }
-    queries <-
-      lapply(1:(page_max - 1),
-             build_query,
-             batch_size = batch_size(),
-             query = query)
-    queries <-
-      append(queries, list(
-        build_query(
-          query = query,
-          page = page_max,
-          batch_size = last_chunk
-        )
-      ))
-  } else {
-    queries <-
-      list(build_query(
-        page = 1,
-        query = query,
-        batch_size = limit
-      ))
-  }
+  queries <- make_queries(hit_count = hit_count, limit = limit, query = query)
   # if only ids are requested
   if (id_list == TRUE)
     queries <-
@@ -93,3 +64,5 @@ epmc_search <- function(query = NULL, limit = 25, id_list = FALSE,
   attr(md, "hit_count") <- hit_count
   md
 }
+
+

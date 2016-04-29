@@ -2,7 +2,7 @@ context("testing epmc_db")
 
 test_that("epmc_db returns", {
   skip_on_cran()
-  a <- epmc_db("12368864", db = "uniprot", n_pages = 2)
+  a <- epmc_db("12368864", db = "uniprot", limit = 50)
   b <- epmc_db("25249410", db = "embl")
   c <- epmc_db("14756321", db = "uniprot")
 
@@ -21,7 +21,7 @@ test_that("epmc_db returns", {
 
   # fails correctly
   expect_error(epmc_db("14756321"), "Please restrict reponse to a database")
-  expect_error(epmc_db("14756321", db = "intact"), "No references available")
+  expect_error(epmc_db("14756321", db = "intact"), "Sorry, no links found")
   expect_error(epmc_db("13814508", n_pages = "abc"))
   expect_error(epmc_db("13814508", data_src = "abc"))
   expect_error(epmc_db("14756321", db = "uniprotl"))

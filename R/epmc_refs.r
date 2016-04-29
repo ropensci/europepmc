@@ -17,8 +17,9 @@
 #'     \item{pat}{Biological Patents}
 #'     \item{pmc}{PubMed Central}
 #'     }
-#' @param n_pages Number of pages to be returned. By default, this function
+#' @param limit Number of pages to be returned. By default, this function
 #'   returns 25 records for each page.
+#' @param verbose	print some information on what is going on.
 #'
 #' @return List of 3, citation count, metadata of citing documents (data.frame)
 #'   and summary of request parameter
@@ -30,36 +31,35 @@
 #' epmc_refs("25378340")
 #' epmc_refs("21753913")
 #' }
-epmc_refs <- function(ext_id = NULL, data_src = "med", n_pages = 20) {
+epmc_refs <- function(ext_id = NULL, data_src = "med", limit = 25, verbose = TRUE) {
   if (is.null(ext_id))
     stop("Please provide a publication id")
-  if (!is.numeric(n_pages))
-    stop("n_pages must be of type 'numeric'")
+  if (!is.numeric(limit))
+    stop("limit must be of type 'numeric'")
   if (!tolower(data_src) %in% supported_data_src)
     stop(paste0("Data source '", data_src, "' not supported. Try one of the
                 following sources: ", paste0(supported_data_src, collapse =", ")
     ))
   # build request
-  path = paste(rest_path(), data_src, ext_id, "references",
+  req_method <- "references"
+  path = paste(rest_path(), data_src, ext_id, req_method,
                "json", sep ="/")
   doc <- rebi_GET(path = path)
-  hitCount <- doc$hitCount
-  if(doc$hitCount == 0)
+  hit_count <- doc$hitCount
+  if(hit_count == 0)
     stop("No references found")
-  no_pages <- rebi_pageing(hitCount = hitCount, pageSize = doc$request$pageSize)
-  # limit number of pages that will be retrieved
-  if(max(no_pages) > n_pages) no_pages <- 1:n_pages
-  pages = list()
-  for(i in no_pages){
-    out <- rebi_GET(path = paste(rest_path(), data_src, ext_id,
-                                 "references", "json", i, sep ="/"))
-    message("Retrieving page ", i)
-    result <- plyr::ldply(out$referenceList, data.frame,
-                          stringsAsFactors = FALSE, .id = NULL)
-    pages[[i+1]] <- result
-  }
+  paths <- make_path(hit_count = hit_count, limit = limit, ext_id = ext_id,
+            data_src = data_src, req_method = req_method)
+  out <- lapply(paths, function(x) {
+    if(verbose == TRUE)
+      message(paste0(hit_count, " records found. Returning ",
+                     ifelse(hit_count <= limit, hit_count, limit)))
+    doc <- rebi_GET(path = x)
+    plyr::ldply(doc$referenceList, data.frame, stringsAsFactors = FALSE, .id = NULL)
+  })
   #combine all into one
-  result <- jsonlite::rbind.pages(pages)
+  result <- jsonlite::rbind.pages(out)
   # return
-  list(hit_count = hitCount, data = result)
+  list(hit_count = hit_count, data = result)
 }
+

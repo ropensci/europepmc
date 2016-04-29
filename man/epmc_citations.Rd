@@ -4,7 +4,8 @@
 \alias{epmc_citations}
 \title{Get citations for a given publication}
 \usage{
-epmc_citations(ext_id = NULL, data_src = "med", n_pages = 20)
+epmc_citations(ext_id = NULL, data_src = "med", limit = 25,
+  verbose = TRUE)
 }
 \arguments{
 \item{ext_id}{publication identifier}
@@ -26,16 +27,18 @@ Europe PubMed Central supports:
   \item{pmc}{PubMed Central}
   }}
 
-\item{n_pages}{Number of pages to be returned. By default, this function
+\item{limit}{Number of pages to be returned. By default, this function
 returns 25 records for each page.}
+
+\item{verbose}{print some information on what is going on.}
 }
 \value{
 List of 2, citation count and metadata of citing documents
   (data.frame)
 }
 \description{
-The function finds citations to a publication in the Europe PMC index. It
-retrieves the citation count and some metadata about the citing publications.
+The function finds works citing a publication. It retrieves counts and
+some metadata.
 }
 \examples{
 \dontrun{

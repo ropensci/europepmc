@@ -5,7 +5,7 @@
 \title{Get text-mined terms}
 \usage{
 epmc_tm(ext_id = NULL, data_src = "med", semantic_type = NULL,
-  n_pages = 20)
+  limit = 25, verbose = TRUE)
 }
 \arguments{
 \item{ext_id}{publication identifier}
@@ -40,8 +40,10 @@ wish to retrieve. The following types are supported:
   \item{ORGANISM}{organism}
   }}
 
-\item{n_pages}{Number of pages to be returned. By default, this function
-returns 20 pages with  25 records each.}
+\item{limit}{Number of pages to be returned. By default, this function
+returns 25 records for each page.}
+
+\item{verbose}{print some information on what is going on.}
 }
 \value{
 List of 2, including counts and terms found as data.frame

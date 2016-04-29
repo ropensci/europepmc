@@ -4,7 +4,7 @@
 \alias{epmc_refs}
 \title{Get references for a given publication}
 \usage{
-epmc_refs(ext_id = NULL, data_src = "med", n_pages = 20)
+epmc_refs(ext_id = NULL, data_src = "med", limit = 25, verbose = TRUE)
 }
 \arguments{
 \item{ext_id}{publication identifier}
@@ -26,8 +26,10 @@ Europe PubMed Central supports:
   \item{pmc}{PubMed Central}
   }}
 
-\item{n_pages}{Number of pages to be returned. By default, this function
+\item{limit}{Number of pages to be returned. By default, this function
 returns 25 records for each page.}
+
+\item{verbose}{print some information on what is going on.}
 }
 \value{
 List of 3, citation count, metadata of citing documents (data.frame)

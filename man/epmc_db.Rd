@@ -4,13 +4,15 @@
 \alias{epmc_db}
 \title{Retrieve external database entities referenced in a given publication}
 \usage{
-epmc_db(ext_id = NULL, data_src = "med", db = NULL, n_pages = 20)
+epmc_db(ext_id = NULL, data_src = "med", db = NULL, limit = 25,
+  verbose = TRUE)
 }
 \arguments{
 \item{ext_id}{publication identifier}
 
 \item{data_src}{data source, by default Pubmed/MedLine index will be searched.
-Other sources Europe PubMed Central supports are:
+The following three letter codes represents the sources
+Europe PubMed Central supports:
 \describe{
   \item{agr}{Agricola is a bibliographic database of citations to the
   agricultural literature created by the US National Agricultural Library
@@ -49,8 +51,10 @@ Other sources Europe PubMed Central supports are:
  \url{http://www.uniprot.org/}}
  }}
 
-\item{n_pages}{Number of pages to be returned. By default, this function
-returns 10 records for each page.}
+\item{limit}{Number of pages to be returned. By default, this function
+returns 25 records for each page.}
+
+\item{verbose}{print some information on what is going on.}
 }
 \value{
 list of 3 including link count and metadata of cross-references.
@@ -61,7 +65,7 @@ Europe PMC RESTful Web Service.
 }
 \examples{
   \dontrun{
-  epmc_db("12368864", db = "uniprot", n_pages = 2)
+  epmc_db("12368864", db = "uniprot", limit = 100)
   epmc_db("25249410", db = "embl")
   epmc_db("14756321", db = "uniprot")
   }

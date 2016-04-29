@@ -3,22 +3,7 @@
 #' This function returns EBI database entities referenced in a publication from
 #' Europe PMC RESTful Web Service.
 #'
-#' @param ext_id publication identifier
-#' @param data_src data source, by default Pubmed/MedLine index will be searched.
-#'   Other sources Europe PubMed Central supports are:
-#'   \describe{
-#'     \item{agr}{Agricola is a bibliographic database of citations to the
-#'     agricultural literature created by the US National Agricultural Library
-#'     and its co-operators.}
-#'     \item{cba}{Chinese Biological Abstracts}
-#'     \item{ctx}{CiteXplore}
-#'     \item{eth}{EthOs Theses, i.e. PhD theses (British Library)}
-#'     \item{hir}{NHS Evidence}
-#'     \item{med}{PubMed/Medline NLM}
-#'     \item{nbk}{Europe PMC Book metadata}
-#'     \item{pat}{Biological Patents}
-#'     \item{pmc}{PubMed Central}
-#'     }
+#' @inheritParams epmc_refs
 #' @param db restrict the response to a specific database:
 #'  \describe{
 #'  \item{'CHEBI'}{a database and ontology of chemical entities of biological
@@ -42,22 +27,19 @@
 #'      resource of protein sequence and functional information
 #'   \url{http://www.uniprot.org/}}
 #'   }
-#' @param n_pages Number of pages to be returned. By default, this function
-#'      returns 10 records for each page.
+
 #' @return list of 3 including link count and metadata of cross-references.
 #' @examples
 #'   \dontrun{
-#'   epmc_db("12368864", db = "uniprot", n_pages = 2)
+#'   epmc_db("12368864", db = "uniprot", limit = 100)
 #'   epmc_db("25249410", db = "embl")
 #'   epmc_db("14756321", db = "uniprot")
 #'   }
 #' @export
 epmc_db <- function(ext_id = NULL, data_src = "med", db = NULL,
-                            n_pages = 20) {
+                            limit = 25, verbose = TRUE) {
   if (is.null(ext_id))
     stop("Please provide a publication id")
-  if (!is.numeric(n_pages))
-    stop("n_pages must be of type 'numeric'")
   # build request
   if (is.null(db))
     stop("Please restrict reponse to a database")
@@ -69,30 +51,28 @@ epmc_db <- function(ext_id = NULL, data_src = "med", db = NULL,
     stop(paste0("Data source '", data_src, "' not supported. Try one of the
                 following sources: ", paste0(supported_data_src, collapse =", ")
     ))
-  path = paste(rest_path(), data_src, ext_id, "databaseLinks",
-               db, "json", sep ="/")
+  # build request
+  req_method <- "databaseLinks"
+  path = paste(rest_path(), data_src, ext_id, req_method, db,
+               "json", sep ="/")
   doc <- rebi_GET(path = path)
-  hitCount <- doc$hitCount
-  if(doc$hitCount == 0)
-    stop("No references available")
-  no_pages <- rebi_pageing(hitCount = hitCount, pageSize = doc$request$pageSize)
-  # limit number of pages that will be retrieved
-  if(max(no_pages) > n_pages) no_pages <- 1:n_pages
-  pages = list()
-  for(i in no_pages){
-    out <- rebi_GET(path = paste(rest_path(), data_src, ext_id,
-                                 "databaseLinks", db, "json", i, sep ="/"))
-    message("Retrieving page ", i)
-    result <- plyr::ldply(
-      doc$dbCrossReferenceList$dbCrossReference$dbCrossReferenceInfo,
-      data.frame, stringsAsFactors = FALSE, .id = NULL
-      )
-    pages[[i+1]] <- result
-  }
+  hit_count <- doc$hitCount
+  if(hit_count == 0)
+    stop("Sorry, no links found")
+  paths <- make_path(hit_count = hit_count, limit = limit, ext_id = ext_id,
+                     data_src = data_src, req_method = req_method, type = db)
+  out <- lapply(paths, function(x) {
+    if(verbose == TRUE)
+      message(paste0(hit_count, " records found. Returning ",
+                     ifelse(hit_count <= limit, hit_count, limit)))
+    doc <- rebi_GET(path = x)
+    plyr::ldply(doc$dbCrossReferenceList$dbCrossReference$dbCrossReferenceInfo,
+                data.frame, stringsAsFactors = FALSE, .id = NULL)
+  })
   #combine all into one
-  result <- jsonlite::rbind.pages(pages)
+  result <- jsonlite::rbind.pages(out)
   # return
-  list(hit_count = hitCount, data = result, db = db)
+  list(hit_count = hit_count, data = result, db = db)
 }
 
 

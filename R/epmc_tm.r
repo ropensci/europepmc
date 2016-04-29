@@ -3,23 +3,8 @@
 #' Retrieve a count and list of terms Europe PubMed Central has text-mined from
 #' full text publications.
 #'
-#' @param ext_id publication identifier
-#' @param data_src data source, by default Pubmed/MedLine index will be searched.
-#'   The following three letter codes represents the sources
-#'   Europe PubMed Central supports:
-#'   \describe{
-#'     \item{agr}{Agricola is a bibliographic database of citations to the
-#'     agricultural literature created by the US National Agricultural Library
-#'     and its co-operators.}
-#'     \item{cba}{Chinese Biological Abstracts}
-#'     \item{ctx}{CiteXplore}
-#'     \item{eth}{EthOs Theses, i.e. PhD theses (British Library)}
-#'     \item{hir}{NHS Evidence}
-#'     \item{med}{PubMed/Medline NLM}
-#'     \item{nbk}{Europe PMC Book metadata}
-#'     \item{pat}{Biological Patents}
-#'     \item{pmc}{PubMed Central}
-#'     }
+#'@inheritParams epmc_refs
+#'
 #' @param semantic_type controlled vocabulary. Specify the semantic type you
 #'   wish to retrieve. The following types are supported:
 #'     \describe{
@@ -32,8 +17,6 @@
 #'     \item{GO_TERM}{Gene Ontology Terms (\url{http://geneontology.org/})}
 #'     \item{ORGANISM}{organism}
 #'     }
-#' @param n_pages Number of pages to be returned. By default, this function
-#'   returns 20 pages with  25 records each.
 #' @return List of 2, including counts and terms found as data.frame
 #' @examples
 #' \dontrun{
@@ -42,11 +25,9 @@
 #' }
 #' @export
 epmc_tm <- function(ext_id = NULL, data_src = "med", semantic_type = NULL,
-                    n_pages = 20) {
+                    limit = 25, verbose = TRUE) {
   if (is.null(ext_id))
     stop("Please provide a publication id")
-  if (!is.numeric(n_pages))
-    stop("n_pages must be of type 'numeric'")
   if (!tolower(data_src) %in% supported_data_src)
     stop(paste0("Data source '", data_src, "' not supported. Try one of the
                 following sources: ", paste0(supported_data_src, collapse =", ")
@@ -59,29 +40,27 @@ epmc_tm <- function(ext_id = NULL, data_src = "med", semantic_type = NULL,
                  one of the following types: ",
                 paste0(supported_semantic_types, collapse =", ")))
   # build request
-  path = paste(rest_path(), data_src, ext_id, "textMinedTerms",
-               semantic_type, "json", sep ="/")
+  req_method <- "textMinedTerms"
+  path = paste(rest_path(), data_src, ext_id, req_method, semantic_type,
+               "json", sep ="/")
   doc <- rebi_GET(path = path)
-  hitCount <- doc$hitCount
-  if(doc$hitCount == 0)
+  hit_count <- doc$hitCount
+  if(hit_count == 0)
     stop("Sorry, no text-mined terms found")
-  no_pages <- rebi_pageing(hitCount = hitCount, pageSize = doc$request$pageSize)
-  # limit number of pages that will be retrieved
-  if(max(no_pages) > n_pages) no_pages <- 1:n_pages
-  pages = list()
-  for(i in no_pages){
-    out <- rebi_GET(path = paste(rest_path(), data_src, ext_id,
-                                 "textMinedTerms", semantic_type, "json",
-                                 i, sep ="/"))
-    message("Retrieving page ", i)
-    result <- plyr::ldply(out$semanticTypeList$semanticType$tmSummary,
-      data.frame, stringsAsFactors = FALSE, .id = NULL)
-    pages[[i+1]] <- result
-  }
+  paths <- make_path(hit_count = hit_count, limit = limit, ext_id = ext_id,
+                     data_src = data_src, req_method = req_method, type = semantic_type)
+  out <- lapply(paths, function(x) {
+    if(verbose == TRUE)
+      message(paste0(hit_count, " records found. Returning ",
+                     ifelse(hit_count <= limit, hit_count, limit)))
+    doc <- rebi_GET(path = x)
+    plyr::ldply(doc$semanticTypeList$semanticType$tmSummary, data.frame,
+                stringsAsFactors = FALSE, .id = NULL)
+  })
   #combine all into one
-  result <- jsonlite::rbind.pages(pages)
+  result <- jsonlite::rbind.pages(out)
   # return
-  list(hit_count = hitCount, data = result)
+  list(hit_count = hit_count, data = result)
 }
 
 # check semantic types
