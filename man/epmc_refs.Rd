@@ -26,7 +26,7 @@ Europe PubMed Central supports:
   \item{pmc}{PubMed Central}
   }}
 
-\item{limit}{Number of pages to be returned. By default, this function
+\item{limit}{results. By default, this function
 returns 25 records for each page.}
 
 \item{verbose}{print some information on what is going on.}

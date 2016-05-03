@@ -40,7 +40,7 @@ wish to retrieve. The following types are supported:
   \item{ORGANISM}{organism}
   }}
 
-\item{limit}{Number of pages to be returned. By default, this function
+\item{limit}{results. By default, this function
 returns 25 records for each page.}
 
 \item{verbose}{print some information on what is going on.}

@@ -51,7 +51,7 @@ Europe PubMed Central supports:
  \url{http://www.uniprot.org/}}
  }}
 
-\item{limit}{Number of pages to be returned. By default, this function
+\item{limit}{results. By default, this function
 returns 25 records for each page.}
 
 \item{verbose}{print some information on what is going on.}

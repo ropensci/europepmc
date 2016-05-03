@@ -20,7 +20,7 @@
 #'     \item{pat}{Biological Patents}
 #'     \item{pmc}{PubMed Central}
 #'     }
-#' @param limit Number of pages to be returned. By default, this function
+#' @param limit results. By default, this function
 #'   returns 25 records for each page.
 #' @param verbose	print some information on what is going on.
 #'
