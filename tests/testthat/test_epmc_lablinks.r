@@ -7,15 +7,13 @@ test_that("epmc_lablinks returns", {
   c <- epmc_lablinks("12736239", lab_id = "1056")
 
   #correct dimensions and class
-  expect_output(str(a), "List of 2")
-  expect_output(str(b), "List of 2")
-  expect_output(str(c), "List of 2")
+  expect_output(str(a), "data.frame")
+  expect_output(str(b), "data.frame")
+  expect_output(str(c), "data.frame")
 
-  #correct class metadata
-  expect_is(a$data, "data.frame")
-  expect_is(b$data, "data.frame")
-  expect_is(c$data, "data.frame")
-  expect_is(a$hit_count, "integer")
+  expect_is(attr(a, "hit_count"), "integer")
+  expect_is(attr(b, "hit_count"), "integer")
+  expect_is(attr(c, "hit_count"), "integer")
 
   # fails correctly
   expect_error(epmc_lablinks("13814508", lab_id = "1342"),

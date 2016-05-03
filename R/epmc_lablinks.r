@@ -29,7 +29,7 @@
 #' @param n_pages Number of pages to be returned. By default, this function
 #'   returns 10 records for each page.
 #'
-#' @return List of 2, number of links found and links as data.frame
+#' @return Links found as data.frame
 #' @export
 #'
 #' @examples
@@ -86,6 +86,6 @@ epmc_lablinks <- function(ext_id = NULL, data_src = "med", lab_id = NULL,
                   lab_id = doc$providers$provider$id,
                   lab_name = doc$providers$provider$name,
                   lab_description = doc$providers$provider$description)
-  # return
-  list(hit_count = hitCount, data = result)
+  attr(result, "hit_count") <- hitCount
+  result
 }

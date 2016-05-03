@@ -11,16 +11,16 @@ Service](http://europepmc.org/RestfulWebService).
 
 [Europe PMC](http://europepmc.org/) covers life science literature and it
 gives access to open access full texts. Coverage is not only restricted to
-Europe, but articles and abstracts are indexed from all over the world. As a
-partner in the [PMC International
-(PMCi)](http://www.ncbi.nlm.nih.gov/pmc/about/pmci/), Europe PMC ingests all
-PubMed content and extends its index with other sources, including Agricola, a
-bibliographic database of citations to the agricultural literature, or
-Biological Patents.
+Europe, but articles and abstracts are indexed from all over the world. Europe 
+PMC ingests all PubMed content and extends its index with other sources, 
+including Agricola, a bibliographic database of citations to the agricultural 
+literature, or Biological Patents. 
 
 ![Index coverage](https://europepmc.org/wicket/resource/uk.bl.ukpmc.web.pages.faq.Help/images/EuropePMCContent-ver-4BB17F003F8F38DF2D3BBE48AB5896C6.png)
 
 For more background, see:
+
+<https://europepmc.org/About>
 
 Europe PMC: a full-text literature database for the life sciences and platform 
 for innovation. (2014). Nucleic Acids Research, 43(D1), D1042–D1048. doi:[10.1093/nar/gku1061](http://doi.org/10.1093/nar/gku1061)
@@ -33,16 +33,15 @@ The latest development version can be installed using
 
 ```r
 require(devtools)
-install_github("njahn82/rebi")
+install_github("ropensci/rebi")
 ```
 
 ## Search Europe PMC
 
 The search covers both metadata (e.g. abstracts or title) and full texts. To
 build your query, please refer to the comprehensive guidance on how to search
-Europe PMC: <http://europepmc.org/help>. After you have created your query,
-simply paste the text string out of the search box and provide the string as
-argument to the `query` parameter.
+Europe PMC: <http://europepmc.org/help>. Simply provide your query in the Europe
+PMC search syntax to `epmc_search()`.
 
 The search function helps to get a general overview about additional
 information types that are offered by Europe PMC and which can be retrieved
@@ -51,7 +50,7 @@ through other `rebi`-functions. Columns inform whether open access full texts
 text-mined terms (`hasTextMinedTerms`) or references (`hasReferences`) are
 available.
 
-By default, `epmc_search` returns 1.000 records. To adjust the limit, simply use 
+By default, `epmc_search` returns 25 records. To adjust the limit, simply use 
 the `limit` parameter.
 
 Either list of publication ids (`id_list = TRUE`) or key metadata
@@ -65,13 +64,13 @@ library(rebi)
 my_data <- epmc_search(query = 'Gabi-Kat')
 # first six records
 head(my_data)
-#>         id source     pmid      pmcid
-#> 1 26842807    MED 26842807 PMC4740857
-#> 2 26930070    MED 26930070 PMC4773003
-#> 3 26824478    MED 26824478 PMC4733102
-#> 4 27064270    MED 27064270 PMC4814454
-#> 5 27015278    MED 27015278 PMC4807768
-#> 6 26343971    MED 26343971       <NA>
+#>         id source     pmid      pmcid                          doi
+#> 1 26842807    MED 26842807 PMC4740857            10.1038/srep20309
+#> 2 26930070    MED 26930070 PMC4773003 10.1371/journal.pone.0150254
+#> 3 26824478    MED 26824478 PMC4733102 10.1371/journal.pone.0148335
+#> 4 27064270    MED 27064270 PMC4814454      10.3389/fpls.2016.00405
+#> 5 27015278    MED 27015278 PMC4807768 10.1371/journal.pgen.1005959
+#> 6 26343971    MED 26343971       <NA>   10.1016/j.molp.2015.08.011
 #>                                                                                                                                                                                                                  title
 #> 1                                                                                  Precocious leaf senescence by functional loss of PROTEIN S-ACYL TRANSFERASE14 involves the NPR1-dependent salicylic acid signaling.
 #> 2 The Arabidopsis Domain of Unknown Function 1218 (DUF1218) Containing Proteins, MODIFYING WALL LIGNIN-1 and 2 (At1g31720/MWL-1 and At4g19370/MWL-2) Function Redundantly to Alter Secondary Cell Wall Lignin Content.
@@ -101,11 +100,11 @@ head(my_data)
 #> 5                 journal article; research-article            Y      Y
 #> 6 journal article; research support, non-u.s. gov't         <NA>      N
 #>   inPMC hasPDF hasBook hasSuppl citedByCount hasReferences
-#> 1     N      Y       N        N            0             N
-#> 2     N      Y       N        N            0             N
-#> 3     N      Y       N        N            0             N
-#> 4     N      Y       N        N            0             N
-#> 5     N      Y       N        N            0             N
+#> 1     N      Y       N        N            0             Y
+#> 2     N      Y       N        N            0             Y
+#> 3     N      Y       N        N            0             Y
+#> 4     N      Y       N        N            0             Y
+#> 5     N      Y       N        N            0             Y
 #> 6     N      N       N        N            0             N
 #>   hasTextMinedTerms hasDbCrossReferences hasLabsLinks epmcAuthMan
 #> 1                 Y                    N            N           N
@@ -114,13 +113,13 @@ head(my_data)
 #> 4                 Y                    N            N           N
 #> 5                 Y                    N            N           N
 #> 6                 N                    N            N           N
-#>   hasTMAccessionNumbers luceneScore                          doi issue
-#> 1                     N         NaN            10.1038/srep20309  <NA>
-#> 2                     N         NaN 10.1371/journal.pone.0150254     3
-#> 3                     N         NaN 10.1371/journal.pone.0148335     1
-#> 4                     N         NaN      10.3389/fpls.2016.00405  <NA>
-#> 5                     N         NaN 10.1371/journal.pgen.1005959     3
-#> 6                     N         NaN   10.1016/j.molp.2015.08.011    11
+#>   hasTMAccessionNumbers luceneScore issue
+#> 1                     N         NaN  <NA>
+#> 2                     N         NaN     3
+#> 3                     N         NaN     1
+#> 4                     N         NaN  <NA>
+#> 5                     N         NaN     3
+#> 6                     N         NaN    11
 ```
 
 Get PLOS Genetics (ISSN:1553-7404) articles that cross-reference EMBL:
@@ -129,69 +128,62 @@ Get PLOS Genetics (ISSN:1553-7404) articles that cross-reference EMBL:
 ```r
 my_data <- epmc_search(query = 'ISSN:1553-7404 HAS_EMBL:y')
 head(my_data)
-#>         id source     pmid      pmcid
-#> 1 26982327    MED 26982327 PMC4794157
-#> 2 26115430    MED 26115430 PMC4483262
-#> 3 25664770    MED 25664770 PMC4335487
-#> 4 25875245    MED 25875245 PMC4395465
-#> 5 26427027    MED 26427027 PMC4591017
-#> 6 26495848    MED 26495848 PMC4619825
-#>                                                                                                                                                     title
-#> 1                                                             Hybrid Dysgenesis in Drosophila simulans Associated with a Rapid Invasion of the P-Element.
-#> 2                               Genetic Changes to a Transcriptional Silencer Element Confers Phenotypic Diversity within and between Drosophila Species.
-#> 3                                            Tribolium castaneum RR-1 cuticular protein TcCPR4 is required for formation of pore canals in rigid cuticle.
-#> 4 MAPK signaling pathway alters expression of midgut ALP and ABCC genes and causes resistance to Bacillus thuringiensis Cry1Ac toxin in diamondback moth.
-#> 5                            Functional Impact and Evolution of a Novel Human Polymorphic Inversion That Disrupts a Gene and Creates a Fusion Transcript.
-#> 6                                                                                                     Virus Satellites Drive Viral Evolution and Ecology.
+#>         id source     pmid      pmcid                          doi
+#> 1 26982327    MED 26982327 PMC4794157 10.1371/journal.pgen.1005920
+#> 2 26115430    MED 26115430 PMC4483262 10.1371/journal.pgen.1005279
+#> 3 26427027    MED 26427027 PMC4591017 10.1371/journal.pgen.1005495
+#> 4 26379286    MED 26379286 PMC4574769 10.1371/journal.pgen.1005470
+#> 5 26495848    MED 26495848 PMC4619825 10.1371/journal.pgen.1005609
+#> 6 25757102    MED 25757102 PMC4355411 10.1371/journal.pgen.1005042
+#>                                                                                                                          title
+#> 1                                  Hybrid Dysgenesis in Drosophila simulans Associated with a Rapid Invasion of the P-Element.
+#> 2    Genetic Changes to a Transcriptional Silencer Element Confers Phenotypic Diversity within and between Drosophila Species.
+#> 3 Functional Impact and Evolution of a Novel Human Polymorphic Inversion That Disrupts a Gene and Creates a Fusion Transcript.
+#> 4                               Recurrent Domestication by Lepidoptera of Genes from Their Parasites Mediated by Bracoviruses.
+#> 5                                                                          Virus Satellites Drive Viral Evolution and Ecology.
+#> 6                                  Maternal co-ordinate gene regulation and axis polarity in the scuttle fly Megaselia abdita.
 #>                                                                                                                          authorString
 #> 1                                                                                               Hill T, Schlötterer C, Betancourt AJ.
 #> 2                                                                  Johnson WC, Ordway AJ, Watada M, Pruitt JN, Williams TM, Rebeiz M.
-#> 3                                                                                      Noh MY, Muthukrishnan S, Kramer KJ, Arakane Y.
-#> 4                                    Guo Z, Kang S, Chen D, Wu Q, Wang S, Xie W, Zhu X, Baxter SW, Zhou X, Jurat-Fuentes JL, Zhang Y.
-#> 5 Puig M, Castellano D, Pantano L, Giner-Delgado C, Izquierdo D, Gayà-Vidal M, Lucas-Lledó JI, Esko T, Terao C, Matsuda F, Cáceres M.
-#> 6                      Frígols B, Quiles-Puchalt N, Mir-Sanchis I, Donderis J, Elena SF, Buckling A, Novick RP, Marina A, Penadés JR.
+#> 3 Puig M, Castellano D, Pantano L, Giner-Delgado C, Izquierdo D, Gayà-Vidal M, Lucas-Lledó JI, Esko T, Terao C, Matsuda F, Cáceres M.
+#> 4            Gasmi L, Boulain H, Gauthier J, Hua-Van A, Musset K, Jakubowska AK, Aury JM, Volkoff AN, Huguet E, Herrero S, Drezen JM.
+#> 5                      Frígols B, Quiles-Puchalt N, Mir-Sanchis I, Donderis J, Elena SF, Buckling A, Novick RP, Marina A, Penadés JR.
+#> 6                                                                                                Wotton KR, Jiménez-Guri E, Jaeger J.
 #>   journalTitle issue journalVolume pubYear journalIssn pageInfo
 #> 1   PLoS Genet     3            12    2016   1553-7390 e1005920
 #> 2   PLoS Genet     6            11    2015   1553-7390 e1005279
-#> 3   PLoS Genet     2            11    2015   1553-7390 e1004963
-#> 4   PLoS Genet     4            11    2015   1553-7390 e1005124
-#> 5   PLoS Genet    10            11    2015   1553-7390 e1005495
-#> 6   PLoS Genet    10            11    2015   1553-7390 e1005609
+#> 3   PLoS Genet    10            11    2015   1553-7390 e1005495
+#> 4   PLoS Genet     9            11    2015   1553-7390 e1005470
+#> 5   PLoS Genet    10            11    2015   1553-7390 e1005609
+#> 6   PLoS Genet     3            11    2015   1553-7390 e1005042
 #>                                                                                                         pubType
 #> 1                                                                             journal article; research-article
 #> 2 journal article; research support, non-u.s. gov't; research support, u.s. gov't, non-p.h.s.; research-article
 #> 3                                           journal article; research support, non-u.s. gov't; research-article
-#> 4 journal article; research support, non-u.s. gov't; research support, u.s. gov't, non-p.h.s.; research-article
+#> 4                                           journal article; research support, non-u.s. gov't; research-article
 #> 5                                           journal article; research support, non-u.s. gov't; research-article
 #> 6                                           journal article; research support, non-u.s. gov't; research-article
 #>   isOpenAccess inEPMC inPMC hasPDF hasBook hasSuppl citedByCount
 #> 1            Y      Y     N      Y       N        N            0
 #> 2            Y      Y     N      Y       N        N            0
-#> 3            Y      Y     N      Y       N        N            1
-#> 4            Y      Y     N      Y       N        N            1
+#> 3            Y      Y     N      Y       N        N            0
+#> 4            Y      Y     N      Y       N        N            0
 #> 5            Y      Y     N      Y       N        N            0
 #> 6            Y      Y     N      Y       N        N            0
 #>   hasReferences hasTextMinedTerms hasDbCrossReferences hasLabsLinks
-#> 1             N                 Y                    Y            Y
+#> 1             Y                 Y                    Y            Y
 #> 2             Y                 Y                    Y            N
 #> 3             Y                 Y                    Y            Y
 #> 4             Y                 Y                    Y            Y
 #> 5             Y                 Y                    Y            Y
-#> 6             Y                 Y                    Y            Y
+#> 6             Y                 Y                    Y            N
 #>   epmcAuthMan hasTMAccessionNumbers luceneScore
 #> 1           N                     Y         NaN
 #> 2           N                     N         NaN
 #> 3           N                     Y         NaN
 #> 4           N                     Y         NaN
 #> 5           N                     Y         NaN
-#> 6           N                     Y         NaN
-#>                            doi
-#> 1 10.1371/journal.pgen.1005920
-#> 2 10.1371/journal.pgen.1005279
-#> 3 10.1371/journal.pgen.1004963
-#> 4 10.1371/journal.pgen.1005124
-#> 5 10.1371/journal.pgen.1005495
-#> 6 10.1371/journal.pgen.1005609
+#> 6           N                     N         NaN
 ```
 
 Count hits before with `epmc_hits` to define limit. For example, get list of ids
@@ -201,20 +193,20 @@ that represent articles referencing DataCite DOIs:
 ```r
 query <- "ACCESSION_TYPE:doi"
 epmc_hits(query)
-#> [1] 4748
+#> [1] 4878
 # set limit to 10 records
 my_data <- epmc_search(query = "ACCESSION_TYPE:doi", limit = 10, 
                        id_list = TRUE)
 head(my_data)
 #>         id source     pmid      pmcid
-#> 1 26805866    MED 26805866 PMC4772172
-#> 2 26861373    MED 26861373 PMC4772231
-#> 3 26880343    MED 26880343 PMC4754017
-#> 4 26895485    MED 26895485 PMC4764516
-#> 5 26895333    MED 26895333 PMC4760976
-#> 6 26894589    MED 26894589 PMC4760680
+#> 1 26952022    MED 26952022 PMC4761652
+#> 2 26955653    MED 26955653 PMC4761700
+#> 3 26997665    MED 26997665 PMC4797422
+#> 4 27014734    MED 27014734 PMC4789307
+#> 5 27006978    MED 27006978 PMC4781994
+#> 6 27028871    MED 27028871 PMC4814075
 attr(my_data, "hit_count")
-#> [1] 4748
+#> [1] 4878
 ```
 
 Use [ORCID](http://orcid.org/) to search for personal publications:
@@ -225,6 +217,7 @@ my_data <- epmc_search(query = 'AUTHORID:"0000-0002-7635-3473"')
 attr(my_data, "hit_count")
 #> [1] 125
 ```
+
 
 ## Get article details
 
@@ -237,8 +230,8 @@ PubMed / Medline index is searched.
 ```r
 epmc_details(ext_id = "24270414") 
 #> $basic
-#>         id source     pmid      pmcid
-#> 1 24270414    MED 24270414 PMC3859427
+#>         id source     pmid      pmcid              doi
+#> 1 24270414    MED 24270414 PMC3859427 10.1172/jci73168
 #>                                     title                 authorString
 #> 1 ADCK4 "reenergizes" nephrotic syndrome. Malaga-Dieguez L, Susztak K.
 #>    pageInfo
@@ -248,13 +241,13 @@ epmc_details(ext_id = "24270414")
 #>   language         pubModel isOpenAccess inEPMC inPMC hasPDF hasBook
 #> 1      eng Print-Electronic            N      Y     Y      Y       N
 #>   hasSuppl citedByCount hasReferences hasTextMinedTerms
-#> 1        N            0             Y                 Y
+#> 1        N            1             Y                 Y
 #>   hasDbCrossReferences hasLabsLinks epmcAuthMan hasTMAccessionNumbers
 #> 1                    N            N           N                     N
 #>   dateOfCompletion dateOfCreation dateOfRevision electronicPublicationDate
 #> 1       2014-02-04     2013-12-02     2015-07-10                2013-11-25
-#>   firstPublicationDate luceneScore              doi
-#> 1           2013-11-25         NaN 10.1172/jci73168
+#>   firstPublicationDate luceneScore
+#> 1           2013-11-25         NaN
 #> 
 #> $author_details
 #>           fullName firstName       lastName initials
@@ -340,9 +333,7 @@ Citing publications from the Europe PMC index can be retrieved like this:
 
 ```r
 my_cites <- epmc_citations("9338777")
-my_cites$hit_count
-#> [1] 178
-head(my_cites$data)
+head(my_cites)
 #>         id source
 #> 1  9728985    MED
 #> 2  9728986    MED
@@ -371,13 +362,15 @@ head(my_cites$data)
 #> 4                                  Takeuchi Y, Patience C, Magre S, Weiss RA, Banerjee PT, Le Tissier P, Stoye JP.
 #> 5                      Patience C, Switzer WM, Takeuchi Y, Griffiths DJ, Goward ME, Heneine W, Stoye JP, Weiss RA.
 #> 6                                                                 Wilson CA, Wong S, VanBrocklin M, Federspiel MJ.
-#>   journalAbbreviation pubYear volume issue  pageInfo citedByCount text
-#> 1              Lancet    1998    352  9129   692-694          137 <NA>
-#> 2              Lancet    1998    352  9129   695-699          156 <NA>
-#> 3              Lancet    1998    352  9129   699-701          131 <NA>
-#> 4           J. Virol.    1998     72    12 9986-9991          174 <NA>
-#> 5           J. Virol.    2001     75     6 2771-2775           88 <NA>
-#> 6           J. Virol.    2000     74     1     49-56          104 <NA>
+#>   journalAbbreviation pubYear volume issue  pageInfo citedByCount
+#> 1              Lancet    1998    352  9129   692-694          138
+#> 2              Lancet    1998    352  9129   695-699          157
+#> 3              Lancet    1998    352  9129   699-701          132
+#> 4           J. Virol.    1998     72    12 9986-9991          176
+#> 5           J. Virol.    2001     75     6 2771-2775           88
+#> 6           J. Virol.    2000     74     1     49-56          104
+attr(my_cites, "hit_count")
+#> [1] 178
 ```
 
 Please note, that citation counts are often smaller than those held by toll-
@@ -392,10 +385,6 @@ Europe PMC indexes more than 5 million reference sections.
 
 ```r
 epmc_refs("PMC3166943", data_src = "pmc")
-#> $hit_count
-#> [1] 18
-#> 
-#> $data
 #>          id source    citationType
 #> 1  10802651    MED JOURNAL ARTICLE
 #> 2      <NA>   <NA>            <NA>
@@ -542,10 +531,6 @@ Select database and get links:
 
 ```r
 epmc_db("12368864", db = "embl")
-#> $hit_count
-#> [1] 10
-#> 
-#> $data
 #>       info1                                                       info2
 #> 1  AE014187 Plasmodium falciparum 3D7 chromosome 14, complete sequence.
 #> 2  AE014186 Plasmodium falciparum 3D7 chromosome 11, complete sequence.
@@ -568,9 +553,6 @@ epmc_db("12368864", db = "embl")
 #> 8  2038340    10
 #> 9  3291936    10
 #> 10 2271478    10
-#> 
-#> $db
-#> [1] "embl"
 ```
 
 ## Get text-mined terms
@@ -600,10 +582,6 @@ Select vocabulary to retrieve the terms:
 
 ```r
 epmc_tm("25249410", semantic_type = "GO_TERM")
-#> $hit_count
-#> [1] 17
-#> 
-#> $data
 #>                             term count              altName dbName    dbId
 #> 1                     chromosome    25          chromosomes     GO 0005694
 #> 2                   biosynthesis    16 formation, synthesis     GO 0009058
@@ -648,10 +626,6 @@ Get links to PANGEA (`lab_id = "1342"`)
 
 ```r
 epmc_lablinks("24023770", lab_id = "1342")
-#> $hit_count
-#> [1] 13
-#> 
-#> $data
 #>                                                                                                                                                                                                title
 #> 1  Related to: Schewe, I (2010). Biochemical investigation of multicorer sediment profile PS74/106-3. Alfred Wegener Institute, Helmholtz Center for Polar and Marine Research, Bremerhaven, PANGAEA
 #> 2  Related to: Schewe, I (2010). Biochemical investigation of multicorer sediment profile PS74/107-2. Alfred Wegener Institute, Helmholtz Center for Polar and Marine Research, Bremerhaven, PANGAEA

@@ -17,7 +17,7 @@
 #'     \item{GO_TERM}{Gene Ontology Terms (\url{http://geneontology.org/})}
 #'     \item{ORGANISM}{organism}
 #'     }
-#' @return List of 2, including counts and terms found as data.frame
+#' @return Terms found as data.frame
 #' @examples
 #' \dontrun{
 #' epmc_tm("25249410", semantic_type = "GO_TERM")
@@ -60,7 +60,8 @@ epmc_tm <- function(ext_id = NULL, data_src = "med", semantic_type = NULL,
   #combine all into one
   result <- jsonlite::rbind.pages(out)
   # return
-  list(hit_count = hit_count, data = result)
+  attr(result, "hit_count") <- hit_count
+  result
 }
 
 # check semantic types

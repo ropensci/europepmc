@@ -1,5 +1,8 @@
 #'  Get references for a given publication
-
+#'
+#'  This function retrieves all the works listed in the bibliography of a given
+#'  article.
+#'
 #' @param ext_id publication identifier
 #' @param data_src data source, by default Pubmed/MedLine index will be searched.
 #'   The following three letter codes represents the sources
@@ -21,8 +24,7 @@
 #'   returns 25 records for each page.
 #' @param verbose	print some information on what is going on.
 #'
-#' @return List of 3, citation count, metadata of citing documents (data.frame)
-#'   and summary of request parameter
+#' @return returns reference section as data.frame
 #' @export
 #'
 #' @examples
@@ -59,7 +61,8 @@ epmc_refs <- function(ext_id = NULL, data_src = "med", limit = 25, verbose = TRU
   })
   #combine all into one
   result <- jsonlite::rbind.pages(out)
-  # return
-  list(hit_count = hit_count, data = result)
+  # return (thanks to @cstubben)
+  attr(result, "hit_count") <- hit_count
+  result
 }
 

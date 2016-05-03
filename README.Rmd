@@ -18,16 +18,16 @@ Service](http://europepmc.org/RestfulWebService).
 
 [Europe PMC](http://europepmc.org/) covers life science literature and it
 gives access to open access full texts. Coverage is not only restricted to
-Europe, but articles and abstracts are indexed from all over the world. As a
-partner in the [PMC International
-(PMCi)](http://www.ncbi.nlm.nih.gov/pmc/about/pmci/), Europe PMC ingests all
-PubMed content and extends its index with other sources, including Agricola, a
-bibliographic database of citations to the agricultural literature, or
-Biological Patents.
+Europe, but articles and abstracts are indexed from all over the world. Europe 
+PMC ingests all PubMed content and extends its index with other sources, 
+including Agricola, a bibliographic database of citations to the agricultural 
+literature, or Biological Patents. 
 
 ![Index coverage](https://europepmc.org/wicket/resource/uk.bl.ukpmc.web.pages.faq.Help/images/EuropePMCContent-ver-4BB17F003F8F38DF2D3BBE48AB5896C6.png)
 
 For more background, see:
+
+<https://europepmc.org/About>
 
 Europe PMC: a full-text literature database for the life sciences and platform 
 for innovation. (2014). Nucleic Acids Research, 43(D1), D1042–D1048. doi:[10.1093/nar/gku1061](http://doi.org/10.1093/nar/gku1061)
@@ -37,18 +37,18 @@ for innovation. (2014). Nucleic Acids Research, 43(D1), D1042–D1048. doi:[10.1
 The latest development version can be installed using
 [devtools](https://github.com/hadley/devtools) package:
 
-```{r, eval = FALSE}
+
+```r
 require(devtools)
-install_github("njahn82/rebi")
+install_github("ropensci/rebi")
 ```
 
 ## Search Europe PMC
 
 The search covers both metadata (e.g. abstracts or title) and full texts. To
 build your query, please refer to the comprehensive guidance on how to search
-Europe PMC: <http://europepmc.org/help>. After you have created your query,
-simply paste the text string out of the search box and provide the string as
-argument to the `query` parameter.
+Europe PMC: <http://europepmc.org/help>. Simply provide your query in the Europe
+PMC search syntax to `epmc_search()`.
 
 The search function helps to get a general overview about additional
 information types that are offered by Europe PMC and which can be retrieved
@@ -57,7 +57,7 @@ through other `rebi`-functions. Columns inform whether open access full texts
 text-mined terms (`hasTextMinedTerms`) or references (`hasReferences`) are
 available.
 
-By default, `epmc_search` returns 1.000 records. To adjust the limit, simply use 
+By default, `epmc_search` returns 25 records. To adjust the limit, simply use 
 the `limit` parameter.
 
 Either list of publication ids (`id_list = TRUE`) or key metadata
@@ -99,6 +99,7 @@ my_data <- epmc_search(query = 'AUTHORID:"0000-0002-7635-3473"')
 attr(my_data, "hit_count")
 ```
 
+
 ## Get article details
 
 In addition to key metadata, `epmc_details` also returns full metadata
@@ -123,8 +124,8 @@ Citing publications from the Europe PMC index can be retrieved like this:
 
 ```{r}
 my_cites <- epmc_citations("9338777")
-my_cites$hit_count
-head(my_cites$data)
+head(my_cites)
+attr(my_cites, "hit_count")
 ```
 
 Please note, that citation counts are often smaller than those held by toll-

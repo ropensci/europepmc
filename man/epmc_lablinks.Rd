@@ -34,7 +34,7 @@ advanced search form to find an id.}
 returns 10 records for each page.}
 }
 \value{
-List of 2, number of links found and links as data.frame
+Links found as data.frame
 }
 \description{
 With the External Link services, Europe PMC allows third parties to publish

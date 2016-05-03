@@ -33,12 +33,10 @@ returns 25 records for each page.}
 \item{verbose}{print some information on what is going on.}
 }
 \value{
-List of 2, citation count and metadata of citing documents
-  (data.frame)
+Metadata of citing documents as data.frame
 }
 \description{
-The function finds works citing a publication. It retrieves counts and
-some metadata.
+The function finds works that cite a given publication.
 }
 \examples{
 \dontrun{

@@ -1,12 +1,10 @@
 #' Get citations for a given publication
 #'
-#' The function finds works citing a publication. It retrieves counts and
-#' some metadata.
+#' The function finds works that cite a given publication.
 #'
 #' @inheritParams epmc_refs
 #'
-#' @return List of 2, citation count and metadata of citing documents
-#'   (data.frame)
+#' @return Metadata of citing documents as data.frame
 #' @export
 #'
 #' @examples
@@ -42,5 +40,6 @@ epmc_citations <- function(ext_id = NULL, data_src = "med", limit = 25,
   #combine all into one
   result <- jsonlite::rbind.pages(out)
   # return
-  list(hit_count = hit_count, data = result)
+  attr(result, "hit_count") <- hit_count
+  result
 }

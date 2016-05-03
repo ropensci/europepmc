@@ -46,7 +46,7 @@ returns 25 records for each page.}
 \item{verbose}{print some information on what is going on.}
 }
 \value{
-List of 2, including counts and terms found as data.frame
+Terms found as data.frame
 }
 \description{
 Retrieve a count and list of terms Europe PubMed Central has text-mined from

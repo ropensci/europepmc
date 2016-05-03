@@ -32,11 +32,11 @@ returns 25 records for each page.}
 \item{verbose}{print some information on what is going on.}
 }
 \value{
-List of 3, citation count, metadata of citing documents (data.frame)
-  and summary of request parameter
+returns reference section as data.frame
 }
 \description{
-Get references for a given publication
+This function retrieves all the works listed in the bibliography of a given
+ article.
 }
 \examples{
 \dontrun{

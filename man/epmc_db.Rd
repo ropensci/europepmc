@@ -57,7 +57,7 @@ returns 25 records for each page.}
 \item{verbose}{print some information on what is going on.}
 }
 \value{
-list of 3 including link count and metadata of cross-references.
+Cross-references as data.frame
 }
 \description{
 This function returns EBI database entities referenced in a publication from

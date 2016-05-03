@@ -28,7 +28,7 @@
 #'   \url{http://www.uniprot.org/}}
 #'   }
 
-#' @return list of 3 including link count and metadata of cross-references.
+#' @return Cross-references as data.frame
 #' @examples
 #'   \dontrun{
 #'   epmc_db("12368864", db = "uniprot", limit = 100)
@@ -72,7 +72,8 @@ epmc_db <- function(ext_id = NULL, data_src = "med", db = NULL,
   #combine all into one
   result <- jsonlite::rbind.pages(out)
   # return
-  list(hit_count = hit_count, data = result, db = db)
+  attr(result, "hit_count") <- hit_count
+  result
 }
 
 

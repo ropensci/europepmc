@@ -7,15 +7,13 @@ test_that("epmc_tm returns", {
   c <- epmc_tm("PMC4340542", data_src = "pmc", semantic_type = "ORGANISM")
 
   #correct dimensions and class
-  expect_output(str(a), "List of 2")
-  expect_output(str(b), "List of 2")
-  expect_output(str(c), "List of 2")
+  expect_output(str(a), "data.frame")
+  expect_output(str(b), "data.frame")
+  expect_output(str(c), "data.frame")
 
-  #correct class metadata
-  expect_is(a$data, "data.frame")
-  expect_is(b$data, "data.frame")
-  expect_is(c$data, "data.frame")
-  expect_is(a$hit_count, "integer")
+  expect_is(attr(a, "hit_count"), "integer")
+  expect_is(attr(b, "hit_count"), "integer")
+  expect_is(attr(c, "hit_count"), "integer")
 
   # fails correctly
   expect_error(epmc_tm("14756321", semantic_type = "GO_TERM"),

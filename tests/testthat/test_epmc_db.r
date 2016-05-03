@@ -7,17 +7,15 @@ test_that("epmc_db returns", {
   c <- epmc_db("14756321", db = "uniprot")
 
   #correct dimensions and class
-  expect_output(str(a), "List of 3")
-  expect_output(str(b), "List of 3")
-  expect_output(str(c), "List of 3")
+  expect_output(str(a), "data.frame")
+  expect_output(str(b), "data.frame")
+  expect_output(str(c), "data.frame")
 
-  #correct class metadata
-  expect_is(a$data, "data.frame")
-  expect_is(b$data, "data.frame")
-  expect_is(c$data, "data.frame")
-  expect_is(a$hit_count, "integer")
+  expect_is(attr(a, "hit_count"), "integer")
+  expect_is(attr(b, "hit_count"), "integer")
+  expect_is(attr(c, "hit_count"), "integer")
 
-  expect_equal(nrow(a$data), 50)
+  expect_equal(nrow(a), 50)
 
   # fails correctly
   expect_error(epmc_db("14756321"), "Please restrict reponse to a database")
