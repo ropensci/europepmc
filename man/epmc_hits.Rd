@@ -4,10 +4,12 @@
 \alias{epmc_hits}
 \title{Get search result count}
 \usage{
-epmc_hits(query = NULL)
+epmc_hits(query = NULL, ...)
 }
 \arguments{
 \item{query}{query in the Europe PMC syntax}
+
+\item{...}{add query parameters, e.g. synonym=true}
 }
 \description{
 Search over Europe PMC and retrieve the number of results found

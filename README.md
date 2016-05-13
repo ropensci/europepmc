@@ -9,9 +9,8 @@
 rebi facilitates access to [Europe PMC RESTful Web
 Service](http://europepmc.org/RestfulWebService).
 
-[Europe PMC](http://europepmc.org/) covers life science literature and it
-gives access to open access full texts. Coverage is not only restricted to
-Europe, but articles and abstracts are indexed from all over the world. Europe 
+[Europe PMC](http://europepmc.org/) covers life science literature and
+gives access to open access full texts. Europe 
 PMC ingests all PubMed content and extends its index with other sources, 
 including Agricola, a bibliographic database of citations to the agricultural 
 literature, or Biological Patents. 
@@ -130,61 +129,63 @@ my_data <- epmc_search(query = 'ISSN:1553-7404 HAS_EMBL:y')
 head(my_data)
 #>         id source     pmid      pmcid                          doi
 #> 1 26982327    MED 26982327 PMC4794157 10.1371/journal.pgen.1005920
-#> 2 26115430    MED 26115430 PMC4483262 10.1371/journal.pgen.1005279
-#> 3 26427027    MED 26427027 PMC4591017 10.1371/journal.pgen.1005495
-#> 4 26379286    MED 26379286 PMC4574769 10.1371/journal.pgen.1005470
-#> 5 26495848    MED 26495848 PMC4619825 10.1371/journal.pgen.1005609
-#> 6 25757102    MED 25757102 PMC4355411 10.1371/journal.pgen.1005042
-#>                                                                                                                          title
-#> 1                                  Hybrid Dysgenesis in Drosophila simulans Associated with a Rapid Invasion of the P-Element.
-#> 2    Genetic Changes to a Transcriptional Silencer Element Confers Phenotypic Diversity within and between Drosophila Species.
-#> 3 Functional Impact and Evolution of a Novel Human Polymorphic Inversion That Disrupts a Gene and Creates a Fusion Transcript.
-#> 4                               Recurrent Domestication by Lepidoptera of Genes from Their Parasites Mediated by Bracoviruses.
-#> 5                                                                          Virus Satellites Drive Viral Evolution and Ecology.
-#> 6                                  Maternal co-ordinate gene regulation and axis polarity in the scuttle fly Megaselia abdita.
-#>                                                                                                                          authorString
-#> 1                                                                                               Hill T, Schlötterer C, Betancourt AJ.
-#> 2                                                                  Johnson WC, Ordway AJ, Watada M, Pruitt JN, Williams TM, Rebeiz M.
-#> 3 Puig M, Castellano D, Pantano L, Giner-Delgado C, Izquierdo D, Gayà-Vidal M, Lucas-Lledó JI, Esko T, Terao C, Matsuda F, Cáceres M.
-#> 4            Gasmi L, Boulain H, Gauthier J, Hua-Van A, Musset K, Jakubowska AK, Aury JM, Volkoff AN, Huguet E, Herrero S, Drezen JM.
-#> 5                      Frígols B, Quiles-Puchalt N, Mir-Sanchis I, Donderis J, Elena SF, Buckling A, Novick RP, Marina A, Penadés JR.
-#> 6                                                                                                Wotton KR, Jiménez-Guri E, Jaeger J.
+#> 2 27082250    MED 27082250 PMC4833346 10.1371/journal.pgen.1005954
+#> 3 26495848    MED 26495848 PMC4619825 10.1371/journal.pgen.1005609
+#> 4 26020649    MED 26020649 PMC4447368 10.1371/journal.pgen.1005207
+#> 5 25875245    MED 25875245 PMC4395465 10.1371/journal.pgen.1005124
+#> 6 25622028    MED 25622028 PMC4314295 10.1371/journal.pgen.1004970
+#>                                                                                                                                                     title
+#> 1                                                             Hybrid Dysgenesis in Drosophila simulans Associated with a Rapid Invasion of the P-Element.
+#> 2                                         Chromosomal-Level Assembly of the Asian Seabass Genome Using Long Sequence Reads and Multi-layered Scaffolding.
+#> 3                                                                                                     Virus Satellites Drive Viral Evolution and Ecology.
+#> 4                       A Simple Auxin Transcriptional Response System Regulates Multiple Morphogenetic Processes in the Liverwort Marchantia polymorpha.
+#> 5 MAPK signaling pathway alters expression of midgut ALP and ABCC genes and causes resistance to Bacillus thuringiensis Cry1Ac toxin in diamondback moth.
+#> 6                                                   Naturally occurring differences in CENH3 affect chromosome segregation in zygotic mitosis of hybrids.
+#>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             authorString
+#> 1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  Hill T, Schlötterer C, Betancourt AJ.
+#> 2 Vij S, Kuhl H, Kuznetsova IS, Komissarov A, Yurchenko AA, Van Heusden P, Singh S, Thevasagayam NM, Prakki SR, Purushothaman K, Saju JM, Jiang J, Mbandi SK, Jonas M, Hin Yan Tong A, Mwangi S, Lau D, Ngoh SY, Liew WC, Shen X, Hon LS, Drake JP, Boitano M, Hall R, Chin CS, Lachumanan R, Korlach J, Trifonov V, Kabilov M, Tupikin A, Green D, Moxon S, Garvin T, Sedlazeck FJ, Vurture GW, Gopalapillai G, Kumar Katneni V, Noble TH, Scaria V, Sivasubbu S, Jerry DR, O'Brien SJ, Schatz MC, Dalmay T, Turner SW, Lok S, Christoffels A, Orbán L.
+#> 3                                                                                                                                                                                                                                                                                                                                                                                                                                         Frígols B, Quiles-Puchalt N, Mir-Sanchis I, Donderis J, Elena SF, Buckling A, Novick RP, Marina A, Penadés JR.
+#> 4                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               Flores-Sandoval E, Eklund DM, Bowman JL.
+#> 5                                                                                                                                                                                                                                                                                                                                                                                                                                                       Guo Z, Kang S, Chen D, Wu Q, Wang S, Xie W, Zhu X, Baxter SW, Zhou X, Jurat-Fuentes JL, Zhang Y.
+#> 6                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           Maheshwari S, Tan EH, West A, Franklin FC, Comai L, Chan SW.
 #>   journalTitle issue journalVolume pubYear journalIssn pageInfo
 #> 1   PLoS Genet     3            12    2016   1553-7390 e1005920
-#> 2   PLoS Genet     6            11    2015   1553-7390 e1005279
-#> 3   PLoS Genet    10            11    2015   1553-7390 e1005495
-#> 4   PLoS Genet     9            11    2015   1553-7390 e1005470
-#> 5   PLoS Genet    10            11    2015   1553-7390 e1005609
-#> 6   PLoS Genet     3            11    2015   1553-7390 e1005042
+#> 2   PLoS Genet     4            12    2016   1553-7390 e1005954
+#> 3   PLoS Genet    10            11    2015   1553-7390 e1005609
+#> 4   PLoS Genet     5            11    2015   1553-7390 e1005207
+#> 5   PLoS Genet     4            11    2015   1553-7390 e1005124
+#> 6   PLoS Genet     1            11    2015   1553-7390 e1004970
 #>                                                                                                         pubType
 #> 1                                                                             journal article; research-article
-#> 2 journal article; research support, non-u.s. gov't; research support, u.s. gov't, non-p.h.s.; research-article
+#> 2                                                                                               journal article
 #> 3                                           journal article; research support, non-u.s. gov't; research-article
 #> 4                                           journal article; research support, non-u.s. gov't; research-article
-#> 5                                           journal article; research support, non-u.s. gov't; research-article
-#> 6                                           journal article; research support, non-u.s. gov't; research-article
+#> 5 journal article; research support, non-u.s. gov't; research support, u.s. gov't, non-p.h.s.; research-article
+#> 6     journal article; research support, non-u.s. gov't; research support, n.i.h., extramural; research-article
 #>   isOpenAccess inEPMC inPMC hasPDF hasBook hasSuppl citedByCount
 #> 1            Y      Y     N      Y       N        N            0
-#> 2            Y      Y     N      Y       N        N            0
+#> 2            N      Y     N      N       N        N            0
 #> 3            Y      Y     N      Y       N        N            0
-#> 4            Y      Y     N      Y       N        N            0
-#> 5            Y      Y     N      Y       N        N            0
-#> 6            Y      Y     N      Y       N        N            0
+#> 4            Y      Y     N      Y       N        N            3
+#> 5            Y      Y     N      Y       N        N            3
+#> 6            Y      Y     N      Y       N        N            8
 #>   hasReferences hasTextMinedTerms hasDbCrossReferences hasLabsLinks
 #> 1             Y                 Y                    Y            Y
-#> 2             Y                 Y                    Y            N
+#> 2             N                 Y                    Y            N
 #> 3             Y                 Y                    Y            Y
 #> 4             Y                 Y                    Y            Y
 #> 5             Y                 Y                    Y            Y
 #> 6             Y                 Y                    Y            N
 #>   epmcAuthMan hasTMAccessionNumbers luceneScore
 #> 1           N                     Y         NaN
-#> 2           N                     N         NaN
+#> 2           N                     Y         NaN
 #> 3           N                     Y         NaN
 #> 4           N                     Y         NaN
 #> 5           N                     Y         NaN
 #> 6           N                     N         NaN
 ```
+
+### Get results number 
 
 Count hits before with `epmc_hits` to define limit. For example, get list of ids
 that represent articles referencing DataCite DOIs:
@@ -193,7 +194,7 @@ that represent articles referencing DataCite DOIs:
 ```r
 query <- "ACCESSION_TYPE:doi"
 epmc_hits(query)
-#> [1] 4878
+#> [1] 4895
 # set limit to 10 records
 my_data <- epmc_search(query = "ACCESSION_TYPE:doi", limit = 10, 
                        id_list = TRUE)
@@ -206,8 +207,10 @@ head(my_data)
 #> 5 27006978    MED 27006978 PMC4781994
 #> 6 27028871    MED 27028871 PMC4814075
 attr(my_data, "hit_count")
-#> [1] 4878
+#> [1] 4895
 ```
+
+### Search with ORCID
 
 Use [ORCID](http://orcid.org/) to search for personal publications:
 
@@ -218,6 +221,21 @@ attr(my_data, "hit_count")
 #> [1] 125
 ```
 
+### Include MeSH and UniProt synonyms
+
+You may also want to include synonyms when searching Europe PMC. If 
+`synonym = TRUE` MeSH and UniProt synonyms are searched as well.
+
+
+```r
+my_data <- epmc_search("aspirin", synonym = TRUE)
+attr(my_data, "hit_count")
+#> [1] 111303
+
+my_data <- epmc_search("aspirin", synonym = FALSE)
+attr(my_data, "hit_count")
+#> [1] 104144
+```
 
 ## Get article details
 
@@ -363,14 +381,14 @@ head(my_cites)
 #> 5                      Patience C, Switzer WM, Takeuchi Y, Griffiths DJ, Goward ME, Heneine W, Stoye JP, Weiss RA.
 #> 6                                                                 Wilson CA, Wong S, VanBrocklin M, Federspiel MJ.
 #>   journalAbbreviation pubYear volume issue  pageInfo citedByCount
-#> 1              Lancet    1998    352  9129   692-694          138
+#> 1              Lancet    1998    352  9129   692-694          139
 #> 2              Lancet    1998    352  9129   695-699          157
-#> 3              Lancet    1998    352  9129   699-701          132
+#> 3              Lancet    1998    352  9129   699-701          133
 #> 4           J. Virol.    1998     72    12 9986-9991          176
 #> 5           J. Virol.    2001     75     6 2771-2775           88
 #> 6           J. Virol.    2000     74     1     49-56          104
 attr(my_cites, "hit_count")
-#> [1] 178
+#> [1] 179
 ```
 
 Please note, that citation counts are often smaller than those held by toll-

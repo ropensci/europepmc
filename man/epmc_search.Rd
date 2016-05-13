@@ -4,7 +4,8 @@
 \alias{epmc_search}
 \title{Search Europe PMC publication database}
 \usage{
-epmc_search(query = NULL, limit = 25, id_list = FALSE, verbose = TRUE)
+epmc_search(query = NULL, limit = 25, id_list = FALSE, synonym = FALSE,
+  verbose = TRUE)
 }
 \arguments{
 \item{query}{search query (character vector). For more information on how to
@@ -15,6 +16,9 @@ By default, 25 are returned.}
 
 \item{id_list}{Should only IDs (e.g. PMID) and sources be retrieved for the
 given search terms?}
+
+\item{synonym}{synonym search. If TRUE, synonym terms from MeSH terminology and the
+UniProt synonym list are queried, too. Disabled by default.}
 
 \item{verbose}{print some information on what is going on.}
 }
@@ -40,6 +44,9 @@ my.data <- epmc_search(query = 'EXT_ID:22246381')
 my.data <- epmc_search(query = 'ISSN:1553-7404 HAS_EMBL:y')
 #Limit search to 250 PLOS Genetics articles
 my.data <- epmc_search(query = 'ISSN:1553-7404', limit = 250)
+
+# include mesh and uniprot synonyms in search
+my.data <- epmc_search(query = 'aspirin', synonym = TRUE)
 
 }
 }

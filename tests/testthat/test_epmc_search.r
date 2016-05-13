@@ -8,6 +8,8 @@ test_that("epmc_search returns", {
   d <- epmc_search(query = 'ISSN:1553-7404 HAS_EMBL:y')
   e <- epmc_search(query = 'ISSN:1553-7404', id_list= TRUE, limit = 250)
   f <- epmc_search(query = 'ISSN:1553-7404 HAS_EMBL:y', limit = 25)
+  g <- epmc_search(query = 'aspirin', synonym = TRUE)
+
 
   #correct class metadata
   expect_is(a, "data.frame")
@@ -15,6 +17,7 @@ test_that("epmc_search returns", {
   expect_is(c, "data.frame")
   expect_is(d, "data.frame")
   expect_is(e, "data.frame")
+  expect_is(g, "data.frame")
 
   #are diminsions correct?
   expect_equal(nrow(e), 250)

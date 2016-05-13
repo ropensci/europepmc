@@ -11,6 +11,8 @@
 #'   given search terms?
 #' @param limit limit the number of records you wish to retrieve.
 #'   By default, 25 are returned.
+#' @param synonym synonym search. If TRUE, synonym terms from MeSH terminology and the
+#'   UniProt synonym list are queried, too. Disabled by default.
 #' @param verbose	print some information on what is going on.
 #' @return List of two, number of hits and the retrieved metadata as data.frame
 #' @examples \dontrun{
@@ -28,16 +30,21 @@
 #' #Limit search to 250 PLOS Genetics articles
 #' my.data <- epmc_search(query = 'ISSN:1553-7404', limit = 250)
 #'
+#' # include mesh and uniprot synonyms in search
+#' my.data <- epmc_search(query = 'aspirin', synonym = TRUE)
+#'
 #' }
 #' @export
 
 epmc_search <- function(query = NULL, limit = 25, id_list = FALSE,
-                        verbose = TRUE){
+                        synonym = FALSE, verbose = TRUE){
   # check
   if (is.null(query))
     stop("No query provided")
+  #  get the correct hit count when mesh and uniprot synonyms are also searched
+  synonym = ifelse(synonym == FALSE, "false", "true")
   # get results found
-  hit_count <- epmc_hits(query = query)
+  hit_count <- epmc_hits(query = query, synonym = synonym)
   #prepare queries
   queries <- make_queries(hit_count = hit_count, limit = limit, query = query)
   # if only ids are requested
@@ -45,6 +52,11 @@ epmc_search <- function(query = NULL, limit = 25, id_list = FALSE,
     queries <-
     lapply(queries, function(x)
       c(x, resulttype = "idlist"))
+  # include synonyms from mesh and uniprot
+  if (synonym == TRUE)
+    queries <-
+    lapply(queries, function(x)
+      c(x, synonym = "true"))
   # get and parse the json from the queries
   out <- lapply(queries, function(x) {
     if(verbose == TRUE)

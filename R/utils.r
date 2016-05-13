@@ -58,10 +58,10 @@ make_path <- function(hit_count = NULL, limit = NULL, ext_id = NULL,
   limit <- ifelse(hit_count <= limit, hit_count, limit)
   if (limit > batch_size()) {
     tt <- chunks(limit)
-    paths <- lapply(1:(tt$page_max - 1), function(page)
-      paste(c(rest_path(), data_src, ext_id, req_method, type, page, batch_size(), "json"), collapse ="/"))
+    paths <- lapply(1:(tt$page_max - 1), function(x)
+      paste(c(rest_path(), data_src, ext_id, req_method, type, x, batch_size(), "json"), collapse ="/"))
     paths <- append(paths, list(
-      paste(c(rest_path(), data_src, ext_id, req_method, type, page, tt$last_chunk, "json"), collapse ="/")
+      paste(c(rest_path(), data_src, ext_id, req_method, type, tt$page_max, tt$last_chunk, "json"), collapse ="/")
     ))
   } else {
     paths <- paste(c(rest_path(), data_src, ext_id, req_method, type, 1, limit, "json"), collapse ="/")

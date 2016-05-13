@@ -3,6 +3,7 @@
 #' Search over Europe PMC and retrieve the number of results found
 #'
 #' @param query query in the Europe PMC syntax
+#' @param ... add query parameters, e.g. synonym=true
 #'
 #' @examples
 #'  \dontrun{
@@ -11,12 +12,12 @@
 #'  }
 #' @export
 
-epmc_hits <- function(query = NULL) {
+epmc_hits <- function(query = NULL, ...) {
   # check
   if (is.null(query))
     stop("No query provided")
   path = paste0(rest_path(), "/search")
-  doc <- rebi_GET(path, query = list(query = query, format = "json"))
+  doc <- rebi_GET(path, query = list(query = query, format = "json", ...))
   hit_count <- doc$hitCount
   if(hit_count == 0)
       stop("nothing found, please check your query")

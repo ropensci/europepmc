@@ -1,7 +1,7 @@
 ---
 title: "Introducing rebi, an R interface to Europe PMC RESTful API"
 author: "Najko Jahn"
-date: "`r Sys.Date()`"
+date: "13 May 2016"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
@@ -19,9 +19,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-[Europe PMC](http://europepmc.org/) covers life science literature and it
-gives access to open access full texts. Coverage is not only restricted to
-Europe, but articles and abstracts are indexed from all over the world. Europe 
+[Europe PMC](http://europepmc.org/) covers life science literature and
+gives access to open access full texts. Europe 
 PMC ingests all PubMed content and extends its index with other sources, 
 including Agricola, a bibliographic database of citations to the agricultural 
 literature, or Biological Patents. 
@@ -82,6 +81,8 @@ my_data <- epmc_search(query = 'ISSN:1553-7404 HAS_EMBL:y')
 head(my_data)
 ```
 
+### Get results number 
+
 Count hits before with `epmc_hits` to define limit. For example, get list of ids
 that represent articles referencing DataCite DOIs:
 
@@ -95,6 +96,8 @@ head(my_data)
 attr(my_data, "hit_count")
 ```
 
+### Search with ORCID
+
 Use [ORCID](http://orcid.org/) to search for personal publications:
 
 ```{r}
@@ -102,6 +105,18 @@ my_data <- epmc_search(query = 'AUTHORID:"0000-0002-7635-3473"')
 attr(my_data, "hit_count")
 ```
 
+### Include MeSH and UniProt synonyms
+
+You may also want to include synonyms when searching Europe PMC. If 
+`synonym = TRUE` MeSH and UniProt synonyms are searched as well.
+
+```{r}
+my_data <- epmc_search("aspirin", synonym = TRUE)
+attr(my_data, "hit_count")
+
+my_data <- epmc_search("aspirin", synonym = FALSE)
+attr(my_data, "hit_count")
+```
 
 ## Get article details
 
