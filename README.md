@@ -110,7 +110,7 @@ head(my_data)
 #> 2                 Y                    N            N           N
 #> 3                 Y                    N            N           N
 #> 4                 Y                    N            N           N
-#> 5                 Y                    N            N           N
+#> 5                 Y                    Y            N           N
 #> 6                 N                    N            N           N
 #>   hasTMAccessionNumbers luceneScore issue
 #> 1                     N         NaN  <NA>
@@ -130,59 +130,59 @@ head(my_data)
 #>         id source     pmid      pmcid                          doi
 #> 1 26982327    MED 26982327 PMC4794157 10.1371/journal.pgen.1005920
 #> 2 27082250    MED 27082250 PMC4833346 10.1371/journal.pgen.1005954
-#> 3 26495848    MED 26495848 PMC4619825 10.1371/journal.pgen.1005609
-#> 4 26020649    MED 26020649 PMC4447368 10.1371/journal.pgen.1005207
-#> 5 25875245    MED 25875245 PMC4395465 10.1371/journal.pgen.1005124
-#> 6 25622028    MED 25622028 PMC4314295 10.1371/journal.pgen.1004970
-#>                                                                                                                                                     title
-#> 1                                                             Hybrid Dysgenesis in Drosophila simulans Associated with a Rapid Invasion of the P-Element.
-#> 2                                         Chromosomal-Level Assembly of the Asian Seabass Genome Using Long Sequence Reads and Multi-layered Scaffolding.
-#> 3                                                                                                     Virus Satellites Drive Viral Evolution and Ecology.
-#> 4                       A Simple Auxin Transcriptional Response System Regulates Multiple Morphogenetic Processes in the Liverwort Marchantia polymorpha.
-#> 5 MAPK signaling pathway alters expression of midgut ALP and ABCC genes and causes resistance to Bacillus thuringiensis Cry1Ac toxin in diamondback moth.
-#> 6                                                   Naturally occurring differences in CENH3 affect chromosome segregation in zygotic mitosis of hybrids.
+#> 3 27120580    MED 27120580       <NA> 10.1371/journal.pgen.1005987
+#> 4 27149082    MED 27149082       <NA> 10.1371/journal.pgen.1006030
+#> 5 26495848    MED 26495848 PMC4619825 10.1371/journal.pgen.1005609
+#> 6 26020649    MED 26020649 PMC4447368 10.1371/journal.pgen.1005207
+#>                                                                                                                                                                                                    title
+#> 1                                                                                                            Hybrid Dysgenesis in Drosophila simulans Associated with a Rapid Invasion of the P-Element.
+#> 2                                                                                        Chromosomal-Level Assembly of the Asian Seabass Genome Using Long Sequence Reads and Multi-layered Scaffolding.
+#> 3                                                 An Indel Polymorphism in the MtnA 3' Untranslated Region Is Associated with Gene Expression Variation and Local Adaptation in Drosophila melanogaster.
+#> 4 Germline Defects Caused by Smed-boule RNA-Interference Reveal That Egg Capsule Deposition Occurs Independently of Fertilization, Ovulation, Mating, or the Presence of Gametes in Planarian Flatworms.
+#> 5                                                                                                                                                    Virus Satellites Drive Viral Evolution and Ecology.
+#> 6                                                                      A Simple Auxin Transcriptional Response System Regulates Multiple Morphogenetic Processes in the Liverwort Marchantia polymorpha.
 #>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             authorString
 #> 1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  Hill T, Schlötterer C, Betancourt AJ.
 #> 2 Vij S, Kuhl H, Kuznetsova IS, Komissarov A, Yurchenko AA, Van Heusden P, Singh S, Thevasagayam NM, Prakki SR, Purushothaman K, Saju JM, Jiang J, Mbandi SK, Jonas M, Hin Yan Tong A, Mwangi S, Lau D, Ngoh SY, Liew WC, Shen X, Hon LS, Drake JP, Boitano M, Hall R, Chin CS, Lachumanan R, Korlach J, Trifonov V, Kabilov M, Tupikin A, Green D, Moxon S, Garvin T, Sedlazeck FJ, Vurture GW, Gopalapillai G, Kumar Katneni V, Noble TH, Scaria V, Sivasubbu S, Jerry DR, O'Brien SJ, Schatz MC, Dalmay T, Turner SW, Lok S, Christoffels A, Orbán L.
-#> 3                                                                                                                                                                                                                                                                                                                                                                                                                                         Frígols B, Quiles-Puchalt N, Mir-Sanchis I, Donderis J, Elena SF, Buckling A, Novick RP, Marina A, Penadés JR.
-#> 4                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               Flores-Sandoval E, Eklund DM, Bowman JL.
-#> 5                                                                                                                                                                                                                                                                                                                                                                                                                                                       Guo Z, Kang S, Chen D, Wu Q, Wang S, Xie W, Zhu X, Baxter SW, Zhou X, Jurat-Fuentes JL, Zhang Y.
-#> 6                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           Maheshwari S, Tan EH, West A, Franklin FC, Comai L, Chan SW.
+#> 3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          Catalán A, Glaser-Schmitt A, Argyridou E, Duchen P, Parsch J.
+#> 4                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       Steiner JK, Tasaki J, Rouhana L.
+#> 5                                                                                                                                                                                                                                                                                                                                                                                                                                         Frígols B, Quiles-Puchalt N, Mir-Sanchis I, Donderis J, Elena SF, Buckling A, Novick RP, Marina A, Penadés JR.
+#> 6                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               Flores-Sandoval E, Eklund DM, Bowman JL.
 #>   journalTitle issue journalVolume pubYear journalIssn pageInfo
 #> 1   PLoS Genet     3            12    2016   1553-7390 e1005920
 #> 2   PLoS Genet     4            12    2016   1553-7390 e1005954
-#> 3   PLoS Genet    10            11    2015   1553-7390 e1005609
-#> 4   PLoS Genet     5            11    2015   1553-7390 e1005207
-#> 5   PLoS Genet     4            11    2015   1553-7390 e1005124
-#> 6   PLoS Genet     1            11    2015   1553-7390 e1004970
-#>                                                                                                         pubType
-#> 1                                                                             journal article; research-article
-#> 2                                                                                               journal article
-#> 3                                           journal article; research support, non-u.s. gov't; research-article
-#> 4                                           journal article; research support, non-u.s. gov't; research-article
-#> 5 journal article; research support, non-u.s. gov't; research support, u.s. gov't, non-p.h.s.; research-article
-#> 6     journal article; research support, non-u.s. gov't; research support, n.i.h., extramural; research-article
+#> 3   PLoS Genet     4            12    2016   1553-7390 e1005987
+#> 4   PLoS Genet     5            12    2016   1553-7390 e1006030
+#> 5   PLoS Genet    10            11    2015   1553-7390 e1005609
+#> 6   PLoS Genet     5            11    2015   1553-7390 e1005207
+#>                                                               pubType
+#> 1                                   journal article; research-article
+#> 2                                                     journal article
+#> 3                                                     journal article
+#> 4                                                     journal article
+#> 5 journal article; research support, non-u.s. gov't; research-article
+#> 6 journal article; research support, non-u.s. gov't; research-article
 #>   isOpenAccess inEPMC inPMC hasPDF hasBook hasSuppl citedByCount
 #> 1            Y      Y     N      Y       N        N            0
 #> 2            N      Y     N      N       N        N            0
-#> 3            Y      Y     N      Y       N        N            0
-#> 4            Y      Y     N      Y       N        N            3
-#> 5            Y      Y     N      Y       N        N            3
-#> 6            Y      Y     N      Y       N        N            8
+#> 3         <NA>      N     N      N       N        N            0
+#> 4         <NA>      N     N      N       N        N            0
+#> 5            Y      Y     N      Y       N        N            0
+#> 6            Y      Y     N      Y       N        N            3
 #>   hasReferences hasTextMinedTerms hasDbCrossReferences hasLabsLinks
 #> 1             Y                 Y                    Y            Y
 #> 2             N                 Y                    Y            N
-#> 3             Y                 Y                    Y            Y
-#> 4             Y                 Y                    Y            Y
+#> 3             N                 N                    Y            N
+#> 4             N                 N                    Y            N
 #> 5             Y                 Y                    Y            Y
-#> 6             Y                 Y                    Y            N
+#> 6             Y                 Y                    Y            Y
 #>   epmcAuthMan hasTMAccessionNumbers luceneScore
 #> 1           N                     Y         NaN
 #> 2           N                     Y         NaN
-#> 3           N                     Y         NaN
-#> 4           N                     Y         NaN
+#> 3           N                     N         NaN
+#> 4           N                     N         NaN
 #> 5           N                     Y         NaN
-#> 6           N                     N         NaN
+#> 6           N                     Y         NaN
 ```
 
 ### Get results number 
@@ -230,11 +230,11 @@ You may also want to include synonyms when searching Europe PMC. If
 ```r
 my_data <- epmc_search("aspirin", synonym = TRUE)
 attr(my_data, "hit_count")
-#> [1] 111303
+#> [1] 111329
 
 my_data <- epmc_search("aspirin", synonym = FALSE)
 attr(my_data, "hit_count")
-#> [1] 104144
+#> [1] 104168
 ```
 
 ## Get article details
@@ -538,7 +538,7 @@ epmc_db_count("12368864")
 #>     dbName count
 #> 1     EMBL    10
 #> 2 INTERPRO     1
-#> 3  UNIPROT  5320
+#> 3  UNIPROT  5588
 ```
 
 Add `has_xrefs:y` or to your search string in `epmc_search` to make sure
@@ -717,6 +717,13 @@ epmc_ftxt_book("NBK32884")
 ```
 
 Please check full-text availability before.
+
+## Re-use of rebi
+
+Chris Stubben (@cstubben) has created an Shiny App that allows you to search and
+browse Europe PMC:
+
+<https://cstubben.shinyapps.io/euPMC/>
 
 ## Other ways to access Europe PubMed Central
 

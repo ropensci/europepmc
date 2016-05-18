@@ -239,6 +239,13 @@ epmc_ftxt_book("NBK32884")
 
 Please check full-text availability before.
 
+## Re-use of rebi
+
+Chris Stubben (@cstubben) has created an Shiny App that allows you to search and
+browse Europe PMC:
+
+<https://cstubben.shinyapps.io/euPMC/>
+
 ## Other ways to access Europe PubMed Central
 
 ### Other APIs
