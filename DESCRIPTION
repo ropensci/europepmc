@@ -1,4 +1,4 @@
-Package: rebi
+Package: europepmc
 Title: R Interface to Europe PubMed Central RESTful Web Service
 Version: 0.0.999
 Authors@R: person("Najko", "Jahn", email = "najko.jahn@gmail.com",
@@ -11,10 +11,10 @@ Description: An R Client for the Europe PubMed Central RESTful Web Service. It
     full texts. Europe PMC indexes all PubMed content, and other literature
     sources, including Agricola, a bibliographic database of citations to the
     agricultural literature, or Biological Patents. In addition to bibliographic
-    metadata, rebi allows users to fetch citations and reference lists. Links
-    between life-science literature and other EBI databases, including ENA, PDB
-    or ChEMBL are also accessible. No registration or API key is required to use
-    this R client. See the vignettes for usage examples.
+    metadata, the client allows users to fetch citations and reference lists.
+    Links between life-science literature and other EBI databases, including
+    ENA, PDB or ChEMBL are also accessible. No registration or API key is
+    required. See the vignettes for usage examples.
 LazyLoad: yes
 LazyData: yes
 VignetteBuilder: knitr

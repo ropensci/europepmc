@@ -1,4 +1,4 @@
 library(testthat)
-library(rebi)
+library(europepmc)
 
-test_check("rebi")
+test_check("europepmc")

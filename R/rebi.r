@@ -1,8 +1,8 @@
-#' rebi - R client for the Europe PMC RESTful article API
+#' europepmc - R client for the Europe PMC RESTful article API
 #'
-#' What is rebi?
+#' What is europepmc?
 #'
-#' rebi facilitates access to Europe PMC RESTful Web Service. Europe
+#' europepmc facilitates access to Europe PMC RESTful Web Service. Europe
 #' PMC covers life science literature and gives access to open access full
 #' texts. Coverage is not only restricted to Europe, but articles and
 #' abstracts are indexed from all over the world. As a partner in the PMC
@@ -10,7 +10,7 @@
 #' index with other sources, including Agricola, a bibliographic database of
 #' citations to the agricultural literature, or Biological Patents.
 #'
-#' Apart of searching abstracts and full text, rebi can be used to
+#' Apart of searching abstracts and full text, europepmc can be used to
 #' retrieve reference sections and citations, text-mined terms or cross-links
 #' to other databases hosted by the European Bioinformatics Institute (EBI).
 #'
@@ -20,5 +20,5 @@
 #' \url{http://doi.org/10.1093/nar/gku1061}.
 #'
 #' @import plyr jsonlite httr xml2
-#' @name rebi
+#' @name europepmc
 NULL
