@@ -19,6 +19,6 @@ test_that("epmc_citations returns", {
   expect_is(attr(d, "hit_count"), "integer")
 
   # fails correctly
-  expect_error(epmc_citations("13814508"), "No citing documents found")
+  expect_error(epmc_citations("13814508"))
   expect_error(epmc_citations("13814508", data_src = "abc"))
 })
