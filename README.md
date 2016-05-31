@@ -60,7 +60,7 @@ For instance, search for abstracts and full texts that mention `Gabi-Kat`:
 
 
 ```r
-library(rebi)
+library(europepmc)
 my_data <- epmc_search(query = 'Gabi-Kat')
 # first six records
 head(my_data)
