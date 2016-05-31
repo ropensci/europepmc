@@ -1,19 +1,20 @@
-# rebi - R Interface to Europe PMC RESTful Web Service
+# europepmc - R Interface to Europe PMC RESTful Web Service
 
 
 
-[![Build Status](https://travis-ci.org/ropensci/rebi.svg?branch=master)](https://travis-ci.org/ropensci/rebi)
-[![Build status](https://ci.appveyor.com/api/projects/status/nm7ixfn2twuu1y45/branch/master?svg=true)](https://ci.appveyor.com/project/ropensci/rebi/branch/master)
-[![codecov.io](https://codecov.io/github/ropensci/rebi/coverage.svg?branch=master)](https://codecov.io/github/ropensci/rebi?branch=master)
 
-rebi facilitates access to [Europe PMC RESTful Web
+[![Build Status](https://travis-ci.org/ropensci/europepmc.svg?branch=master)](https://travis-ci.org/ropensci/europepmc)
+[![Build status](https://ci.appveyor.com/api/projects/status/nm7ixfn2twuu1y45/branch/master?svg=true)](https://ci.appveyor.com/project/ropensci/europepmc/branch/master)
+[![codecov.io](https://codecov.io/github/ropensci/europepmc/coverage.svg?branch=master)](https://codecov.io/github/ropensci/europepmc?branch=master)
+
+europepmc facilitates access to [Europe PMC RESTful Web
 Service](http://europepmc.org/RestfulWebService).
 
 [Europe PMC](http://europepmc.org/) covers life science literature and
-gives access to open access full texts. Europe 
-PMC ingests all PubMed content and extends its index with other sources, 
-including Agricola, a bibliographic database of citations to the agricultural 
-literature, or Biological Patents. 
+gives access to open access full texts. Europe
+PMC ingests all PubMed content and extends its index with other sources,
+including Agricola, a bibliographic database of citations to the agricultural
+literature, or Biological Patents.
 
 ![Index coverage](https://europepmc.org/wicket/resource/uk.bl.ukpmc.web.pages.faq.Help/images/EuropePMCContent-ver-4BB17F003F8F38DF2D3BBE48AB5896C6.png)
 
@@ -21,7 +22,7 @@ For more background, see:
 
 <https://europepmc.org/About>
 
-Europe PMC: a full-text literature database for the life sciences and platform 
+Europe PMC: a full-text literature database for the life sciences and platform
 for innovation. (2014). Nucleic Acids Research, 43(D1), D1042–D1048. doi:[10.1093/nar/gku1061](http://doi.org/10.1093/nar/gku1061)
 
 ## Installation
@@ -32,7 +33,7 @@ The latest development version can be installed using
 
 ```r
 require(devtools)
-install_github("ropensci/rebi")
+install_github("ropensci/europepmc")
 ```
 
 ## Search Europe PMC
@@ -44,12 +45,12 @@ PMC search syntax to `epmc_search()`.
 
 The search function helps to get a general overview about additional
 information types that are offered by Europe PMC and which can be retrieved
-through other `rebi`-functions. Columns inform whether open access full texts
+through other `europepmc`-functions. Columns inform whether open access full texts
 (`isOpenAccess`), cross-links to other EBI databases (`hasDbCrossReferences`),
 text-mined terms (`hasTextMinedTerms`) or references (`hasReferences`) are
 available.
 
-By default, `epmc_search` returns 25 records. To adjust the limit, simply use 
+By default, `epmc_search` returns 25 records. To adjust the limit, simply use
 the `limit` parameter.
 
 Either list of publication ids (`id_list = TRUE`) or key metadata
@@ -185,7 +186,7 @@ head(my_data)
 #> 6           N                     Y         NaN
 ```
 
-### Get results number 
+### Get results number
 
 Count hits before with `epmc_hits` to define limit. For example, get list of ids
 that represent articles referencing DataCite DOIs:
@@ -196,7 +197,7 @@ query <- "ACCESSION_TYPE:doi"
 epmc_hits(query)
 #> [1] 5050
 # set limit to 10 records
-my_data <- epmc_search(query = "ACCESSION_TYPE:doi", limit = 10, 
+my_data <- epmc_search(query = "ACCESSION_TYPE:doi", limit = 10,
                        id_list = TRUE)
 head(my_data)
 #>         id source     pmid      pmcid
@@ -216,14 +217,14 @@ Use [ORCID](http://orcid.org/) to search for personal publications:
 
 
 ```r
-my_data <- epmc_search(query = 'AUTHORID:"0000-0002-7635-3473"') 
+my_data <- epmc_search(query = 'AUTHORID:"0000-0002-7635-3473"')
 attr(my_data, "hit_count")
 #> [1] 126
 ```
 
 ### Include MeSH and UniProt synonyms
 
-You may also want to include synonyms when searching Europe PMC. If 
+You may also want to include synonyms when searching Europe PMC. If
 `synonym = TRUE` MeSH and UniProt synonyms are searched as well.
 
 
@@ -246,7 +247,7 @@ PubMed / Medline index is searched.
 
 
 ```r
-epmc_details(ext_id = "24270414") 
+epmc_details(ext_id = "24270414")
 #> $basic
 #>         id source     pmid      pmcid              doi
 #> 1 24270414    MED 24270414 PMC3859427 10.1172/jci73168
@@ -521,7 +522,7 @@ epmc_refs("PMC3166943", data_src = "pmc")
 
 Tip: add `has_reflist:y` to your search string in `epmc_search` to make sure
 you only get publications whose reference sections are accessible through
-Europe PMC. 
+Europe PMC.
 
 ## Retrieve links to other EBI databases
 
@@ -542,7 +543,7 @@ epmc_db_count("12368864")
 ```
 
 Add `has_xrefs:y` or to your search string in `epmc_search` to make sure
-you only get publications with cross-references to EBI databases. 
+you only get publications with cross-references to EBI databases.
 
 Select database and get links:
 
@@ -718,7 +719,7 @@ epmc_ftxt_book("NBK32884")
 
 Please check full-text availability before.
 
-## Re-use of rebi
+## Re-use of europepmc
 
 Chris Stubben (@cstubben) has created an Shiny App that allows you to search and
 browse Europe PMC:
