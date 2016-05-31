@@ -9,9 +9,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-[![Build Status](https://travis-ci.org/njahn82/rebi.svg?branch=master)](https://travis-ci.org/njahn82/rebi)
-[![Build status](https://ci.appveyor.com/api/projects/status/nm7ixfn2twuu1y45/branch/master?svg=true)](https://ci.appveyor.com/project/njahn82/rebi/branch/master)
-[![codecov.io](https://codecov.io/github/njahn82/rebi/coverage.svg?branch=master)](https://codecov.io/github/njahn82/rebi?branch=master)
+[![Build Status](https://travis-ci.org/ropensci/rebi.svg?branch=master)](https://travis-ci.org/ropensci/rebi)
+[![Build status](https://ci.appveyor.com/api/projects/status/nm7ixfn2twuu1y45/branch/master?svg=true)](https://ci.appveyor.com/project/ropensci/rebi/branch/master)
+[![codecov.io](https://codecov.io/github/ropensci/rebi/coverage.svg?branch=master)](https://codecov.io/github/ropensci/rebi?branch=master)
 
 rebi facilitates access to [Europe PMC RESTful Web
 Service](http://europepmc.org/RestfulWebService).

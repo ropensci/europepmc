@@ -4,7 +4,7 @@ Version: 0.0.999
 Authors@R: person("Najko", "Jahn", email = "najko.jahn@gmail.com",
                  role = c("aut", "cre"))
 License: GPL-3
-URL: http://github.com/njahn82/rebi/
+URL: http://github.com/ropensci/rebi/
 BugReports: http://github.com/njahn82/rebi/issues
 Description: An R Client for the Europe PubMed Central RESTful Web Service. It
     gives access to both metadata on life science literature and open access
