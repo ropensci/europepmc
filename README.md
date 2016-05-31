@@ -4,7 +4,7 @@
 
 
 [![Build Status](https://travis-ci.org/ropensci/europepmc.svg?branch=master)](https://travis-ci.org/ropensci/europepmc)
-[![Build status](https://ci.appveyor.com/api/projects/status/nm7ixfn2twuu1y45/branch/master?svg=true)](https://ci.appveyor.com/project/ropensci/europepmc/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/f8xtpvhhr074lk44?svg=true)](https://ci.appveyor.com/project/sckott/europepmc)
 [![codecov.io](https://codecov.io/github/ropensci/europepmc/coverage.svg?branch=master)](https://codecov.io/github/ropensci/europepmc?branch=master)
 
 europepmc facilitates access to [Europe PMC RESTful Web
