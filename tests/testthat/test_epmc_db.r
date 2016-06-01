@@ -20,7 +20,6 @@ test_that("epmc_db returns", {
   # fails correctly
   expect_error(epmc_db("14756321"), "Please restrict reponse to a database")
   expect_error(epmc_db("14756321", db = "intact"), "Sorry, no links found")
-  expect_error(epmc_db("13814508", n_pages = "abc"))
   expect_error(epmc_db("13814508", data_src = "abc"))
   expect_error(epmc_db("14756321", db = "uniprotl"))
 })
