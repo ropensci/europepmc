@@ -22,4 +22,5 @@ test_that("epmc_db returns", {
   expect_error(epmc_db("14756321", db = "intact"), "Sorry, no links found")
   expect_error(epmc_db("13814508", data_src = "abc"))
   expect_error(epmc_db("14756321", db = "uniprotl"))
+  expect_error(epmc_db("12368864", db = "uniprot", limit = "no"))
 })

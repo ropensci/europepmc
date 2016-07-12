@@ -51,6 +51,8 @@ epmc_db <- function(ext_id = NULL, data_src = "med", db = NULL,
     stop(paste0("Data source '", data_src, "' not supported. Try one of the
                 following sources: ", paste0(supported_data_src, collapse =", ")
     ))
+  stopifnot(is.numeric(limit))
+  stopifnot(is.logical(verbose))
   # build request
   req_method <- "databaseLinks"
   path = paste(rest_path(), data_src, ext_id, req_method, db,

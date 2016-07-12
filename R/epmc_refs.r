@@ -42,6 +42,8 @@ epmc_refs <- function(ext_id = NULL, data_src = "med", limit = 25, verbose = TRU
     stop(paste0("Data source '", data_src, "' not supported. Try one of the
                 following sources: ", paste0(supported_data_src, collapse =", ")
     ))
+  stopifnot(is.numeric(limit))
+  stopifnot(is.logical(verbose))
   # build request
   req_method <- "references"
   path = paste(rest_path(), data_src, ext_id, req_method,

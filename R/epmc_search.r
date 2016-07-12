@@ -41,6 +41,10 @@ epmc_search <- function(query = NULL, limit = 25, id_list = FALSE,
   # check
   if (is.null(query))
     stop("No query provided")
+  stopifnot(is.numeric(limit))
+  stopifnot(is.logical(verbose))
+  stopifnot(is.logical(id_list))
+  stopifnot(is.logical(synonym))
   #  get the correct hit count when mesh and uniprot synonyms are also searched
   synonym = ifelse(synonym == FALSE, "false", "true")
   # get results found

@@ -20,5 +20,8 @@ test_that("epmc_citations returns", {
 
   # fails correctly
   expect_error(epmc_citations("13814508"))
+  #input validation
   expect_error(epmc_citations("13814508", data_src = "abc"))
+  expect_error(epmc_citations("7535888", limit = "dj"))
+  expect_error(epmc_citations("7535888", verbose = 2))
 })

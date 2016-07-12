@@ -39,6 +39,8 @@ epmc_tm <- function(ext_id = NULL, data_src = "med", semantic_type = NULL,
     stop(paste0("Controlled vocabulary '", semantic_type, "' not supported. Try
                  one of the following types: ",
                 paste0(supported_semantic_types, collapse =", ")))
+  stopifnot(is.numeric(limit))
+  stopifnot(is.logical(verbose))
   # build request
   req_method <- "textMinedTerms"
   path = paste(rest_path(), data_src, ext_id, req_method, semantic_type,

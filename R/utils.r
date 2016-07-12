@@ -55,6 +55,7 @@ rebi_pageing <- function(hitCount, pageSize) {
 # make paths according to limit and request methods
 make_path <- function(hit_count = NULL, limit = NULL, ext_id = NULL,
                       data_src = NULL, req_method = NULL, type = NULL) {
+  limit <- as.integer(limit)
   limit <- ifelse(hit_count <= limit, hit_count, limit)
   if (limit > batch_size()) {
     tt <- chunks(limit)
@@ -70,6 +71,7 @@ make_path <- function(hit_count = NULL, limit = NULL, ext_id = NULL,
 }
 
 make_queries <- function(hit_count = hit_count, limit = limit, query = query) {
+  limit <- as.integer(limit)
   limit <- ifelse(hit_count <= limit, hit_count, limit)
   if (limit > batch_size()) {
     tt <- chunks(limit)
