@@ -8,22 +8,23 @@ epmc_search(query = NULL, limit = 25, id_list = FALSE, synonym = FALSE,
   verbose = TRUE)
 }
 \arguments{
-\item{query}{search query (character vector). For more information on how to
+\item{query}{character, search query. For more information on how to
 build a search query, see \url{http://europepmc.org/Help}}
 
-\item{limit}{limit the number of records you wish to retrieve.
+\item{limit}{integer, limit the number of records you wish to retrieve.
 By default, 25 are returned.}
 
-\item{id_list}{Should only IDs (e.g. PMID) and sources be retrieved for the
-given search terms?}
+\item{id_list}{logical, should only IDs (e.g. PMID) and sources be retrieved
+for the given search terms?}
 
-\item{synonym}{synonym search. If TRUE, synonym terms from MeSH terminology and the
-UniProt synonym list are queried, too. Disabled by default.}
+\item{synonym}{logical, synonym search. If TRUE, synonym terms from MeSH
+terminology and the UniProt synonym list are queried, too. Disabled by
+default.}
 
-\item{verbose}{print some information on what is going on.}
+\item{verbose}{logical, print some information on what is going on.}
 }
 \value{
-List of two, number of hits and the retrieved metadata as data.frame
+data.frame
 }
 \description{
 This is the main function to search
@@ -47,6 +48,9 @@ my.data <- epmc_search(query = 'ISSN:1553-7404', limit = 250)
 
 # include mesh and uniprot synonyms in search
 my.data <- epmc_search(query = 'aspirin', synonym = TRUE)
+
+# print number of records found
+attr(my.data, "hit_count")
 
 }
 }

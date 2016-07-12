@@ -1,7 +1,7 @@
 #' Get text-mined terms
 #'
-#' Retrieve a count and list of terms Europe PubMed Central has text-mined from
-#' full text publications.
+#' Retrieve a count and list of terms text-mined from
+#' full text publications by Europe PMC.
 #'
 #'@inheritParams epmc_refs
 #'

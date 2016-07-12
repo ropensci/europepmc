@@ -8,10 +8,11 @@ epmc_tm(ext_id = NULL, data_src = "med", semantic_type = NULL,
   limit = 25, verbose = TRUE)
 }
 \arguments{
-\item{ext_id}{publication identifier}
+\item{ext_id}{character, publication identifier}
 
-\item{data_src}{data source, by default Pubmed/MedLine index will be searched.
-The following three letter codes represents the sources
+\item{data_src}{character, data source, by default Pubmed/MedLine index will
+be searched.
+The following three letter codes represent the sources
 Europe PubMed Central supports:
 \describe{
   \item{agr}{Agricola is a bibliographic database of citations to the
@@ -40,17 +41,17 @@ wish to retrieve. The following types are supported:
   \item{ORGANISM}{organism}
   }}
 
-\item{limit}{results. By default, this function
-returns 25 records for each page.}
+\item{limit}{integer, number of results. By default, this function
+returns 25 records.}
 
-\item{verbose}{print some information on what is going on.}
+\item{verbose}{logical, print some information on what is going on.}
 }
 \value{
 Terms found as data.frame
 }
 \description{
-Retrieve a count and list of terms Europe PubMed Central has text-mined from
-full text publications.
+Retrieve a count and list of terms text-mined from
+full text publications by Europe PMC.
 }
 \examples{
 \dontrun{

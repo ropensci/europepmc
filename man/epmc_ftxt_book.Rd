@@ -7,7 +7,7 @@
 epmc_ftxt_book(ext_id = NULL)
 }
 \arguments{
-\item{ext_id}{publication identifier. All book full texts are accessible
+\item{ext_id}{character, publication identifier. All book full texts are accessible
 either by the PMID or the 'NBK' book number.}
 }
 \value{

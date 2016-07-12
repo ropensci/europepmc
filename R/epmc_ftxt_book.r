@@ -3,7 +3,7 @@
 #' Use this function to retrieve book XML formatted full text for the Open
 #' Access subset of the Europe PMC bookshelf.
 #'
-#' @param ext_id publication identifier. All book full texts are accessible
+#' @param ext_id character, publication identifier. All book full texts are accessible
 #' either by the PMID or the 'NBK' book number.
 
 #' @export

@@ -3,9 +3,10 @@
 #'  This function retrieves all the works listed in the bibliography of a given
 #'  article.
 #'
-#' @param ext_id publication identifier
-#' @param data_src data source, by default Pubmed/MedLine index will be searched.
-#'   The following three letter codes represents the sources
+#' @param ext_id character, publication identifier
+#' @param data_src character, data source, by default Pubmed/MedLine index will
+#'   be searched.
+#'   The following three letter codes represent the sources
 #'   Europe PubMed Central supports:
 #'   \describe{
 #'     \item{agr}{Agricola is a bibliographic database of citations to the
@@ -20,9 +21,9 @@
 #'     \item{pat}{Biological Patents}
 #'     \item{pmc}{PubMed Central}
 #'     }
-#' @param limit results. By default, this function
-#'   returns 25 records for each page.
-#' @param verbose	print some information on what is going on.
+#' @param limit integer, number of results. By default, this function
+#'   returns 25 records.
+#' @param verbose logical, print some information on what is going on.
 #'
 #' @return returns reference section as data.frame
 #' @export

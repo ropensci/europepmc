@@ -9,7 +9,7 @@ epmc_hits(query = NULL, ...)
 \arguments{
 \item{query}{query in the Europe PMC syntax}
 
-\item{...}{add query parameters, e.g. synonym=true}
+\item{...}{add query parameters from `epmc_search()`, e.g. synonym=true}
 }
 \description{
 Search over Europe PMC and retrieve the number of results found
@@ -19,5 +19,8 @@ Search over Europe PMC and retrieve the number of results found
  epmc_hits('abstract:"burkholderia pseudomallei"')
  epmc_hits('AUTHORID:"0000-0002-7635-3473"')
  }
+}
+\seealso{
+\code{\link{epmc_search}}
 }
 

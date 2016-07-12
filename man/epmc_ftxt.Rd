@@ -7,8 +7,8 @@
 epmc_ftxt(ext_id = NULL)
 }
 \arguments{
-\item{ext_id}{publication identifier. All full text publications have
-external IDs starting 'PMC___'.}
+\item{ext_id}{character, publication identifier. All full text publications
+have external IDs starting with 'PMC___'.}
 }
 \value{
 xml_document

@@ -2,17 +2,15 @@
 % Please edit documentation in R/epmc_details.r
 \name{epmc_details}
 \alias{epmc_details}
-\title{Get details for individual records
-This function returns full metadata for a given publication ID
-including abstract, full text links, author details including ORCID and affiliation,
-MeSH terms, chemicals, grants.}
+\title{Get details for individual records}
 \usage{
 epmc_details(ext_id = NULL, data_src = "med")
 }
 \arguments{
-\item{ext_id}{publication identifier}
+\item{ext_id}{character, publication identifier}
 
-\item{data_src}{data source, by default Pubmed/MedLine index will be searched.
+\item{data_src}{character, data source, by default Pubmed/MedLine index will
+be searched.
 Other sources Europe PubMed Central supports are:
 \describe{
   \item{agr}{Agricola is a bibliographic database of citations to the
@@ -32,7 +30,6 @@ Other sources Europe PubMed Central supports are:
 list of data frames
 }
 \description{
-Get details for individual records
 This function returns full metadata for a given publication ID
 including abstract, full text links, author details including ORCID and affiliation,
 MeSH terms, chemicals, grants.

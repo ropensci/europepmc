@@ -7,10 +7,10 @@
 epmc_tm_count(ext_id = NULL, data_src = "med")
 }
 \arguments{
-\item{ext_id}{publication identifier}
+\item{ext_id}{character, publication identifier}
 
-\item{data_src}{data source, by default Pubmed/MedLine index will be searched
-.}
+\item{data_src}{character, data source, by default Pubmed/MedLine index will
+be searched.}
 }
 \value{
 data.frame with counts for each semantic type

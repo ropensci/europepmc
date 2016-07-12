@@ -5,16 +5,17 @@
 #'
 #' @seealso \url{http://europepmc.org/Help}
 #'
-#' @param query search query (character vector). For more information on how to
+#' @param query character, search query. For more information on how to
 #'   build a search query, see \url{http://europepmc.org/Help}
-#' @param id_list Should only IDs (e.g. PMID) and sources be retrieved for the
-#'   given search terms?
-#' @param limit limit the number of records you wish to retrieve.
+#' @param id_list logical, should only IDs (e.g. PMID) and sources be retrieved
+#'   for the given search terms?
+#' @param limit integer, limit the number of records you wish to retrieve.
 #'   By default, 25 are returned.
-#' @param synonym synonym search. If TRUE, synonym terms from MeSH terminology and the
-#'   UniProt synonym list are queried, too. Disabled by default.
-#' @param verbose	print some information on what is going on.
-#' @return List of two, number of hits and the retrieved metadata as data.frame
+#' @param synonym logical, synonym search. If TRUE, synonym terms from MeSH
+#'  terminology and the UniProt synonym list are queried, too. Disabled by
+#'  default.
+#' @param verbose	logical, print some information on what is going on.
+#' @return data.frame
 #' @examples \dontrun{
 #' #Search articles for 'Gabi-Kat'
 #' my.data <- epmc_search(query='Gabi-Kat')
@@ -32,6 +33,9 @@
 #'
 #' # include mesh and uniprot synonyms in search
 #' my.data <- epmc_search(query = 'aspirin', synonym = TRUE)
+#'
+#' # print number of records found
+#' attr(my.data, "hit_count")
 #'
 #' }
 #' @export

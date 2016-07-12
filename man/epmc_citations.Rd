@@ -8,10 +8,11 @@ epmc_citations(ext_id = NULL, data_src = "med", limit = 25,
   verbose = TRUE)
 }
 \arguments{
-\item{ext_id}{publication identifier}
+\item{ext_id}{character, publication identifier}
 
-\item{data_src}{data source, by default Pubmed/MedLine index will be searched.
-The following three letter codes represents the sources
+\item{data_src}{character, data source, by default Pubmed/MedLine index will
+be searched.
+The following three letter codes represent the sources
 Europe PubMed Central supports:
 \describe{
   \item{agr}{Agricola is a bibliographic database of citations to the
@@ -27,16 +28,16 @@ Europe PubMed Central supports:
   \item{pmc}{PubMed Central}
   }}
 
-\item{limit}{results. By default, this function
-returns 25 records for each page.}
+\item{limit}{integer, number of results. By default, this function
+returns 25 records.}
 
-\item{verbose}{print some information on what is going on.}
+\item{verbose}{logical, print some information on what is going on.}
 }
 \value{
 Metadata of citing documents as data.frame
 }
 \description{
-The function finds works that cite a given publication.
+Finds works that cite a given publication.
 }
 \examples{
 \dontrun{

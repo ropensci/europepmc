@@ -1,15 +1,16 @@
 Package: europepmc
-Title: R Interface to Europe PubMed Central RESTful Web Service
-Version: 0.0.999
-Authors@R: person("Najko", "Jahn", email = "najko.jahn@gmail.com",
-                 role = c("aut", "cre"))
+Title: R Interface to the Europe PubMed Central RESTful Web Service
+Version: 0.1
+Authors@R: c(
+           person("Najko", "Jahn", email = "najko.jahn@gmail.com",
+           role = c("aut", "cre", "cph")))
 License: GPL-3
 URL: http://github.com/ropensci/europepmc/
-BugReports: http://github.com/ropensci/europemc/issues
+BugReports: http://github.com/ropensci/europepmc/issues
 Description: An R Client for the Europe PubMed Central RESTful Web Service. It
     gives access to both metadata on life science literature and open access
-    full texts. Europe PMC indexes all PubMed content, and other literature
-    sources, including Agricola, a bibliographic database of citations to the
+    full texts. Europe PMC indexes all PubMed content and other literature
+    sources including Agricola, a bibliographic database of citations to the
     agricultural literature, or Biological Patents. In addition to bibliographic
     metadata, the client allows users to fetch citations and reference lists.
     Links between life-science literature and other EBI databases, including

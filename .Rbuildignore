@@ -5,3 +5,4 @@ README.Rmd
 ^appveyor\.yml$
 ^.travis.yml$
 review_answer.md
+cran-comments.md

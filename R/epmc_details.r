@@ -1,11 +1,12 @@
 #' Get details for individual records
-
+#'
 #' This function returns full metadata for a given publication ID
 #' including abstract, full text links, author details including ORCID and affiliation,
 #' MeSH terms, chemicals, grants.
 #'
-#' @param ext_id publication identifier
-#' @param data_src data source, by default Pubmed/MedLine index will be searched.
+#' @param ext_id character, publication identifier
+#' @param data_src character, data source, by default Pubmed/MedLine index will
+#'   be searched.
 #'   Other sources Europe PubMed Central supports are:
 #'   \describe{
 #'     \item{agr}{Agricola is a bibliographic database of citations to the

@@ -14,9 +14,9 @@
 #'     \item{ORGANISM}{organism}
 #'     }
 #'
-#' @param ext_id publication identifier
-#' @param data_src data source, by default Pubmed/MedLine index will be searched
-#'   .
+#' @param ext_id character, publication identifier
+#' @param data_src character, data source, by default Pubmed/MedLine index will
+#'   be searched.
 #' @return data.frame with counts for each semantic type
 #' @export
 #' @examples

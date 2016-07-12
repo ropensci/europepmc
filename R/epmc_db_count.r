@@ -1,8 +1,8 @@
 #' Retrieve the number of database links from Europe PMC publication database
 #'
 #' This function returns the number of EBI database links associated with a
-#' publication,
-#'   Europe PMC RESTful Web Service.
+#' publication.
+#'
 #' @details Europe PMC supports cross-references between literature and the
 #'   following databases:
 #'   \describe{
@@ -10,8 +10,8 @@
 #'      interest \url{http://www.ebi.ac.uk/chebi/}}
 #'   \item{'CHEMBL'}{a database of bioactive drug-like small molecules
 #'      \url{https://www.ebi.ac.uk/chembldb/}}
-#'   \item{'EMBL'}{provides a comprehensive record of the world's nucleotide
-#'      sequencing information \url{http://www.ebi.ac.uk/ena/}}
+#'   \item{'EMBL'}{now ENA, provides a comprehensive record of the world's
+#'      nucleotide sequencing information \url{http://www.ebi.ac.uk/ena/}}
 #'   \item{'INTACT'}{provides a freely available, open
 #'      source database system and analysis tools for molecular interaction data
 #'      \url{http://www.ebi.ac.uk/intact/}}
@@ -28,9 +28,9 @@
 #'   \url{http://www.uniprot.org/}}
 #'   }
 #'
-#' @param ext_id publication identifier
-#' @param data_src data source, by default Pubmed/MedLine index will be searched
-#'   .
+#' @param ext_id character, publication identifier
+#' @param data_src character, data source, by default Pubmed/MedLine index will
+#'   be searched.
 #' @return data.frame with counts for each database
 #' @export
 #' @examples

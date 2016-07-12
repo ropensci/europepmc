@@ -1,6 +1,6 @@
 #' Get citations for a given publication
 #'
-#' The function finds works that cite a given publication.
+#' Finds works that cite a given publication.
 #'
 #' @inheritParams epmc_refs
 #'

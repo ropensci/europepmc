@@ -7,18 +7,17 @@
 epmc_db_count(ext_id = NULL, data_src = "med")
 }
 \arguments{
-\item{ext_id}{publication identifier}
+\item{ext_id}{character, publication identifier}
 
-\item{data_src}{data source, by default Pubmed/MedLine index will be searched
-.}
+\item{data_src}{character, data source, by default Pubmed/MedLine index will
+be searched.}
 }
 \value{
 data.frame with counts for each database
 }
 \description{
 This function returns the number of EBI database links associated with a
-publication,
-  Europe PMC RESTful Web Service.
+publication.
 }
 \details{
 Europe PMC supports cross-references between literature and the
@@ -28,8 +27,8 @@ Europe PMC supports cross-references between literature and the
      interest \url{http://www.ebi.ac.uk/chebi/}}
   \item{'CHEMBL'}{a database of bioactive drug-like small molecules
      \url{https://www.ebi.ac.uk/chembldb/}}
-  \item{'EMBL'}{provides a comprehensive record of the world's nucleotide
-     sequencing information \url{http://www.ebi.ac.uk/ena/}}
+  \item{'EMBL'}{now ENA, provides a comprehensive record of the world's
+     nucleotide sequencing information \url{http://www.ebi.ac.uk/ena/}}
   \item{'INTACT'}{provides a freely available, open
      source database system and analysis tools for molecular interaction data
      \url{http://www.ebi.ac.uk/intact/}}

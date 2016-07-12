@@ -3,8 +3,8 @@
 #' This function loads full texts into R. Full texts are in XML format and are
 #' only provided for the Open Access subset of Europe PMC.
 #'
-#' @param ext_id publication identifier. All full text publications have
-#' external IDs starting 'PMC___'.
+#' @param ext_id character, publication identifier. All full text publications
+#'   have external IDs starting with 'PMC___'.
 #'
 #' @export
 #' @return xml_document
