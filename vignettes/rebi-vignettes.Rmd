@@ -1,11 +1,11 @@
 ---
 title: "Introducing europepmc, an R interface to Europe PMC RESTful API"
 author: "Najko Jahn"
-date: "13 May 2016"
+date: "12 July 2016"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Overview}
   \usepackage[utf8]{inputenc}
 ---
 
