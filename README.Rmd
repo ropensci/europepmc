@@ -13,6 +13,9 @@ knitr::opts_chunk$set(
 [![Build Status](https://travis-ci.org/ropensci/europepmc.svg?branch=master)](https://travis-ci.org/ropensci/europepmc)
 [![Build status](https://ci.appveyor.com/api/projects/status/f8xtpvhhr074lk44?svg=true)](https://ci.appveyor.com/project/sckott/europepmc)
 [![codecov.io](https://codecov.io/github/ropensci/europepmc/coverage.svg?branch=master)](https://codecov.io/github/ropensci/europepmc?branch=master)
+[![cran version](http://www.r-pkg.org/badges/version/europepmc)](https://cran.r-project.org/package=europepmc)
+[![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/europepmc)](https://github.com/metacran/cranlogs.app)
+
 
 europepmc facilitates access to [Europe PMC RESTful Web
 Service](http://europepmc.org/RestfulWebService).
@@ -33,6 +36,12 @@ Europe PMC: a full-text literature database for the life sciences and platform
 for innovation. (2014). Nucleic Acids Research, 43(D1), D1042–D1048. doi:[10.1093/nar/gku1061](http://doi.org/10.1093/nar/gku1061)
 
 ## Installation
+
+From CRAN
+
+```r
+install.packages("europepmc")
+```
 
 The latest development version can be installed using
 [devtools](https://github.com/hadley/devtools) package:

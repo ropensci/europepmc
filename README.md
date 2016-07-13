@@ -6,6 +6,9 @@
 [![Build Status](https://travis-ci.org/ropensci/europepmc.svg?branch=master)](https://travis-ci.org/ropensci/europepmc)
 [![Build status](https://ci.appveyor.com/api/projects/status/f8xtpvhhr074lk44?svg=true)](https://ci.appveyor.com/project/sckott/europepmc)
 [![codecov.io](https://codecov.io/github/ropensci/europepmc/coverage.svg?branch=master)](https://codecov.io/github/ropensci/europepmc?branch=master)
+[![cran version](http://www.r-pkg.org/badges/version/europepmc)](https://cran.r-project.org/package=europepmc)
+[![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/europepmc)](https://github.com/metacran/cranlogs.app)
+
 
 europepmc facilitates access to [Europe PMC RESTful Web
 Service](http://europepmc.org/RestfulWebService).
@@ -26,6 +29,12 @@ Europe PMC: a full-text literature database for the life sciences and platform
 for innovation. (2014). Nucleic Acids Research, 43(D1), D1042–D1048. doi:[10.1093/nar/gku1061](http://doi.org/10.1093/nar/gku1061)
 
 ## Installation
+
+From CRAN
+
+```r
+install.packages("europepmc")
+```
 
 The latest development version can be installed using
 [devtools](https://github.com/hadley/devtools) package:
@@ -69,36 +78,36 @@ head(my_data)
 #> 2 26842807    MED 26842807 PMC4740857            10.1038/srep20309
 #> 3 26930070    MED 26930070 PMC4773003 10.1371/journal.pone.0150254
 #> 4 26957563    MED 26957563 PMC4861014           10.1093/jxb/erw096
-#> 5 27064270    MED 27064270 PMC4814454      10.3389/fpls.2016.00405
-#> 6 26824478    MED 26824478 PMC4733102 10.1371/journal.pone.0148335
+#> 5 27216227    MED 27216227 PMC4890181          10.1038/ncomms11654
+#> 6 27064270    MED 27064270 PMC4814454      10.3389/fpls.2016.00405
 #>                                                                                                                                                                                                                  title
 #> 1                                                                                                                         Cancer-specific binary expression system activated in mice by bacteriophage HK022 Integrase.
 #> 2                                                                                  Precocious leaf senescence by functional loss of PROTEIN S-ACYL TRANSFERASE14 involves the NPR1-dependent salicylic acid signaling.
 #> 3 The Arabidopsis Domain of Unknown Function 1218 (DUF1218) Containing Proteins, MODIFYING WALL LIGNIN-1 and 2 (At1g31720/MWL-1 and At4g19370/MWL-2) Function Redundantly to Alter Secondary Cell Wall Lignin Content.
 #> 4                                                                                                                                                                  SLTAB2 is the paramutated SULFUREA locus in tomato.
-#> 5                                                                                          Photosystem II Repair and Plant Immunity: Lessons Learned from Arabidopsis Mutant Lacking the THYLAKOID LUMEN PROTEIN 18.3.
-#> 6                                                                                            The Early-Acting Peroxin PEX19 Is Redundantly Encoded, Farnesylated, and Essential for Viability in Arabidopsis thaliana.
-#>                                                                                               authorString
-#> 1 Elias A, Spector I, Sogolovsky-Bard I, Gritsenko N, Rask L, Mainbakh Y, Zilberstein Y, Yagil E, Kolot M.
-#> 2                                                Zhao XY, Wang JG, Song SJ, Wang Q, Kang H, Zhang Y, Li S.
-#> 3                                               Mewalal R, Mizrachi E, Coetzee B, Mansfield SD, Myburg AA.
-#> 4                                                                          Gouil Q, Novák O, Baulcombe DC.
-#> 5                            Järvi S, Isojärvi J, Kangasjärvi S, Salojärvi J, Mamedov F, Suorsa M, Aro EM.
-#> 6                                 McDonnell MM, Burkhart SE, Stoddard JM, Wright ZJ, Strader LC, Bartel B.
+#> 5                                                                                                                                            A voltage-dependent chloride channel fine-tunes photosynthesis in plants.
+#> 6                                                                                          Photosystem II Repair and Plant Immunity: Lessons Learned from Arabidopsis Mutant Lacking the THYLAKOID LUMEN PROTEIN 18.3.
+#>                                                                                                                                    authorString
+#> 1                                      Elias A, Spector I, Sogolovsky-Bard I, Gritsenko N, Rask L, Mainbakh Y, Zilberstein Y, Yagil E, Kolot M.
+#> 2                                                                                     Zhao XY, Wang JG, Song SJ, Wang Q, Kang H, Zhang Y, Li S.
+#> 3                                                                                    Mewalal R, Mizrachi E, Coetzee B, Mansfield SD, Myburg AA.
+#> 4                                                                                                               Gouil Q, Novák O, Baulcombe DC.
+#> 5 Herdean A, Teardo E, Nilsson AK, Pfeil BE, Johansson ON, Ünnep R, Nagy G, Zsiros O, Dana S, Solymosi K, Garab G, Szabó I, Spetea C, Lundin B.
+#> 6                                                                 Järvi S, Isojärvi J, Kangasjärvi S, Salojärvi J, Mamedov F, Suorsa M, Aro EM.
 #>      journalTitle journalVolume pubYear journalIssn  pageInfo
 #> 1         Sci Rep             6    2016   2045-2322     24971
 #> 2         Sci Rep             6    2016   2045-2322     20309
 #> 3        PLoS One            11    2016   1932-6203  e0150254
 #> 4       J Exp Bot            67    2016   0022-0957 2655-2664
-#> 5 Front Plant Sci             7    2016   1664-462x       405
-#> 6        PLoS One            11    2016   1932-6203  e0148335
-#>                                                                                                                                               pubType
-#> 1                                                                                                                   journal article; research-article
-#> 2                                                                                                                   journal article; research-article
-#> 3                                                                                                                   journal article; research-article
-#> 4                                                                                                                   journal article; research-article
-#> 5                                                                                                                   journal article; research-article
-#> 6 journal article; research support, non-u.s. gov't; research support, u.s. gov't, non-p.h.s.; research support, n.i.h., extramural; research-article
+#> 5      Nat Commun             7    2016   2041-1723     11654
+#> 6 Front Plant Sci             7    2016   1664-462x       405
+#>                                                               pubType
+#> 1                                   journal article; research-article
+#> 2 journal article; research support, non-u.s. gov't; research-article
+#> 3 journal article; research support, non-u.s. gov't; research-article
+#> 4                                   journal article; research-article
+#> 5                                   journal article; research-article
+#> 6                                   journal article; research-article
 #>   isOpenAccess inEPMC inPMC hasPDF hasBook hasSuppl citedByCount
 #> 1            Y      Y     N      Y       N        N            0
 #> 2            Y      Y     N      Y       N        N            1
@@ -107,19 +116,19 @@ head(my_data)
 #> 5            Y      Y     N      Y       N        N            0
 #> 6            Y      Y     N      Y       N        N            0
 #>   hasReferences hasTextMinedTerms hasDbCrossReferences hasLabsLinks
-#> 1             Y                 Y                    N            N
-#> 2             Y                 Y                    N            N
-#> 3             Y                 Y                    N            N
-#> 4             Y                 Y                    N            N
-#> 5             Y                 Y                    N            N
-#> 6             Y                 Y                    N            N
+#> 1             Y                 Y                    N            Y
+#> 2             Y                 Y                    N            Y
+#> 3             Y                 Y                    N            Y
+#> 4             Y                 Y                    N            Y
+#> 5             Y                 Y                    N            Y
+#> 6             Y                 Y                    N            Y
 #>   epmcAuthMan hasTMAccessionNumbers luceneScore issue
 #> 1           N                     N         NaN  <NA>
 #> 2           N                     N         NaN  <NA>
 #> 3           N                     N         NaN     3
 #> 4           N                     N         NaN     9
 #> 5           N                     N         NaN  <NA>
-#> 6           N                     N         NaN     1
+#> 6           N                     N         NaN  <NA>
 ```
 
 Get PLOS Genetics (ISSN:1553-7404) articles that cross-reference EMBL:
@@ -130,59 +139,59 @@ my_data <- epmc_search(query = 'ISSN:1553-7404 HAS_EMBL:y')
 head(my_data)
 #>         id source     pmid      pmcid                          doi
 #> 1 27149082    MED 27149082 PMC4858218 10.1371/journal.pgen.1006030
-#> 2 26982327    MED 26982327 PMC4794157 10.1371/journal.pgen.1005920
-#> 3 27120580    MED 27120580 PMC4847869 10.1371/journal.pgen.1005987
-#> 4 27082250    MED 27082250 PMC4833346 10.1371/journal.pgen.1005954
-#> 5 26495848    MED 26495848 PMC4619825 10.1371/journal.pgen.1005609
-#> 6 26020649    MED 26020649 PMC4447368 10.1371/journal.pgen.1005207
+#> 2 27203426    MED 27203426 PMC4874600 10.1371/journal.pgen.1006063
+#> 3 26982327    MED 26982327 PMC4794157 10.1371/journal.pgen.1005920
+#> 4 27120580    MED 27120580 PMC4847869 10.1371/journal.pgen.1005987
+#> 5 27327578    MED 27327578 PMC4915694 10.1371/journal.pgen.1006110
+#> 6 27082250    MED 27082250 PMC4833346 10.1371/journal.pgen.1005954
 #>                                                                                                                                                                                                    title
 #> 1 Germline Defects Caused by Smed-boule RNA-Interference Reveal That Egg Capsule Deposition Occurs Independently of Fertilization, Ovulation, Mating, or the Presence of Gametes in Planarian Flatworms.
-#> 2                                                                                                            Hybrid Dysgenesis in Drosophila simulans Associated with a Rapid Invasion of the P-Element.
-#> 3                                                 An Indel Polymorphism in the MtnA 3' Untranslated Region Is Associated with Gene Expression Variation and Local Adaptation in Drosophila melanogaster.
-#> 4                                                                                        Chromosomal-Level Assembly of the Asian Seabass Genome Using Long Sequence Reads and Multi-layered Scaffolding.
-#> 5                                                                                                                                                    Virus Satellites Drive Viral Evolution and Ecology.
-#> 6                                                                      A Simple Auxin Transcriptional Response System Regulates Multiple Morphogenetic Processes in the Liverwort Marchantia polymorpha.
+#> 2                                                                                                Antimicrobial Functions of Lactoferrin Promote Genetic Conflicts in Ancient Primates and Modern Humans.
+#> 3                                                                                                            Hybrid Dysgenesis in Drosophila simulans Associated with a Rapid Invasion of the P-Element.
+#> 4                                                 An Indel Polymorphism in the MtnA 3' Untranslated Region Is Associated with Gene Expression Variation and Local Adaptation in Drosophila melanogaster.
+#> 5                                                                                                                      Genetic Dissection of Sexual Reproduction in a Primary Homothallic Basidiomycete.
+#> 6                                                                                        Chromosomal-Level Assembly of the Asian Seabass Genome Using Long Sequence Reads and Multi-layered Scaffolding.
 #>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             authorString
 #> 1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       Steiner JK, Tasaki J, Rouhana L.
-#> 2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  Hill T, Schlötterer C, Betancourt AJ.
-#> 3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          Catalán A, Glaser-Schmitt A, Argyridou E, Duchen P, Parsch J.
-#> 4 Vij S, Kuhl H, Kuznetsova IS, Komissarov A, Yurchenko AA, Van Heusden P, Singh S, Thevasagayam NM, Prakki SR, Purushothaman K, Saju JM, Jiang J, Mbandi SK, Jonas M, Hin Yan Tong A, Mwangi S, Lau D, Ngoh SY, Liew WC, Shen X, Hon LS, Drake JP, Boitano M, Hall R, Chin CS, Lachumanan R, Korlach J, Trifonov V, Kabilov M, Tupikin A, Green D, Moxon S, Garvin T, Sedlazeck FJ, Vurture GW, Gopalapillai G, Kumar Katneni V, Noble TH, Scaria V, Sivasubbu S, Jerry DR, O'Brien SJ, Schatz MC, Dalmay T, Turner SW, Lok S, Christoffels A, Orbán L.
-#> 5                                                                                                                                                                                                                                                                                                                                                                                                                                         Frígols B, Quiles-Puchalt N, Mir-Sanchis I, Donderis J, Elena SF, Buckling A, Novick RP, Marina A, Penadés JR.
-#> 6                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               Flores-Sandoval E, Eklund DM, Bowman JL.
+#> 2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           Barber MF, Kronenberg Z, Yandell M, Elde NC.
+#> 3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  Hill T, Schlötterer C, Betancourt AJ.
+#> 4                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          Catalán A, Glaser-Schmitt A, Argyridou E, Duchen P, Parsch J.
+#> 5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                David-Palma M, Sampaio JP, Gonçalves P.
+#> 6 Vij S, Kuhl H, Kuznetsova IS, Komissarov A, Yurchenko AA, Van Heusden P, Singh S, Thevasagayam NM, Prakki SR, Purushothaman K, Saju JM, Jiang J, Mbandi SK, Jonas M, Hin Yan Tong A, Mwangi S, Lau D, Ngoh SY, Liew WC, Shen X, Hon LS, Drake JP, Boitano M, Hall R, Chin CS, Lachumanan R, Korlach J, Trifonov V, Kabilov M, Tupikin A, Green D, Moxon S, Garvin T, Sedlazeck FJ, Vurture GW, Gopalapillai G, Kumar Katneni V, Noble TH, Scaria V, Sivasubbu S, Jerry DR, O'Brien SJ, Schatz MC, Dalmay T, Turner SW, Lok S, Christoffels A, Orbán L.
 #>   journalTitle issue journalVolume pubYear journalIssn pageInfo
 #> 1   PLoS Genet     5            12    2016   1553-7390 e1006030
-#> 2   PLoS Genet     3            12    2016   1553-7390 e1005920
-#> 3   PLoS Genet     4            12    2016   1553-7390 e1005987
-#> 4   PLoS Genet     4            12    2016   1553-7390 e1005954
-#> 5   PLoS Genet    10            11    2015   1553-7390 e1005609
-#> 6   PLoS Genet     5            11    2015   1553-7390 e1005207
+#> 2   PLoS Genet     5            12    2016   1553-7390 e1006063
+#> 3   PLoS Genet     3            12    2016   1553-7390 e1005920
+#> 4   PLoS Genet     4            12    2016   1553-7390 e1005987
+#> 5   PLoS Genet     6            12    2016   1553-7390 e1006110
+#> 6   PLoS Genet     4            12    2016   1553-7390 e1005954
 #>                                                               pubType
 #> 1                                   journal article; research-article
 #> 2                                   journal article; research-article
-#> 3                                   journal article; research-article
-#> 4                                                     journal article
-#> 5 journal article; research support, non-u.s. gov't; research-article
-#> 6 journal article; research support, non-u.s. gov't; research-article
+#> 3 journal article; research support, non-u.s. gov't; research-article
+#> 4                                   journal article; research-article
+#> 5                                   journal article; research-article
+#> 6                                   journal article; research-article
 #>   isOpenAccess inEPMC inPMC hasPDF hasBook hasSuppl citedByCount
 #> 1            Y      Y     N      Y       N        N            0
-#> 2            Y      Y     N      Y       N        N            1
-#> 3            Y      Y     N      Y       N        N            0
-#> 4            N      Y     N      N       N        N            0
+#> 2            Y      Y     N      Y       N        N            0
+#> 3            Y      Y     N      Y       N        N            1
+#> 4            Y      Y     N      Y       N        N            0
 #> 5            Y      Y     N      Y       N        N            0
-#> 6            Y      Y     N      Y       N        N            3
+#> 6            Y      Y     N      Y       N        N            0
 #>   hasReferences hasTextMinedTerms hasDbCrossReferences hasLabsLinks
-#> 1             Y                 Y                    Y            N
+#> 1             Y                 Y                    Y            Y
 #> 2             Y                 Y                    Y            Y
-#> 3             Y                 Y                    Y            N
-#> 4             Y                 Y                    Y            N
-#> 5             Y                 Y                    Y            Y
+#> 3             Y                 Y                    Y            Y
+#> 4             Y                 Y                    Y            Y
+#> 5             N                 Y                    Y            Y
 #> 6             Y                 Y                    Y            Y
 #>   epmcAuthMan hasTMAccessionNumbers luceneScore
 #> 1           N                     N         NaN
 #> 2           N                     Y         NaN
 #> 3           N                     Y         NaN
 #> 4           N                     Y         NaN
-#> 5           N                     Y         NaN
+#> 5           N                     N         NaN
 #> 6           N                     Y         NaN
 ```
 
@@ -195,20 +204,20 @@ that represent articles referencing DataCite DOIs:
 ```r
 query <- "ACCESSION_TYPE:doi"
 epmc_hits(query)
-#> [1] 5050
+#> [1] 5402
 # set limit to 10 records
 my_data <- epmc_search(query = "ACCESSION_TYPE:doi", limit = 10,
                        id_list = TRUE)
 head(my_data)
 #>         id source     pmid      pmcid
-#> 1 26997665    MED 26997665 PMC4797422
-#> 2 27014734    MED 27014734 PMC4789307
-#> 3 26855764    MED 26855764 PMC4686253
-#> 4 26900179    MED 26900179 PMC4759657
-#> 5 26424727    MED 26424727 PMC4678253
-#> 6 27023427    MED 27023427 PMC4811434
+#> 1 27019208    MED 27019208 PMC4809487
+#> 2 26955653    MED 26955653 PMC4761700
+#> 3 27064844    MED 27064844 PMC4814564
+#> 4 27143036    MED 27143036 PMC4855483
+#> 5 26977150    MED 26977150 PMC4762996
+#> 6 26978783    MED 26978783 PMC4792385
 attr(my_data, "hit_count")
-#> [1] 5050
+#> [1] 5402
 ```
 
 ### Search with ORCID
@@ -219,7 +228,7 @@ Use [ORCID](http://orcid.org/) to search for personal publications:
 ```r
 my_data <- epmc_search(query = 'AUTHORID:"0000-0002-7635-3473"')
 attr(my_data, "hit_count")
-#> [1] 126
+#> [1] 127
 ```
 
 ### Include MeSH and UniProt synonyms
@@ -231,11 +240,11 @@ You may also want to include synonyms when searching Europe PMC. If
 ```r
 my_data <- epmc_search("aspirin", synonym = TRUE)
 attr(my_data, "hit_count")
-#> [1] 111763
+#> [1] 112983
 
 my_data <- epmc_search("aspirin", synonym = FALSE)
 attr(my_data, "hit_count")
-#> [1] 104561
+#> [1] 105706
 ```
 
 ## Get article details
@@ -262,7 +271,7 @@ epmc_details(ext_id = "24270414")
 #>   hasSuppl citedByCount hasReferences hasTextMinedTerms
 #> 1        N            1             Y                 Y
 #>   hasDbCrossReferences hasLabsLinks epmcAuthMan hasTMAccessionNumbers
-#> 1                    N            N           N                     N
+#> 1                    N            Y           N                     N
 #>   dateOfCompletion dateOfCreation dateOfRevision electronicPublicationDate
 #> 1       2014-02-04     2013-12-02     2015-07-10                2013-11-25
 #>   firstPublicationDate luceneScore
@@ -354,42 +363,42 @@ Citing publications from the Europe PMC index can be retrieved like this:
 my_cites <- epmc_citations("9338777")
 head(my_cites)
 #>         id source
-#> 1  9811736    MED
-#> 2  9525633    MED
+#> 1  9525633    MED
+#> 2  9811736    MED
 #> 3  9728986    MED
 #> 4  9728985    MED
 #> 5  9728987    MED
 #> 6 10590090    MED
 #>                                                                              citationType
-#> 1                                       Journal Article; Research Support, Non-U.S. Gov't
-#> 2                                                                         Journal Article
+#> 1                                                                         Journal Article
+#> 2                                       Journal Article; Research Support, Non-U.S. Gov't
 #> 3 Journal Article; Research Support, Non-U.S. Gov't; Research Support, U.S. Gov't, P.H.S.
 #> 4                                       Journal Article; Research Support, Non-U.S. Gov't
 #> 5                         Case Reports; Journal Article; Research Support, Non-U.S. Gov't
 #> 6                                       Journal Article; Research Support, Non-U.S. Gov't
 #>                                                                                                                  title
-#> 1                                   Host range and interference studies of three classes of pig endogenous retrovirus.
-#> 2              Type C retrovirus released from porcine primary peripheral blood mononuclear cells infects human cells.
+#> 1              Type C retrovirus released from porcine primary peripheral blood mononuclear cells infects human cells.
+#> 2                                   Host range and interference studies of three classes of pig endogenous retrovirus.
 #> 3          No evidence of infection with porcine endogenous retrovirus in recipients of porcine islet-cell xenografts.
 #> 4           Expression of pig endogenous retrovirus by primary porcine endothelial cells and infection of human cells.
 #> 5 No evidence of pig DNA or retroviral infection in patients with short-term extracorporeal connection to pig kidneys.
 #> 6                                          Extended analysis of the in vitro tropism of porcine endogenous retrovirus.
 #>                                                                                                       authorString
-#> 1                                  Takeuchi Y, Patience C, Magre S, Weiss RA, Banerjee PT, Le Tissier P, Stoye JP.
-#> 2                                                       Wilson CA, Wong S, Muller J, Davidson CE, Rose TM, Burd P.
+#> 1                                                       Wilson CA, Wong S, Muller J, Davidson CE, Rose TM, Burd P.
+#> 2                                  Takeuchi Y, Patience C, Magre S, Weiss RA, Banerjee PT, Le Tissier P, Stoye JP.
 #> 3 Heneine W, Tibell A, Switzer WM, Sandstrom P, Rosales GV, Mathews A, Korsgren O, Chapman LE, Folks TM, Groth CG.
 #> 4                               Martin U, Kiessig V, Blusch JH, Haverich A, von der Helm K, Herden T, Steinhoff G.
 #> 5                                  Patience C, Patton GS, Takeuchi Y, Weiss RA, McClure MO, Rydberg L, Breimer ME.
 #> 6                                                                 Wilson CA, Wong S, VanBrocklin M, Federspiel MJ.
 #>   journalAbbreviation pubYear volume issue  pageInfo citedByCount
-#> 1           J. Virol.    1998     72    12 9986-9991          181
-#> 2           J. Virol.    1998     72     4 3082-3087          179
-#> 3              Lancet    1998    352  9129   695-699          159
-#> 4              Lancet    1998    352  9129   692-694          142
-#> 5              Lancet    1998    352  9129   699-701          136
-#> 6           J. Virol.    2000     74     1     49-56          104
+#> 1           J. Virol.    1998     72     4 3082-3087          193
+#> 2           J. Virol.    1998     72    12 9986-9991          190
+#> 3              Lancet    1998    352  9129   695-699          167
+#> 4              Lancet    1998    352  9129   692-694          156
+#> 5              Lancet    1998    352  9129   699-701          144
+#> 6           J. Virol.    2000     74     1     49-56          108
 attr(my_cites, "hit_count")
-#> [1] 182
+#> [1] 192
 ```
 
 Please note, that citation counts are often smaller than those held by toll-
@@ -637,7 +646,8 @@ epmc_lablinks_count("PMC3986813", data_src = "pmc")
 #>       providerName linksCount
 #> 1 EBI Train Online          1
 #> 2        Wikipedia          1
-#> 3       BioStudies          1
+#> 3          Publons          1
+#> 4        Altmetric          1
 ```
 
 Get links to PANGEA (`lab_id = "1342"`)
@@ -698,7 +708,7 @@ of Europe PMC. They can be retrieved by the PMCID.
 ```r
 epmc_ftxt("PMC3257301")
 #> {xml_document}
-#> <article>
+#> <article article-type="research-article" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mml="http://www.w3.org/1998/Math/MathML">
 #> [1] <front>\n  <journal-meta>\n    <journal-id journal-id-type="nlm-ta"> ...
 #> [2] <body>\n  <sec id="s1">\n    <title>Introduction</title>\n    <p>Atm ...
 #> [3] <back>\n  <ack>\n    <p>We would like to thank Dr. C. Gourlay and Dr ...
@@ -711,7 +721,7 @@ as XML into R for further text-mining activities.
 ```r
 epmc_ftxt_book("NBK32884")
 #> {xml_document}
-#> <book-part>
+#> <book-part book-part-type="toc" id="toc" indexed="true" lang="EN" type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mml="http://www.w3.org/1998/Math/MathML">
 #> [1] <book-meta>\n  <?showBookmeta?>\n  <book-id pub-id-type="pmcid">erta ...
 #> [2] <book-part-meta>\n  <title-group>\n    <title>Table of Contents</tit ...
 #> [3] <body>\n  <list list-type="simple">\n    <list-item>\n      <?toc-ta ...
