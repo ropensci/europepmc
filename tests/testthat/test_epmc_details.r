@@ -13,15 +13,15 @@ test_that("epmc_details returns", {
   i <- epmc_details("NBK338142", data_src = "nbk")
 
   #correct dimensions and class
-  expect_output(str(a), "List of 8")
-  expect_output(str(b), "List of 8")
-  expect_output(str(c), "List of 8")
-  expect_output(str(d), "List of 8")
-  expect_output(str(e), "List of 8")
-  expect_output(str(f), "List of 8")
-  expect_output(str(g), "List of 8")
-  expect_output(str(h), "List of 8")
-  expect_output(str(i), "List of 8")
+  expect_output(str(a), "List of 9")
+  expect_output(str(b), "List of 9")
+  expect_output(str(c), "List of 9")
+  expect_output(str(d), "List of 9")
+  expect_output(str(e), "List of 9")
+  expect_output(str(f), "List of 9")
+  expect_output(str(g), "List of 9")
+  expect_output(str(h), "List of 9")
+  expect_output(str(i), "List of 9")
 
   #correct class metadata
   expect_is(a$basic, "data.frame")
@@ -35,6 +35,7 @@ test_that("epmc_details returns", {
   expect_is(a$chemical, "data.frame")
   expect_is(a$grants, "data.frame")
   expect_is(a$mesh_topic, "data.frame")
+  expect_is(a$mesh_qualifiers, "data.frame")
   expect_is(a$comments, "data.frame")
 
   #are diminsions correct?

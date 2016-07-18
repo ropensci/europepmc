@@ -21,4 +21,9 @@
 #'
 #' @name europepmc
 #' @docType package
+#'
+#' @importFrom dplyr bind_rows
+#' @importFrom plyr rbind.fill ldply
+#' @import jsonlite
+#' @import httr
 NULL

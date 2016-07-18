@@ -75,9 +75,19 @@ epmc_details <- function(ext_id = NULL, data_src = "med") {
               ftx = plyr::rbind.fill(res$fullTextUrlList$fullTextUrl),
               chemical = plyr::rbind.fill(res$chemicalList$chemical),
               mesh_topic = plyr::rbind.fill(res$meshHeadingList$meshHeading)[-3],
-#             mesh_qualifier = plyr::rbind.fill(res$mesh$meshQualifierList$meshQualifier),
+              mesh_qualifiers = get_mesh_subheadings(res = res),
               comments = plyr::rbind.fill(res$commentCorrectionList$commentCorrection),
               grants =  plyr::rbind.fill(res$grantsList$grant)
   )
   out
+}
+
+#' parsing MeSH subheadings to be returned as data.frame
+#' @param res json results node
+#' @noRd
+get_mesh_subheadings <- function(res){
+  mesh_qualifier <-
+    res$meshHeadingList$meshHeading[[1]][3]$meshQualifierList$meshQualifier
+  names(mesh_qualifier) <- unlist(res$meshHeadingList$meshHeading[[1]][2])
+  dplyr::bind_rows(plyr::compact(mesh_qualifier), .id = "descriptorName")
 }
