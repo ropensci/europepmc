@@ -7,7 +7,7 @@ test_that("epmc_details returns", {
   c <- epmc_details("IND43783977", data_src = "agr")
   d <- epmc_details("EP2412369", data_src = "pat")
   e <- epmc_details("583843", data_src = "cba")
-  f <- epmc_details("C7603", data_src = "ctx")
+  f <- epmc_details("C6802", data_src = "ctx")
   g <- epmc_details("338638", data_src = "hir")
   h <- epmc_details("409323", data_src = "eth")
   i <- epmc_details("NBK338142", data_src = "nbk")

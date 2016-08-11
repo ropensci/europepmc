@@ -49,7 +49,7 @@ epmc_details("EP2412369", data_src = "pat")
 # Chinese Biological Abstracts
 epmc_details("583843", data_src = "cba")
 # CiteXplore
-epmc_details("C7603", data_src = "ctx")
+epmc_details("C6802", data_src = "ctx")
 # NHS Evidence
 epmc_details("338638", data_src = "hir")
 # Theses
