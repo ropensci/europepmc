@@ -86,6 +86,12 @@ epmc_details <- function(ext_id = NULL, data_src = "med") {
 #' @param res json results node
 #' @noRd
 get_mesh_subheadings <- function(res){
+  # no mesh
+  if(is.null(res$meshHeadingList$meshHeading))
+    return(NULL)
+  # no mesh qualifiers in nested list
+  if(ncol(res$meshHeadingList$meshHeading[[1]]) == 2)
+    return(NULL)
   mesh_qualifier <-
     res$meshHeadingList$meshHeading[[1]][3]$meshQualifierList$meshQualifier
   names(mesh_qualifier) <- unlist(res$meshHeadingList$meshHeading[[1]][2])
