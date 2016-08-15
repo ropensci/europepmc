@@ -233,12 +233,8 @@ of Europe PMC. They can be retrieved by the PMCID.
 epmc_ftxt("PMC3257301")
 ```
 
-Books, fetched through the PMID or the 'NBK' book number, can also be loaded
-as XML into R for further text-mining activities.
-
-```{r}
-epmc_ftxt_book("NBK32884")
-```
+Books, fetched through the PMID or the 'NBK' book number, can be loaded
+as XML into R with the `epmc_ftxt_book()` function.
 
 Please check full-text availability before.
 
