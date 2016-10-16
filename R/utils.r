@@ -4,13 +4,13 @@
 base_uri <- function() "http://www.ebi.ac.uk"
 
 # rest path
-rest_path <- function() "europepmc/webservices/ver4.5.2/rest"
+rest_path <- function() "europepmc/webservices/ver4.5.3/rest"
 # check data sources
 supported_data_src <- c("agr", "cba", "ctx", "eth", "hir", "med", "nbk", "pat",
                         "pmc")
 
 # default batch size
-batch_size <- function() 1000
+batch_size <- function() 100
 
 
 # Common methods:
@@ -19,8 +19,9 @@ batch_size <- function() 1000
 rebi_GET <- function(path = NULL, query = NULL, ...) {
   if (is.null(path) && is.null(query))
     stop("Nothing to search")
-  # call api
-  req <- httr::GET(base_uri(), path = path, query = query)
+  # call api, decode workaround because Europe PMC only accepts decoded cursor
+  req <- httr::GET(urltools::url_decode(httr::modify_url(
+    base_uri(), path = path, query = query)))
   # check for http status
   httr::stop_for_status(req)
   # load json into r
