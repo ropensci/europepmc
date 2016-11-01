@@ -16,13 +16,23 @@ epmc_search_tmp_ <- function(query = NULL, id_list = FALSE,
          resulttype = resulttype,
          pageSize = batch_size(),
          cursorMark = page_token)
+  # call API
   out <- rebi_GET(path = paste0(rest_path(), "/search"), query = args)
-  list(next_cursor = out$nextCursorMark, results = as.data.frame(out$resultList$result))
+  # remove nested lists from resulting data.frame, get these infos with epmc_details
+  md <- out$resultList$result
+  if(length(md) == 0) {
+    md <- dplyr::data_frame()
+  } else {
+    md <- md %>%
+      dplyr::select_if(Negate(is.list)) %>%
+      as_data_frame()
+  }
+  list(next_cursor = out$nextCursorMark, results = md)
 }
 
 epmc_search_tmp <- function(query = NULL, id_list = FALSE,
                          synonym = FALSE, verbose = TRUE, page_token = NULL) {
-  results <- data.frame()
+  results <- dplyr::data_frame()
   page_token <- "*"
   repeat {
   out <- epmc_search_tmp_(query = query, id_list = id_list,
