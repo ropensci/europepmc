@@ -4,7 +4,8 @@ epmc_search_tmp_ <- function(query = NULL,
                              synonym = FALSE,
                              verbose = TRUE,
                              page_token = NULL,
-                             page_size = NULL) {
+                             page_size = NULL,
+                             sort = NULL) {
   # check
   if (is.null(query))
     stop("No query provided")
@@ -13,14 +14,8 @@ epmc_search_tmp_ <- function(query = NULL,
   synonym <- ifelse(synonym == FALSE, "false", "true")
   resulttype <- ifelse(id_list == FALSE, "lite", "idlist")
   # control limit
-  hit_count <- epmc_hits(query = query, synonym = synonym)
   limit <- as.integer(limit)
-  if(is.null(page_size)) {
-    page_size <- ifelse(batch_size() <= limit, batch_size(), limit)
-  } else {
-    page_size = page_size
-  }
-
+  page_size <- ifelse(batch_size() <= limit, batch_size(), limit)
   #build query
   args <-
     list(query = query,
@@ -28,7 +23,8 @@ epmc_search_tmp_ <- function(query = NULL,
          synonym = synonym,
          resulttype = resulttype,
          pageSize = page_size,
-         cursorMark = page_token)
+         cursorMark = page_token,
+         sort = sort)
   # call API
   out <- rebi_GET(path = paste0(rest_path(), "/search"), query = args)
   # remove nested lists from resulting data.frame, get these infos with epmc_details
@@ -47,23 +43,32 @@ epmc_search_tmp <- function(query = NULL,
                             id_list = FALSE,
                             synonym = FALSE,
                             verbose = TRUE,
-                            limit = 100) {
+                            limit = 100,
+                            sort = NULL) {
   page_token <- "*"
   results <- dplyr::data_frame()
   out <- epmc_search_tmp_(query = query, limit = limit, id_list = id_list,
                           synonym = synonym, verbose = verbose, page_token = page_token,
-                          page_size = NULL)
+                          sort = sort)
   res_chunks <- chunks(limit = limit)
+  # super hacky to control limit, better approach using pageSize param needed
+  hits <- epmc_hits(query)
+  limit <- as.integer(limit)
+  limit <- ifelse(hits <= limit, hits, limit)
+  # let's loop over until page max is reached, or until cursor marks are identical
   i <- 0
   while(i < res_chunks$page_max) {
     out <- epmc_search_tmp_(query = query, limit = limit, id_list = id_list,
                             synonym = synonym, verbose = verbose, page_token = page_token,
-                            page_size = NULL)
+                            sort = sort)
+    if(page_token == out$next_cursor)
+      break
     i <- i + 1
     message(paste("Retrieving result page", i))
     page_token <- out$next_cursor
     results <- dplyr::bind_rows(results, out$results)
   }
+  # again, approach needed to use param pageSize instead
   return(results[1:limit,])
 }
 
