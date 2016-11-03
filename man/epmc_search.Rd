@@ -4,15 +4,12 @@
 \alias{epmc_search}
 \title{Search Europe PMC publication database}
 \usage{
-epmc_search(query = NULL, limit = 25, id_list = FALSE, synonym = FALSE,
-  verbose = TRUE)
+epmc_search(query = NULL, id_list = FALSE, synonym = FALSE,
+  verbose = TRUE, limit = 100, sort = NULL)
 }
 \arguments{
 \item{query}{character, search query. For more information on how to
 build a search query, see \url{http://europepmc.org/Help}}
-
-\item{limit}{integer, limit the number of records you wish to retrieve.
-By default, 25 are returned.}
 
 \item{id_list}{logical, should only IDs (e.g. PMID) and sources be retrieved
 for the given search terms?}
@@ -22,6 +19,9 @@ terminology and the UniProt synonym list are queried, too. Disabled by
 default.}
 
 \item{verbose}{logical, print some information on what is going on.}
+
+\item{limit}{integer, limit the number of records you wish to retrieve.
+By default, 25 are returned.}
 }
 \value{
 data.frame

@@ -40,49 +40,98 @@
 #' }
 #' @export
 
-epmc_search <- function(query = NULL, limit = 25, id_list = FALSE,
-                        synonym = FALSE, verbose = TRUE){
-  # check
-  if (is.null(query))
-    stop("No query provided")
-  stopifnot(is.numeric(limit))
-  stopifnot(is.logical(verbose))
-  stopifnot(is.logical(id_list))
-  stopifnot(is.logical(synonym))
-  #  get the correct hit count when mesh and uniprot synonyms are also searched
-  synonym = ifelse(synonym == FALSE, "false", "true")
-  # get results found
-  hit_count <- epmc_hits(query = query, synonym = synonym)
-  #prepare queries
-  queries <- make_queries(hit_count = hit_count, limit = limit, query = query)
-  # if only ids are requested
-  if (id_list == TRUE)
-    queries <-
-    lapply(queries, function(x)
-      c(x, resulttype = "idlist"))
-  # include synonyms from mesh and uniprot
-  if (synonym == TRUE)
-    queries <-
-    lapply(queries, function(x)
-      c(x, synonym = "true"))
-  # get and parse the json from the queries
-  out <- lapply(queries, function(x) {
-    if(verbose == TRUE)
-      message(paste0(hit_count, " records found. Retrieving batch ",
-                     x[["page"]]))
-    out <- rebi_GET(path = paste0(rest_path(), "/search"), query = x)
-    plyr::ldply(out$resultList,
-                data.frame,
-                stringsAsFactors = FALSE,
-                .id = NULL)
-  })
-  #combine all into one
-  result <- jsonlite::rbind.pages(out)
-  # remove nested lists from data.frame, get these infos with epmc_details
-  md <- result[, !(names(result) %in% fix_list(result))]
-  # return (thanks to @cstubben)
-  attr(md, "hit_count") <- hit_count
-  md
+epmc_search <- function(query = NULL,
+                            id_list = FALSE,
+                            synonym = FALSE,
+                            verbose = TRUE,
+                            limit = 100,
+                            sort = NULL) {
+  # needed because of decoded/encoded conflicts regarding cursorMark
+  query <- URLencode(query)
+  # get the correct hit count when mesh and uniprot synonyms are also searched
+  synonym <- ifelse(synonym == FALSE, "false", "true")
+  page_token <- "*"
+  results <- dplyr::data_frame()
+  out <-
+    epmc_search_(
+      query = query,
+      limit = limit,
+      id_list = id_list,
+      synonym = synonym,
+      verbose = verbose,
+      page_token = page_token,
+      sort = sort
+    )
+  res_chunks <- chunks(limit = limit)
+  # super hacky to control limit, better approach using pageSize param needed
+  hits <- epmc_hits(query, synonym = synonym)
+  limit <- as.integer(limit)
+  limit <- ifelse(hits <= limit, hits, limit)
+  # let's loop over until page max is reached, or until cursor marks are identical
+  i <- 0
+  while (i < res_chunks$page_max) {
+    out <-
+      epmc_search_(
+        query = query,
+        limit = limit,
+        id_list = id_list,
+        synonym = synonym,
+        verbose = verbose,
+        page_token = page_token,
+        sort = sort
+      )
+    if (page_token == out$next_cursor)
+      break
+    i <- i + 1
+    message(paste("Retrieving result page", i))
+    page_token <- out$next_cursor
+    results <- dplyr::bind_rows(results, out$results)
+  }
+  # again, approach needed to use param pageSize instead
+  md <- results[1:limit, ]
+  # return hit counts(thanks to @cstubben)
+  attr(md, "hit_count") <- hits
+  return(md)
 }
 
-
+epmc_search_ <-
+  function(query = NULL,
+           limit = 100,
+           id_list = FALSE,
+           synonym = FALSE,
+           verbose = TRUE,
+           page_token = NULL,
+           sort = NULL) {
+    # check
+    if (is.null(query))
+      stop("No query provided")
+#    stopifnot(is.logical(c(verbose, id_list, synonym)))
+    resulttype <- ifelse(id_list == FALSE, "lite", "idlist")
+    # control limit
+    limit <- as.integer(limit)
+    page_size <- ifelse(batch_size() <= limit, batch_size(), limit)
+    #build query
+    args <-
+      list(
+        query = query,
+        format = "json",
+        synonym = synonym,
+        resulttype = resulttype,
+        pageSize = page_size,
+        cursorMark = page_token,
+        sort = sort
+      )
+    # call API
+    out <-
+      rebi_GET(path = paste0(rest_path(), "/search"), query = args)
+    # remove nested lists from resulting data.frame, get these infos with epmc_details
+    md <- out$resultList$result
+    if (length(md) == 0) {
+      md <- dplyr::data_frame()
+    } else {
+      md <- md %>%
+        dplyr::select_if(Negate(is.list)) %>%
+        as_data_frame()
+    }
+    list(next_cursor = out$nextCursorMark, results = md)
+  }
