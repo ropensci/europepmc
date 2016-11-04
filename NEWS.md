@@ -1,3 +1,16 @@
+# europepmc 0.1.1
+
+Implement [RESTful API v4.5.3](https://europepmc.org/docs/Europe_PMC_RESTful_Release_Notes.pdf)
+
+## Major changes
+
+- implement cursorMark to paginate through results
+- added sort parameter
+
+## Minor changes
+
+- return tibbles
+
 # europepmc 0.1
 
 Initial submission to CRAN

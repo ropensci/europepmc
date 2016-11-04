@@ -4,15 +4,12 @@
 \alias{epmc_search}
 \title{Search Europe PMC publication database}
 \usage{
-epmc_search(query = NULL, limit = 25, id_list = FALSE, synonym = FALSE,
-  verbose = TRUE)
+epmc_search(query = NULL, id_list = FALSE, synonym = FALSE,
+  verbose = TRUE, limit = 100, sort = NULL)
 }
 \arguments{
 \item{query}{character, search query. For more information on how to
 build a search query, see \url{http://europepmc.org/Help}}
-
-\item{limit}{integer, limit the number of records you wish to retrieve.
-By default, 25 are returned.}
 
 \item{id_list}{logical, should only IDs (e.g. PMID) and sources be retrieved
 for the given search terms?}
@@ -22,9 +19,17 @@ terminology and the UniProt synonym list are queried, too. Disabled by
 default.}
 
 \item{verbose}{logical, print some information on what is going on.}
+
+\item{limit}{integer, limit the number of records you wish to retrieve.
+By default, 100 are returned.}
+
+\item{sort}{character, sort results by order (\code{asc}, \code{desc}) and
+sort field (e.g. \code{CITED}, \code{P_PDATE}), seperated with a blank.
+For example, sort results  by times cited in descending order:
+\code{sort = "CITED desc"}.}
 }
 \value{
-data.frame
+tibble
 }
 \description{
 This is the main function to search
@@ -48,6 +53,9 @@ my.data <- epmc_search(query = 'ISSN:1553-7404', limit = 250)
 
 # include mesh and uniprot synonyms in search
 my.data <- epmc_search(query = 'aspirin', synonym = TRUE)
+
+# get 100 most cited atricles from PLOS ONE
+epmc_search(query = 'ISSN:	1932-6203', sort = 'CITED desc')
 
 # print number of records found
 attr(my.data, "hit_count")
