@@ -10,12 +10,16 @@
 #' @param id_list logical, should only IDs (e.g. PMID) and sources be retrieved
 #'   for the given search terms?
 #' @param limit integer, limit the number of records you wish to retrieve.
-#'   By default, 25 are returned.
+#'   By default, 100 are returned.
 #' @param synonym logical, synonym search. If TRUE, synonym terms from MeSH
 #'  terminology and the UniProt synonym list are queried, too. Disabled by
 #'  default.
+#' @param sort character, sort results by order (\code{asc}, \code{desc}) and
+#'  sort field (e.g. \code{CITED}, \code{P_PDATE}), seperated with a blank.
+#'  For example, sort results  by times cited in descending order:
+#'  \code{sort = "CITED desc"}.
 #' @param verbose	logical, print some information on what is going on.
-#' @return data.frame
+#' @return tibble
 #' @examples \dontrun{
 #' #Search articles for 'Gabi-Kat'
 #' my.data <- epmc_search(query='Gabi-Kat')
@@ -34,20 +38,23 @@
 #' # include mesh and uniprot synonyms in search
 #' my.data <- epmc_search(query = 'aspirin', synonym = TRUE)
 #'
+#' # get 100 most cited atricles from PLOS ONE
+#' epmc_search(query = 'ISSN:	1932-6203', sort = 'CITED desc')
+#'
 #' # print number of records found
 #' attr(my.data, "hit_count")
 #'
 #' }
 #' @export
-
 epmc_search <- function(query = NULL,
                             id_list = FALSE,
                             synonym = FALSE,
                             verbose = TRUE,
                             limit = 100,
                             sort = NULL) {
-  # needed because of decoded/encoded conflicts regarding cursorMark
-  query <- URLencode(query)
+  query <- transform_query(query)
+  stopifnot(is.logical(c(verbose, id_list, synonym)))
+  stopifnot(is.numeric(limit))
   # get the correct hit count when mesh and uniprot synonyms are also searched
   synonym <- ifelse(synonym == FALSE, "false", "true")
   page_token <- "*"
@@ -83,7 +90,8 @@ epmc_search <- function(query = NULL,
     if (page_token == out$next_cursor)
       break
     i <- i + 1
-    message(paste("Retrieving result page", i))
+    if(verbose == TRUE)
+      message(paste("Retrieving result page", i))
     page_token <- out$next_cursor
     results <- dplyr::bind_rows(results, out$results)
   }
@@ -94,18 +102,38 @@ epmc_search <- function(query = NULL,
   return(md)
 }
 
+#' Get one page of results when searching Europe PubMed Central
+#'
+#' In general, use \code{\link{epmc_search}} instead. It calls this function, calling all
+#' pages within the defined limit.
+#'
+#' @param query character, search query. For more information on how to
+#'   build a search query, see \url{http://europepmc.org/Help}
+#' @param id_list logical, should only IDs (e.g. PMID) and sources be retrieved
+#'   for the given search terms?
+#' @param limit integer, limit the number of records you wish to retrieve.
+#'   By default, 25 are returned.
+#' @param synonym logical, synonym search. If TRUE, synonym terms from MeSH
+#'  terminology and the UniProt synonym list are queried, too. Disabled by
+#'  default.
+#' @param sort character, sort results by order (\code{asc}, \code{desc}) and
+#'  sort field (e.g. \code{CITED}, \code{P_PDATE}), seperated with a blank.
+#'  For example, sort results  by times cited in descending order:
+#'  \code{sort = "CITED desc"}.
+#' @param page_token cursor marking the page
+#'
+#' @param ... further params from \code{\link{epmc_search}}
+#'
+#' @export
+#'
+#' @seealso \link{epmc_search}
 epmc_search_ <-
   function(query = NULL,
            limit = 100,
            id_list = FALSE,
            synonym = FALSE,
-           verbose = TRUE,
            page_token = NULL,
-           sort = NULL) {
-    # check
-    if (is.null(query))
-      stop("No query provided")
-#    stopifnot(is.logical(c(verbose, id_list, synonym)))
+           sort = NULL, ...) {
     resulttype <- ifelse(id_list == FALSE, "lite", "idlist")
     # control limit
     limit <- as.integer(limit)
@@ -119,7 +147,7 @@ epmc_search_ <-
         resulttype = resulttype,
         pageSize = page_size,
         cursorMark = page_token,
-        sort = sort
+        sort = val_args(sort)
       )
     # call API
     out <-
@@ -135,3 +163,10 @@ epmc_search_ <-
     }
     list(next_cursor = out$nextCursorMark, results = md)
   }
+
+val_args <- function(x) {
+  if(!is.null(x))
+    utils::URLencode(x)
+  NULL
+}
+

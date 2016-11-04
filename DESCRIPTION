@@ -26,7 +26,8 @@ Imports:
     jsonlite,
     plyr,
     xml2,
-    dplyr
+    dplyr,
+    urltools
 RoxygenNote: 5.0.1
 Suggests:
     testthat,

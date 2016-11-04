@@ -108,3 +108,11 @@ fix_list <- function(x){
   tmp[tmp$V1 == TRUE, ".id"]
 }
 
+
+transform_query <- function(query = NULL) {
+  # check
+  if (is.null(query))
+    stop("No query provided")
+  query <- URLencode(query)
+  return(query)
+}
