@@ -28,4 +28,5 @@
 #' @import jsonlite
 #' @import httr
 #' @import dplyr
+#' @import xml2
 NULL
