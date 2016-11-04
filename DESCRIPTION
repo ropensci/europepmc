@@ -25,7 +25,6 @@ Imports:
     httr,
     jsonlite,
     plyr,
-    xml2,
     dplyr,
     urltools
 RoxygenNote: 5.0.1
