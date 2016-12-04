@@ -26,7 +26,4 @@ test_that("epmc_hits returns", {
   expect_equal(length(e), 1)
   expect_equal(length(f), 1)
 
-
-  # fails correctly
-  expect_error(epmc_hits("123haha"), "nothing found, please check your query")
 })

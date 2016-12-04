@@ -72,6 +72,8 @@ epmc_search <- function(query = NULL,
   res_chunks <- chunks(limit = limit)
   # super hacky to control limit, better approach using pageSize param needed
   hits <- epmc_hits(query, synonym = synonym)
+  if(hits == 0)
+    stop("There are no results matching your query")
   limit <- as.integer(limit)
   limit <- ifelse(hits <= limit, hits, limit)
   # let's loop over until page max is reached, or until cursor marks are identical

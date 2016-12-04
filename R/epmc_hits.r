@@ -18,8 +18,5 @@ epmc_hits <- function(query = NULL, ...) {
   query <- transform_query(query)
   path = paste0(rest_path(), "/search")
   doc <- rebi_GET(path, query = list(query = query, format = "json", ...))
-  hit_count <- doc$hitCount
-  if(hit_count == 0)
-      stop("nothing found, please check your query")
-  hit_count
+  doc$hitCount
 }
