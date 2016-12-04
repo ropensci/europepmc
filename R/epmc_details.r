@@ -27,6 +27,7 @@
 #'
 #' @examples
 #' \dontrun{
+#' epmc_details(ext_id = "26980001")
 #' epmc_details(ext_id = "24270414")
 #'
 #' # PMC record
@@ -68,10 +69,9 @@ epmc_details <- function(ext_id = NULL, data_src = "med") {
   if(doc$hitCount == 0)
     stop("nothing found, please check your query")
   res <- doc$resultList$result
-  # result
   out <- list(basic = res[, !names(res) %in% fix_list(res)],
-              author_details = plyr::rbind.fill(res$authorList$author),
-              journal_info = plyr::rbind.fill(res$journalInfo),
+              author_details = parse_aut(res),
+              journal_info = parse_jn(res),
               ftx = plyr::rbind.fill(res$fullTextUrlList$fullTextUrl),
               chemical = plyr::rbind.fill(res$chemicalList$chemical),
               mesh_topic = plyr::rbind.fill(res$meshHeadingList$meshHeading)[-3],
@@ -79,7 +79,7 @@ epmc_details <- function(ext_id = NULL, data_src = "med") {
               comments = plyr::rbind.fill(res$commentCorrectionList$commentCorrection),
               grants =  plyr::rbind.fill(res$grantsList$grant)
   )
-  out
+  lapply(out, dplyr::as_data_frame)
 }
 
 #' parsing MeSH subheadings to be returned as data.frame
@@ -96,4 +96,20 @@ get_mesh_subheadings <- function(res){
     res$meshHeadingList$meshHeading[[1]][3]$meshQualifierList$meshQualifier
   names(mesh_qualifier) <- unlist(res$meshHeadingList$meshHeading[[1]][2])
   dplyr::bind_rows(plyr::compact(mesh_qualifier), .id = "descriptorName")
+}
+
+#' get author data
+#' @param res json results node
+#' @noRd
+
+parse_aut <- function(res) {
+  if(!is.null(res$authorList$author))
+    res$authorList$author %>%
+    plyr::rbind.fill() %>%
+    jsonlite::flatten()
+}
+
+parse_jn <- function(res) {
+  if(!is.null(res$journalInfo))
+    jsonlite::flatten(res$journalInfo)
 }
