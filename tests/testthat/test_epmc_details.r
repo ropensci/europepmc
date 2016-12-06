@@ -12,6 +12,8 @@ test_that("epmc_details returns", {
   h <- epmc_details("409323", data_src = "eth")
   i <- epmc_details("NBK338142", data_src = "nbk")
   j <- epmc_details("20585653")
+  k <- epmc_details(ext_id = "26980001")
+
 
   #correct dimensions and class
   expect_output(str(a), "List of 9")
@@ -24,6 +26,7 @@ test_that("epmc_details returns", {
   expect_output(str(h), "List of 9")
   expect_output(str(i), "List of 9")
   expect_output(str(j), "List of 9")
+  expect_output(str(k), "List of 9")
 
   #correct class metadata
   expect_is(a$basic, "data.frame")

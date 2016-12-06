@@ -4,13 +4,14 @@ Implement [RESTful API v4.5.3](https://europepmc.org/docs/Europe_PMC_RESTful_Rel
 
 ## Major changes
 
-- implement cursorMark to paginate through results
-- added sort parameter
+- `epmc_search()`: implement cursorMark to paginate through results
+- `epmc_search()`: added sort parameter
 
 ## Minor changes
 
-- return tibbles
-
+- `epmc_search()` returns tibble
+- `epmc_search()` improve error handling when zero results were found
+- `epmc_details()` added MeSH qualifer #8
 # europepmc 0.1
 
 Initial submission to CRAN

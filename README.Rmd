@@ -66,7 +66,7 @@ through other `europepmc`-functions. Columns inform whether open access full tex
 text-mined terms (`hasTextMinedTerms`) or references (`hasReferences`) are
 available.
 
-By default, `epmc_search` returns 25 records. To adjust the limit, simply use
+By default, `epmc_search` returns 100 records. To adjust the limit, simply use
 the `limit` parameter.
 
 Either list of publication ids (`id_list = TRUE`) or key metadata
@@ -76,16 +76,13 @@ For instance, search for abstracts and full texts that mention `Gabi-Kat`:
 
 ```{r}
 library(europepmc)
-my_data <- epmc_search(query = 'Gabi-Kat')
-# first six records
-head(my_data)
+epmc_search(query = 'Gabi-Kat')
 ```
 
 Get PLOS Genetics (ISSN:1553-7404) articles that cross-reference EMBL:
 
 ```{r}
-my_data <- epmc_search(query = 'ISSN:1553-7404 HAS_EMBL:y')
-head(my_data)
+epmc_search(query = 'ISSN:1553-7404 HAS_EMBL:y')
 ```
 
 ### Get results number
@@ -139,8 +136,7 @@ epmc_details(ext_id = "24270414")
 Show author details including ORCID:
 
 ```{r}
-my_data <- epmc_details(ext_id = "14756321")
-my_data$author_details
+epmc_details(ext_id = "14756321")$author_details
 ```
 
 ## Get citation counts and citing publications

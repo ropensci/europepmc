@@ -19,7 +19,6 @@ Access subset of the Europe PMC bookshelf.
 }
 \examples{
   \dontrun{
-  epmc_ftxt_book("10510270")
   epmc_ftxt_book("NBK32884")
   }
 }

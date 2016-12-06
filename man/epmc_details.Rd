@@ -36,6 +36,7 @@ MeSH terms, chemicals, grants.
 }
 \examples{
 \dontrun{
+epmc_details(ext_id = "26980001")
 epmc_details(ext_id = "24270414")
 
 # PMC record
