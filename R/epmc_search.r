@@ -7,8 +7,11 @@
 #'
 #' @param query character, search query. For more information on how to
 #'   build a search query, see \url{http://europepmc.org/Help}
-#' @param id_list logical, should only IDs (e.g. PMID) and sources be retrieved
-#'   for the given search terms?
+#' @param output character, what kind of output should be returned. One of 'parsed', 'id_list'
+#'   or 'raw' As default, parsed key metadata will be returned as data.frame.
+#'   'id_list' returns a list of IDs and sources.
+#'   Use 'raw' to get full metadata as list. Please be aware that these lists
+#'   can become very large.
 #' @param limit integer, limit the number of records you wish to retrieve.
 #'   By default, 100 are returned.
 #' @param synonym logical, synonym search. If TRUE, synonym terms from MeSH
@@ -17,7 +20,7 @@
 #' @param sort character, sort results by order (\code{asc}, \code{desc}) and
 #'  sort field (e.g. \code{CITED}, \code{P_PDATE}), seperated with a blank.
 #'  For example, sort results  by times cited in descending order:
-#'  \code{sort = "CITED desc"}.
+#'  \code{sort = 'CITED desc'}.
 #' @param verbose	logical, print some information on what is going on.
 #' @return tibble
 #' @examples \dontrun{
@@ -44,26 +47,31 @@
 #' # print number of records found
 #' attr(my.data, "hit_count")
 #'
+#' # change output
+#'
 #' }
 #' @export
 epmc_search <- function(query = NULL,
-                            id_list = FALSE,
-                            synonym = FALSE,
-                            verbose = TRUE,
-                            limit = 100,
-                            sort = NULL) {
+                        output = 'parsed',
+                        synonym = FALSE,
+                        verbose = TRUE,
+                        limit = 100,
+                        sort = NULL) {
   query <- transform_query(query)
-  stopifnot(is.logical(c(verbose, id_list, synonym)))
+  stopifnot(is.logical(c(verbose, synonym)))
   stopifnot(is.numeric(limit))
   # get the correct hit count when mesh and uniprot synonyms are also searched
   synonym <- ifelse(synonym == FALSE, "false", "true")
   page_token <- "*"
-  results <- dplyr::data_frame()
+  if (!output == "raw")
+    results <- dplyr::data_frame()
+  else
+    results <- NULL
   out <-
     epmc_search_(
       query = query,
       limit = limit,
-      id_list = id_list,
+      output = output,
       synonym = synonym,
       verbose = verbose,
       page_token = page_token,
@@ -72,7 +80,7 @@ epmc_search <- function(query = NULL,
   res_chunks <- chunks(limit = limit)
   # super hacky to control limit, better approach using pageSize param needed
   hits <- epmc_hits(query, synonym = synonym)
-  if(hits == 0)
+  if (hits == 0)
     stop("There are no results matching your query")
   limit <- as.integer(limit)
   limit <- ifelse(hits <= limit, hits, limit)
@@ -83,7 +91,7 @@ epmc_search <- function(query = NULL,
       epmc_search_(
         query = query,
         limit = limit,
-        id_list = id_list,
+        output = output,
         synonym = synonym,
         verbose = verbose,
         page_token = page_token,
@@ -92,13 +100,21 @@ epmc_search <- function(query = NULL,
     if (page_token == out$next_cursor)
       break
     i <- i + 1
-    if(verbose == TRUE)
+    if (verbose == TRUE)
       message(paste("Retrieving result page", i))
     page_token <- out$next_cursor
-    results <- dplyr::bind_rows(results, out$results)
+    if (output == "raw") {
+      results <- c(results, out$results)
+    } else {
+      results <- dplyr::bind_rows(results, out$results)
+    }
   }
   # again, approach needed to use param pageSize instead
-  md <- results[1:limit, ]
+  if (output == "raw") {
+    md <- results[1:limit]
+  } else {
+    md <- results[1:limit,]
+  }
   # return hit counts(thanks to @cstubben)
   attr(md, "hit_count") <- hits
   return(md)
@@ -111,8 +127,11 @@ epmc_search <- function(query = NULL,
 #'
 #' @param query character, search query. For more information on how to
 #'   build a search query, see \url{http://europepmc.org/Help}
-#' @param id_list logical, should only IDs (e.g. PMID) and sources be retrieved
-#'   for the given search terms?
+#' @param output character, what kind of output should be returned. One of 'parsed', 'id_list'
+#'   or 'raw' As default, parsed key metadata will be returned as data.frame.
+#'   'id_list returns a list of IDs and sources.
+#'   Use 'raw' to get full metadata as list. Please be aware that these lists
+#'   can become very large.
 #' @param limit integer, limit the number of records you wish to retrieve.
 #'   By default, 25 are returned.
 #' @param synonym logical, synonym search. If TRUE, synonym terms from MeSH
@@ -121,7 +140,7 @@ epmc_search <- function(query = NULL,
 #' @param sort character, sort results by order (\code{asc}, \code{desc}) and
 #'  sort field (e.g. \code{CITED}, \code{P_PDATE}), seperated with a blank.
 #'  For example, sort results  by times cited in descending order:
-#'  \code{sort = "CITED desc"}.
+#'  \code{sort = 'CITED desc'}.
 #' @param page_token cursor marking the page
 #'
 #' @param ... further params from \code{\link{epmc_search}}
@@ -132,15 +151,23 @@ epmc_search <- function(query = NULL,
 epmc_search_ <-
   function(query = NULL,
            limit = 100,
-           id_list = FALSE,
+           output = "parsed",
            synonym = FALSE,
            page_token = NULL,
-           sort = NULL, ...) {
-    resulttype <- ifelse(id_list == FALSE, "lite", "idlist")
+           sort = NULL,
+           ...) {
     # control limit
     limit <- as.integer(limit)
     page_size <- ifelse(batch_size() <= limit, batch_size(), limit)
-    #build query
+    # choose output
+    if (!output %in% c("id_list", "parsed", "raw"))
+      stop("'output' must be one of 'parsed', 'id_list'. 'raw'",
+           call. = FALSE)
+    result_types <- c("id_list" = "idlist",
+                      "parsed" = "lite",
+                      "raw" = "core")
+    resulttype <- result_types[[output]]
+    # build query
     args <-
       list(
         query = query,
@@ -155,20 +182,27 @@ epmc_search_ <-
     out <-
       rebi_GET(path = paste0(rest_path(), "/search"), query = args)
     # remove nested lists from resulting data.frame, get these infos with epmc_details
-    md <- out$resultList$result
-    if (length(md) == 0) {
-      md <- dplyr::data_frame()
+    if (!resulttype == "core") {
+      md <- out$resultList$result
+      if (length(md) == 0) {
+        md <- dplyr::data_frame()
+      } else {
+        md <- md %>%
+          dplyr::select_if(Negate(is.list)) %>%
+          as_data_frame()
+      }
     } else {
-      md <- md %>%
-        dplyr::select_if(Negate(is.list)) %>%
-        as_data_frame()
+      out <- jsonlite::fromJSON(out, simplifyDataFrame = FALSE)
+      md <- out$resultList$result
     }
     list(next_cursor = out$nextCursorMark, results = md)
   }
 
+#' encode param for API call
+#' @param x API parameter
+#' @noRd
 val_args <- function(x) {
-  if(!is.null(x))
+  if (!is.null(x))
     utils::URLencode(x)
   NULL
 }
-

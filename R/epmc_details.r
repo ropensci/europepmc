@@ -77,12 +77,13 @@ epmc_details <- function(ext_id = NULL, data_src = "med") {
       resulttype = "core"
     )
   }
-  doc <- rebi_GET(path = path, query = q)
+  req <- rebi_GET(path = path, query = q)
+  doc <- jsonlite::fromJSON(req)
   if (doc$hitCount == 0)
     stop("nothing found, please check your query")
   res <- doc$resultList$result
   out <- list(
-    basic = res[,!names(res) %in% fix_list(res)],
+    basic = res[, !names(res) %in% fix_list(res)],
     author_details = parse_aut(res),
     journal_info = parse_jn(res),
     ftx = plyr::rbind.fill(res$fullTextUrlList$fullTextUrl),

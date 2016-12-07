@@ -4,7 +4,7 @@
 \alias{epmc_search_}
 \title{Get one page of results when searching Europe PubMed Central}
 \usage{
-epmc_search_(query = NULL, limit = 100, id_list = FALSE,
+epmc_search_(query = NULL, limit = 100, output = "parsed",
   synonym = FALSE, page_token = NULL, sort = NULL, ...)
 }
 \arguments{
@@ -14,8 +14,11 @@ build a search query, see \url{http://europepmc.org/Help}}
 \item{limit}{integer, limit the number of records you wish to retrieve.
 By default, 25 are returned.}
 
-\item{id_list}{logical, should only IDs (e.g. PMID) and sources be retrieved
-for the given search terms?}
+\item{output}{character, what kind of output should be returned. One of 'parsed', 'id_list'
+or 'raw' As default, parsed key metadata will be returned as data.frame.
+'id_list returns a list of IDs and sources.
+Use 'raw' to get full metadata as list. Please be aware that these lists
+can become very large.}
 
 \item{synonym}{logical, synonym search. If TRUE, synonym terms from MeSH
 terminology and the UniProt synonym list are queried, too. Disabled by
@@ -26,7 +29,7 @@ default.}
 \item{sort}{character, sort results by order (\code{asc}, \code{desc}) and
 sort field (e.g. \code{CITED}, \code{P_PDATE}), seperated with a blank.
 For example, sort results  by times cited in descending order:
-\code{sort = "CITED desc"}.}
+\code{sort = 'CITED desc'}.}
 
 \item{...}{further params from \code{\link{epmc_search}}}
 }

@@ -69,16 +69,13 @@ For instance, search for abstracts and full texts that mention `Gabi-Kat`:
 
 ```{r}
 library(europepmc)
-my_data <- epmc_search(query = 'Gabi-Kat')
-# first six records
-head(my_data)
+epmc_search(query = 'Gabi-Kat')
 ```
 
 Get PLOS Genetics (ISSN:1553-7404) articles that cross-reference EMBL:
 
 ```{r}
-my_data <- epmc_search(query = 'ISSN:1553-7404 HAS_EMBL:y')
-head(my_data)
+epmc_search(query = 'ISSN:1553-7404 HAS_EMBL:y')
 ```
 
 ### Get results number
@@ -91,8 +88,8 @@ query <- "ACCESSION_TYPE:doi"
 epmc_hits(query)
 # set limit to 10 records
 my_data <- epmc_search(query = "ACCESSION_TYPE:doi", limit = 10,
-                       id_list = TRUE)
-head(my_data)
+                       output = "id_list")
+my_data
 attr(my_data, "hit_count")
 ```
 

@@ -29,10 +29,15 @@ rebi_GET <- function(path = NULL, query = NULL, ...) {
   # valid json
   if(!jsonlite::validate(out))
     stop("Upps, nothing to parse, please check your query")
+  # return core format as list
+  if(length(query$resulttype) == 1 && query$resulttype == "core") {
+    doc <- out
+  } else {
   doc <- jsonlite::fromJSON(out)
+  }
   if (!exists("doc"))
     stop("No json to parse", call. = FALSE)
-  doc
+  return(doc)
 }
 
 # build query
