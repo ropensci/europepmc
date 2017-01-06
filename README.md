@@ -19,7 +19,7 @@ PMC ingests all PubMed content and extends its index with other sources,
 including Agricola, a bibliographic database of citations to the agricultural
 literature, or Biological Patents.
 
-For more background, see:
+For more infos on Europe PMC, see:
 
 <https://europepmc.org/About>
 
@@ -28,7 +28,7 @@ for innovation. (2014). Nucleic Acids Research, 43(D1), D1042–D1048. doi:[10.1
 
 ## Implemented API methods
 
-The following API methods are supported:
+This client supports the following API methods:
 
 |API-Method     |Description                                                                                  |R functions                                |
 |:--------------|:--------------------------------------------------------------------------------------------|:------------------------------------------|
@@ -333,10 +333,10 @@ str(my_list[[10]])
 #>   ..$ journal             :List of 6
 #>   .. ..$ title              : chr "Plant signaling & behavior"
 #>   .. ..$ medlineAbbreviation: chr "Plant Signal Behav"
-#>   .. ..$ essn               : chr "1559-2324"
 #>   .. ..$ isoabbreviation    : chr "Plant Signal Behav"
-#>   .. ..$ nlmid              : chr "101291431"
 #>   .. ..$ issn               : chr "1559-2316"
+#>   .. ..$ nlmid              : chr "101291431"
+#>   .. ..$ essn               : chr "1559-2324"
 #>  $ pubYear              : chr "2016"
 #>  $ pageInfo             : chr "e1161876"
 #>  $ abstractText         : chr "The essential micronutrient vitamin B6 is best known in its enzymatic cofactor form, pyridoxal 5'-phosphate (PLP). However, vit"| __truncated__

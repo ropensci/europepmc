@@ -27,7 +27,7 @@ literature, or Biological Patents.
 
 ![Index coverage](https://europepmc.org/wicket/resource/uk.bl.ukpmc.web.pages.faq.Help/images/EuropePMCContent-ver-4BB17F003F8F38DF2D3BBE48AB5896C6.png)
 
-For more background, see:
+For more background on Europe PMC, see:
 
 <https://europepmc.org/About>
 

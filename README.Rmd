@@ -26,7 +26,7 @@ PMC ingests all PubMed content and extends its index with other sources,
 including Agricola, a bibliographic database of citations to the agricultural
 literature, or Biological Patents.
 
-For more background, see:
+For more infos on Europe PMC, see:
 
 <https://europepmc.org/About>
 
@@ -35,7 +35,7 @@ for innovation. (2014). Nucleic Acids Research, 43(D1), D1042–D1048. doi:[10.1
 
 ## Implemented API methods
 
-The following API methods are supported:
+This client supports the following API methods:
 
 |API-Method     |Description                                                                                  |R functions                                |
 |:--------------|:--------------------------------------------------------------------------------------------|:------------------------------------------|
