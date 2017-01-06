@@ -1,16 +1,20 @@
 # utils
 
 # base uri
-base_uri <- function() "http://www.ebi.ac.uk"
+base_uri <- function()
+  "http://www.ebi.ac.uk"
 
 # rest path
-rest_path <- function() "europepmc/webservices/ver4.5.3/rest"
+rest_path <- function()
+  "europepmc/webservices/ver4.5.3/rest"
 # check data sources
-supported_data_src <- c("agr", "cba", "ctx", "eth", "hir", "med", "nbk", "pat",
-                        "pmc")
+supported_data_src <-
+  c("agr", "cba", "ctx", "eth", "hir", "med", "pat",
+    "pmc")
 
 # default batch size
-batch_size <- function() 100
+batch_size <- function()
+  100
 
 
 # Common methods:
@@ -21,33 +25,36 @@ rebi_GET <- function(path = NULL, query = NULL, ...) {
     stop("Nothing to search")
   # call api, decode workaround because Europe PMC only accepts decoded cursor
   req <- httr::GET(urltools::url_decode(httr::modify_url(
-    base_uri(), path = path, query = query)))
+    base_uri(), path = path, query = query
+  )))
   # check for http status
   httr::stop_for_status(req)
   # load json into r
   out <- httr::content(req, "text")
   # valid json
-  if(!jsonlite::validate(out))
+  if (!jsonlite::validate(out))
     stop("Upps, nothing to parse, please check your query")
   # return core format as list
-  if(length(query$resulttype) == 1 && query$resulttype == "core") {
+  if (length(query$resulttype) == 1 && query$resulttype == "core") {
     doc <- out
   } else {
-  doc <- jsonlite::fromJSON(out)
+    doc <- jsonlite::fromJSON(out)
   }
   if (!exists("doc"))
     stop("No json to parse", call. = FALSE)
   return(doc)
 }
 
-# build query
-build_query <- function(query, page, batch_size, ...){
-  list(query = query,
-       format = "json",
-       page = page,
-       pageSize = batch_size,
-       ...)
-}
+# # build query
+# build_query <- function(query, page, batch_size, ...) {
+#   list(
+#     query = query,
+#     format = "json",
+#     page = page,
+#     pageSize = batch_size,
+#     ...
+#   )
+# }
 
 # Calculate pages. Each page consists of 25 records.
 rebi_pageing <- function(hitCount, pageSize) {
@@ -59,39 +66,91 @@ rebi_pageing <- function(hitCount, pageSize) {
 }
 
 # make paths according to limit and request methods
-make_path <- function(hit_count = NULL, limit = NULL, ext_id = NULL,
-                      data_src = NULL, req_method = NULL, type = NULL) {
+make_path <- function(hit_count = NULL,
+                      limit = NULL,
+                      ext_id = NULL,
+                      data_src = NULL,
+                      req_method = NULL,
+                      type = NULL) {
   limit <- as.integer(limit)
   limit <- ifelse(hit_count <= limit, hit_count, limit)
   if (limit > batch_size()) {
     tt <- chunks(limit)
     paths <- lapply(1:(tt$page_max - 1), function(x)
-      paste(c(rest_path(), data_src, ext_id, req_method, type, x, batch_size(), "json"), collapse ="/"))
-    paths <- append(paths, list(
-      paste(c(rest_path(), data_src, ext_id, req_method, type, tt$page_max, tt$last_chunk, "json"), collapse ="/")
-    ))
+      paste(
+        c(
+          rest_path(),
+          data_src,
+          ext_id,
+          req_method,
+          type,
+          x,
+          batch_size(),
+          "json"
+        ),
+        collapse = "/"
+      ))
+    paths <- append(paths, list(paste(
+      c(
+        rest_path(),
+        data_src,
+        ext_id,
+        req_method,
+        type,
+        tt$page_max,
+        tt$last_chunk,
+        "json"
+      ),
+      collapse = "/"
+    )))
   } else {
-    paths <- paste(c(rest_path(), data_src, ext_id, req_method, type, 1, limit, "json"), collapse ="/")
+    paths <-
+      paste(c(
+        rest_path(),
+        data_src,
+        ext_id,
+        req_method,
+        type,
+        1,
+        limit,
+        "json"
+      ),
+      collapse = "/")
   }
   paths
 }
 
-make_queries <- function(hit_count = hit_count, limit = limit, query = query) {
-  limit <- as.integer(limit)
-  limit <- ifelse(hit_count <= limit, hit_count, limit)
-  if (limit > batch_size()) {
-    tt <- chunks(limit)
-    queries <-
-      lapply(1:(tt$page_max - 1), build_query, batch_size = batch_size(), query = query)
-    queries <-
-      append(queries, list(build_query(query = query, page = tt$page_max, batch_size = tt$last_chunk)
-      ))
-  } else {
-    queries <-list(build_query(page = 1, query = query, batch_size = limit
-      ))
-  }
-  queries
-}
+# make_queries <-
+#   function(hit_count = hit_count,
+#            limit = limit,
+#            query = query) {
+#     limit <- as.integer(limit)
+#     limit <- ifelse(hit_count <= limit, hit_count, limit)
+#     if (limit > batch_size()) {
+#       tt <- chunks(limit)
+#       queries <-
+#         lapply(1:(tt$page_max - 1),
+#                build_query,
+#                batch_size = batch_size(),
+#                query = query)
+#       queries <-
+#         append(queries, list(
+#           build_query(
+#             query = query,
+#             page = tt$page_max,
+#             batch_size = tt$last_chunk
+#           )
+#         ))
+#     } else {
+#       queries <-
+#         list(build_query(
+#           page = 1,
+#           query = query,
+#           batch_size = limit
+#         ))
+#     }
+#     queries
+#   }
 
 # calculate number of page chunks needed in accordance with limit param
 chunks <- function(limit, ...) {
@@ -107,13 +166,14 @@ chunks <- function(limit, ...) {
 
 
 # fix to remove columns that cannot be easily flatten from the data.frame
-fix_list <- function(x){
-  if(!is.null(x))
+fix_list <- function(x) {
+  if (!is.null(x))
     tmp <- plyr::ldply(x, is.list)
   tmp[tmp$V1 == TRUE, ".id"]
 }
 
-
+# URL encode parts of the query. Needed because EPMC inconsistently
+# deal with URL encoding
 transform_query <- function(query = NULL) {
   # check
   if (is.null(query))

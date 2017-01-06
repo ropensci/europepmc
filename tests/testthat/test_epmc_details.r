@@ -10,7 +10,6 @@ test_that("epmc_details returns", {
   f <- epmc_details("C6802", data_src = "ctx")
   g <- epmc_details("338638", data_src = "hir")
   h <- epmc_details("409323", data_src = "eth")
-  i <- epmc_details("NBK338142", data_src = "nbk")
   j <- epmc_details("20585653")
   k <- epmc_details(ext_id = "26980001")
 
@@ -24,7 +23,6 @@ test_that("epmc_details returns", {
   expect_output(str(f), "List of 9")
   expect_output(str(g), "List of 9")
   expect_output(str(h), "List of 9")
-  expect_output(str(i), "List of 9")
   expect_output(str(j), "List of 9")
   expect_output(str(k), "List of 9")
 

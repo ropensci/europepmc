@@ -21,7 +21,6 @@ Other sources Europe PubMed Central supports are:
   \item{eth}{EthOs Theses, i.e. PhD theses (British Library)}
   \item{hir}{NHS Evidence}
   \item{med}{PubMed/Medline NLM}
-  \item{nbk}{Europe PMC Book metadata}
   \item{pat}{Biological Patents}
   \item{pmc}{PubMed Central}
   }}
@@ -55,8 +54,6 @@ epmc_details("C6802", data_src = "ctx")
 epmc_details("338638", data_src = "hir")
 # Theses
 epmc_details("409323", data_src = "eth")
-# Books
-epmc_details("NBK338142", data_src = "nbk")
 }
 }
 

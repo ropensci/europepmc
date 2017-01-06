@@ -17,7 +17,6 @@
 #'     \item{eth}{EthOs Theses, i.e. PhD theses (British Library)}
 #'     \item{hir}{NHS Evidence}
 #'     \item{med}{PubMed/Medline NLM}
-#'     \item{nbk}{Europe PMC Book metadata}
 #'     \item{pat}{Biological Patents}
 #'     \item{pmc}{PubMed Central}
 #'     }
@@ -46,8 +45,6 @@
 #' epmc_details("338638", data_src = "hir")
 #' # Theses
 #' epmc_details("409323", data_src = "eth")
-#' # Books
-#' epmc_details("NBK338142", data_src = "nbk")
 #' }
 epmc_details <- function(ext_id = NULL, data_src = "med") {
   if (is.null(ext_id))
