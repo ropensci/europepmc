@@ -1,6 +1,6 @@
 Package: europepmc
 Title: R Interface to the Europe PubMed Central RESTful Web Service
-Version: 0.1.0.9000
+Version: 0.1.1
 Authors@R: c(
            person("Najko", "Jahn", email = "najko.jahn@gmail.com",
            role = c("aut", "cre", "cph")))

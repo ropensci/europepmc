@@ -6,12 +6,16 @@ Implement [RESTful API v4.5.3](https://europepmc.org/docs/Europe_PMC_RESTful_Rel
 
 - `epmc_search()`: implement cursorMark to paginate through results
 - `epmc_search()`: added sort parameter
+- `epmc_search()`: [support of `raw` output file #7](https://github.com/ropensci/europepmc/issues/7)
 
 ## Minor changes
 
-- `epmc_search()` returns tibble
-- `epmc_search()` improve error handling when zero results were found
-- `epmc_details()` added MeSH qualifer #8
+- `epmc_search()` and other functions return non-nested data.frames as tibbles to better support the [tidyverse](http://tidyverse.org/)
+- `epmc_search()` improve error handling when nothing was found
+- `epmc_details()` [added MeSH qualifer #8]((https://github.com/ropensci/europepmc/issues/8)
+- remove NBK` as data source for `epmc_details()`, use PMIDs (`MED`) instead
+- fix warnings regarding vignettes and imported dependencies reported by CRAN
+
 # europepmc 0.1
 
 Initial submission to CRAN

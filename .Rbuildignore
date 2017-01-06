@@ -6,3 +6,4 @@ README.Rmd
 ^.travis.yml$
 review_answer.md
 cran-comments.md
+^revdep$
