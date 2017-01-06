@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/europepmc)](https://github.com/metacran/cranlogs.app)
 
 
-europepmc facilitates access to [Europe PMC RESTful Web
+europepmc facilitates access to the [Europe PMC RESTful Web
 Service](http://europepmc.org/RestfulWebService).
 
 [Europe PMC](http://europepmc.org/) covers life science literature and
@@ -26,14 +26,48 @@ PMC ingests all PubMed content and extends its index with other sources,
 including Agricola, a bibliographic database of citations to the agricultural
 literature, or Biological Patents.
 
-![Index coverage](https://europepmc.org/wicket/resource/uk.bl.ukpmc.web.pages.faq.Help/images/EuropePMCContent-ver-4BB17F003F8F38DF2D3BBE48AB5896C6.png)
-
 For more background, see:
 
 <https://europepmc.org/About>
 
 Europe PMC: a full-text literature database for the life sciences and platform
 for innovation. (2014). Nucleic Acids Research, 43(D1), D1042–D1048. doi:[10.1093/nar/gku1061](http://doi.org/10.1093/nar/gku1061)
+
+## Implemented API methods
+
+The following API methods are supported:
+
+----------------------------------------------------------------------------
+API-Method     Description                    R functions                   
+-------------- ------------------------------ ------------------------------
+search         Search Europe PMC and get      `epmc_search()`,              
+               detailed metadata              `epmc_details()`              
+
+citations      Load metadata representing     `epmc_citations()`            
+               citing articles for a given                                  
+               publication                                                  
+
+references     Retrieve the reference section `epmc_refs()`                 
+               of a pubication                                              
+
+databaseLinks  Get links to biological        `epmc_db()`, `epmc_db_count()`
+               databases such as UniProt or                                 
+               ENA                                                          
+
+labslinks      Access links to Europe PMC     `epmc_lablinks()`,            
+               provided by third parties      `epmc_lablinks_count()`       
+
+textMinedTerms Retrieve text-mined terms      `epmc_tm()`, `epmc_tm_count()`
+
+fullTextXML    Fetch full-texts deposited in  `epmc_ftxt()`                 
+               PMC                                                          
+
+bookXML        retrieve book XML formatted    `epmc_ftxt_book()`            
+               full text for the Open                                       
+               Access subset of the Europe                                  
+               PMC bookshelf                                                
+----------------------------------------------------------------------------
+
 
 ## Installation
 
@@ -52,30 +86,29 @@ require(devtools)
 install_github("ropensci/europepmc")
 ```
 
+Loading into R
+
+```{r}
+library(europepmc)
+```
+
 ## Search Europe PMC
 
 The search covers both metadata (e.g. abstracts or title) and full texts. To
 build your query, please refer to the comprehensive guidance on how to search
 Europe PMC: <http://europepmc.org/help>. Simply provide your query in the Europe
-PMC search syntax to `epmc_search()`.
-
-The search function helps to get a general overview about additional
-information types that are offered by Europe PMC and which can be retrieved
-through other `europepmc`-functions. Columns inform whether open access full texts
-(`isOpenAccess`), cross-links to other EBI databases (`hasDbCrossReferences`),
-text-mined terms (`hasTextMinedTerms`) or references (`hasReferences`) are
-available.
+PMC search syntax to `epmc_search()`. 
 
 By default, `epmc_search` returns 100 records. To adjust the limit, simply use
 the `limit` parameter.
 
-Either list of publication ids (`id_list = TRUE`) or key metadata
-information  (`id_list = FALSE`, default option) are returned.
+### Examples
 
-For instance, search for abstracts and full texts that mention `Gabi-Kat`:
+For instance, search for abstracts and full texts that mention 
+[`Gabi-Kat`](https://www.gabi-kat.de/),  a Flanking Sequence Tag 
+(FST)-based database for T-DNA insertion mutants:
 
 ```{r}
-library(europepmc)
 epmc_search(query = 'Gabi-Kat')
 ```
 
@@ -83,6 +116,62 @@ Get PLOS Genetics (ISSN:1553-7404) articles that cross-reference EMBL:
 
 ```{r}
 epmc_search(query = 'ISSN:1553-7404 HAS_EMBL:y')
+```
+
+Use [ORCID](http://orcid.org/) to search for personal publications:
+
+```{r}
+epmc_search(query = 'AUTHORID:"0000-0002-7635-3473"', limit = 1000)
+```
+
+### Include MeSH and UniProt synonyms
+
+You may also want to include synonyms when searching Europe PMC. If
+`synonym = TRUE` MeSH and UniProt synonyms are searched as well.
+
+```{r}
+# with snyonyms
+epmc_search('aspirin', synonym = TRUE)
+
+# without synonyms
+epmc_search('aspirin', synonym = FALSE)
+```
+
+### Output types
+
+`epmc_search()` supports the following output types :
+
+#### Parsed key metadata (default)
+
+Key metadata parsed as non-nested tibble:
+
+```{r}
+epmc_search('Gabi-Kat', output = 'parsed')
+```
+
+In addition to fetch bibliographic metadata, the parsed output also helps you
+to get a general overview about additional information types that are offered by 
+Europe PMC and which can be retrieved through other `europepmc`-functions. 
+Columns inform whether open access full texts (`isOpenAccess`), cross-links to
+other EBI databases (`hasDbCrossReferences`), text-mined terms (`hasTextMinedTerms`)
+or references (`hasReferences`) are available.
+
+#### IDs
+
+List of literature database identifier including PMID:
+
+```{r}
+epmc_search('Gabi-Kat', output = 'id_list')
+```
+
+#### Record details
+
+Full metadata as list. Please be aware that these lists can become very large, and fetching these data from Europe PMC therefore takes some time.
+
+```{r}
+my_list <- epmc_search('Gabi-Kat', output = 'raw', limit = 10)
+# display the structure for one list element
+str(my_list[[10]])
 ```
 
 ### Get results number
@@ -94,31 +183,8 @@ that represent articles referencing DataCite DOIs:
 query <- "ACCESSION_TYPE:doi"
 epmc_hits(query)
 # set limit to 10 records
-my_data <- epmc_search(query = "ACCESSION_TYPE:doi", limit = 10,
-                       id_list = TRUE)
+my_data <- epmc_search(query = query, limit = 10)
 head(my_data)
-attr(my_data, "hit_count")
-```
-
-### Search with ORCID
-
-Use [ORCID](http://orcid.org/) to search for personal publications:
-
-```{r}
-my_data <- epmc_search(query = 'AUTHORID:"0000-0002-7635-3473"')
-attr(my_data, "hit_count")
-```
-
-### Include MeSH and UniProt synonyms
-
-You may also want to include synonyms when searching Europe PMC. If
-`synonym = TRUE` MeSH and UniProt synonyms are searched as well.
-
-```{r}
-my_data <- epmc_search("aspirin", synonym = TRUE)
-attr(my_data, "hit_count")
-
-my_data <- epmc_search("aspirin", synonym = FALSE)
 attr(my_data, "hit_count")
 ```
 
@@ -130,13 +196,13 @@ PubMed / Medline index is searched.
 
 
 ```{r}
-epmc_details(ext_id = "24270414")
+epmc_details(ext_id = '24270414')
 ```
 
 Show author details including ORCID:
 
 ```{r}
-epmc_details(ext_id = "14756321")$author_details
+epmc_details(ext_id = '14756321')$author_details
 ```
 
 ## Get citation counts and citing publications
@@ -144,9 +210,10 @@ epmc_details(ext_id = "14756321")$author_details
 Citing publications from the Europe PMC index can be retrieved like this:
 
 ```{r}
-my_cites <- epmc_citations("9338777")
-head(my_cites)
-attr(my_cites, "hit_count")
+my_cites <- epmc_citations('9338777')
+my_cites
+# hits:
+attr(my_cites, 'hit_count')
 ```
 
 Please note, that citation counts are often smaller than those held by toll-
@@ -159,7 +226,7 @@ lack of full text accessibility.
 Europe PMC indexes more than 5 million reference sections.
 
 ```{r}
-epmc_refs("PMC3166943", data_src = "pmc")
+epmc_refs('PMC3166943', data_src = 'pmc')
 ```
 
 Tip: add `has_reflist:y` to your search string in `epmc_search` to make sure
@@ -176,7 +243,7 @@ Pfam, InterPro, Ensembl, ArrayExpress and data DOIs).
 Before retrieving the links, please check availability and sources first:
 
 ```{r}
-epmc_db_count("12368864")
+epmc_db_count('12368864')
 ```
 
 Add `has_xrefs:y` or to your search string in `epmc_search` to make sure
@@ -185,7 +252,7 @@ you only get publications with cross-references to EBI databases.
 Select database and get links:
 
 ```{r}
-epmc_db("12368864", db = "embl")
+epmc_db('12368864', db = 'embl')
 ```
 
 ## Get text-mined terms
@@ -198,13 +265,13 @@ Before retrieving these terms, please check availability and vocabularies
 first:
 
 ```{r}
-epmc_tm_count("25249410")
+epmc_tm_count('25249410')
 ```
 
 Select vocabulary to retrieve the terms:
 
 ```{r}
-epmc_tm("25249410", semantic_type = "GO_TERM")
+epmc_tm('25249410', semantic_type = 'GO_TERM')
 ```
 
 ## Links to external sources
@@ -218,13 +285,13 @@ University. For more information, see <http://europepmc.org/labslink>.
 Check availability and number of links:
 
 ```{r}
-epmc_lablinks_count("PMC3986813", data_src = "pmc")
+epmc_lablinks_count('PMC3986813', data_src = 'pmc')
 ```
 
 Get links to PANGEA (`lab_id = "1342"`)
 
 ```{r}
-epmc_lablinks("24023770", lab_id = "1342")
+epmc_lablinks('24023770', lab_id = '1342')
 ```
 
 ## Full text access
@@ -233,17 +300,14 @@ Full texts are in XML format and are only provided for the Open Access subset
 of Europe PMC. They can be retrieved by the PMCID.
 
 ```{r}
-epmc_ftxt("PMC3257301")
+epmc_ftxt('PMC3257301')
 ```
 
 Books, fetched through the PMID or the 'NBK' book number, can also be loaded
-as XML into R for further text-mining activities.
+as XML into R for further text-mining activities using `epmc_ftxt_book()`.
 
-```{r}
-epmc_ftxt_book("NBK32884")
-```
 
-Please check full-text availability before.
+Please check full-text availability before calling this method either with `epmc_search()` or `epmc_details()`.
 
 ## Re-use of europepmc
 
