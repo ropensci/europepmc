@@ -37,37 +37,16 @@ for innovation. (2014). Nucleic Acids Research, 43(D1), D1042–D1048. doi:[10.1
 
 The following API methods are supported:
 
-----------------------------------------------------------------------------
-API-Method     Description                    R functions                   
--------------- ------------------------------ ------------------------------
-search         Search Europe PMC and get      `epmc_search()`,              
-               detailed metadata              `epmc_details()`              
-
-citations      Load metadata representing     `epmc_citations()`            
-               citing articles for a given                                  
-               publication                                                  
-
-references     Retrieve the reference section `epmc_refs()`                 
-               of a pubication                                              
-
-databaseLinks  Get links to biological        `epmc_db()`, `epmc_db_count()`
-               databases such as UniProt or                                 
-               ENA                                                          
-
-labslinks      Access links to Europe PMC     `epmc_lablinks()`,            
-               provided by third parties      `epmc_lablinks_count()`       
-
-textMinedTerms Retrieve text-mined terms      `epmc_tm()`, `epmc_tm_count()`
-
-fullTextXML    Fetch full-texts deposited in  `epmc_ftxt()`                 
-               PMC                                                          
-
-bookXML        retrieve book XML formatted    `epmc_ftxt_book()`            
-               full text for the Open                                       
-               Access subset of the Europe                                  
-               PMC bookshelf                                                
-----------------------------------------------------------------------------
-
+|API-Method     |Description                                                                                  |R functions                                |
+|:--------------|:--------------------------------------------------------------------------------------------|:------------------------------------------|
+|search         |Search Europe PMC and get detailed metadata                                                  |`epmc_search()`, `epmc_details()`          |
+|citations      |Load metadata representing citing articles for a given publication                           |`epmc_citations()`                         |
+|references     |Retrieve the reference section of a pubication                                               |`epmc_refs()`                              |
+|databaseLinks  |Get links to biological databases such as UniProt or ENA                                     |`epmc_db()`, `epmc_db_count()`             |
+|labslinks      |Access links to Europe PMC provided by third parties                                         |`epmc_lablinks()`, `epmc_lablinks_count()` |
+|textMinedTerms |Retrieve text-mined terms                                                                    |`epmc_tm()`, `epmc_tm_count()`             |
+|fullTextXML    |Fetch full-texts deposited in PMC                                                            |`epmc_ftxt()`                              |
+|bookXML        |retrieve book XML formatted full text for the Open Access subset of the Europe PMC bookshelf |`epmc_ftxt_book()`                         |
 
 ## Installation
 

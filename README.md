@@ -30,37 +30,16 @@ for innovation. (2014). Nucleic Acids Research, 43(D1), D1042–D1048. doi:[10.1
 
 The following API methods are supported:
 
-----------------------------------------------------------------------------
-API-Method     Description                    R functions                   
--------------- ------------------------------ ------------------------------
-search         Search Europe PMC and get      `epmc_search()`,              
-               detailed metadata              `epmc_details()`              
-
-citations      Load metadata representing     `epmc_citations()`            
-               citing articles for a given                                  
-               publication                                                  
-
-references     Retrieve the reference section `epmc_refs()`                 
-               of a pubication                                              
-
-databaseLinks  Get links to biological        `epmc_db()`, `epmc_db_count()`
-               databases such as UniProt or                                 
-               ENA                                                          
-
-labslinks      Access links to Europe PMC     `epmc_lablinks()`,            
-               provided by third parties      `epmc_lablinks_count()`       
-
-textMinedTerms Retrieve text-mined terms      `epmc_tm()`, `epmc_tm_count()`
-
-fullTextXML    Fetch full-texts deposited in  `epmc_ftxt()`                 
-               PMC                                                          
-
-bookXML        retrieve book XML formatted    `epmc_ftxt_book()`            
-               full text for the Open                                       
-               Access subset of the Europe                                  
-               PMC bookshelf                                                
-----------------------------------------------------------------------------
-
+|API-Method     |Description                                                                                  |R functions                                |
+|:--------------|:--------------------------------------------------------------------------------------------|:------------------------------------------|
+|search         |Search Europe PMC and get detailed metadata                                                  |`epmc_search()`, `epmc_details()`          |
+|citations      |Load metadata representing citing articles for a given publication                           |`epmc_citations()`                         |
+|references     |Retrieve the reference section of a pubication                                               |`epmc_refs()`                              |
+|databaseLinks  |Get links to biological databases such as UniProt or ENA                                     |`epmc_db()`, `epmc_db_count()`             |
+|labslinks      |Access links to Europe PMC provided by third parties                                         |`epmc_lablinks()`, `epmc_lablinks_count()` |
+|textMinedTerms |Retrieve text-mined terms                                                                    |`epmc_tm()`, `epmc_tm_count()`             |
+|fullTextXML    |Fetch full-texts deposited in PMC                                                            |`epmc_ftxt()`                              |
+|bookXML        |retrieve book XML formatted full text for the Open Access subset of the Europe PMC bookshelf |`epmc_ftxt_book()`                         |
 
 ## Installation
 
@@ -203,8 +182,8 @@ epmc_search('aspirin', synonym = TRUE)
 #> 5  28039577    MED 28039577    10.1007/s12975-016-0516-0
 #> 6  28033561    MED 28033561 10.1016/j.ejogrb.2016.12.023
 #> 7  28004997    MED 28004997        10.6002/ect.2016.0139
-#> 8  27987244    MED 27987244            10.1111/wrr.12502
-#> 9  28052291    MED 28052291                         <NA>
+#> 8  28052291    MED 28052291                         <NA>
+#> 9  27987244    MED 27987244            10.1111/wrr.12502
 #> 10 27931272    MED 27931272                         <NA>
 #> # ... with 90 more rows, and 23 more variables: title <chr>,
 #> #   authorString <chr>, journalTitle <chr>, issue <chr>,
@@ -354,10 +333,10 @@ str(my_list[[10]])
 #>   ..$ journal             :List of 6
 #>   .. ..$ title              : chr "Plant signaling & behavior"
 #>   .. ..$ medlineAbbreviation: chr "Plant Signal Behav"
-#>   .. ..$ isoabbreviation    : chr "Plant Signal Behav"
-#>   .. ..$ issn               : chr "1559-2316"
-#>   .. ..$ nlmid              : chr "101291431"
 #>   .. ..$ essn               : chr "1559-2324"
+#>   .. ..$ isoabbreviation    : chr "Plant Signal Behav"
+#>   .. ..$ nlmid              : chr "101291431"
+#>   .. ..$ issn               : chr "1559-2316"
 #>  $ pubYear              : chr "2016"
 #>  $ pageInfo             : chr "e1161876"
 #>  $ abstractText         : chr "The essential micronutrient vitamin B6 is best known in its enzymatic cofactor form, pyridoxal 5'-phosphate (PLP). However, vit"| __truncated__
@@ -554,8 +533,8 @@ epmc_details(ext_id = '24270414')
 #> 1    12    123        2099360          2013 Dec                 12
 #> # ... with 8 more variables: yearOfPublication <int>,
 #> #   printPublicationDate <chr>, journal.title <chr>,
-#> #   journal.medlineAbbreviation <chr>, journal.essn <chr>,
-#> #   journal.isoabbreviation <chr>, journal.nlmid <chr>, journal.issn <chr>
+#> #   journal.medlineAbbreviation <chr>, journal.isoabbreviation <chr>,
+#> #   journal.issn <chr>, journal.nlmid <chr>, journal.essn <chr>
 #> 
 #> $ftx
 #> # A tibble: 5 × 5
