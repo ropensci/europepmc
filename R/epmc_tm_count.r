@@ -24,18 +24,29 @@
 #'   epmc_tm_count("PMC4340542", data_src = "pmc")
 #'   }
 
-epmc_tm_count <- function(ext_id = NULL, data_src = "med"){
+epmc_tm_count <- function(ext_id = NULL, data_src = "med") {
   if (is.null(ext_id))
     stop("Please provide a publication id")
   if (!tolower(data_src) %in% supported_data_src)
-    stop(paste0("Data source '", data_src, "' not supported. Try one of the
-                following sources: ", paste0(supported_data_src, collapse =", ")
-    ))
+    stop(
+      paste0(
+        "Data source '",
+        data_src,
+        "' not supported. Try one of the
+        following sources: ",
+        paste0(supported_data_src, collapse = ", ")
+      )
+    )
   # build request
-  path = paste(rest_path(), data_src, ext_id, "textMinedTerms",
-               "/json", sep ="/")
+  path = paste(rest_path(),
+               data_src,
+               ext_id,
+               "textMinedTerms",
+               "/json",
+               sep = "/")
   doc <- rebi_GET(path = path)
-  if(doc$hitCount == 0)
+  if (doc$hitCount == 0)
     stop("Sorry, no text-mined terms found")
-  plyr::rbind.fill(doc$semanticTypeCountList)
+  plyr::rbind.fill(doc$semanticTypeCountList) %>%
+    dplyr::as_data_frame()
 }

@@ -4,7 +4,7 @@
 \alias{epmc_refs}
 \title{Get references for a given publication}
 \usage{
-epmc_refs(ext_id = NULL, data_src = "med", limit = 25, verbose = TRUE)
+epmc_refs(ext_id = NULL, data_src = "med", limit = 100, verbose = TRUE)
 }
 \arguments{
 \item{ext_id}{character, publication identifier}
@@ -28,12 +28,12 @@ Europe PubMed Central supports:
   }}
 
 \item{limit}{integer, number of results. By default, this function
-returns 25 records.}
+returns 100 records.}
 
 \item{verbose}{logical, print some information on what is going on.}
 }
 \value{
-returns reference section as data.frame
+returns reference section as tibble
 }
 \description{
 This function retrieves all the works listed in the bibliography of a given

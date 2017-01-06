@@ -4,7 +4,7 @@
 \alias{epmc_citations}
 \title{Get citations for a given publication}
 \usage{
-epmc_citations(ext_id = NULL, data_src = "med", limit = 25,
+epmc_citations(ext_id = NULL, data_src = "med", limit = 100,
   verbose = TRUE)
 }
 \arguments{
@@ -29,7 +29,7 @@ Europe PubMed Central supports:
   }}
 
 \item{limit}{integer, number of results. By default, this function
-returns 25 records.}
+returns 100 records.}
 
 \item{verbose}{logical, print some information on what is going on.}
 }

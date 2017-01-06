@@ -15,7 +15,7 @@ test_that("epmc_db returns", {
   expect_is(attr(b, "hit_count"), "integer")
   expect_is(attr(c, "hit_count"), "integer")
 
-  # expect_equal(nrow(a), 50)
+   expect_equal(nrow(a), 50)
 
   # fails correctly
   expect_error(epmc_db("14756321"), "Please restrict reponse to a database")

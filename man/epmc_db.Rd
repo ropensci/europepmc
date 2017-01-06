@@ -4,7 +4,7 @@
 \alias{epmc_db}
 \title{Retrieve external database entities referenced in a given publication}
 \usage{
-epmc_db(ext_id = NULL, data_src = "med", db = NULL, limit = 25,
+epmc_db(ext_id = NULL, data_src = "med", db = NULL, limit = 100,
   verbose = TRUE)
 }
 \arguments{
@@ -53,7 +53,7 @@ Europe PubMed Central supports:
  }}
 
 \item{limit}{integer, number of results. By default, this function
-returns 25 records.}
+returns 100 records.}
 
 \item{verbose}{logical, print some information on what is going on.}
 }
@@ -66,7 +66,7 @@ Europe PMC RESTful Web Service.
 }
 \examples{
   \dontrun{
-  epmc_db("12368864", db = "uniprot", limit = 100)
+  epmc_db("12368864", db = "uniprot", limit = 150)
   epmc_db("25249410", db = "embl")
   epmc_db("14756321", db = "uniprot")
   }

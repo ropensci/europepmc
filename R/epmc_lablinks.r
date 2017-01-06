@@ -45,47 +45,77 @@
 #'   epmc_lablinks("12736239", lab_id = "1056")
 #'   }
 
-epmc_lablinks <- function(ext_id = NULL, data_src = "med", lab_id = NULL,
-                    n_pages = 20) {
-  if (is.null(ext_id))
-    stop("Please provide a publication id")
-  if (!is.numeric(n_pages))
-    stop("n_pages must be of type 'numeric'")
-  if (!tolower(data_src) %in% supported_data_src)
-    stop(paste0("Data source '", data_src, "' not supported. Try one of the
-                following sources: ", paste0(supported_data_src, collapse =", ")
-    ))
-  # build request
-  if (is.null(lab_id))
-    stop("Please restrict your query to one external link provider. You'll find
-         all providers in Europe PMC's advanced search form.")
-  path = paste(rest_path(), data_src, ext_id, "labsLinks",
-               lab_id, "json", sep ="/")
-  doc <- rebi_GET(path = path)
-  hitCount <- doc$hitCount
-  if(doc$hitCount == 0)
-    stop("Sorry, no links available")
-  no_pages <- rebi_pageing(hitCount = hitCount, pageSize = doc$request$pageSize)
-  # limit number of pages that will be retrieved
-  if(max(no_pages) > n_pages) no_pages <- 1:n_pages
-  pages = list()
-  for(i in no_pages){
-    out <- rebi_GET(path = paste(rest_path(), data_src, ext_id,
-                                 "labsLinks", lab_id, i, "json", sep ="/"))
-    message("Retrieving page ", i)
-    result <- plyr::ldply(
-      out$providers$provider$link,
-      data.frame, stringsAsFactors = FALSE, .id = NULL
+epmc_lablinks <-
+  function(ext_id = NULL,
+           data_src = "med",
+           lab_id = NULL,
+           n_pages = 20) {
+    if (is.null(ext_id))
+      stop("Please provide a publication id")
+    if (!is.numeric(n_pages))
+      stop("n_pages must be of type 'numeric'")
+    if (!tolower(data_src) %in% supported_data_src)
+      stop(
+        paste0(
+          "Data source '",
+          data_src,
+          "' not supported. Try one of the
+          following sources: ",
+          paste0(supported_data_src, collapse = ", ")
+        )
+      )
+    # build request
+    if (is.null(lab_id))
+      stop(
+        "Please restrict your query to one external link provider. You'll find
+        all providers in Europe PMC's advanced search form."
+      )
+    path = paste(rest_path(),
+                 data_src,
+                 ext_id,
+                 "labsLinks",
+                 lab_id,
+                 "json",
+                 sep = "/")
+    doc <- rebi_GET(path = path)
+    hitCount <- doc$hitCount
+    if (doc$hitCount == 0)
+      stop("Sorry, no links available")
+    no_pages <-
+      rebi_pageing(hitCount = hitCount, pageSize = doc$request$pageSize)
+    # limit number of pages that will be retrieved
+    if (max(no_pages) > n_pages)
+      no_pages <- 1:n_pages
+    pages = list()
+    for (i in no_pages) {
+      out <- rebi_GET(path = paste(
+        rest_path(),
+        data_src,
+        ext_id,
+        "labsLinks",
+        lab_id,
+        i,
+        "json",
+        sep = "/"
+      ))
+      message("Retrieving page ", i)
+      result <- plyr::ldply(
+        out$providers$provider$link,
+        data.frame,
+        stringsAsFactors = FALSE,
+        .id = NULL
+      )
+      pages[[i + 1]] <- result
+    }
+    #combine all into one
+    tt <- jsonlite::rbind.pages(pages)
+    # add lablink metadata
+    result <- cbind(
+      tt,
+      lab_id = doc$providers$provider$id,
+      lab_name = doc$providers$provider$name,
+      lab_description = doc$providers$provider$description
     )
-    pages[[i+1]] <- result
+    attr(result, "hit_count") <- hitCount
+    dplyr::as_data_frame(result)
   }
-  #combine all into one
-  tt <- jsonlite::rbind.pages(pages)
-  # add lablink metadata
-  result <- cbind(tt,
-                  lab_id = doc$providers$provider$id,
-                  lab_name = doc$providers$provider$name,
-                  lab_description = doc$providers$provider$description)
-  attr(result, "hit_count") <- hitCount
-  result
-}

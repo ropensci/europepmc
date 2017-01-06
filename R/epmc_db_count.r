@@ -51,5 +51,6 @@ epmc_db_count <- function(ext_id = NULL, data_src = "med"){
   doc <- rebi_GET(path = path)
   if(is.null(doc$dbCountList))
     stop("Nothing found")
-  plyr::rbind.fill(doc$dbCountList)
+  plyr::rbind.fill(doc$dbCountList) %>%
+    dplyr::as_data_frame()
 }

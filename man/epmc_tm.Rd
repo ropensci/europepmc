@@ -5,7 +5,7 @@
 \title{Get text-mined terms}
 \usage{
 epmc_tm(ext_id = NULL, data_src = "med", semantic_type = NULL,
-  limit = 25, verbose = TRUE)
+  limit = 100, verbose = TRUE)
 }
 \arguments{
 \item{ext_id}{character, publication identifier}
@@ -42,7 +42,7 @@ wish to retrieve. The following types are supported:
   }}
 
 \item{limit}{integer, number of results. By default, this function
-returns 25 records.}
+returns 100 records.}
 
 \item{verbose}{logical, print some information on what is going on.}
 }
