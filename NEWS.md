@@ -1,3 +1,8 @@
+# europepmc 0.1.1.9000
+
+- update imported packages in DESCRIPTION
+- cache HTTP 500 errors which sometimes occur and re-try up to five times. It is based on [googlesheet's approach](https://github.com/jennybc/googlesheets/commit/a91403ecb8ab5d8059bf14a9f9878ab68a829f0a)
+
 # europepmc 0.1.1
 
 Implement [RESTful API v4.5.3](https://europepmc.org/docs/Europe_PMC_RESTful_Release_Notes.pdf)

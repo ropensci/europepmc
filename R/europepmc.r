@@ -28,4 +28,5 @@
 #' @importFrom jsonlite fromJSON rbind.pages
 #' @importFrom httr GET content stop_for_status
 #' @importFrom dplyr %>% as_data_frame select_if data_frame bind_rows
+#' @importFrom stats runif
 NULL

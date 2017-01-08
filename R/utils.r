@@ -24,7 +24,7 @@ rebi_GET <- function(path = NULL, query = NULL, ...) {
   if (is.null(path) && is.null(query))
     stop("Nothing to search")
   # call api, decode workaround because Europe PMC only accepts decoded cursor
-  req <- httr::GET(urltools::url_decode(httr::modify_url(
+  req <- rGET(urltools::url_decode(httr::modify_url(
     base_uri(), path = path, query = query
   )))
   # check for http status
@@ -181,3 +181,39 @@ transform_query <- function(query = NULL) {
   query <- URLencode(query)
   return(query)
 }
+
+
+# There is a problem with accidental internal server error (HTTP 500),
+# which, for instance, leads to CRAN checks warnings when trying to build
+# the package. Let's try and re-use googlesheets' approach:
+# https://github.com/jennybc/googlesheets/issues/225
+# https://github.com/jennybc/googlesheets/commit/a91403ecb8ab5d8059bf14a9f9878ab68a829f0a
+
+## http://www.iana.org/assignments/http-status-codes/http-status-codes-1.csv
+coarsen_code <- function(code)
+  #cut(code, c(0, 299, 500, 600), right = FALSE, labels = FALSE)
+  cut(code, c(0, 500, 600), right = FALSE, labels = FALSE)
+
+VERB_n <- function(VERB, n = 5) {
+  function(...) {
+    for (i in seq_len(n)) {
+      out <- VERB(...)
+      status <- httr::status_code(out)
+      switch(coarsen_code(status),
+             break, ## < 500
+             {## >= 500
+               backoff <- stats::runif(n = 1, min = 0, max = 2 ^ i - 1)
+               ## TO DO: honor a verbose argument or option
+               mess <- paste("HTTP error %s on attempt %d ...\n",
+                             "  backing off %0.2f seconds, retrying")
+               mpf(mess, status, i, backoff)
+               Sys.sleep(backoff)
+             })
+    }
+    out
+  }
+}
+mpf <- function(...) message(sprintf(...))
+rGET <- VERB_n(httr::GET)
+
+
