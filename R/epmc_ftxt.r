@@ -27,5 +27,6 @@ epmc_ftxt <- function(ext_id = NULL) {
   httr::stop_for_status(req, "retrieve full text. Check with epmc_details()
                         if full text is available")
   # load xml into r
-  httr::content(req, encoding = "utf-8")
+  httr::content(req, as = "text", encoding = "utf-8") %>%
+    xml2::read_xml()
 }

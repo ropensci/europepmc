@@ -23,5 +23,6 @@ epmc_ftxt_book <- function(ext_id = NULL) {
   # check for http status
   httr::stop_for_status(req)
   # load xml into r
-  httr::content(req, encoding = "utf-8")
+  httr::content(req, as = "text", encoding = "utf-8") %>%
+    xml2::read_xml()
 }
