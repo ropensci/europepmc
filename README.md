@@ -33,6 +33,7 @@ This client supports the following API methods:
 |API-Method     |Description                                                                                  |R functions                                |
 |:--------------|:--------------------------------------------------------------------------------------------|:------------------------------------------|
 |search         |Search Europe PMC and get detailed metadata                                                  |`epmc_search()`, `epmc_details()`          |
+|profile        |Obtain a summary of hit counts for several Europe PMC databases                              |`epmc_profile()`                           |
 |citations      |Load metadata representing citing articles for a given publication                           |`epmc_citations()`                         |
 |references     |Retrieve the reference section of a pubication                                               |`epmc_refs()`                              |
 |databaseLinks  |Get links to biological databases such as UniProt or ENA                                     |`epmc_db()`, `epmc_db_count()`             |
@@ -180,11 +181,11 @@ epmc_search('aspirin', synonym = TRUE)
 #> 3  28039526    MED 28039526    10.1007/s00246-016-1529-x
 #> 4  28030443    MED 28030443 10.1097/eja.0000000000000581
 #> 5  28039577    MED 28039577    10.1007/s12975-016-0516-0
-#> 6  28033561    MED 28033561 10.1016/j.ejogrb.2016.12.023
-#> 7  28004997    MED 28004997        10.6002/ect.2016.0139
-#> 8  28052291    MED 28052291                         <NA>
-#> 9  27987244    MED 27987244            10.1111/wrr.12502
-#> 10 27931272    MED 27931272                         <NA>
+#> 6  28056332    MED 28056332                         <NA>
+#> 7  28033561    MED 28033561 10.1016/j.ejogrb.2016.12.023
+#> 8  28004997    MED 28004997        10.6002/ect.2016.0139
+#> 9  28052291    MED 28052291            10.1159/000452361
+#> 10 27987244    MED 27987244            10.1111/wrr.12502
 #> # ... with 90 more rows, and 23 more variables: title <chr>,
 #> #   authorString <chr>, journalTitle <chr>, issue <chr>,
 #> #   journalVolume <chr>, pubYear <chr>, journalIssn <chr>, pageInfo <chr>,
@@ -205,10 +206,10 @@ epmc_search('aspirin', synonym = FALSE)
 #> 4  27987244    MED 27987244             10.1111/wrr.12502
 #> 5  27937054    MED 27937054 10.1080/14656566.2016.1269747
 #> 6  28004997    MED 28004997         10.6002/ect.2016.0139
-#> 7  28030443    MED 28030443  10.1097/eja.0000000000000581
-#> 8  28039577    MED 28039577     10.1007/s12975-016-0516-0
-#> 9  27902693    MED 27902693  10.1371/journal.pone.0166103
-#> 10 27917124    MED 27917124                          <NA>
+#> 7  28056332    MED 28056332                          <NA>
+#> 8  28030443    MED 28030443  10.1097/eja.0000000000000581
+#> 9  28039577    MED 28039577     10.1007/s12975-016-0516-0
+#> 10 27902693    MED 27902693  10.1371/journal.pone.0166103
 #> # ... with 90 more rows, and 23 more variables: title <chr>,
 #> #   authorString <chr>, journalTitle <chr>, issue <chr>,
 #> #   journalVolume <chr>, pubYear <chr>, journalIssn <chr>, pageInfo <chr>,
@@ -494,6 +495,42 @@ attr(my_data, "hit_count")
 #> [1] 6933
 ```
 
+You may also use `epmc_profile`to get a summary of hit counts.
+
+
+```r
+epmc_profile(query = 'malaria')
+#> $source
+#> # A tibble: 9 × 2
+#>    name  count
+#> * <chr>  <int>
+#> 1   AGR    121
+#> 2   CBA    118
+#> 3   CTX      8
+#> 4   ETH    239
+#> 5   HIR      4
+#> 6   MED 127023
+#> 7   PAT   2295
+#> 8   CIT      0
+#> 9   PMC  10728
+#> 
+#> $pubType
+#> # A tibble: 5 × 2
+#>                  name  count
+#> *               <chr>  <int>
+#> 1                 ALL 140536
+#> 2           FULL TEXT  79247
+#> 3         OPEN ACCESS  33853
+#> 4              REVIEW  16562
+#> 5 BOOKS AND DOCUMENTS     94
+#> 
+#> $subset
+#> # A tibble: 1 × 2
+#>    name count
+#> * <chr> <int>
+#> 1    BL     3
+```
+
 ## Get article details
 
 In addition to key metadata, `epmc_details` also returns full metadata
@@ -672,7 +709,7 @@ epmc_refs('PMC3166943', data_src = 'pmc')
 #> 18     <NA>   <NA>            <NA>
 #> # ... with 13 more variables: title <chr>, authorString <chr>,
 #> #   journalAbbreviation <chr>, issue <chr>, pubYear <int>, volume <chr>,
-#> #   pageInfo <chr>, citedOrder <int>, match <chr>, essn <chr>, issn <chr>,
+#> #   pageInfo <chr>, citedOrder <int>, match <chr>, issn <chr>, essn <chr>,
 #> #   publicationTitle <chr>, externalLink <chr>
 ```
 

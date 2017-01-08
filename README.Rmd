@@ -40,6 +40,7 @@ This client supports the following API methods:
 |API-Method     |Description                                                                                  |R functions                                |
 |:--------------|:--------------------------------------------------------------------------------------------|:------------------------------------------|
 |search         |Search Europe PMC and get detailed metadata                                                  |`epmc_search()`, `epmc_details()`          |
+|profile        |Obtain a summary of hit counts for several Europe PMC databases                              |`epmc_profile()`                           |
 |citations      |Load metadata representing citing articles for a given publication                           |`epmc_citations()`                         |
 |references     |Retrieve the reference section of a pubication                                               |`epmc_refs()`                              |
 |databaseLinks  |Get links to biological databases such as UniProt or ENA                                     |`epmc_db()`, `epmc_db_count()`             |
@@ -165,6 +166,12 @@ epmc_hits(query)
 my_data <- epmc_search(query = query, limit = 10)
 head(my_data)
 attr(my_data, "hit_count")
+```
+
+You may also use `epmc_profile` to retrieve a summary of hit counts.
+
+```{r}
+epmc_profile(query = 'malaria')
 ```
 
 ## Get article details
