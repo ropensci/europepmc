@@ -245,8 +245,7 @@ epmc_db('12368864', db = 'embl')
 ## Get text-mined terms
 
 Text-mined terms that can be accessed via Europe PMC are mapped against
-controlled vocabularies such as [Gene
-Ontology](http://www.ebi.ac.uk/QuickGO/).  
+controlled vocabularies like [Gene Ontology](http://www.geneontology.org/).  
 
 Before retrieving these terms, please check availability and vocabularies
 first:

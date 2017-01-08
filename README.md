@@ -495,7 +495,7 @@ attr(my_data, "hit_count")
 #> [1] 6933
 ```
 
-You may also use `epmc_profile`to get a summary of hit counts.
+You may also use `epmc_profile` to retrieve a summary of hit counts.
 
 
 ```r
@@ -709,7 +709,7 @@ epmc_refs('PMC3166943', data_src = 'pmc')
 #> 18     <NA>   <NA>            <NA>
 #> # ... with 13 more variables: title <chr>, authorString <chr>,
 #> #   journalAbbreviation <chr>, issue <chr>, pubYear <int>, volume <chr>,
-#> #   pageInfo <chr>, citedOrder <int>, match <chr>, issn <chr>, essn <chr>,
+#> #   pageInfo <chr>, citedOrder <int>, match <chr>, essn <chr>, issn <chr>,
 #> #   publicationTitle <chr>, externalLink <chr>
 ```
 
@@ -764,8 +764,7 @@ epmc_db('12368864', db = 'embl')
 ## Get text-mined terms
 
 Text-mined terms that can be accessed via Europe PMC are mapped against
-controlled vocabularies such as [Gene
-Ontology](http://www.ebi.ac.uk/QuickGO/).  
+controlled vocabularies like [Gene Ontology](http://www.geneontology.org/).
 
 Before retrieving these terms, please check availability and vocabularies
 first:
