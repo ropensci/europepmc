@@ -6,7 +6,7 @@ base_uri <- function()
 
 # rest path
 rest_path <- function()
-  "europepmc/webservices/ver4.5.3/rest"
+  "europepmc/webservices/rest"
 # check data sources
 supported_data_src <-
   c("agr", "cba", "ctx", "eth", "hir", "med", "pat",
