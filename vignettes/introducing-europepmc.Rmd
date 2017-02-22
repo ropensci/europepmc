@@ -99,7 +99,7 @@ Get PLOS Genetics (ISSN:1553-7404) articles that cross-reference EMBL:
 epmc_search(query = 'ISSN:1553-7404 HAS_EMBL:y')
 ```
 
-Use [ORCID](http://orcid.org/) to search for personal publications:
+Use [ORCID](https://orcid.org/) to search for personal publications:
 
 ```{r}
 epmc_search(query = 'AUTHORID:"0000-0002-7635-3473"', limit = 1000)
