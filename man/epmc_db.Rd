@@ -50,6 +50,8 @@ Europe PubMed Central supports:
  \item{'UNIPROT'}{comprehensive and freely accessible
     resource of protein sequence and functional information
  \url{http://www.uniprot.org/}}
+ \item{'PRIDE'}{PRIDE Archive - proteomics data repository
+ \url{https://www.ebi.ac.uk/pride/archive/}}
  }}
 
 \item{limit}{integer, number of results. By default, this function
@@ -69,6 +71,7 @@ Europe PMC RESTful Web Service.
   epmc_db("12368864", db = "uniprot", limit = 150)
   epmc_db("25249410", db = "embl")
   epmc_db("14756321", db = "uniprot")
+  epmc_db("11805837", db = "pride")
   }
 }
 

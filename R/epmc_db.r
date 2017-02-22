@@ -26,6 +26,8 @@
 #'   \item{'UNIPROT'}{comprehensive and freely accessible
 #'      resource of protein sequence and functional information
 #'   \url{http://www.uniprot.org/}}
+#'   \item{'PRIDE'}{PRIDE Archive - proteomics data repository
+#'   \url{https://www.ebi.ac.uk/pride/archive/}}
 #'   }
 
 #' @return Cross-references as data.frame
@@ -34,6 +36,7 @@
 #'   epmc_db("12368864", db = "uniprot", limit = 150)
 #'   epmc_db("25249410", db = "embl")
 #'   epmc_db("14756321", db = "uniprot")
+#'   epmc_db("11805837", db = "pride")
 #'   }
 #' @export
 epmc_db <- function(ext_id = NULL,
@@ -118,4 +121,5 @@ supported_db <-
     "INTERPRO",
     "OMIM",
     "PDB",
-    "UNIPROT")
+    "UNIPROT",
+    "PRIDE")
