@@ -7,6 +7,10 @@ base_uri <- function()
 # rest path
 rest_path <- function()
   "europepmc/webservices/rest"
+
+# set user agent
+ua <- httr::user_agent("https://github.com/ropensci/europepmc")
+
 # check data sources
 supported_data_src <-
   c("agr", "cba", "ctx", "eth", "hir", "med", "pat",
@@ -26,7 +30,7 @@ rebi_GET <- function(path = NULL, query = NULL, ...) {
   # call api, decode workaround because Europe PMC only accepts decoded cursor
   req <- rGET(urltools::url_decode(httr::modify_url(
     base_uri(), path = path, query = query
-  )))
+  )), ua)
   # check for http status
   httr::stop_for_status(req)
   # load json into r
@@ -191,7 +195,6 @@ transform_query <- function(query = NULL) {
 
 ## http://www.iana.org/assignments/http-status-codes/http-status-codes-1.csv
 coarsen_code <- function(code)
-  #cut(code, c(0, 299, 500, 600), right = FALSE, labels = FALSE)
   cut(code, c(0, 500, 600), right = FALSE, labels = FALSE)
 
 VERB_n <- function(VERB, n = 5) {
