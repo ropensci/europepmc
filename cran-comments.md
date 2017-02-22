@@ -3,19 +3,16 @@
 ## Test environments
 
 * local OS X install, R 3.3.2 
-* ubuntu 12.04 (on travis-ci), R 3.3.1 
+* ubuntu 12.04 (on travis-ci), R 3.3.2
 * win-builder (devel and release) and appveyor CI
 
 ## R CMD check results
 
-I have run R CMD check locally using option "--as-cran" and one note:
+On local machine (OS):
 
-* checking CRAN incoming feasibility ... NOTE
-Maintainer: ‘Najko Jahn <najko.jahn@gmail.com>’
+Status: OK
 
-Days since last update: 2
-
-The win-builder furthermore send one Note about possibly mis-spelled words in DESCRIPTION,
+The win-builder send one NOTE about possibly mis-spelled words in DESCRIPTION,
 which are, in fact, correctly spelled.
 
 ## Reverse dependencies
@@ -25,14 +22,8 @@ and found no problems related to this new version.
 
 ---
 
-Dear CRAN team,
+This submission supports the most recent API version and should fix warning messages.
 
-Apologies for this submission of a new version after two days. 
+Thanks!
 
-This version should fix issues reported by CRAN checks and Uwe Ligges. These errors occured while building the vignette, more specifically some functions stopped because the web service sometimes returned HTTP 500 errors. There is now a new function caching 500 errors. It also re-tries a call up to five times when a 500 occur. I will also report the HTTP 500 errors to the maintainer of the web service.
-
-This submission should also fix a note on importing the xml2 package.
-
-This submission adds a new function, epmc_profile(), returning a profile of hit counts.
-
-Thanks! Najko Jahn
+Najko Jahn

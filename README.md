@@ -141,27 +141,27 @@ Use [ORCID](http://orcid.org/) to search for personal publications:
 
 ```r
 epmc_search(query = 'AUTHORID:"0000-0002-7635-3473"', limit = 1000)
-#> # A tibble: 131 × 27
-#>          id source     pmid      pmcid                          doi
-#>       <chr>  <chr>    <chr>      <chr>                        <chr>
-#> 1  27711162    MED 27711162 PMC5053417 10.1371/journal.pone.0164321
-#> 2  27230558    MED 27230558 PMC4881148    10.1186/s12870-016-0805-5
-#> 3  27214749    MED 27214749       <NA>            10.1111/nph.14008
-#> 4  26980001    MED 26980001 PMC4791833    10.1186/s12864-016-2566-9
-#> 5  27557761    MED 27557761       <NA>  10.1007/978-1-4939-6396-6_5
-#> 6  26676716    MED 26676716       <NA>            10.1111/tpj.13103
-#> 7  26343971    MED 26343971       <NA>   10.1016/j.molp.2015.08.011
-#> 8  26328666    MED 26328666 PMC4556409    10.1186/s13059-015-0729-7
-#> 9  27660776    MED 27660776 PMC5034127     10.1128/genomea.00975-16
-#> 10 27540267    MED 27540267       <NA>                         <NA>
-#> # ... with 121 more rows, and 22 more variables: title <chr>,
-#> #   authorString <chr>, journalTitle <chr>, issue <chr>,
-#> #   journalVolume <chr>, pubYear <chr>, journalIssn <chr>, pageInfo <chr>,
-#> #   pubType <chr>, isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>,
-#> #   hasPDF <chr>, hasBook <chr>, hasSuppl <chr>, citedByCount <int>,
+#> # A tibble: 132 × 27
+#>          id source     pmid                          doi
+#>       <chr>  <chr>    <chr>                        <chr>
+#> 1  28013277    MED 28013277           10.1093/pcp/pcw205
+#> 2  27711162    MED 27711162 10.1371/journal.pone.0164321
+#> 3  27230558    MED 27230558    10.1186/s12870-016-0805-5
+#> 4  27214749    MED 27214749            10.1111/nph.14008
+#> 5  26980001    MED 26980001    10.1186/s12864-016-2566-9
+#> 6  27557761    MED 27557761  10.1007/978-1-4939-6396-6_5
+#> 7  26676716    MED 26676716            10.1111/tpj.13103
+#> 8  26343971    MED 26343971   10.1016/j.molp.2015.08.011
+#> 9  26328666    MED 26328666    10.1186/s13059-015-0729-7
+#> 10 27660776    MED 27660776     10.1128/genomea.00975-16
+#> # ... with 122 more rows, and 23 more variables: title <chr>,
+#> #   authorString <chr>, journalTitle <chr>, pubYear <chr>,
+#> #   journalIssn <chr>, pubType <chr>, isOpenAccess <chr>, inEPMC <chr>,
+#> #   inPMC <chr>, hasPDF <chr>, hasBook <chr>, citedByCount <int>,
 #> #   hasReferences <chr>, hasTextMinedTerms <chr>,
 #> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>, epmcAuthMan <chr>,
-#> #   hasTMAccessionNumbers <chr>
+#> #   hasTMAccessionNumbers <chr>, pmcid <chr>, issue <chr>,
+#> #   journalVolume <chr>, pageInfo <chr>, hasSuppl <chr>
 ```
 
 ### Include MeSH and UniProt synonyms
@@ -174,50 +174,50 @@ You may also want to include synonyms when searching Europe PMC. If
 # with snyonyms
 epmc_search('aspirin', synonym = TRUE)
 #> # A tibble: 100 × 27
-#>          id source     pmid                          doi
-#>       <chr>  <chr>    <chr>                        <chr>
-#> 1  27888917    MED 27888917    10.1016/j.otc.2016.08.007
-#> 2  28025961    MED 28025961             10.5414/cp202637
-#> 3  28039526    MED 28039526    10.1007/s00246-016-1529-x
-#> 4  28030443    MED 28030443 10.1097/eja.0000000000000581
-#> 5  28039577    MED 28039577    10.1007/s12975-016-0516-0
-#> 6  28056332    MED 28056332                         <NA>
-#> 7  28033561    MED 28033561 10.1016/j.ejogrb.2016.12.023
-#> 8  28004997    MED 28004997        10.6002/ect.2016.0139
-#> 9  28052291    MED 28052291            10.1159/000452361
-#> 10 27987244    MED 27987244            10.1111/wrr.12502
-#> # ... with 90 more rows, and 23 more variables: title <chr>,
+#>          id source     pmid
+#>       <chr>  <chr>    <chr>
+#> 1  28147891    MED 28147891
+#> 2  28142297    MED 28142297
+#> 3  28181214    MED 28181214
+#> 4  28213047    MED 28213047
+#> 5  28202405    MED 28202405
+#> 6  28205318    MED 28205318
+#> 7  28125730    MED 28125730
+#> 8  28189429    MED 28189429
+#> 9  28160159    MED 28160159
+#> 10 28159866    MED 28159866
+#> # ... with 90 more rows, and 24 more variables: title <chr>,
 #> #   authorString <chr>, journalTitle <chr>, issue <chr>,
 #> #   journalVolume <chr>, pubYear <chr>, journalIssn <chr>, pageInfo <chr>,
 #> #   pubType <chr>, isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>,
 #> #   hasPDF <chr>, hasBook <chr>, citedByCount <int>, hasReferences <chr>,
 #> #   hasTextMinedTerms <chr>, hasDbCrossReferences <chr>,
 #> #   hasLabsLinks <chr>, epmcAuthMan <chr>, hasTMAccessionNumbers <chr>,
-#> #   pmcid <chr>, hasSuppl <chr>
+#> #   doi <chr>, pmcid <chr>, hasSuppl <chr>
 
 # without synonyms
 epmc_search('aspirin', synonym = FALSE)
 #> # A tibble: 100 × 27
-#>          id source     pmid                           doi
-#>       <chr>  <chr>    <chr>                         <chr>
-#> 1  27888917    MED 27888917     10.1016/j.otc.2016.08.007
-#> 2  28025961    MED 28025961              10.5414/cp202637
-#> 3  28039526    MED 28039526     10.1007/s00246-016-1529-x
-#> 4  27987244    MED 27987244             10.1111/wrr.12502
-#> 5  27937054    MED 27937054 10.1080/14656566.2016.1269747
-#> 6  28004997    MED 28004997         10.6002/ect.2016.0139
-#> 7  28056332    MED 28056332                          <NA>
-#> 8  28030443    MED 28030443  10.1097/eja.0000000000000581
-#> 9  28039577    MED 28039577     10.1007/s12975-016-0516-0
-#> 10 27902693    MED 27902693  10.1371/journal.pone.0166103
-#> # ... with 90 more rows, and 23 more variables: title <chr>,
+#>          id source     pmid
+#>       <chr>  <chr>    <chr>
+#> 1  28147891    MED 28147891
+#> 2  28142297    MED 28142297
+#> 3  28181214    MED 28181214
+#> 4  28125730    MED 28125730
+#> 5  27888917    MED 27888917
+#> 6  28213047    MED 28213047
+#> 7  28213669    MED 28213669
+#> 8  28160159    MED 28160159
+#> 9  28163951    MED 28163951
+#> 10 28072691    MED 28072691
+#> # ... with 90 more rows, and 24 more variables: title <chr>,
 #> #   authorString <chr>, journalTitle <chr>, issue <chr>,
 #> #   journalVolume <chr>, pubYear <chr>, journalIssn <chr>, pageInfo <chr>,
 #> #   pubType <chr>, isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>,
 #> #   hasPDF <chr>, hasBook <chr>, citedByCount <int>, hasReferences <chr>,
 #> #   hasTextMinedTerms <chr>, hasDbCrossReferences <chr>,
 #> #   hasLabsLinks <chr>, epmcAuthMan <chr>, hasTMAccessionNumbers <chr>,
-#> #   pmcid <chr>, hasSuppl <chr>
+#> #   doi <chr>, pmcid <chr>, hasSuppl <chr>
 ```
 
 ### Output types
@@ -334,10 +334,10 @@ str(my_list[[10]])
 #>   ..$ journal             :List of 6
 #>   .. ..$ title              : chr "Plant signaling & behavior"
 #>   .. ..$ medlineAbbreviation: chr "Plant Signal Behav"
-#>   .. ..$ isoabbreviation    : chr "Plant Signal Behav"
-#>   .. ..$ issn               : chr "1559-2316"
-#>   .. ..$ nlmid              : chr "101291431"
 #>   .. ..$ essn               : chr "1559-2324"
+#>   .. ..$ issn               : chr "1559-2316"
+#>   .. ..$ isoabbreviation    : chr "Plant Signal Behav"
+#>   .. ..$ nlmid              : chr "101291431"
 #>  $ pubYear              : chr "2016"
 #>  $ pageInfo             : chr "e1161876"
 #>  $ abstractText         : chr "The essential micronutrient vitamin B6 is best known in its enzymatic cofactor form, pyridoxal 5'-phosphate (PLP). However, vit"| __truncated__
@@ -345,7 +345,7 @@ str(my_list[[10]])
 #>  $ language             : chr "eng"
 #>  $ pubModel             : chr "Print"
 #>  $ pubTypeList          :List of 1
-#>   ..$ pubType: chr [1:2] "Journal Article" "Research Support, Non-U.S. Gov't"
+#>   ..$ pubType: chr [1:3] "addendum" "Journal Article" "Research Support, Non-U.S. Gov't"
 #>  $ meshHeadingList      :List of 1
 #>   ..$ meshHeading:List of 9
 #>   .. ..$ :List of 3
@@ -447,7 +447,7 @@ str(my_list[[10]])
 #>  $ hasPDF               : chr "Y"
 #>  $ hasBook              : chr "N"
 #>  $ hasSuppl             : chr "N"
-#>  $ citedByCount         : int 0
+#>  $ citedByCount         : int 1
 #>  $ hasReferences        : chr "Y"
 #>  $ hasTextMinedTerms    : chr "Y"
 #>  $ hasDbCrossReferences : chr "N"
@@ -470,29 +470,29 @@ that represent articles referencing DataCite DOIs:
 ```r
 query <- "ACCESSION_TYPE:doi"
 epmc_hits(query)
-#> [1] 6933
+#> [1] 7323
 # set limit to 10 records
 my_data <- epmc_search(query = query, limit = 10)
 head(my_data)
 #> # A tibble: 6 × 27
-#>         id source     pmid      pmcid
-#>      <chr>  <chr>    <chr>      <chr>
-#> 1 27957387    MED 27957387 PMC5147021
-#> 2 27927179    MED 27927179 PMC5142327
-#> 3 27927161    MED 27927161 PMC5142403
-#> 4 27924834    MED 27924834 PMC5141443
-#> 5 27923923    MED 27923923 PMC5142621
-#> 6 27922629    MED 27922629 PMC5139674
-#> # ... with 23 more variables: title <chr>, authorString <chr>,
+#>         id source     pmid      pmcid                         doi
+#>      <chr>  <chr>    <chr>      <chr>                       <chr>
+#> 1 28079148    MED 28079148 PMC5228185           10.1038/srep40501
+#> 2 28097071    MED 28097071 PMC5228508          10.7717/peerj.2874
+#> 3 28097058    MED 28097058 PMC5228507          10.7717/peerj.2844
+#> 4 28071681    MED 28071681 PMC5223163           10.1038/srep40034
+#> 5 28071668    MED 28071668 PMC5223119           10.1038/srep40094
+#> 6 28069623    MED 28069623 PMC5223632 10.1136/bmjopen-2016-013420
+#> # ... with 22 more variables: title <chr>, authorString <chr>,
 #> #   journalTitle <chr>, journalVolume <chr>, pubYear <chr>,
 #> #   journalIssn <chr>, pageInfo <chr>, pubType <chr>, isOpenAccess <chr>,
 #> #   inEPMC <chr>, inPMC <chr>, hasPDF <chr>, hasBook <chr>,
 #> #   hasSuppl <chr>, citedByCount <int>, hasReferences <chr>,
 #> #   hasTextMinedTerms <chr>, hasDbCrossReferences <chr>,
 #> #   hasLabsLinks <chr>, epmcAuthMan <chr>, hasTMAccessionNumbers <chr>,
-#> #   issue <chr>, doi <chr>
+#> #   issue <chr>
 attr(my_data, "hit_count")
-#> [1] 6933
+#> [1] 7323
 ```
 
 You may also use `epmc_profile` to retrieve a summary of hit counts.
@@ -501,28 +501,29 @@ You may also use `epmc_profile` to retrieve a summary of hit counts.
 ```r
 epmc_profile(query = 'malaria')
 #> $source
-#> # A tibble: 9 × 2
-#>    name  count
-#> * <chr>  <int>
-#> 1   AGR    121
-#> 2   CBA    118
-#> 3   CTX      8
-#> 4   ETH    239
-#> 5   HIR      4
-#> 6   MED 127023
-#> 7   PAT   2295
-#> 8   CIT      0
-#> 9   PMC  10728
+#> # A tibble: 10 × 2
+#>     name  count
+#> *  <chr>  <int>
+#> 1    AGR    121
+#> 2    CBA    113
+#> 3    CTX      7
+#> 4    ETH    179
+#> 5    HIR      4
+#> 6    MED 114975
+#> 7    PAT   2252
+#> 8    CIT      0
+#> 9    PMC  10384
+#> 10   PPR      2
 #> 
 #> $pubType
 #> # A tibble: 5 × 2
 #>                  name  count
 #> *               <chr>  <int>
-#> 1                 ALL 140536
-#> 2           FULL TEXT  79247
-#> 3         OPEN ACCESS  33853
-#> 4              REVIEW  16562
-#> 5 BOOKS AND DOCUMENTS     94
+#> 1                 ALL 128037
+#> 2           FULL TEXT  78505
+#> 3         OPEN ACCESS  34244
+#> 4              REVIEW  15548
+#> 5 BOOKS AND DOCUMENTS     97
 #> 
 #> $subset
 #> # A tibble: 1 × 2
@@ -557,11 +558,12 @@ epmc_details(ext_id = '24270414')
 #> #   electronicPublicationDate <chr>, firstPublicationDate <chr>
 #> 
 #> $author_details
-#> # A tibble: 2 × 4
-#>           fullName firstName       lastName initials
-#> *            <chr>     <chr>          <chr>    <chr>
-#> 1 Malaga-Dieguez L     Laura Malaga-Dieguez        L
-#> 2        Susztak K   Katalin        Susztak        K
+#> # A tibble: 2 × 6
+#>           fullName firstName       lastName initials authorId.type
+#> *            <chr>     <chr>          <chr>    <chr>         <chr>
+#> 1 Malaga-Dieguez L     Laura Malaga-Dieguez        L         ORCID
+#> 2        Susztak K   Katalin        Susztak        K          <NA>
+#> # ... with 1 more variables: authorId.value <chr>
 #> 
 #> $journal_info
 #> # A tibble: 1 × 13
@@ -570,8 +572,8 @@ epmc_details(ext_id = '24270414')
 #> 1    12    123        2099360          2013 Dec                 12
 #> # ... with 8 more variables: yearOfPublication <int>,
 #> #   printPublicationDate <chr>, journal.title <chr>,
-#> #   journal.medlineAbbreviation <chr>, journal.isoabbreviation <chr>,
-#> #   journal.issn <chr>, journal.nlmid <chr>, journal.essn <chr>
+#> #   journal.medlineAbbreviation <chr>, journal.essn <chr>,
+#> #   journal.issn <chr>, journal.isoabbreviation <chr>, journal.nlmid <chr>
 #> 
 #> $ftx
 #> # A tibble: 5 × 5
@@ -671,7 +673,7 @@ my_cites
 #> #   citedByCount <int>, text <chr>
 # hits:
 attr(my_cites, 'hit_count')
-#> [1] 197
+#> [1] 199
 ```
 
 Please note, that citation counts are often smaller than those held by toll-

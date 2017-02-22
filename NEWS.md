@@ -1,3 +1,11 @@
+# europepmc 0.1.3
+
+## Minor changes
+
+- [removed explicit API versioning, so that the client now always supports the most recent API version #13](https://github.com/ropensci/europepmc/issues/13)
+- set user agent to "ropensci/europepmc"
+- `epmc_db()`, `epmc_db_count()`: add PRIDE archive as external database
+
 # europepmc 0.1.2
 
 - cache HTTP 500 errors which sometimes occur and re-try up to five times. It is based on [googlesheet's approach](https://github.com/jennybc/googlesheets/commit/a91403ecb8ab5d8059bf14a9f9878ab68a829f0a)
