@@ -4,11 +4,15 @@
 \alias{epmc_profile}
 \title{Obtain a summary of hit counts}
 \usage{
-epmc_profile(query = NULL)
+epmc_profile(query = NULL, synonym = FALSE)
 }
 \arguments{
 \item{query}{character, search query. For more information on how to
 build a search query, see \url{http://europepmc.org/Help}}
+
+\item{synonym}{logical, synonym search. If TRUE, synonym terms from MeSH
+terminology and the UniProt synonym list are queried, too. Disabled by
+default.}
 }
 \description{
 This functions returns the number of results found for your query,

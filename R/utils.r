@@ -219,4 +219,3 @@ VERB_n <- function(VERB, n = 5) {
 mpf <- function(...) message(sprintf(...))
 rGET <- VERB_n(httr::GET)
 
-

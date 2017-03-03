@@ -57,11 +57,13 @@ epmc_search <- function(query = NULL,
                         verbose = TRUE,
                         limit = 100,
                         sort = NULL) {
-  query <- transform_query(query)
   stopifnot(is.logical(c(verbose, synonym)))
-  stopifnot(is.numeric(limit))
   # get the correct hit count when mesh and uniprot synonyms are also searched
   synonym <- ifelse(synonym == FALSE, "false", "true")
+  # this is so far the only way how I got the synonym paramworking after the API change
+  # there is a possible conflict with the resumption token and decoding the API call.
+  query <- transform_query(paste0(query, "&synonym=", synonym))
+  stopifnot(is.numeric(limit))
   page_token <- "*"
   if (!output == "raw")
     results <- dplyr::data_frame()
@@ -72,7 +74,7 @@ epmc_search <- function(query = NULL,
       query = query,
       limit = limit,
       output = output,
-      synonym = synonym,
+#      synonym = synonym,
       verbose = verbose,
       page_token = page_token,
       sort = sort
@@ -92,7 +94,7 @@ epmc_search <- function(query = NULL,
         query = query,
         limit = limit,
         output = output,
-        synonym = synonym,
+#        synonym = synonym,
         verbose = verbose,
         page_token = page_token,
         sort = sort
@@ -152,7 +154,7 @@ epmc_search_ <-
   function(query = NULL,
            limit = 100,
            output = "parsed",
-           synonym = FALSE,
+#           synonym = NULL,
            page_token = NULL,
            sort = NULL,
            ...) {
@@ -172,7 +174,7 @@ epmc_search_ <-
       list(
         query = query,
         format = "json",
-        synonym = synonym,
+#        synonym = synonym,
         resulttype = resulttype,
         pageSize = page_size,
         cursorMark = page_token,
