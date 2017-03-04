@@ -28,10 +28,6 @@ For example, sort results  by times cited in descending order:
 \code{sort = 'CITED desc'}.}
 
 \item{...}{further params from \code{\link{epmc_search}}}
-
-\item{synonym}{logical, synonym search. If TRUE, synonym terms from MeSH
-terminology and the UniProt synonym list are queried, too. Disabled by
-default.}
 }
 \description{
 In general, use \code{\link{epmc_search}} instead. It calls this function, calling all

@@ -136,9 +136,6 @@ epmc_search <- function(query = NULL,
 #'   can become very large.
 #' @param limit integer, limit the number of records you wish to retrieve.
 #'   By default, 25 are returned.
-#' @param synonym logical, synonym search. If TRUE, synonym terms from MeSH
-#'  terminology and the UniProt synonym list are queried, too. Disabled by
-#'  default.
 #' @param sort character, sort results by order (\code{asc}, \code{desc}) and
 #'  sort field (e.g. \code{CITED}, \code{P_PDATE}), seperated with a blank.
 #'  For example, sort results  by times cited in descending order:
