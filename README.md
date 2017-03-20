@@ -86,26 +86,26 @@ For instance, search for abstracts and full texts that mention
 ```r
 epmc_search(query = 'Gabi-Kat')
 #> # A tibble: 100 × 27
-#>          id source     pmid                                doi
-#>       <chr>  <chr>    <chr>                              <chr>
-#> 1  28013277    MED 28013277                 10.1093/pcp/pcw205
-#> 2  22080561    MED 22080561                10.1093/nar/gkr1047
-#> 3  17062622    MED 17062622                 10.1093/nar/gkl753
-#> 4  14756321    MED 14756321 10.1023/b:plan.0000009297.37235.4a
-#> 5  12874060    MED 12874060      10.1093/bioinformatics/btg170
-#> 6  25324895    MED 25324895            10.1186/1746-4811-10-28
-#> 7  26343971    MED 26343971         10.1016/j.molp.2015.08.011
-#> 8  27117628    MED 27117628                  10.1038/srep24971
-#> 9  26493293    MED 26493293                  10.1111/tpj.13062
-#> 10 27018849    MED 27018849      10.1080/15592324.2016.1161876
-#> # ... with 90 more rows, and 23 more variables: title <chr>,
+#>          id source     pmid
+#>       <chr>  <chr>    <chr>
+#> 1  28013277    MED 28013277
+#> 2  22080561    MED 22080561
+#> 3  17062622    MED 17062622
+#> 4  14756321    MED 14756321
+#> 5  12874060    MED 12874060
+#> 6  25324895    MED 25324895
+#> 7  26343971    MED 26343971
+#> 8  27117628    MED 27117628
+#> 9  26493293    MED 26493293
+#> 10 27018849    MED 27018849
+#> # ... with 90 more rows, and 24 more variables: doi <chr>, title <chr>,
 #> #   authorString <chr>, journalTitle <chr>, pubYear <chr>,
-#> #   journalIssn <chr>, pubType <chr>, isOpenAccess <chr>, inEPMC <chr>,
-#> #   inPMC <chr>, hasPDF <chr>, hasBook <chr>, citedByCount <int>,
-#> #   hasReferences <chr>, hasTextMinedTerms <chr>,
-#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>, epmcAuthMan <chr>,
-#> #   hasTMAccessionNumbers <chr>, pmcid <chr>, issue <chr>,
-#> #   journalVolume <chr>, pageInfo <chr>, hasSuppl <chr>
+#> #   journalIssn <chr>, isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>,
+#> #   hasPDF <chr>, hasBook <chr>, citedByCount <int>, hasReferences <chr>,
+#> #   hasTextMinedTerms <chr>, hasDbCrossReferences <chr>,
+#> #   hasLabsLinks <chr>, epmcAuthMan <chr>, hasTMAccessionNumbers <chr>,
+#> #   pmcid <chr>, issue <chr>, journalVolume <chr>, pageInfo <chr>,
+#> #   pubType <chr>, hasSuppl <chr>
 ```
 
 Get PLOS Genetics (ISSN:1553-7404) articles that cross-reference EMBL:
@@ -114,26 +114,26 @@ Get PLOS Genetics (ISSN:1553-7404) articles that cross-reference EMBL:
 ```r
 epmc_search(query = 'ISSN:1553-7404 HAS_EMBL:y')
 #> # A tibble: 100 × 27
-#>          id source     pmid      pmcid                          doi
-#>       <chr>  <chr>    <chr>      <chr>                        <chr>
-#> 1  27780204    MED 27780204 PMC5079590 10.1371/journal.pgen.1006397
-#> 2  27764113    MED 27764113 PMC5072692 10.1371/journal.pgen.1006387
-#> 3  27541862    MED 27541862 PMC4991801 10.1371/journal.pgen.1006270
-#> 4  27327578    MED 27327578 PMC4915694 10.1371/journal.pgen.1006110
-#> 5  27203426    MED 27203426 PMC4874600 10.1371/journal.pgen.1006063
-#> 6  27149082    MED 27149082 PMC4858218 10.1371/journal.pgen.1006030
-#> 7  27120580    MED 27120580 PMC4847869 10.1371/journal.pgen.1005987
-#> 8  27082250    MED 27082250 PMC4833346 10.1371/journal.pgen.1005954
-#> 9  26982327    MED 26982327 PMC4794157 10.1371/journal.pgen.1005920
-#> 10 26637114    MED 26637114 PMC4670201 10.1371/journal.pgen.1005681
-#> # ... with 90 more rows, and 22 more variables: title <chr>,
+#>          id source     pmid                                          doi
+#>       <chr>  <chr>    <chr>                                        <chr>
+#> 1  28222092    MED 28222092                 10.1371/journal.pgen.1006596
+#> 2  27780204    MED 27780204                 10.1371/journal.pgen.1006397
+#> 3  27764113    MED 27764113                 10.1371/journal.pgen.1006387
+#> 4  27541862    MED 27541862                 10.1371/journal.pgen.1006270
+#> 5  27385107    MED 27385107                 10.1371/journal.pgen.1006155
+#> 6  27327578    MED 27327578                 10.1371/journal.pgen.1006110
+#> 7  27203426    MED 27203426                 10.1371/journal.pgen.1006063
+#> 8  27149082    MED 27149082                 10.1371/journal.pgen.1006030
+#> 9  27120580    MED 27120580 https://doi.org/10.1371/journal.pgen.1005987
+#> 10 27082250    MED 27082250 https://doi.org/10.1371/journal.pgen.1005954
+#> # ... with 90 more rows, and 23 more variables: title <chr>,
 #> #   authorString <chr>, journalTitle <chr>, issue <chr>,
 #> #   journalVolume <chr>, pubYear <chr>, journalIssn <chr>, pageInfo <chr>,
 #> #   pubType <chr>, isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>,
-#> #   hasPDF <chr>, hasBook <chr>, hasSuppl <chr>, citedByCount <int>,
-#> #   hasReferences <chr>, hasTextMinedTerms <chr>,
-#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>, epmcAuthMan <chr>,
-#> #   hasTMAccessionNumbers <chr>
+#> #   hasPDF <chr>, hasBook <chr>, citedByCount <int>, hasReferences <chr>,
+#> #   hasTextMinedTerms <chr>, hasDbCrossReferences <chr>,
+#> #   hasLabsLinks <chr>, epmcAuthMan <chr>, hasTMAccessionNumbers <chr>,
+#> #   pmcid <chr>, hasSuppl <chr>
 ```
 
 Use [ORCID](http://orcid.org/) to search for personal publications:
@@ -142,26 +142,26 @@ Use [ORCID](http://orcid.org/) to search for personal publications:
 ```r
 epmc_search(query = 'AUTHORID:"0000-0002-7635-3473"', limit = 1000)
 #> # A tibble: 132 × 27
-#>          id source     pmid                          doi
-#>       <chr>  <chr>    <chr>                        <chr>
-#> 1  28013277    MED 28013277           10.1093/pcp/pcw205
-#> 2  27711162    MED 27711162 10.1371/journal.pone.0164321
-#> 3  27230558    MED 27230558    10.1186/s12870-016-0805-5
-#> 4  27214749    MED 27214749            10.1111/nph.14008
-#> 5  26980001    MED 26980001    10.1186/s12864-016-2566-9
-#> 6  27557761    MED 27557761  10.1007/978-1-4939-6396-6_5
-#> 7  26676716    MED 26676716            10.1111/tpj.13103
-#> 8  26343971    MED 26343971   10.1016/j.molp.2015.08.011
-#> 9  26328666    MED 26328666    10.1186/s13059-015-0729-7
-#> 10 27660776    MED 27660776     10.1128/genomea.00975-16
+#>          id source     pmid                                      doi
+#>       <chr>  <chr>    <chr>                                    <chr>
+#> 1  28013277    MED 28013277                       10.1093/pcp/pcw205
+#> 2  27711162    MED 27711162             10.1371/journal.pone.0164321
+#> 3  27230558    MED 27230558                10.1186/s12870-016-0805-5
+#> 4  27214749    MED 27214749                        10.1111/nph.14008
+#> 5  26980001    MED 26980001                10.1186/s12864-016-2566-9
+#> 6  27557761    MED 27557761              10.1007/978-1-4939-6396-6_5
+#> 7  26676716    MED 26676716                        10.1111/tpj.13103
+#> 8  26343971    MED 26343971               10.1016/j.molp.2015.08.011
+#> 9  26328666    MED 26328666                10.1186/s13059-015-0729-7
+#> 10 27660776    MED 27660776 https://doi.org/10.1128/genomea.00975-16
 #> # ... with 122 more rows, and 23 more variables: title <chr>,
 #> #   authorString <chr>, journalTitle <chr>, pubYear <chr>,
-#> #   journalIssn <chr>, pubType <chr>, isOpenAccess <chr>, inEPMC <chr>,
-#> #   inPMC <chr>, hasPDF <chr>, hasBook <chr>, citedByCount <int>,
-#> #   hasReferences <chr>, hasTextMinedTerms <chr>,
-#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>, epmcAuthMan <chr>,
-#> #   hasTMAccessionNumbers <chr>, pmcid <chr>, issue <chr>,
-#> #   journalVolume <chr>, pageInfo <chr>, hasSuppl <chr>
+#> #   journalIssn <chr>, isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>,
+#> #   hasPDF <chr>, hasBook <chr>, citedByCount <int>, hasReferences <chr>,
+#> #   hasTextMinedTerms <chr>, hasDbCrossReferences <chr>,
+#> #   hasLabsLinks <chr>, epmcAuthMan <chr>, hasTMAccessionNumbers <chr>,
+#> #   pmcid <chr>, issue <chr>, journalVolume <chr>, pageInfo <chr>,
+#> #   pubType <chr>, hasSuppl <chr>
 ```
 
 ### Include MeSH and UniProt synonyms
@@ -174,50 +174,50 @@ You may also want to include synonyms when searching Europe PMC. If
 # with snyonyms
 epmc_search('aspirin', synonym = TRUE)
 #> # A tibble: 100 × 27
-#>          id source     pmid
-#>       <chr>  <chr>    <chr>
-#> 1  28147891    MED 28147891
-#> 2  28142297    MED 28142297
-#> 3  28181214    MED 28181214
-#> 4  28213047    MED 28213047
-#> 5  28202405    MED 28202405
-#> 6  28205318    MED 28205318
-#> 7  28125730    MED 28125730
-#> 8  28189429    MED 28189429
-#> 9  28160159    MED 28160159
-#> 10 28159866    MED 28159866
-#> # ... with 90 more rows, and 24 more variables: title <chr>,
+#>          id source     pmid                           doi
+#>       <chr>  <chr>    <chr>                         <chr>
+#> 1  28147891    MED 28147891 10.1080/13880209.2017.1283706
+#> 2  28142297    MED 28142297 10.1080/15419061.2017.1282469
+#> 3  28278500    MED 28278500             10.1159/000464434
+#> 4  28293429    MED 28293429     10.1186/s40780-017-0078-7
+#> 5  28292923    MED 28292923 10.1158/1055-9965.epi-16-1027
+#> 6  28301951    MED 28301951      10.1177/1203475417697652
+#> 7  28265622    MED 28265622            10.1039/c6cp08122c
+#> 8  28302605    MED 28302605            10.3174/ajnr.a5113
+#> 9  28262342    MED 28262342  10.1016/j.ijcard.2017.02.122
+#> 10 28220610    MED 28220610              10.1002/bio.3285
+#> # ... with 90 more rows, and 23 more variables: title <chr>,
 #> #   authorString <chr>, journalTitle <chr>, issue <chr>,
 #> #   journalVolume <chr>, pubYear <chr>, journalIssn <chr>, pageInfo <chr>,
 #> #   pubType <chr>, isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>,
 #> #   hasPDF <chr>, hasBook <chr>, citedByCount <int>, hasReferences <chr>,
 #> #   hasTextMinedTerms <chr>, hasDbCrossReferences <chr>,
 #> #   hasLabsLinks <chr>, epmcAuthMan <chr>, hasTMAccessionNumbers <chr>,
-#> #   doi <chr>, pmcid <chr>, hasSuppl <chr>
+#> #   pmcid <chr>, hasSuppl <chr>
 
 # without synonyms
 epmc_search('aspirin', synonym = FALSE)
 #> # A tibble: 100 × 27
-#>          id source     pmid
-#>       <chr>  <chr>    <chr>
-#> 1  28147891    MED 28147891
-#> 2  28142297    MED 28142297
-#> 3  28181214    MED 28181214
-#> 4  28125730    MED 28125730
-#> 5  27888917    MED 27888917
-#> 6  28213047    MED 28213047
-#> 7  28213669    MED 28213669
-#> 8  28160159    MED 28160159
-#> 9  28163951    MED 28163951
-#> 10 28072691    MED 28072691
-#> # ... with 90 more rows, and 24 more variables: title <chr>,
+#>          id source     pmid                            doi
+#>       <chr>  <chr>    <chr>                          <chr>
+#> 1  28147891    MED 28147891  10.1080/13880209.2017.1283706
+#> 2  28278500    MED 28278500              10.1159/000464434
+#> 3  28293429    MED 28293429      10.1186/s40780-017-0078-7
+#> 4  28301951    MED 28301951       10.1177/1203475417697652
+#> 5  28265622    MED 28265622             10.1039/c6cp08122c
+#> 6  28220610    MED 28220610               10.1002/bio.3285
+#> 7  28292923    MED 28292923  10.1158/1055-9965.epi-16-1027
+#> 8  28289603    MED 28289603    10.1016/j.gdata.2017.02.013
+#> 9  28181214    MED 28181214 10.1002/14651858.cd012129.pub2
+#> 10 28285696    MED 28285696  10.1016/j.lungcan.2017.01.018
+#> # ... with 90 more rows, and 23 more variables: title <chr>,
 #> #   authorString <chr>, journalTitle <chr>, issue <chr>,
 #> #   journalVolume <chr>, pubYear <chr>, journalIssn <chr>, pageInfo <chr>,
 #> #   pubType <chr>, isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>,
 #> #   hasPDF <chr>, hasBook <chr>, citedByCount <int>, hasReferences <chr>,
 #> #   hasTextMinedTerms <chr>, hasDbCrossReferences <chr>,
 #> #   hasLabsLinks <chr>, epmcAuthMan <chr>, hasTMAccessionNumbers <chr>,
-#> #   doi <chr>, pmcid <chr>, hasSuppl <chr>
+#> #   pmcid <chr>, hasSuppl <chr>
 ```
 
 ### Output types
@@ -232,26 +232,26 @@ Key metadata parsed as non-nested tibble:
 ```r
 epmc_search('Gabi-Kat', output = 'parsed')
 #> # A tibble: 100 × 27
-#>          id source     pmid                                doi
-#>       <chr>  <chr>    <chr>                              <chr>
-#> 1  28013277    MED 28013277                 10.1093/pcp/pcw205
-#> 2  22080561    MED 22080561                10.1093/nar/gkr1047
-#> 3  17062622    MED 17062622                 10.1093/nar/gkl753
-#> 4  14756321    MED 14756321 10.1023/b:plan.0000009297.37235.4a
-#> 5  12874060    MED 12874060      10.1093/bioinformatics/btg170
-#> 6  25324895    MED 25324895            10.1186/1746-4811-10-28
-#> 7  26343971    MED 26343971         10.1016/j.molp.2015.08.011
-#> 8  27117628    MED 27117628                  10.1038/srep24971
-#> 9  26493293    MED 26493293                  10.1111/tpj.13062
-#> 10 27018849    MED 27018849      10.1080/15592324.2016.1161876
-#> # ... with 90 more rows, and 23 more variables: title <chr>,
+#>          id source     pmid
+#>       <chr>  <chr>    <chr>
+#> 1  28013277    MED 28013277
+#> 2  22080561    MED 22080561
+#> 3  17062622    MED 17062622
+#> 4  14756321    MED 14756321
+#> 5  12874060    MED 12874060
+#> 6  25324895    MED 25324895
+#> 7  26343971    MED 26343971
+#> 8  27117628    MED 27117628
+#> 9  26493293    MED 26493293
+#> 10 27018849    MED 27018849
+#> # ... with 90 more rows, and 24 more variables: doi <chr>, title <chr>,
 #> #   authorString <chr>, journalTitle <chr>, pubYear <chr>,
-#> #   journalIssn <chr>, pubType <chr>, isOpenAccess <chr>, inEPMC <chr>,
-#> #   inPMC <chr>, hasPDF <chr>, hasBook <chr>, citedByCount <int>,
-#> #   hasReferences <chr>, hasTextMinedTerms <chr>,
-#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>, epmcAuthMan <chr>,
-#> #   hasTMAccessionNumbers <chr>, pmcid <chr>, issue <chr>,
-#> #   journalVolume <chr>, pageInfo <chr>, hasSuppl <chr>
+#> #   journalIssn <chr>, isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>,
+#> #   hasPDF <chr>, hasBook <chr>, citedByCount <int>, hasReferences <chr>,
+#> #   hasTextMinedTerms <chr>, hasDbCrossReferences <chr>,
+#> #   hasLabsLinks <chr>, epmcAuthMan <chr>, hasTMAccessionNumbers <chr>,
+#> #   pmcid <chr>, issue <chr>, journalVolume <chr>, pageInfo <chr>,
+#> #   pubType <chr>, hasSuppl <chr>
 ```
 
 In addition to fetch bibliographic metadata, the parsed output also helps you
@@ -336,8 +336,8 @@ str(my_list[[10]])
 #>   .. ..$ medlineAbbreviation: chr "Plant Signal Behav"
 #>   .. ..$ essn               : chr "1559-2324"
 #>   .. ..$ issn               : chr "1559-2316"
-#>   .. ..$ isoabbreviation    : chr "Plant Signal Behav"
 #>   .. ..$ nlmid              : chr "101291431"
+#>   .. ..$ isoabbreviation    : chr "Plant Signal Behav"
 #>  $ pubYear              : chr "2016"
 #>  $ pageInfo             : chr "e1161876"
 #>  $ abstractText         : chr "The essential micronutrient vitamin B6 is best known in its enzymatic cofactor form, pyridoxal 5'-phosphate (PLP). However, vit"| __truncated__
@@ -345,7 +345,7 @@ str(my_list[[10]])
 #>  $ language             : chr "eng"
 #>  $ pubModel             : chr "Print"
 #>  $ pubTypeList          :List of 1
-#>   ..$ pubType: chr [1:3] "addendum" "Journal Article" "Research Support, Non-U.S. Gov't"
+#>   ..$ pubType: chr [1:3] "Research Support, Non-U.S. Gov't" "addendum" "Journal Article"
 #>  $ meshHeadingList      :List of 1
 #>   ..$ meshHeading:List of 9
 #>   .. ..$ :List of 3
@@ -440,7 +440,7 @@ str(my_list[[10]])
 #>   .. .. ..$ availabilityCode: chr "S"
 #>   .. .. ..$ documentStyle   : chr "doi"
 #>   .. .. ..$ site            : chr "DOI"
-#>   .. .. ..$ url             : chr "http://dx.doi.org/10.1080/15592324.2016.1161876"
+#>   .. .. ..$ url             : chr "https://doi.org/10.1080/15592324.2016.1161876"
 #>  $ isOpenAccess         : chr "N"
 #>  $ inEPMC               : chr "Y"
 #>  $ inPMC                : chr "N"
@@ -470,19 +470,19 @@ that represent articles referencing DataCite DOIs:
 ```r
 query <- "ACCESSION_TYPE:doi"
 epmc_hits(query)
-#> [1] 7323
+#> [1] 7315
 # set limit to 10 records
 my_data <- epmc_search(query = query, limit = 10)
 head(my_data)
 #> # A tibble: 6 × 27
-#>         id source     pmid      pmcid                         doi
-#>      <chr>  <chr>    <chr>      <chr>                       <chr>
-#> 1 28079148    MED 28079148 PMC5228185           10.1038/srep40501
-#> 2 28097071    MED 28097071 PMC5228508          10.7717/peerj.2874
-#> 3 28097058    MED 28097058 PMC5228507          10.7717/peerj.2844
-#> 4 28071681    MED 28071681 PMC5223163           10.1038/srep40034
-#> 5 28071668    MED 28071668 PMC5223119           10.1038/srep40094
-#> 6 28069623    MED 28069623 PMC5223632 10.1136/bmjopen-2016-013420
+#>         id source     pmid      pmcid                      doi
+#>      <chr>  <chr>    <chr>      <chr>                    <chr>
+#> 1 28280457    MED 28280457 PMC5321675 10.3389/fnmol.2017.00048
+#> 2 28230794    MED 28230794       <NA>       10.3390/md15020048
+#> 3 28079148    MED 28079148 PMC5228185        10.1038/srep40501
+#> 4 28097071    MED 28097071 PMC5228508       10.7717/peerj.2874
+#> 5 28097058    MED 28097058 PMC5228507       10.7717/peerj.2844
+#> 6 28071681    MED 28071681 PMC5223163        10.1038/srep40034
 #> # ... with 22 more variables: title <chr>, authorString <chr>,
 #> #   journalTitle <chr>, journalVolume <chr>, pubYear <chr>,
 #> #   journalIssn <chr>, pageInfo <chr>, pubType <chr>, isOpenAccess <chr>,
@@ -492,7 +492,7 @@ head(my_data)
 #> #   hasLabsLinks <chr>, epmcAuthMan <chr>, hasTMAccessionNumbers <chr>,
 #> #   issue <chr>
 attr(my_data, "hit_count")
-#> [1] 7323
+#> [1] 7315
 ```
 
 You may also use `epmc_profile` to retrieve a summary of hit counts.
@@ -509,20 +509,20 @@ epmc_profile(query = 'malaria')
 #> 3    CTX      7
 #> 4    ETH    179
 #> 5    HIR      4
-#> 6    MED 114975
+#> 6    MED 115538
 #> 7    PAT   2252
 #> 8    CIT      0
-#> 9    PMC  10384
+#> 9    PMC  10372
 #> 10   PPR      2
 #> 
 #> $pubType
 #> # A tibble: 5 × 2
 #>                  name  count
 #> *               <chr>  <int>
-#> 1                 ALL 128037
-#> 2           FULL TEXT  78505
-#> 3         OPEN ACCESS  34244
-#> 4              REVIEW  15548
+#> 1                 ALL 128588
+#> 2           FULL TEXT  79013
+#> 3         OPEN ACCESS  34583
+#> 4              REVIEW  15674
 #> 5 BOOKS AND DOCUMENTS     97
 #> 
 #> $subset
@@ -544,9 +544,9 @@ PubMed / Medline index is searched.
 epmc_details(ext_id = '24270414')
 #> $basic
 #> # A tibble: 1 × 30
-#>         id source     pmid      pmcid              doi
-#> *    <chr>  <chr>    <chr>      <chr>            <chr>
-#> 1 24270414    MED 24270414 PMC3859427 10.1172/jci73168
+#>         id source     pmid      pmcid                              doi
+#> *    <chr>  <chr>    <chr>      <chr>                            <chr>
+#> 1 24270414    MED 24270414 PMC3859427 https://doi.org/10.1172/jci73168
 #> # ... with 25 more variables: title <chr>, authorString <chr>,
 #> #   pubYear <chr>, pageInfo <chr>, abstractText <chr>, language <chr>,
 #> #   pubModel <chr>, isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>,
@@ -573,7 +573,7 @@ epmc_details(ext_id = '24270414')
 #> # ... with 8 more variables: yearOfPublication <int>,
 #> #   printPublicationDate <chr>, journal.title <chr>,
 #> #   journal.medlineAbbreviation <chr>, journal.essn <chr>,
-#> #   journal.issn <chr>, journal.isoabbreviation <chr>, journal.nlmid <chr>
+#> #   journal.issn <chr>, journal.nlmid <chr>, journal.isoabbreviation <chr>
 #> 
 #> $ftx
 #> # A tibble: 5 × 5
@@ -659,14 +659,14 @@ my_cites
 #>       <chr>  <chr>
 #> 1  10221475    MED
 #> 2  10342317    MED
-#> 3   9643812    MED
-#> 4  10440384    MED
-#> 5   9696842    MED
-#> 6   9703304    MED
-#> 7   9728974    MED
-#> 8   9728985    MED
-#> 9   9728986    MED
-#> 10  9728987    MED
+#> 3  10440384    MED
+#> 4   9696842    MED
+#> 5   9703304    MED
+#> 6   9728974    MED
+#> 7   9728985    MED
+#> 8   9728986    MED
+#> 9   9728987    MED
+#> 10 11134319    MED
 #> # ... with 90 more rows, and 10 more variables: citationType <chr>,
 #> #   title <chr>, authorString <chr>, journalAbbreviation <chr>,
 #> #   pubYear <int>, volume <chr>, issue <chr>, pageInfo <chr>,
@@ -824,37 +824,25 @@ Check availability and number of links:
 
 ```r
 epmc_lablinks_count('PMC3986813', data_src = 'pmc')
-#> # A tibble: 5 × 2
+#> # A tibble: 4 × 2
 #>       providerName linksCount
 #> *            <chr>      <int>
 #> 1 EBI Train Online          1
 #> 2        Wikipedia          1
 #> 3       BioStudies          1
-#> 4          Publons          1
-#> 5        Altmetric          1
+#> 4        Altmetric          1
 ```
 
-Get links to PANGEA (`lab_id = "1342"`)
+Get linksfrom Wikipedia (`lab_id = "1507"`)
 
 
 ```r
-epmc_lablinks('24023770', lab_id = '1342')
-#> # A tibble: 13 × 6
-#>                                                                          title
-#>                                                                          <chr>
-#> 1  Related to: Schewe, I (2010). Biochemical investigation of multicorer sedim
-#> 2  Related to: Schewe, I (2010). Biochemical investigation of multicorer sedim
-#> 3  Related to: Schewe, I (2010). Biochemical investigation of multicorer sedim
-#> 4  Related to: Schewe, I (2010). Biochemical investigation of multicorer sedim
-#> 5  Related to: Schewe, I (2010). Biochemical investigation of multicorer sedim
-#> 6  Related to: Schewe, I (2010). Biochemical investigation of multicorer sedim
-#> 7  Related to: Schewe, I (2010). Biochemical investigation of multicorer sedim
-#> 8  Related to: Schewe, I (2010). Biochemical investigation of multicorer sedim
-#> 9  Related to: Schewe, I (2010). Biochemical investigation of multicorer sedim
-#> 10 Related to: Schewe, I (2010). Biochemical investigation of multicorer sedim
-#> 11 Related to: Schewe, I (2010). Biochemical investigation of multicorer sedim
-#> 12 Related to: Schewe, I (2010). Biochemical investigation of multicorer sedim
-#> 13 Related to: Schewe, I (2010). Biochemical investigation of multicorer sedim
+epmc_lablinks('20301687', lab_id = '1507')
+#> # A tibble: 2 × 6
+#>                                    title
+#>                                    <chr>
+#> 1                        Werner_syndrome
+#> 2 Werner_syndrome_ATP-dependent_helicase
 #> # ... with 5 more variables: url <chr>, imgUrl <lgl>, lab_id <int>,
 #> #   lab_name <fctr>, lab_description <fctr>
 ```
