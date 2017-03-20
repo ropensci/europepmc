@@ -58,7 +58,7 @@ epmc_refs <-
     stopifnot(is.logical(verbose))
     # build request
     req_method <- "references"
-    path = paste(rest_path(), data_src, ext_id, req_method,
+    path <- paste(rest_path(), data_src, ext_id, req_method,
                  "json", sep = "/")
     doc <- rebi_GET(path = path)
     hit_count <- doc$hitCount

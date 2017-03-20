@@ -158,7 +158,8 @@ make_path <- function(hit_count = NULL,
 
 # calculate number of page chunks needed in accordance with limit param
 chunks <- function(limit, ...) {
-  if (all.equal(limit / batch_size(), as.integer(limit / batch_size())) == TRUE) {
+  if (all.equal(limit / batch_size(),
+                as.integer(limit / batch_size())) == TRUE) {
     page_max <- limit / batch_size()
     last_chunk <- batch_size()
   } else {
@@ -204,8 +205,12 @@ VERB_n <- function(VERB, n = 5) {
       status <- httr::status_code(out)
       switch(coarsen_code(status),
              break, ## < 500
-             {## >= 500
-               backoff <- stats::runif(n = 1, min = 0, max = 2 ^ i - 1)
+             {
+               ## >= 500
+               backoff <-
+                 stats::runif(n = 1,
+                              min = 0,
+                              max = 2 ^ i - 1)
                ## TO DO: honor a verbose argument or option
                mess <- paste("HTTP error %s on attempt %d ...\n",
                              "  backing off %0.2f seconds, retrying")
@@ -216,6 +221,6 @@ VERB_n <- function(VERB, n = 5) {
     out
   }
 }
-mpf <- function(...) message(sprintf(...))
+mpf <- function(...)
+  message(sprintf(...))
 rGET <- VERB_n(httr::GET)
-

@@ -17,13 +17,14 @@
 #' @export
 epmc_profile <- function(query = NULL, synonym = FALSE) {
   synonym <- ifelse(synonym == FALSE, "false", "true")
-  # this is so far the only way how I got the synonym paramworking after the API change
-  # there is a possible conflict with the resumption token and decoding the API call.
+  # this is so far the only way how I got the synonym paramworking after
+  # the API change.
+  # there is a possible conflict with the resumption token and
+  # decoding the API call.
   query <- transform_query(paste0(query, "&synonym=", synonym))
   args <-
-    list(
-      query = query,
-      format = "json")
+    list(query = query,
+         format = "json")
   out <-
     rebi_GET(path = paste0(rest_path(), "/profile"), query = args)
   lapply(out$profileList, dplyr::as_data_frame)

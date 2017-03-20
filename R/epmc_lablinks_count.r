@@ -45,7 +45,7 @@ epmc_lablinks_count <- function(ext_id = NULL, data_src = "med") {
       )
     )
   # build request
-  path = paste(rest_path(), data_src, ext_id, "labsLinks",
+  path <- paste(rest_path(), data_src, ext_id, "labsLinks",
                "/json", sep = "/")
   doc <- rebi_GET(path = path)
   hitCount <- doc$hitCount

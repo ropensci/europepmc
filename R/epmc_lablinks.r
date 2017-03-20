@@ -70,7 +70,7 @@ epmc_lablinks <-
         "Please restrict your query to one external link provider. You'll find
         all providers in Europe PMC's advanced search form."
       )
-    path = paste(rest_path(),
+    path <- paste(rest_path(),
                  data_src,
                  ext_id,
                  "labsLinks",
@@ -86,7 +86,7 @@ epmc_lablinks <-
     # limit number of pages that will be retrieved
     if (max(no_pages) > n_pages)
       no_pages <- 1:n_pages
-    pages = list()
+    pages <- list()
     for (i in no_pages) {
       out <- rebi_GET(path = paste(
         rest_path(),

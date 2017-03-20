@@ -73,7 +73,7 @@ epmc_db <- function(ext_id = NULL,
   stopifnot(is.logical(verbose))
   # build request
   req_method <- "databaseLinks"
-  path = paste(rest_path(), data_src, ext_id, req_method, db,
+  path <- paste(rest_path(), data_src, ext_id, req_method, db,
                "json", sep = "/")
   doc <- rebi_GET(path = path)
   hit_count <- doc$hitCount
