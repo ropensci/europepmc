@@ -82,7 +82,8 @@ parse_ftxt <-function(...)
 
 dblinkcount <-function(...)
 {
-  .Defunct("dblinkcount", "europepmc", "Function removed, use epmc_db_count instead")
+  .Defunct("dblinkcount", "europepmc", "Function removed,
+           use epmc_db_count instead")
 }
 
 

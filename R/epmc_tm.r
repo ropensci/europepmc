@@ -43,8 +43,8 @@ epmc_tm <-
         )
       )
     if (is.null(semantic_type))
-      stop("Please Specify the semantic type you wish to retrieve text-mined terms
-           for")
+      stop("Please Specify the semantic type you wish to
+           retrieve text-mined terms for")
     if (!toupper(semantic_type) %in% supported_semantic_types)
       stop(
         paste0(
@@ -59,13 +59,13 @@ epmc_tm <-
     stopifnot(is.logical(verbose))
     # build request
     req_method <- "textMinedTerms"
-    path = paste(rest_path(),
-                 data_src,
-                 ext_id,
-                 req_method,
-                 semantic_type,
-                 "json",
-                 sep = "/")
+    path <- paste(rest_path(),
+                  data_src,
+                  ext_id,
+                  req_method,
+                  semantic_type,
+                  "json",
+                  sep = "/")
     doc <- rebi_GET(path = path)
     hit_count <- doc$hitCount
     if (hit_count == 0)

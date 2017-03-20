@@ -60,8 +60,10 @@ epmc_search <- function(query = NULL,
   stopifnot(is.logical(c(verbose, synonym)))
   # get the correct hit count when mesh and uniprot synonyms are also searched
   synonym <- ifelse(synonym == FALSE, "false", "true")
-  # this is so far the only way how I got the synonym paramworking after the API change
-  # there is a possible conflict with the resumption token and decoding the API call.
+  # this is so far the only way how I got the synonym paramworking after
+  # the API change.
+  # there is a possible conflict with the resumption token and decoding
+  # the API call.
   query <- transform_query(paste0(query, "&synonym=", synonym))
   stopifnot(is.numeric(limit))
   page_token <- "*"
@@ -86,7 +88,8 @@ epmc_search <- function(query = NULL,
     stop("There are no results matching your query")
   limit <- as.integer(limit)
   limit <- ifelse(hits <= limit, hits, limit)
-  # let's loop over until page max is reached, or until cursor marks are identical
+  # let's loop over until page max is reached,
+  # or until cursor marks are identical
   i <- 0
   while (i < res_chunks$page_max) {
     out <-
@@ -180,7 +183,8 @@ epmc_search_ <-
     # call API
     out <-
       rebi_GET(path = paste0(rest_path(), "/search"), query = args)
-    # remove nested lists from resulting data.frame, get these infos with epmc_details
+    # remove nested lists from resulting data.frame, get these infos
+    # with epmc_details
     if (!resulttype == "core") {
       md <- out$resultList$result
       if (length(md) == 0) {

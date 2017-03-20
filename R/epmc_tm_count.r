@@ -38,7 +38,7 @@ epmc_tm_count <- function(ext_id = NULL, data_src = "med") {
       )
     )
   # build request
-  path = paste(rest_path(),
+  path <- paste(rest_path(),
                data_src,
                ext_id,
                "textMinedTerms",

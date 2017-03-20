@@ -10,7 +10,8 @@ epmc_search_tmp_ <-
     if (is.null(query))
       stop("No query provided")
     stopifnot(is.logical(c(verbose, id_list, synonym)))
-    #  get the correct hit count when mesh and uniprot synonyms are also searched
+    #  get the correct hit count when mesh and uniprot
+    # synonyms are also searched
     synonym <- ifelse(synonym == FALSE, "false", "true")
     resulttype <- ifelse(id_list == FALSE, "lite", "idlist")
     # control limit

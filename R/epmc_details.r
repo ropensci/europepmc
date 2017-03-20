@@ -60,7 +60,7 @@ epmc_details <- function(ext_id = NULL, data_src = "med") {
       )
     )
   # build request
-  path = paste0(rest_path(), "/search")
+  path <- paste0(rest_path(), "/search")
   if (data_src == "pmc") {
     q <- list(
       query = paste0("PMCID:", ext_id),
