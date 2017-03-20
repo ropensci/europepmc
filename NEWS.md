@@ -1,3 +1,8 @@
+# europepmc 0.1.4
+
+- fixed example in vignette which lead to warnings
+- synonym search is operational again
+
 # europepmc 0.1.3
 
 ## Minor changes

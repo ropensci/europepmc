@@ -1,10 +1,10 @@
-# europepmc v 0.1.3
+# europepmc v 0.1.4
 
 ## Test environments
 
 * local OS X install, R 3.3.2 
 * ubuntu 12.04 (on travis-ci), R 3.3.2
-* win-builder (devel and release) and appveyor CI
+* win-builder (devel, release and oldevel) and appveyor CI
 
 ## R CMD check results
 
@@ -22,7 +22,7 @@ and found no problems related to this new version.
 
 ---
 
-This submission supports the most recent API version and should fix warning messages.
+This submission fixes warnings and note reported by CRAN Package Check Results for europepmc.
 
 Thanks!
 
