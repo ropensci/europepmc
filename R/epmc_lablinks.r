@@ -3,8 +3,8 @@
 #' With the External Link services, Europe PMC allows third parties to publish
 #' links from Europe PMC to other webpages or tools. Current External Link
 #' providers, which can be selected through Europe PMC's advanced search,
-#' include Wikipedia, Dryad Digital Repository or the institutional repo of
-#' Bielefeld University. For more information, see
+#' include Wikipedia, Dryad Digital Repository or other open services.
+#' For more information, see
 #' \url{http://europepmc.org/labslink}.
 #'
 #' @param ext_id publication identifier
@@ -34,8 +34,8 @@
 #'
 #' @examples
 #'   \dontrun{
-#'   # Links to PANGEA (lab_id = 1342)
-#'   epmc_lablinks("24023770", lab_id = "1342")
+#'   # Link to Altmetric (lab_id = 1562)
+#'   epmc_lablinks("25389392", lab_id = "1562")
 #'
 #'   # Links to Wikipedia
 #'   epmc_lablinks("24007304", lab_id = "1507")

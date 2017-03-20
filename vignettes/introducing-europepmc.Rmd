@@ -274,10 +274,10 @@ Check availability and number of links:
 epmc_lablinks_count('PMC3986813', data_src = 'pmc')
 ```
 
-Get links to PANGEA (`lab_id = "1342"`)
+Get links from Wikipedia (`lab_id = '1507'`)
 
 ```{r}
-epmc_lablinks('24023770', lab_id = '1342')
+epmc_lablinks('20301687', lab_id = '1507')
 ```
 
 ## Full text access
