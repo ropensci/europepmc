@@ -2,7 +2,7 @@ context("testing epmc_lablinks")
 
 test_that("epmc_lablinks returns", {
   skip_on_cran()
-  a <- epmc_lablinks("24023770", lab_id = "1342")
+  a <- epmc_lablinks("25389392", lab_id = "1562")
   b <- epmc_lablinks("24007304", lab_id = "1507")
   c <- epmc_lablinks("12736239", lab_id = "1056")
 
