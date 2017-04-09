@@ -53,13 +53,13 @@
 #' @export
 epmc_search <- function(query = NULL,
                         output = 'parsed',
-                        synonym = FALSE,
+                        synonym = TRUE,
                         verbose = TRUE,
                         limit = 100,
                         sort = NULL) {
   stopifnot(is.logical(c(verbose, synonym)))
   # get the correct hit count when mesh and uniprot synonyms are also searched
-  synonym <- ifelse(synonym == FALSE, "false", "true")
+  # synonym <- ifelse(synonym == FALSE, "false", "true")
   # this is so far the only way how I got the synonym paramworking after
   # the API change.
   # there is a possible conflict with the resumption token and decoding
@@ -76,7 +76,6 @@ epmc_search <- function(query = NULL,
       query = query,
       limit = limit,
       output = output,
-#      synonym = synonym,
       verbose = verbose,
       page_token = page_token,
       sort = sort
@@ -97,7 +96,6 @@ epmc_search <- function(query = NULL,
         query = query,
         limit = limit,
         output = output,
-#        synonym = synonym,
         verbose = verbose,
         page_token = page_token,
         sort = sort
@@ -154,7 +152,6 @@ epmc_search_ <-
   function(query = NULL,
            limit = 100,
            output = "parsed",
-#           synonym = NULL,
            page_token = NULL,
            sort = NULL,
            ...) {
@@ -174,7 +171,6 @@ epmc_search_ <-
       list(
         query = query,
         format = "json",
-#        synonym = synonym,
         resulttype = resulttype,
         pageSize = page_size,
         cursorMark = page_token,

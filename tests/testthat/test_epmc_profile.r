@@ -17,3 +17,14 @@ test_that("epmc_profile returns", {
  expect_is(b$pubType, "tbl_df")
  expect_is(b$subset, "tbl_df")
 })
+
+test_that("epmc_profile synonym parameter works", {
+  skip_on_cran()
+  a <- epmc_profile("malaria")
+  b <- epmc_profile("malaria", synonym = FALSE)
+  c <- epmc_profile("jupyter")
+  d <- epmc_profile("jupyter", synonym = FALSE)
+
+  expect_gt(sum(a$source$count), sum(b$source$count))
+  expect_gt(sum(c$source$count), sum(d$source$count))
+})
