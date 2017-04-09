@@ -6,7 +6,7 @@
 #' @param query character, search query. For more information on how to
 #'   build a search query, see \url{http://europepmc.org/Help}
 #' @param synonym logical, synonym search. If TRUE, synonym terms from MeSH
-#'  terminology and the UniProt synonym list are queried, too. Disabled by
+#'  terminology and the UniProt synonym list are queried, too. Enabled by
 #'  default.
 #' @examples \dontrun{
 #'   epmc_profile('malaria')
@@ -15,7 +15,7 @@
 #'   epmc_profile('(METHODS:"ropensci")')
 #'  }
 #' @export
-epmc_profile <- function(query = NULL, synonym = FALSE) {
+epmc_profile <- function(query = NULL, synonym = TRUE) {
   synonym <- ifelse(synonym == FALSE, "false", "true")
   # this is so far the only way how I got the synonym paramworking after
   # the API change.

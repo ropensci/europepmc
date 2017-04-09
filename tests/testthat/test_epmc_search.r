@@ -38,3 +38,14 @@ test_that("epmc_search returns", {
   expect_error(epmc_search(query = "malaria", synonym = "yes"))
   expect_error(epmc_search(query = "malaria", output = "djd"))
 })
+
+test_that("epmc_search synonym parameter works", {
+  skip_on_cran()
+  a <- epmc_search("malaria")
+  b <- epmc_search("malaria", synonym = FALSE)
+  c <- epmc_search("jupyter")
+  d <- epmc_search("jupyter", synonym = FALSE)
+
+  expect_gt(attr(a, "hit_count"), attr(b, "hit_count"))
+  expect_gt(attr(c, "hit_count"), attr(d, "hit_count"))
+})
