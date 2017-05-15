@@ -8,7 +8,7 @@ License: GPL-3
 Date: 2017-04-09
 URL: http://github.com/ropensci/europepmc/
 BugReports: http://github.com/ropensci/europepmc/issues
-Description: An R Client for the Europe PubMed Central RESTful Web Service 
+Description: An R Client for the Europe PubMed Central RESTful Web Service
     (see <https://europepmc.org/RestfulWebService> for more information). It
     gives access to both metadata on life science literature and open access
     full texts. Europe PMC indexes all PubMed content and other literature
@@ -29,8 +29,9 @@ Imports:
     plyr,
     dplyr,
     urltools,
-    xml2
-RoxygenNote: 5.0.1
+    xml2,
+    tibble
+RoxygenNote: 6.0.1
 Suggests:
     testthat,
     knitr,
