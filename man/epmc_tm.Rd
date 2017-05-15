@@ -59,4 +59,3 @@ epmc_tm("25249410", semantic_type = "GO_TERM")
 epmc_tm("PMC4340542", data_src = "pmc", semantic_type = "GO_TERM")
 }
 }
-

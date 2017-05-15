@@ -51,4 +51,3 @@ Europe PMC supports cross-references between literature and the
   epmc_db_count(ext_id = "PMC3245140", data_src = "PMC")
   }
 }
-

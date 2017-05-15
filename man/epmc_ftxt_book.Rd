@@ -22,4 +22,3 @@ Access subset of the Europe PMC bookshelf.
   epmc_ftxt_book("NBK32884")
   }
 }
-

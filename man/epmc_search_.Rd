@@ -36,4 +36,3 @@ pages within the defined limit.
 \seealso{
 \link{epmc_search}
 }
-

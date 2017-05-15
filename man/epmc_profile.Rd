@@ -27,4 +27,3 @@ This functions returns the number of results found for your query,
   epmc_profile('(METHODS:"ropensci")')
  }
 }
-
