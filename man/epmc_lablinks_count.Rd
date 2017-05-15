@@ -43,4 +43,3 @@ Bielefeld University. For more information, see
    epmc_lablinks_count("PMC3986813", data_src = "pmc")
    }
 }
-

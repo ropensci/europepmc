@@ -74,4 +74,3 @@ Europe PMC RESTful Web Service.
   epmc_db("11805837", db = "pride")
   }
 }
-

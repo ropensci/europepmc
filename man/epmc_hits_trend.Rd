@@ -16,7 +16,7 @@ default.}
 \item{period}{a vector of years (numeric) over which to perform the search}
 }
 \value{
-a data.frame (tibble tibble) with year, total number of hits (all_hits) and number of hits for the query (query_hits)
+a data.frame (dplyr tbl_df) with year, total number of hits (all_hits) and number of hits for the query (query_hits)
 }
 \description{
 Get the yearly number of hits for a query and the total yearly number of hits for a given period

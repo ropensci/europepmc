@@ -23,4 +23,3 @@ Search over Europe PMC and retrieve the number of results found
 \seealso{
 \code{\link{epmc_search}}
 }
-

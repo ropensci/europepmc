@@ -45,4 +45,3 @@ epmc_citations("PMC3166943", data_src = "pmc")
 epmc_citations("9338777")
 }
 }
-
