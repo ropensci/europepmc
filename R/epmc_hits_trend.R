@@ -9,7 +9,7 @@
 #' @details A similar function was used in http://www.masalmon.eu/2017/05/14/evergreenreviewgraph/ where
 #' it was advised to not plot no. of hits over time for a query, but to normalize it by the total no. of hits.
 #'
-#' @return a data.frame (tibble tibble) with year, total number of hits (all_hits) and number of hits for the query (query_hits)
+#' @return a data.frame (dplyr tbl_df) with year, total number of hits (all_hits) and number of hits for the query (query_hits)
 #' @export
 #'
 #' @examples
@@ -49,7 +49,7 @@ epmc_hits_trend_by_year <- function(year, query, synonym) {
   query_hits <-
     as.numeric(europepmc::epmc_profile(queryforterm, synonym)$pubType[1, 2])
 
-  return(tibble::tibble(
+  return(dplyr::as_data_frame(
     year = year,
     all_hits = all_hits,
     query_hits = query_hits

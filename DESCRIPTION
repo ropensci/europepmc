@@ -3,7 +3,8 @@ Title: R Interface to the Europe PubMed Central RESTful Web Service
 Version: 0.1.4.9100
 Authors@R: c(
            person("Najko", "Jahn", email = "najko.jahn@gmail.com",
-           role = c("aut", "cre", "cph")))
+           role = c("aut", "cre", "cph")),
+           person("Maëlle", "Salmon", role = c("ctb")))
 License: GPL-3
 Date: 2017-04-09
 URL: http://github.com/ropensci/europepmc/
@@ -29,10 +30,10 @@ Imports:
     plyr,
     dplyr,
     urltools,
-    xml2,
-    tibble
+    xml2
 RoxygenNote: 6.0.1
 Suggests:
     testthat,
     knitr,
     rmarkdown
+Encoding: UTF-8
