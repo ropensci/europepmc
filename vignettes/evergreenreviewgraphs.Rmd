@@ -1,0 +1,52 @@
+---
+title: "#evergreenreview graphs"
+author: "Najko Jahn"
+date: "15 May 2017"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Overview}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r, echo=FALSE}
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  echo = TRUE,
+  fig.width = 12,
+  fig.height = 8
+)
+options(scipen = 999, digits = 2)
+knitr::knit_hooks$set(inline = function(x) {
+      if(is.numeric(x)){
+          return(prettyNum(x, big.mark=","))
+      }else{
+          return(x)
+       }
+   })
+```
+
+## What is a evergreen review graph?
+
+<http://www.masalmon.eu/2017/05/14/evergreenreviewgraph/>
+
+## Making proper review graphs with Europe PMC
+
+### Growth of Open Access Literature
+
+There is growing interest in knowing the proportion of open access to scholarly literature. Europe PMC allows searching for open access content with with the [OPEN_ACCESS:Y parameter](https://europepmc.org/search?query=OPEN_ACCESS:Y&page=1&sortby=Relevance). At the moment, Europe PMC contains `r europepmc::epmc_hits("OPEN_ACCESS:Y")` open access fulltexts. Let's see how they are relatively distributed over the period 1995 - 2016.
+
+```{r, fig.align='center', fig.width=7, fig.height=4}
+library(ggplot2)
+tt_oa <- europepmc::epmc_hits_trend("OPEN_ACCESS:Y", period = 1995:2016, synonym = FALSE)
+ggplot(tt_oa, aes(year, query_hits / all_hits)) + 
+  geom_point() + 
+  geom_line() +
+  xlab("Year published") + 
+  ylab("Proportion of OA full-texts in Europe PMC")
+```
+
+Be careful with your interpretion of the last years as Europe PMC also contains journals, which may make their articles openly availabe after an embargo period (up to two years). 
