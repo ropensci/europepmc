@@ -70,4 +70,3 @@ attr(my.data, "hit_count")
 \seealso{
 \url{http://europepmc.org/Help}
 }
-

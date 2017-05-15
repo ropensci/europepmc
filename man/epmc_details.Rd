@@ -56,4 +56,3 @@ epmc_details("338638", data_src = "hir")
 epmc_details("409323", data_src = "eth")
 }
 }
-

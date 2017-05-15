@@ -37,4 +37,3 @@ Europe PMC supports the following semantic types:
   epmc_tm_count("PMC4340542", data_src = "pmc")
   }
 }
-

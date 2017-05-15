@@ -23,4 +23,3 @@ only provided for the Open Access subset of Europe PMC.
   epmc_ftxt("PMC3639880")
   }
 }
-

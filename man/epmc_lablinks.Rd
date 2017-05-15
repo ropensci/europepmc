@@ -57,4 +57,3 @@ For more information, see
   epmc_lablinks("12736239", lab_id = "1056")
   }
 }
-
