@@ -2,7 +2,8 @@
 % Please edit documentation in R/epmc_hits_trend.R
 \name{epmc_hits_trend}
 \alias{epmc_hits_trend}
-\title{Get the yearly number of hits for a query and the total yearly number of hits for a given period}
+\title{Get the yearly number of hits for a query and the total
+yearly number of hits for a given period}
 \usage{
 epmc_hits_trend(query, synonym = TRUE, period = 1975:2016)
 }
@@ -16,14 +17,18 @@ default.}
 \item{period}{a vector of years (numeric) over which to perform the search}
 }
 \value{
-a data.frame (dplyr tbl_df) with year, total number of hits (all_hits) and number of hits for the query (query_hits)
+a data.frame (dplyr tbl_df) with year, total number of hits
+ (all_hits) and number of hits for the query (query_hits)
 }
 \description{
-Get the yearly number of hits for a query and the total yearly number of hits for a given period
+Get the yearly number of hits for a query and the total
+yearly number of hits for a given period
 }
 \details{
-A similar function was used in http://www.masalmon.eu/2017/05/14/evergreenreviewgraph/ where
-it was advised to not plot no. of hits over time for a query, but to normalize it by the total no. of hits.
+A similar function was used in
+ \url{http://www.masalmon.eu/2017/05/14/evergreenreviewgraph/} where
+ it was advised to not plot no. of hits over time for a query,
+ but to normalize it by the total no. of hits.
 }
 \examples{
 \dontrun{
@@ -32,6 +37,7 @@ epmc_hits_trend('aspirin', period = 2006:2016, synonym = FALSE)
 # link to cran packages in reference lists
 epmc_hits_trend('REF:"cran.r-project.org*"', period = 2006:2016, synonym = FALSE)
 # more complex with source Medline and publication type review
-epmc_hits_trend('(REF:"cran.r-project.org*") AND (SRC:"MED") AND (PUB_TYPE:"Review" OR PUB_TYPE:"review-article")', period = 2006:2016, synonym = FALSE)
+epmc_hits_trend('(REF:"cran.r-project.org*") AND (SRC:"MED") AND (PUB_TYPE:"Review" OR PUB_TYPE:"review-article")',
+period = 2006:2016, synonym = FALSE)
 }
 }
