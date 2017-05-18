@@ -16,8 +16,9 @@ test_that("epmc_lablinks returns", {
   expect_is(attr(c, "hit_count"), "integer")
 
   # fails correctly
-  expect_error(epmc_lablinks("13814508", lab_id = "1342"),
+  expect_message(epmc_lablinks("13814508", lab_id = "1342"),
                "Sorry, no links available")
+  expect_null(epmc_lablinks("13814508", lab_id = "1342"))
   expect_error(epmc_lablinks("13814508"))
   expect_error(epmc_lablinks("13814508", n_pages = "abc"))
   expect_error(epmc_lablinks("13814508", data_src = "abc"))

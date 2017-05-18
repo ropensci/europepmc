@@ -16,8 +16,9 @@ test_that("epmc_tm returns", {
   expect_is(attr(c, "hit_count"), "integer")
 
   # fails correctly
-  expect_error(epmc_tm("14756321", semantic_type = "GO_TERM"),
+  expect_message(epmc_tm("14756321", semantic_type = "GO_TERM"),
                "Sorry, no text-mined terms found")
+  expect_null(epmc_tm("14756321", semantic_type = "GO_TERM"))
   expect_error(epmc_tm("13814508", data_src = "abc"))
   expect_error(epmc_tm("25249410", semantic_type = "GO_TERMs"))
 })

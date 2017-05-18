@@ -49,7 +49,9 @@ test_that("epmc_details returns", {
   expect_equal(ncol(a$mesh_topic), 2)
 
   # fails correctly
-  expect_error(epmc_details("123hah"), "nothing found, please check your query")
+  expect_message(epmc_details("123hah"), 
+    "nothing found, please check your query")
+  expect_null(epmc_details("123hah"))
   expect_error(epmc_details("NBK338142", data_src = "nbks"))
   expect_error(epmc_details("13814508", data_src = "abc"))
 })

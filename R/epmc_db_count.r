@@ -38,19 +38,28 @@
 #'   epmc_db_count(ext_id = "10779411")
 #'   epmc_db_count(ext_id = "PMC3245140", data_src = "PMC")
 #'   }
-epmc_db_count <- function(ext_id = NULL, data_src = "med"){
+epmc_db_count <- function(ext_id = NULL, data_src = "med") {
   if (is.null(ext_id))
     stop("Please provide a publication id")
   if (!tolower(data_src) %in% supported_data_src)
-    stop(paste0("Data source '", data_src, "' not supported. Try one of the
-                following sources: ", paste0(supported_data_src, collapse =", ")
-    ))
+    stop(
+      paste0(
+        "Data source '",
+        data_src,
+        "' not supported. Try one of the
+        following sources: ",
+        paste0(supported_data_src, collapse = ", ")
+      )
+    )
   # build request
   path <- paste(rest_path(), data_src, ext_id, "databaseLinks",
-               "/json", sep ="/")
+                "/json", sep = "/")
   doc <- rebi_GET(path = path)
-  if(is.null(doc$dbCountList))
-    stop("Nothing found")
-  plyr::rbind.fill(doc$dbCountList) %>%
-    dplyr::as_data_frame()
+  if (is.null(doc$dbCountList)) {
+    message("Nothing found")
+    NULL
+  } else {
+    plyr::rbind.fill(doc$dbCountList) %>%
+      dplyr::as_data_frame()
+  }
 }

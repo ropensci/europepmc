@@ -74,40 +74,43 @@ epmc_db <- function(ext_id = NULL,
   # build request
   req_method <- "databaseLinks"
   path <- paste(rest_path(), data_src, ext_id, req_method, db,
-               "json", sep = "/")
+                "json", sep = "/")
   doc <- rebi_GET(path = path)
   hit_count <- doc$hitCount
-  if (hit_count == 0)
-    stop("Sorry, no links found")
-  if (verbose == TRUE)
-    message(paste0(
-      hit_count,
-      " records found. Returning ",
-      ifelse(hit_count <= limit, hit_count, limit)
-    ))
-  paths <-
-    make_path(
-      hit_count = hit_count,
-      limit = limit,
-      ext_id = ext_id,
-      data_src = data_src,
-      req_method = req_method,
-      type = db
-    )
-  out <- lapply(paths, function(x) {
-    doc <- rebi_GET(path = x)
-    plyr::ldply(
-      doc$dbCrossReferenceList$dbCrossReference$dbCrossReferenceInfo,
-      data.frame,
-      stringsAsFactors = FALSE,
-      .id = NULL
-    )
-  })
-  #combine all into one
-  result <- jsonlite::rbind.pages(out) %>%
-    dplyr::as_data_frame()
-  # return
-  attr(result, "hit_count") <- hit_count
+  if (hit_count == 0) {
+    message("Sorry, no links found")
+    result <- NULL
+  } else {
+    if (verbose == TRUE)
+      message(paste0(
+        hit_count,
+        " records found. Returning ",
+        ifelse(hit_count <= limit, hit_count, limit)
+      ))
+    paths <-
+      make_path(
+        hit_count = hit_count,
+        limit = limit,
+        ext_id = ext_id,
+        data_src = data_src,
+        req_method = req_method,
+        type = db
+      )
+    out <- lapply(paths, function(x) {
+      doc <- rebi_GET(path = x)
+      plyr::ldply(
+        doc$dbCrossReferenceList$dbCrossReference$dbCrossReferenceInfo,
+        data.frame,
+        stringsAsFactors = FALSE,
+        .id = NULL
+      )
+    })
+    #combine all into one
+    result <- jsonlite::rbind.pages(out) %>%
+      dplyr::as_data_frame()
+    # return
+    attr(result, "hit_count") <- hit_count
+  }
   result
 }
 

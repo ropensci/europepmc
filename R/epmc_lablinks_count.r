@@ -46,11 +46,14 @@ epmc_lablinks_count <- function(ext_id = NULL, data_src = "med") {
     )
   # build request
   path <- paste(rest_path(), data_src, ext_id, "labsLinks",
-               "/json", sep = "/")
+                "/json", sep = "/")
   doc <- rebi_GET(path = path)
   hitCount <- doc$hitCount
-  if (doc$hitCount == 0)
-    stop("Sorry, no links available")
-  plyr::rbind.fill(doc$linksCountList) %>%
-    dplyr::as_data_frame()
+  if (doc$hitCount == 0) {
+    message("Sorry, no links available")
+    NULL
+  } else {
+    plyr::rbind.fill(doc$linksCountList) %>%
+      dplyr::as_data_frame()
+  }
 }

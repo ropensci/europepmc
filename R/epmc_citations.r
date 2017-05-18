@@ -34,36 +34,39 @@ epmc_citations <-
     # build request
     req_method <- "citations"
     path <- paste(rest_path(), data_src, ext_id, req_method,
-                 "json", sep = "/")
+                  "json", sep = "/")
     doc <- rebi_GET(path = path)
     hit_count <- doc$hitCount
-    if (hit_count == 0)
-      stop("No citing documents found")
-    if (verbose == TRUE)
-      message(paste0(
-        hit_count,
-        " records found. Returning ",
-        ifelse(hit_count <= limit, hit_count, limit)
-      ))
-    paths <-
-      make_path(
-        hit_count = hit_count,
-        limit = limit,
-        ext_id = ext_id,
-        data_src = data_src,
-        req_method = req_method
-      )
-    out <- lapply(paths, function(x) {
-      doc <- rebi_GET(path = x)
-      plyr::ldply(doc$citationList,
-                  data.frame,
-                  stringsAsFactors = FALSE,
-                  .id = NULL)
-    })
-    #combine all into one
-    result <- jsonlite::rbind.pages(out) %>%
-      dplyr::as_data_frame()
-    # return
-    attr(result, "hit_count") <- hit_count
+    if (hit_count == 0) {
+      message("No citing documents found")
+      result <- NULL
+    } else {
+      if (verbose == TRUE)
+        message(paste0(
+          hit_count,
+          " records found. Returning ",
+          ifelse(hit_count <= limit, hit_count, limit)
+        ))
+      paths <-
+        make_path(
+          hit_count = hit_count,
+          limit = limit,
+          ext_id = ext_id,
+          data_src = data_src,
+          req_method = req_method
+        )
+      out <- lapply(paths, function(x) {
+        doc <- rebi_GET(path = x)
+        plyr::ldply(doc$citationList,
+                    data.frame,
+                    stringsAsFactors = FALSE,
+                    .id = NULL)
+      })
+      #combine all into one
+      result <- jsonlite::rbind.pages(out) %>%
+        dplyr::as_data_frame()
+      # return
+      attr(result, "hit_count") <- hit_count
+    }
     result
   }

@@ -26,7 +26,6 @@
 #' @param verbose logical, print some information on what is going on.
 #'
 #' @return returns reference section as tibble
-
 #' @export
 #'
 #' @examples
@@ -59,36 +58,39 @@ epmc_refs <-
     # build request
     req_method <- "references"
     path <- paste(rest_path(), data_src, ext_id, req_method,
-                 "json", sep = "/")
+                  "json", sep = "/")
     doc <- rebi_GET(path = path)
     hit_count <- doc$hitCount
-    if (hit_count == 0)
-      stop("No references found")
-    if (verbose == TRUE)
-      message(paste0(
-        hit_count,
-        " records found. Returning ",
-        ifelse(hit_count <= limit, hit_count, limit)
-      ))
-    paths <-
-      make_path(
-        hit_count = hit_count,
-        limit = limit,
-        ext_id = ext_id,
-        data_src = data_src,
-        req_method = req_method
-      )
-    out <- lapply(paths, function(x) {
-      doc <- rebi_GET(path = x)
-      plyr::ldply(doc$referenceList,
-                  data.frame,
-                  stringsAsFactors = FALSE,
-                  .id = NULL)
-    })
-    #combine all into one
-    result <- jsonlite::rbind.pages(out) %>%
-      dplyr::as_data_frame()
-    # return (thanks to @cstubben)
-    attr(result, "hit_count") <- hit_count
+    if (hit_count == 0) {
+      message("No references found")
+      result <- NULL
+    } else {
+      if (verbose == TRUE)
+        message(paste0(
+          hit_count,
+          " records found. Returning ",
+          ifelse(hit_count <= limit, hit_count, limit)
+        ))
+      paths <-
+        make_path(
+          hit_count = hit_count,
+          limit = limit,
+          ext_id = ext_id,
+          data_src = data_src,
+          req_method = req_method
+        )
+      out <- lapply(paths, function(x) {
+        doc <- rebi_GET(path = x)
+        plyr::ldply(doc$referenceList,
+                    data.frame,
+                    stringsAsFactors = FALSE,
+                    .id = NULL)
+      })
+      #combine all into one
+      result <- jsonlite::rbind.pages(out) %>%
+        dplyr::as_data_frame()
+      # return (thanks to @cstubben)
+      attr(result, "hit_count") <- hit_count
+    }
     result
   }

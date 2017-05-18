@@ -18,7 +18,8 @@ test_that("epmc_refs returns", {
   expect_equal(nrow(c), 10)
 
   # fails correctly
-  expect_error(epmc_refs("14756321"), "No references found")
+  expect_message(epmc_refs("14756321"), "No references found")
+  expect_null(epmc_refs("14756321"))
   expect_error(epmc_refs("13814508", data_src = "abc"))
   expect_error(epmc_refs("2439888", limit = TRUE))
 })
