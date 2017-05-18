@@ -40,7 +40,7 @@ This client supports the following API methods:
 |API-Method     |Description                                                                                  |R functions                                |
 |:--------------|:--------------------------------------------------------------------------------------------|:------------------------------------------|
 |search         |Search Europe PMC and get detailed metadata                                                  |`epmc_search()`, `epmc_details()`          |
-|profile        |Obtain a summary of hit counts for several Europe PMC databases                              |`epmc_profile()`                           |
+|profile        |Obtain a summary of hit counts for several Europe PMC databases                              |`epmc_profile()`, `epmc_profile_hits()`                           |
 |citations      |Load metadata representing citing articles for a given publication                           |`epmc_citations()`                         |
 |references     |Retrieve the reference section of a pubication                                               |`epmc_refs()`                              |
 |databaseLinks  |Get links to biological databases such as UniProt or ENA                                     |`epmc_db()`, `epmc_db_count()`             |

@@ -33,7 +33,7 @@ This client supports the following API methods:
 |API-Method     |Description                                                                                  |R functions                                |
 |:--------------|:--------------------------------------------------------------------------------------------|:------------------------------------------|
 |search         |Search Europe PMC and get detailed metadata                                                  |`epmc_search()`, `epmc_details()`          |
-|profile        |Obtain a summary of hit counts for several Europe PMC databases                              |`epmc_profile()`                           |
+|profile        |Obtain a summary of hit counts for several Europe PMC databases                              |`epmc_profile()`, `epmc_profile_hits()`                           |
 |citations      |Load metadata representing citing articles for a given publication                           |`epmc_citations()`                         |
 |references     |Retrieve the reference section of a pubication                                               |`epmc_refs()`                              |
 |databaseLinks  |Get links to biological databases such as UniProt or ENA                                     |`epmc_db()`, `epmc_db_count()`             |
@@ -86,26 +86,26 @@ For instance, search for abstracts and full texts that mention
 ```r
 epmc_search(query = 'Gabi-Kat')
 #> # A tibble: 100 × 27
-#>          id source     pmid
-#>       <chr>  <chr>    <chr>
-#> 1  28013277    MED 28013277
-#> 2  22080561    MED 22080561
-#> 3  17062622    MED 17062622
-#> 4  14756321    MED 14756321
-#> 5  12874060    MED 12874060
-#> 6  25324895    MED 25324895
-#> 7  26343971    MED 26343971
-#> 8  27117628    MED 27117628
-#> 9  26493293    MED 26493293
-#> 10 27018849    MED 27018849
-#> # ... with 90 more rows, and 24 more variables: doi <chr>, title <chr>,
-#> #   authorString <chr>, journalTitle <chr>, pubYear <chr>,
-#> #   journalIssn <chr>, isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>,
+#>          id source     pmid                                doi
+#>       <chr>  <chr>    <chr>                              <chr>
+#> 1  28013277    MED 28013277                 10.1093/pcp/pcw205
+#> 2  22080561    MED 22080561                10.1093/nar/gkr1047
+#> 3  17062622    MED 17062622                 10.1093/nar/gkl753
+#> 4  14756321    MED 14756321 10.1023/b:plan.0000009297.37235.4a
+#> 5  12874060    MED 12874060      10.1093/bioinformatics/btg170
+#> 6  25324895    MED 25324895            10.1186/1746-4811-10-28
+#> 7  27507985    MED 27507985            10.3389/fpls.2016.01115
+#> 8  27117628    MED 27117628                  10.1038/srep24971
+#> 9  26343971    MED 26343971         10.1016/j.molp.2015.08.011
+#> 10 28167950    MED 28167950            10.3389/fpls.2017.00007
+#> # ... with 90 more rows, and 23 more variables: title <chr>,
+#> #   authorString <chr>, journalTitle <chr>, issue <chr>,
+#> #   journalVolume <chr>, pubYear <chr>, journalIssn <chr>, pageInfo <chr>,
+#> #   pubType <chr>, isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>,
 #> #   hasPDF <chr>, hasBook <chr>, citedByCount <int>, hasReferences <chr>,
 #> #   hasTextMinedTerms <chr>, hasDbCrossReferences <chr>,
-#> #   hasLabsLinks <chr>, epmcAuthMan <chr>, hasTMAccessionNumbers <chr>,
-#> #   pmcid <chr>, issue <chr>, journalVolume <chr>, pageInfo <chr>,
-#> #   pubType <chr>, hasSuppl <chr>
+#> #   hasLabsLinks <chr>, hasTMAccessionNumbers <chr>,
+#> #   firstPublicationDate <chr>, pmcid <chr>, hasSuppl <chr>
 ```
 
 Get PLOS Genetics (ISSN:1553-7404) articles that cross-reference EMBL:
@@ -114,26 +114,26 @@ Get PLOS Genetics (ISSN:1553-7404) articles that cross-reference EMBL:
 ```r
 epmc_search(query = 'ISSN:1553-7404 HAS_EMBL:y')
 #> # A tibble: 100 × 27
-#>          id source     pmid                                          doi
-#>       <chr>  <chr>    <chr>                                        <chr>
-#> 1  28222092    MED 28222092                 10.1371/journal.pgen.1006596
-#> 2  27780204    MED 27780204                 10.1371/journal.pgen.1006397
-#> 3  27764113    MED 27764113                 10.1371/journal.pgen.1006387
-#> 4  27541862    MED 27541862                 10.1371/journal.pgen.1006270
-#> 5  27385107    MED 27385107                 10.1371/journal.pgen.1006155
-#> 6  27327578    MED 27327578                 10.1371/journal.pgen.1006110
-#> 7  27203426    MED 27203426                 10.1371/journal.pgen.1006063
-#> 8  27149082    MED 27149082                 10.1371/journal.pgen.1006030
-#> 9  27120580    MED 27120580 https://doi.org/10.1371/journal.pgen.1005987
-#> 10 27082250    MED 27082250 https://doi.org/10.1371/journal.pgen.1005954
-#> # ... with 90 more rows, and 23 more variables: title <chr>,
+#>          id source     pmid      pmcid                          doi
+#>       <chr>  <chr>    <chr>      <chr>                        <chr>
+#> 1  28222092    MED 28222092 PMC5340410 10.1371/journal.pgen.1006596
+#> 2  27780204    MED 27780204 PMC5079590 10.1371/journal.pgen.1006397
+#> 3  27764113    MED 27764113 PMC5072692 10.1371/journal.pgen.1006387
+#> 4  27541862    MED 27541862 PMC4991801 10.1371/journal.pgen.1006270
+#> 5  27385107    MED 27385107 PMC4934787 10.1371/journal.pgen.1006155
+#> 6  27327578    MED 27327578 PMC4915694 10.1371/journal.pgen.1006110
+#> 7  27203426    MED 27203426 PMC4874600 10.1371/journal.pgen.1006063
+#> 8  27149082    MED 27149082 PMC4858218 10.1371/journal.pgen.1006030
+#> 9  27120580    MED 27120580 PMC4847869 10.1371/journal.pgen.1005987
+#> 10 27082250    MED 27082250 PMC4833346 10.1371/journal.pgen.1005954
+#> # ... with 90 more rows, and 22 more variables: title <chr>,
 #> #   authorString <chr>, journalTitle <chr>, issue <chr>,
 #> #   journalVolume <chr>, pubYear <chr>, journalIssn <chr>, pageInfo <chr>,
 #> #   pubType <chr>, isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>,
-#> #   hasPDF <chr>, hasBook <chr>, citedByCount <int>, hasReferences <chr>,
-#> #   hasTextMinedTerms <chr>, hasDbCrossReferences <chr>,
-#> #   hasLabsLinks <chr>, epmcAuthMan <chr>, hasTMAccessionNumbers <chr>,
-#> #   pmcid <chr>, hasSuppl <chr>
+#> #   hasPDF <chr>, hasBook <chr>, hasSuppl <chr>, citedByCount <int>,
+#> #   hasReferences <chr>, hasTextMinedTerms <chr>,
+#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>,
+#> #   hasTMAccessionNumbers <chr>, firstPublicationDate <chr>
 ```
 
 Use [ORCID](http://orcid.org/) to search for personal publications:
@@ -142,26 +142,26 @@ Use [ORCID](http://orcid.org/) to search for personal publications:
 ```r
 epmc_search(query = 'AUTHORID:"0000-0002-7635-3473"', limit = 1000)
 #> # A tibble: 132 × 27
-#>          id source     pmid                                      doi
-#>       <chr>  <chr>    <chr>                                    <chr>
-#> 1  28013277    MED 28013277                       10.1093/pcp/pcw205
-#> 2  27711162    MED 27711162             10.1371/journal.pone.0164321
-#> 3  27230558    MED 27230558                10.1186/s12870-016-0805-5
-#> 4  27214749    MED 27214749                        10.1111/nph.14008
-#> 5  26980001    MED 26980001                10.1186/s12864-016-2566-9
-#> 6  27557761    MED 27557761              10.1007/978-1-4939-6396-6_5
-#> 7  26676716    MED 26676716                        10.1111/tpj.13103
-#> 8  26343971    MED 26343971               10.1016/j.molp.2015.08.011
-#> 9  26328666    MED 26328666                10.1186/s13059-015-0729-7
-#> 10 27660776    MED 27660776 https://doi.org/10.1128/genomea.00975-16
+#>          id source     pmid                          doi
+#>       <chr>  <chr>    <chr>                        <chr>
+#> 1  28013277    MED 28013277           10.1093/pcp/pcw205
+#> 2  27230558    MED 27230558    10.1186/s12870-016-0805-5
+#> 3  27214749    MED 27214749            10.1111/nph.14008
+#> 4  26980001    MED 26980001    10.1186/s12864-016-2566-9
+#> 5  27557761    MED 27557761  10.1007/978-1-4939-6396-6_5
+#> 6  26676716    MED 26676716            10.1111/tpj.13103
+#> 7  26343971    MED 26343971   10.1016/j.molp.2015.08.011
+#> 8  26328666    MED 26328666    10.1186/s13059-015-0729-7
+#> 9  27711162    MED 27711162 10.1371/journal.pone.0164321
+#> 10 27660776    MED 27660776     10.1128/genomea.00975-16
 #> # ... with 122 more rows, and 23 more variables: title <chr>,
-#> #   authorString <chr>, journalTitle <chr>, pubYear <chr>,
-#> #   journalIssn <chr>, isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>,
+#> #   authorString <chr>, journalTitle <chr>, issue <chr>,
+#> #   journalVolume <chr>, pubYear <chr>, journalIssn <chr>, pageInfo <chr>,
+#> #   pubType <chr>, isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>,
 #> #   hasPDF <chr>, hasBook <chr>, citedByCount <int>, hasReferences <chr>,
 #> #   hasTextMinedTerms <chr>, hasDbCrossReferences <chr>,
-#> #   hasLabsLinks <chr>, epmcAuthMan <chr>, hasTMAccessionNumbers <chr>,
-#> #   pmcid <chr>, issue <chr>, journalVolume <chr>, pageInfo <chr>,
-#> #   pubType <chr>, hasSuppl <chr>
+#> #   hasLabsLinks <chr>, hasTMAccessionNumbers <chr>,
+#> #   firstPublicationDate <chr>, pmcid <chr>, hasSuppl <chr>
 ```
 
 ### Include MeSH and UniProt synonyms
@@ -174,26 +174,26 @@ You may also want to include synonyms when searching Europe PMC. If
 # with snyonyms
 epmc_search('aspirin', synonym = TRUE)
 #> # A tibble: 100 × 27
-#>          id source     pmid                           doi
-#>       <chr>  <chr>    <chr>                         <chr>
-#> 1  28147891    MED 28147891 10.1080/13880209.2017.1283706
-#> 2  28142297    MED 28142297 10.1080/15419061.2017.1282469
-#> 3  28278500    MED 28278500             10.1159/000464434
-#> 4  28293429    MED 28293429     10.1186/s40780-017-0078-7
-#> 5  28292923    MED 28292923 10.1158/1055-9965.epi-16-1027
-#> 6  28301951    MED 28301951      10.1177/1203475417697652
-#> 7  28265622    MED 28265622            10.1039/c6cp08122c
-#> 8  28302605    MED 28302605            10.3174/ajnr.a5113
-#> 9  28262342    MED 28262342  10.1016/j.ijcard.2017.02.122
-#> 10 28220610    MED 28220610              10.1002/bio.3285
+#>          id source     pmid                            doi
+#>       <chr>  <chr>    <chr>                          <chr>
+#> 1  28147891    MED 28147891  10.1080/13880209.2017.1283706
+#> 2  28142297    MED 28142297  10.1080/15419061.2017.1282469
+#> 3  28472145    MED 28472145   10.1371/journal.pone.0177201
+#> 4  28507039    MED 28507039 10.1158/1940-6207.capr-17-0033
+#> 5  28464540    MED 28464540               10.1002/jhbp.461
+#> 6  28481152    MED 28481152  10.1080/01616412.2017.1326657
+#> 7  28504994    MED 28504994   10.1213/ane.0000000000002053
+#> 8  28463532    MED 28463532  10.1080/17512433.2017.1324782
+#> 9  28503981    MED 28503981  10.1080/09537104.2017.1306039
+#> 10 28460643    MED 28460643      10.1186/s13058-017-0840-7
 #> # ... with 90 more rows, and 23 more variables: title <chr>,
 #> #   authorString <chr>, journalTitle <chr>, issue <chr>,
 #> #   journalVolume <chr>, pubYear <chr>, journalIssn <chr>, pageInfo <chr>,
 #> #   pubType <chr>, isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>,
 #> #   hasPDF <chr>, hasBook <chr>, citedByCount <int>, hasReferences <chr>,
 #> #   hasTextMinedTerms <chr>, hasDbCrossReferences <chr>,
-#> #   hasLabsLinks <chr>, epmcAuthMan <chr>, hasTMAccessionNumbers <chr>,
-#> #   pmcid <chr>, hasSuppl <chr>
+#> #   hasLabsLinks <chr>, hasTMAccessionNumbers <chr>,
+#> #   firstPublicationDate <chr>, pmcid <chr>, hasSuppl <chr>
 
 # without synonyms
 epmc_search('aspirin', synonym = FALSE)
@@ -201,23 +201,23 @@ epmc_search('aspirin', synonym = FALSE)
 #>          id source     pmid                            doi
 #>       <chr>  <chr>    <chr>                          <chr>
 #> 1  28147891    MED 28147891  10.1080/13880209.2017.1283706
-#> 2  28278500    MED 28278500              10.1159/000464434
-#> 3  28293429    MED 28293429      10.1186/s40780-017-0078-7
-#> 4  28301951    MED 28301951       10.1177/1203475417697652
-#> 5  28265622    MED 28265622             10.1039/c6cp08122c
-#> 6  28220610    MED 28220610               10.1002/bio.3285
-#> 7  28292923    MED 28292923  10.1158/1055-9965.epi-16-1027
-#> 8  28289603    MED 28289603    10.1016/j.gdata.2017.02.013
-#> 9  28181214    MED 28181214 10.1002/14651858.cd012129.pub2
-#> 10 28285696    MED 28285696  10.1016/j.lungcan.2017.01.018
+#> 2  28464540    MED 28464540               10.1002/jhbp.461
+#> 3  28472145    MED 28472145   10.1371/journal.pone.0177201
+#> 4  28507039    MED 28507039 10.1158/1940-6207.capr-17-0033
+#> 5  28463532    MED 28463532  10.1080/17512433.2017.1324782
+#> 6  28481152    MED 28481152  10.1080/01616412.2017.1326657
+#> 7  28432049    MED 28432049             10.2146/ajhp160219
+#> 8  28453510    MED 28453510   10.1371/journal.pone.0175966
+#> 9  28446712    MED 28446712          10.18632/aging.101224
+#> 10 28444860    MED 28444860        10.1111/1755-5922.12268
 #> # ... with 90 more rows, and 23 more variables: title <chr>,
 #> #   authorString <chr>, journalTitle <chr>, issue <chr>,
 #> #   journalVolume <chr>, pubYear <chr>, journalIssn <chr>, pageInfo <chr>,
 #> #   pubType <chr>, isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>,
 #> #   hasPDF <chr>, hasBook <chr>, citedByCount <int>, hasReferences <chr>,
 #> #   hasTextMinedTerms <chr>, hasDbCrossReferences <chr>,
-#> #   hasLabsLinks <chr>, epmcAuthMan <chr>, hasTMAccessionNumbers <chr>,
-#> #   pmcid <chr>, hasSuppl <chr>
+#> #   hasLabsLinks <chr>, hasTMAccessionNumbers <chr>,
+#> #   firstPublicationDate <chr>, pmcid <chr>, hasSuppl <chr>
 ```
 
 ### Output types
@@ -232,26 +232,26 @@ Key metadata parsed as non-nested tibble:
 ```r
 epmc_search('Gabi-Kat', output = 'parsed')
 #> # A tibble: 100 × 27
-#>          id source     pmid
-#>       <chr>  <chr>    <chr>
-#> 1  28013277    MED 28013277
-#> 2  22080561    MED 22080561
-#> 3  17062622    MED 17062622
-#> 4  14756321    MED 14756321
-#> 5  12874060    MED 12874060
-#> 6  25324895    MED 25324895
-#> 7  26343971    MED 26343971
-#> 8  27117628    MED 27117628
-#> 9  26493293    MED 26493293
-#> 10 27018849    MED 27018849
-#> # ... with 90 more rows, and 24 more variables: doi <chr>, title <chr>,
-#> #   authorString <chr>, journalTitle <chr>, pubYear <chr>,
-#> #   journalIssn <chr>, isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>,
+#>          id source     pmid                                doi
+#>       <chr>  <chr>    <chr>                              <chr>
+#> 1  28013277    MED 28013277                 10.1093/pcp/pcw205
+#> 2  22080561    MED 22080561                10.1093/nar/gkr1047
+#> 3  17062622    MED 17062622                 10.1093/nar/gkl753
+#> 4  14756321    MED 14756321 10.1023/b:plan.0000009297.37235.4a
+#> 5  12874060    MED 12874060      10.1093/bioinformatics/btg170
+#> 6  25324895    MED 25324895            10.1186/1746-4811-10-28
+#> 7  27507985    MED 27507985            10.3389/fpls.2016.01115
+#> 8  27117628    MED 27117628                  10.1038/srep24971
+#> 9  26343971    MED 26343971         10.1016/j.molp.2015.08.011
+#> 10 28167950    MED 28167950            10.3389/fpls.2017.00007
+#> # ... with 90 more rows, and 23 more variables: title <chr>,
+#> #   authorString <chr>, journalTitle <chr>, issue <chr>,
+#> #   journalVolume <chr>, pubYear <chr>, journalIssn <chr>, pageInfo <chr>,
+#> #   pubType <chr>, isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>,
 #> #   hasPDF <chr>, hasBook <chr>, citedByCount <int>, hasReferences <chr>,
 #> #   hasTextMinedTerms <chr>, hasDbCrossReferences <chr>,
-#> #   hasLabsLinks <chr>, epmcAuthMan <chr>, hasTMAccessionNumbers <chr>,
-#> #   pmcid <chr>, issue <chr>, journalVolume <chr>, pageInfo <chr>,
-#> #   pubType <chr>, hasSuppl <chr>
+#> #   hasLabsLinks <chr>, hasTMAccessionNumbers <chr>,
+#> #   firstPublicationDate <chr>, pmcid <chr>, hasSuppl <chr>
 ```
 
 In addition to fetch bibliographic metadata, the parsed output also helps you
@@ -277,10 +277,10 @@ epmc_search('Gabi-Kat', output = 'id_list')
 #> 4  14756321    MED 14756321       <NA>
 #> 5  12874060    MED 12874060       <NA>
 #> 6  25324895    MED 25324895 PMC4169229
-#> 7  26343971    MED 26343971       <NA>
+#> 7  27507985    MED 27507985 PMC4960254
 #> 8  27117628    MED 27117628 PMC4846993
-#> 9  26493293    MED 26493293 PMC4737287
-#> 10 27018849    MED 27018849 PMC4883958
+#> 9  26343971    MED 26343971       <NA>
+#> 10 28167950    MED 28167950 PMC5253381
 #> # ... with 90 more rows
 ```
 
@@ -293,172 +293,128 @@ Full metadata as list. Please be aware that these lists can become very large, a
 my_list <- epmc_search('Gabi-Kat', output = 'raw', limit = 10)
 # display the structure for one list element
 str(my_list[[10]])
-#> List of 40
-#>  $ id                   : chr "27018849"
-#>  $ source               : chr "MED"
-#>  $ pmid                 : chr "27018849"
-#>  $ pmcid                : chr "PMC4883958"
-#>  $ doi                  : chr "10.1080/15592324.2016.1161876"
-#>  $ title                : chr "Interaction between vitamin B6 metabolism, nitrogen metabolism and autoimmunity."
-#>  $ authorString         : chr "Colinas M, Fitzpatrick TB."
-#>  $ authorList           :List of 1
-#>   ..$ author:List of 2
-#>   .. ..$ :List of 6
-#>   .. .. ..$ fullName   : chr "Colinas M"
-#>   .. .. ..$ firstName  : chr "Maite"
-#>   .. .. ..$ lastName   : chr "Colinas"
-#>   .. .. ..$ initials   : chr "M"
-#>   .. .. ..$ authorId   :List of 2
-#>   .. .. .. ..$ type : chr "ORCID"
-#>   .. .. .. ..$ value: chr "0000-0001-7053-2983"
-#>   .. .. ..$ affiliation: chr "a Department of Botany and Plant Biology , University of Geneva , Geneva , Switzerland."
+#> List of 38
+#>  $ id                       : chr "28167950"
+#>  $ source                   : chr "MED"
+#>  $ pmid                     : chr "28167950"
+#>  $ pmcid                    : chr "PMC5253381"
+#>  $ doi                      : chr "10.3389/fpls.2017.00007"
+#>  $ title                    : chr "Small One-Helix Proteins Are Essential for Photosynthesis in Arabidopsis."
+#>  $ authorString             : chr "Beck J, Lohscheider JN, Albert S, Andersson U, Mendgen KW, Rojas-Stütz MC, Adamska I, Funck D."
+#>  $ authorList               :List of 1
+#>   ..$ author:List of 8
 #>   .. ..$ :List of 5
-#>   .. .. ..$ fullName   : chr "Fitzpatrick TB"
-#>   .. .. ..$ firstName  : chr "Teresa B"
-#>   .. .. ..$ lastName   : chr "Fitzpatrick"
-#>   .. .. ..$ initials   : chr "TB"
-#>   .. .. ..$ affiliation: chr "a Department of Botany and Plant Biology , University of Geneva , Geneva , Switzerland."
-#>  $ authorIdList         :List of 1
-#>   ..$ authorId:List of 1
-#>   .. ..$ :List of 2
-#>   .. .. ..$ type : chr "ORCID"
-#>   .. .. ..$ value: chr "0000-0001-7053-2983"
-#>  $ journalInfo          :List of 8
-#>   ..$ issue               : chr "4"
-#>   ..$ volume              : chr "11"
-#>   ..$ journalIssueId      : int 2439536
-#>   ..$ dateOfPublication   : chr "2016 "
+#>   .. .. ..$ fullName   : chr "Beck J"
+#>   .. .. ..$ firstName  : chr "Jochen"
+#>   .. .. ..$ lastName   : chr "Beck"
+#>   .. .. ..$ initials   : chr "J"
+#>   .. .. ..$ affiliation: chr "Plant Physiology and Biochemistry Group, Department of Biology, University of Konstanz Konstanz, Germany."
+#>   .. ..$ :List of 5
+#>   .. .. ..$ fullName   : chr "Lohscheider JN"
+#>   .. .. ..$ firstName  : chr "Jens N"
+#>   .. .. ..$ lastName   : chr "Lohscheider"
+#>   .. .. ..$ initials   : chr "JN"
+#>   .. .. ..$ affiliation: chr "Plant Physiology and Biochemistry Group, Department of Biology, University of Konstanz Konstanz, Germany."
+#>   .. ..$ :List of 5
+#>   .. .. ..$ fullName   : chr "Albert S"
+#>   .. .. ..$ firstName  : chr "Susanne"
+#>   .. .. ..$ lastName   : chr "Albert"
+#>   .. .. ..$ initials   : chr "S"
+#>   .. .. ..$ affiliation: chr "Plant Physiology and Biochemistry Group, Department of Biology, University of Konstanz Konstanz, Germany."
+#>   .. ..$ :List of 5
+#>   .. .. ..$ fullName   : chr "Andersson U"
+#>   .. .. ..$ firstName  : chr "Ulrica"
+#>   .. .. ..$ lastName   : chr "Andersson"
+#>   .. .. ..$ initials   : chr "U"
+#>   .. .. ..$ affiliation: chr "Plant Physiology and Biochemistry Group, Department of Biology, University of Konstanz Konstanz, Germany."
+#>   .. ..$ :List of 5
+#>   .. .. ..$ fullName   : chr "Mendgen KW"
+#>   .. .. ..$ firstName  : chr "Kurt W"
+#>   .. .. ..$ lastName   : chr "Mendgen"
+#>   .. .. ..$ initials   : chr "KW"
+#>   .. .. ..$ affiliation: chr "Plant Physiology and Biochemistry Group, Department of Biology, University of Konstanz Konstanz, Germany."
+#>   .. ..$ :List of 5
+#>   .. .. ..$ fullName   : chr "Rojas-Stütz MC"
+#>   .. .. ..$ firstName  : chr "Marc C"
+#>   .. .. ..$ lastName   : chr "Rojas-Stütz"
+#>   .. .. ..$ initials   : chr "MC"
+#>   .. .. ..$ affiliation: chr "Plant Physiology and Biochemistry Group, Department of Biology, University of Konstanz Konstanz, Germany."
+#>   .. ..$ :List of 5
+#>   .. .. ..$ fullName   : chr "Adamska I"
+#>   .. .. ..$ firstName  : chr "Iwona"
+#>   .. .. ..$ lastName   : chr "Adamska"
+#>   .. .. ..$ initials   : chr "I"
+#>   .. .. ..$ affiliation: chr "Plant Physiology and Biochemistry Group, Department of Biology, University of Konstanz Konstanz, Germany."
+#>   .. ..$ :List of 5
+#>   .. .. ..$ fullName   : chr "Funck D"
+#>   .. .. ..$ firstName  : chr "Dietmar"
+#>   .. .. ..$ lastName   : chr "Funck"
+#>   .. .. ..$ initials   : chr "D"
+#>   .. .. ..$ affiliation: chr "Plant Physiology and Biochemistry Group, Department of Biology, University of Konstanz Konstanz, Germany."
+#>  $ journalInfo              :List of 7
+#>   ..$ volume              : chr "8"
+#>   ..$ journalIssueId      : int 2519709
+#>   ..$ dateOfPublication   : chr "2017 "
 #>   ..$ monthOfPublication  : int 0
-#>   ..$ yearOfPublication   : int 2016
-#>   ..$ printPublicationDate: chr "2016-01-01"
+#>   ..$ yearOfPublication   : int 2017
+#>   ..$ printPublicationDate: chr "2017-01-01"
 #>   ..$ journal             :List of 6
-#>   .. ..$ title              : chr "Plant signaling & behavior"
-#>   .. ..$ medlineAbbreviation: chr "Plant Signal Behav"
-#>   .. ..$ essn               : chr "1559-2324"
-#>   .. ..$ issn               : chr "1559-2316"
-#>   .. ..$ nlmid              : chr "101291431"
-#>   .. ..$ isoabbreviation    : chr "Plant Signal Behav"
-#>  $ pubYear              : chr "2016"
-#>  $ pageInfo             : chr "e1161876"
-#>  $ abstractText         : chr "The essential micronutrient vitamin B6 is best known in its enzymatic cofactor form, pyridoxal 5'-phosphate (PLP). However, vit"| __truncated__
-#>  $ affiliation          : chr "a Department of Botany and Plant Biology , University of Geneva , Geneva , Switzerland."
-#>  $ language             : chr "eng"
-#>  $ pubModel             : chr "Print"
-#>  $ pubTypeList          :List of 1
-#>   ..$ pubType: chr [1:3] "Research Support, Non-U.S. Gov't" "addendum" "Journal Article"
-#>  $ meshHeadingList      :List of 1
-#>   ..$ meshHeading:List of 9
-#>   .. ..$ :List of 3
-#>   .. .. ..$ majorTopic_YN    : chr "N"
-#>   .. .. ..$ descriptorName   : chr "Arabidopsis"
-#>   .. .. ..$ meshQualifierList:List of 1
-#>   .. .. .. ..$ meshQualifier:List of 2
-#>   .. .. .. .. ..$ :List of 3
-#>   .. .. .. .. .. ..$ abbreviation : chr "GE"
-#>   .. .. .. .. .. ..$ qualifierName: chr "genetics"
-#>   .. .. .. .. .. ..$ majorTopic_YN: chr "N"
-#>   .. .. .. .. ..$ :List of 3
-#>   .. .. .. .. .. ..$ abbreviation : chr "IM"
-#>   .. .. .. .. .. ..$ qualifierName: chr "immunology"
-#>   .. .. .. .. .. ..$ majorTopic_YN: chr "N"
-#>   .. ..$ :List of 3
-#>   .. .. ..$ majorTopic_YN    : chr "N"
-#>   .. .. ..$ descriptorName   : chr "Nitrogen"
-#>   .. .. ..$ meshQualifierList:List of 1
-#>   .. .. .. ..$ meshQualifier:List of 1
-#>   .. .. .. .. ..$ :List of 3
-#>   .. .. .. .. .. ..$ abbreviation : chr "ME"
-#>   .. .. .. .. .. ..$ qualifierName: chr "metabolism"
-#>   .. .. .. .. .. ..$ majorTopic_YN: chr "Y"
-#>   .. ..$ :List of 3
-#>   .. .. ..$ majorTopic_YN    : chr "N"
-#>   .. .. ..$ descriptorName   : chr "Vitamin B 6"
-#>   .. .. ..$ meshQualifierList:List of 1
-#>   .. .. .. ..$ meshQualifier:List of 1
-#>   .. .. .. .. ..$ :List of 3
-#>   .. .. .. .. .. ..$ abbreviation : chr "ME"
-#>   .. .. .. .. .. ..$ qualifierName: chr "metabolism"
-#>   .. .. .. .. .. ..$ majorTopic_YN: chr "Y"
-#>   .. ..$ :List of 3
-#>   .. .. ..$ majorTopic_YN    : chr "N"
-#>   .. .. ..$ descriptorName   : chr "Arabidopsis Proteins"
-#>   .. .. ..$ meshQualifierList:List of 1
-#>   .. .. .. ..$ meshQualifier:List of 1
-#>   .. .. .. .. ..$ :List of 3
-#>   .. .. .. .. .. ..$ abbreviation : chr "ME"
-#>   .. .. .. .. .. ..$ qualifierName: chr "metabolism"
-#>   .. .. .. .. .. ..$ majorTopic_YN: chr "N"
-#>   .. ..$ :List of 2
-#>   .. .. ..$ majorTopic_YN : chr "N"
-#>   .. .. ..$ descriptorName: chr "Temperature"
-#>   .. ..$ :List of 2
-#>   .. .. ..$ majorTopic_YN : chr "Y"
-#>   .. .. ..$ descriptorName: chr "Autoimmunity"
-#>   .. ..$ :List of 2
-#>   .. .. ..$ majorTopic_YN : chr "N"
-#>   .. .. ..$ descriptorName: chr "Gene Expression Regulation, Plant"
-#>   .. ..$ :List of 2
-#>   .. .. ..$ majorTopic_YN : chr "N"
-#>   .. .. ..$ descriptorName: chr "Reproduction"
-#>   .. ..$ :List of 2
-#>   .. .. ..$ majorTopic_YN : chr "N"
-#>   .. .. ..$ descriptorName: chr "Phenotype"
-#>  $ keywordList          :List of 1
-#>   ..$ keyword: chr [1:8] "Arabidopsis thaliana" "Autoimmunity" "plant defense" "Vitamin B6" ...
-#>  $ chemicalList         :List of 1
-#>   ..$ chemical:List of 3
-#>   .. ..$ :List of 2
-#>   .. .. ..$ name          : chr "Arabidopsis Proteins"
-#>   .. .. ..$ registryNumber: chr "0"
-#>   .. ..$ :List of 2
-#>   .. .. ..$ name          : chr "Vitamin B 6"
-#>   .. .. ..$ registryNumber: chr "8059-24-3"
-#>   .. ..$ :List of 2
-#>   .. .. ..$ name          : chr "Nitrogen"
-#>   .. .. ..$ registryNumber: chr "N762921K75"
-#>  $ subsetList           :List of 1
-#>   ..$ subset:List of 1
-#>   .. ..$ :List of 2
-#>   .. .. ..$ code: chr "IM"
-#>   .. .. ..$ name: chr "Index Medicus"
-#>  $ fullTextUrlList      :List of 1
+#>   .. ..$ title              : chr "Frontiers in plant science"
+#>   .. ..$ medlineAbbreviation: chr "Front Plant Sci"
+#>   .. ..$ essn               : chr "1664-462X"
+#>   .. ..$ issn               : chr "1664-462X"
+#>   .. ..$ isoabbreviation    : chr "Front Plant Sci"
+#>   .. ..$ nlmid              : chr "101568200"
+#>  $ pubYear                  : chr "2017"
+#>  $ pageInfo                 : chr "7"
+#>  $ abstractText             : chr "The extended superfamily of chlorophyll a/b binding proteins comprises the Light-Harvesting Complex Proteins (L"| __truncated__
+#>  $ affiliation              : chr "Plant Physiology and Biochemistry Group, Department of Biology, University of Konstanz Konstanz, Germany."
+#>  $ language                 : chr "eng"
+#>  $ pubModel                 : chr "Electronic-eCollection"
+#>  $ pubTypeList              :List of 1
+#>   ..$ pubType: chr [1:2] "research-article" "Journal Article"
+#>  $ keywordList              :List of 1
+#>   ..$ keyword: chr [1:5] "Photosynthesis" "Phylogeny" "Photoprotection" "Pigment-Protein Complexes" ...
+#>  $ fullTextUrlList          :List of 1
 #>   ..$ fullTextUrl:List of 3
 #>   .. ..$ :List of 5
-#>   .. .. ..$ availability    : chr "Free"
-#>   .. .. ..$ availabilityCode: chr "F"
+#>   .. .. ..$ availability    : chr "Open access"
+#>   .. .. ..$ availabilityCode: chr "OA"
 #>   .. .. ..$ documentStyle   : chr "pdf"
 #>   .. .. ..$ site            : chr "Europe_PMC"
-#>   .. .. ..$ url             : chr "http://europepmc.org/articles/PMC4883958?pdf=render"
+#>   .. .. ..$ url             : chr "http://europepmc.org/articles/PMC5253381?pdf=render"
 #>   .. ..$ :List of 5
-#>   .. .. ..$ availability    : chr "Free"
-#>   .. .. ..$ availabilityCode: chr "F"
+#>   .. .. ..$ availability    : chr "Open access"
+#>   .. .. ..$ availabilityCode: chr "OA"
 #>   .. .. ..$ documentStyle   : chr "html"
 #>   .. .. ..$ site            : chr "Europe_PMC"
-#>   .. .. ..$ url             : chr "http://europepmc.org/articles/PMC4883958"
+#>   .. .. ..$ url             : chr "http://europepmc.org/articles/PMC5253381"
 #>   .. ..$ :List of 5
 #>   .. .. ..$ availability    : chr "Subscription required"
 #>   .. .. ..$ availabilityCode: chr "S"
 #>   .. .. ..$ documentStyle   : chr "doi"
 #>   .. .. ..$ site            : chr "DOI"
-#>   .. .. ..$ url             : chr "https://doi.org/10.1080/15592324.2016.1161876"
-#>  $ isOpenAccess         : chr "N"
-#>  $ inEPMC               : chr "Y"
-#>  $ inPMC                : chr "N"
-#>  $ hasPDF               : chr "Y"
-#>  $ hasBook              : chr "N"
-#>  $ hasSuppl             : chr "N"
-#>  $ citedByCount         : int 1
-#>  $ hasReferences        : chr "Y"
-#>  $ hasTextMinedTerms    : chr "Y"
-#>  $ hasDbCrossReferences : chr "N"
-#>  $ hasLabsLinks         : chr "N"
-#>  $ epmcAuthMan          : chr "N"
-#>  $ hasTMAccessionNumbers: chr "N"
-#>  $ dateOfCompletion     : chr "2016-12-30"
-#>  $ dateOfCreation       : chr "2016-05-11"
-#>  $ dateOfRevision       : chr "2016-12-31"
-#>  $ firstPublicationDate : chr "2016-03-28"
-#>  $ embargoDate          : chr "2016-09-28"
+#>   .. .. ..$ url             : chr "https://doi.org/10.3389/fpls.2017.00007"
+#>  $ isOpenAccess             : chr "Y"
+#>  $ inEPMC                   : chr "Y"
+#>  $ inPMC                    : chr "N"
+#>  $ hasPDF                   : chr "Y"
+#>  $ hasBook                  : chr "N"
+#>  $ hasSuppl                 : chr "N"
+#>  $ citedByCount             : int 0
+#>  $ hasReferences            : chr "Y"
+#>  $ hasTextMinedTerms        : chr "Y"
+#>  $ hasDbCrossReferences     : chr "N"
+#>  $ hasLabsLinks             : chr "Y"
+#>  $ license                  : chr "cc by"
+#>  $ authMan                  : chr "N"
+#>  $ epmcAuthMan              : chr "N"
+#>  $ nihAuthMan               : chr "N"
+#>  $ hasTMAccessionNumbers    : chr "N"
+#>  $ dateOfCreation           : chr "2017-02-07"
+#>  $ dateOfRevision           : chr "2017-02-10"
+#>  $ electronicPublicationDate: chr "2017-01-23"
+#>  $ firstPublicationDate     : chr "2017-01-23"
 ```
 
 ### Get results number
@@ -470,7 +426,7 @@ that represent articles referencing DataCite DOIs:
 ```r
 query <- "ACCESSION_TYPE:doi"
 epmc_hits(query)
-#> [1] 7315
+#> [1] 7245
 # set limit to 10 records
 my_data <- epmc_search(query = query, limit = 10)
 head(my_data)
@@ -478,7 +434,7 @@ head(my_data)
 #>         id source     pmid      pmcid                      doi
 #>      <chr>  <chr>    <chr>      <chr>                    <chr>
 #> 1 28280457    MED 28280457 PMC5321675 10.3389/fnmol.2017.00048
-#> 2 28230794    MED 28230794       <NA>       10.3390/md15020048
+#> 2 28230794    MED 28230794 PMC5334628       10.3390/md15020048
 #> 3 28079148    MED 28079148 PMC5228185        10.1038/srep40501
 #> 4 28097071    MED 28097071 PMC5228508       10.7717/peerj.2874
 #> 5 28097058    MED 28097058 PMC5228507       10.7717/peerj.2844
@@ -489,10 +445,10 @@ head(my_data)
 #> #   inEPMC <chr>, inPMC <chr>, hasPDF <chr>, hasBook <chr>,
 #> #   hasSuppl <chr>, citedByCount <int>, hasReferences <chr>,
 #> #   hasTextMinedTerms <chr>, hasDbCrossReferences <chr>,
-#> #   hasLabsLinks <chr>, epmcAuthMan <chr>, hasTMAccessionNumbers <chr>,
-#> #   issue <chr>
+#> #   hasLabsLinks <chr>, hasTMAccessionNumbers <chr>,
+#> #   firstPublicationDate <chr>, issue <chr>
 attr(my_data, "hit_count")
-#> [1] 7315
+#> [1] 7245
 ```
 
 You may also use `epmc_profile` to retrieve a summary of hit counts.
@@ -505,25 +461,25 @@ epmc_profile(query = 'malaria')
 #>     name  count
 #> *  <chr>  <int>
 #> 1    AGR    121
-#> 2    CBA    113
-#> 3    CTX      7
-#> 4    ETH    179
+#> 2    CBA    118
+#> 3    CTX      8
+#> 4    ETH    239
 #> 5    HIR      4
-#> 6    MED 115538
-#> 7    PAT   2252
+#> 6    MED 130208
+#> 7    PAT   2295
 #> 8    CIT      0
-#> 9    PMC  10372
+#> 9    PMC  10850
 #> 10   PPR      2
 #> 
 #> $pubType
 #> # A tibble: 5 × 2
 #>                  name  count
 #> *               <chr>  <int>
-#> 1                 ALL 128588
-#> 2           FULL TEXT  79013
-#> 3         OPEN ACCESS  34583
-#> 4              REVIEW  15674
-#> 5 BOOKS AND DOCUMENTS     97
+#> 1                 ALL 143845
+#> 2           FULL TEXT  82186
+#> 3         OPEN ACCESS  36145
+#> 4              REVIEW  17124
+#> 5 BOOKS AND DOCUMENTS     98
 #> 
 #> $subset
 #> # A tibble: 1 × 2
@@ -543,18 +499,18 @@ PubMed / Medline index is searched.
 ```r
 epmc_details(ext_id = '24270414')
 #> $basic
-#> # A tibble: 1 × 30
-#>         id source     pmid      pmcid                              doi
-#> *    <chr>  <chr>    <chr>      <chr>                            <chr>
-#> 1 24270414    MED 24270414 PMC3859427 https://doi.org/10.1172/jci73168
-#> # ... with 25 more variables: title <chr>, authorString <chr>,
+#> # A tibble: 1 × 32
+#>         id source     pmid      pmcid              doi
+#> *    <chr>  <chr>    <chr>      <chr>            <chr>
+#> 1 24270414    MED 24270414 PMC3859427 10.1172/jci73168
+#> # ... with 27 more variables: title <chr>, authorString <chr>,
 #> #   pubYear <chr>, pageInfo <chr>, abstractText <chr>, language <chr>,
 #> #   pubModel <chr>, isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>,
 #> #   hasPDF <chr>, hasBook <chr>, hasSuppl <chr>, citedByCount <int>,
 #> #   hasReferences <chr>, hasTextMinedTerms <chr>,
-#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>, epmcAuthMan <chr>,
-#> #   hasTMAccessionNumbers <chr>, dateOfCompletion <chr>,
-#> #   dateOfCreation <chr>, dateOfRevision <chr>,
+#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>, authMan <chr>,
+#> #   epmcAuthMan <chr>, nihAuthMan <chr>, hasTMAccessionNumbers <chr>,
+#> #   dateOfCompletion <chr>, dateOfCreation <chr>, dateOfRevision <chr>,
 #> #   electronicPublicationDate <chr>, firstPublicationDate <chr>
 #> 
 #> $author_details
@@ -573,7 +529,7 @@ epmc_details(ext_id = '24270414')
 #> # ... with 8 more variables: yearOfPublication <int>,
 #> #   printPublicationDate <chr>, journal.title <chr>,
 #> #   journal.medlineAbbreviation <chr>, journal.essn <chr>,
-#> #   journal.issn <chr>, journal.nlmid <chr>, journal.isoabbreviation <chr>
+#> #   journal.issn <chr>, journal.isoabbreviation <chr>, journal.nlmid <chr>
 #> 
 #> $ftx
 #> # A tibble: 5 × 5
@@ -622,11 +578,12 @@ epmc_details(ext_id = '24270414')
 #> # ... with 1 more variables: orderIn <int>
 #> 
 #> $grants
-#> # A tibble: 2 × 4
+#> # A tibble: 3 × 4
 #>        grantId        agency acronym orderIn
 #> *        <chr>         <chr>   <chr>   <int>
-#> 1  R01DK076077 NIDDK NIH HHS      DK       0
-#> 2 R01 DK076077 NIDDK NIH HHS      DK       0
+#> 1 R01 DK076077 NIDDK NIH HHS      DK       0
+#> 2  R01DK076077 NIDDK NIH HHS      DK       0
+#> 3 R01 DK087635 NIDDK NIH HHS      DK       0
 ```
 
 Show author details including ORCID:
@@ -673,7 +630,7 @@ my_cites
 #> #   citedByCount <int>, text <chr>
 # hits:
 attr(my_cites, 'hit_count')
-#> [1] 199
+#> [1] 200
 ```
 
 Please note, that citation counts are often smaller than those held by toll-
@@ -824,13 +781,14 @@ Check availability and number of links:
 
 ```r
 epmc_lablinks_count('PMC3986813', data_src = 'pmc')
-#> # A tibble: 4 × 2
+#> # A tibble: 5 × 2
 #>       providerName linksCount
 #> *            <chr>      <int>
 #> 1 EBI Train Online          1
 #> 2        Wikipedia          1
 #> 3       BioStudies          1
-#> 4        Altmetric          1
+#> 4          Publons          1
+#> 5        Altmetric          1
 ```
 
 Get linksfrom Wikipedia (`lab_id = "1507"`)
