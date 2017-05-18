@@ -29,6 +29,8 @@
 epmc_hits_trend <- function(query,
                             synonym = TRUE,
                             period = 1975:2016) {
+  # input validation
+  stopifnot(is.character(query), is.logical(synonym), is.numeric(period))
   years <- period
   results <- lapply(years,
                     epmc_hits_trend_by_year,

@@ -18,3 +18,11 @@ test_that("epmc_hits_trend returns", {
   expect_true(all(b$year == 2006:2016))
   expect_true(all(c$year == 2006:2016))
 })
+
+test_that("epmc_hits_trend fails correctly", {
+  skip_on_cran()
+  # input validation
+  expect_error(epmc_hits_trend("aspirin", period = "2006:2004", synonym = FALSE))
+  expect_error(epmc_hits_trend("aspirin", period = 2006:2008, synonym = "f"))
+  expect_error(epmc_hits_trend(query = 123, period = 2006:2008))
+})
