@@ -12,7 +12,8 @@ test_that("epmc_tm_count returns", {
   expect_output(str(c), "data.frame")
 
   # fails correctly
-  expect_error(epmc_tm_count("14756321"),
+  expect_message(epmc_tm_count("14756321"),
                "Sorry, no text-mined terms found")
+  expect_null(epmc_tm_count("14756321"))
   expect_error(epmc_tm_count("13814508", data_src = "abc"))
 })

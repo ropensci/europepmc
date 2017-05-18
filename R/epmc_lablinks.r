@@ -71,51 +71,55 @@ epmc_lablinks <-
         all providers in Europe PMC's advanced search form."
       )
     path <- paste(rest_path(),
-                 data_src,
-                 ext_id,
-                 "labsLinks",
-                 lab_id,
-                 "json",
-                 sep = "/")
+                  data_src,
+                  ext_id,
+                  "labsLinks",
+                  lab_id,
+                  "json",
+                  sep = "/")
     doc <- rebi_GET(path = path)
     hitCount <- doc$hitCount
-    if (doc$hitCount == 0)
-      stop("Sorry, no links available")
-    no_pages <-
-      rebi_pageing(hitCount = hitCount, pageSize = doc$request$pageSize)
-    # limit number of pages that will be retrieved
-    if (max(no_pages) > n_pages)
-      no_pages <- 1:n_pages
-    pages <- list()
-    for (i in no_pages) {
-      out <- rebi_GET(path = paste(
-        rest_path(),
-        data_src,
-        ext_id,
-        "labsLinks",
-        lab_id,
-        i,
-        "json",
-        sep = "/"
-      ))
-      message("Retrieving page ", i)
-      result <- plyr::ldply(
-        out$providers$provider$link,
-        data.frame,
-        stringsAsFactors = FALSE,
-        .id = NULL
+    if (doc$hitCount == 0) {
+      message("Sorry, no links available")
+      result <- NULL
+    } else {
+      no_pages <-
+        rebi_pageing(hitCount = hitCount,
+                     pageSize = doc$request$pageSize)
+      # limit number of pages that will be retrieved
+      if (max(no_pages) > n_pages)
+        no_pages <- 1:n_pages
+      pages <- list()
+      for (i in no_pages) {
+        out <- rebi_GET(path = paste(
+          rest_path(),
+          data_src,
+          ext_id,
+          "labsLinks",
+          lab_id,
+          i,
+          "json",
+          sep = "/"
+        ))
+        message("Retrieving page ", i)
+        result <- plyr::ldply(
+          out$providers$provider$link,
+          data.frame,
+          stringsAsFactors = FALSE,
+          .id = NULL
+        )
+        pages[[i + 1]] <- result
+      }
+      #combine all into one
+      tt <- jsonlite::rbind.pages(pages)
+      # add lablink metadata
+      result <- cbind(
+        tt,
+        lab_id = doc$providers$provider$id,
+        lab_name = doc$providers$provider$name,
+        lab_description = doc$providers$provider$description
       )
-      pages[[i + 1]] <- result
+      attr(result, "hit_count") <- hitCount
+      dplyr::as_data_frame(result)
     }
-    #combine all into one
-    tt <- jsonlite::rbind.pages(pages)
-    # add lablink metadata
-    result <- cbind(
-      tt,
-      lab_id = doc$providers$provider$id,
-      lab_name = doc$providers$provider$name,
-      lab_description = doc$providers$provider$description
-    )
-    attr(result, "hit_count") <- hitCount
-    dplyr::as_data_frame(result)
   }

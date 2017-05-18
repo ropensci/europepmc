@@ -1,26 +1,29 @@
 #' Search Europe PMC publication database
 #'
-#' @description This is the main function to search
-#' Europe PMC RESTful Web Service (\url{http://europepmc.org/RestfulWebService})
+#' @description This is the main function to search Europe PMC RESTful Web
+#'   Service (\url{http://europepmc.org/RestfulWebService}). It fully supports
+#'   the comprehensive Europe PMC query language. Simply copy & paste your query
+#'   terms to R. To get familiar with the Europe PMC query syntax, check the
+#'   Advanced Search Query Builder \url{https://europepmc.org/advancesearch}.
 #'
 #' @seealso \url{http://europepmc.org/Help}
 #'
-#' @param query character, search query. For more information on how to
-#'   build a search query, see \url{http://europepmc.org/Help}
-#' @param output character, what kind of output should be returned. One of 'parsed', 'id_list'
-#'   or 'raw' As default, parsed key metadata will be returned as data.frame.
-#'   'id_list' returns a list of IDs and sources.
-#'   Use 'raw' to get full metadata as list. Please be aware that these lists
-#'   can become very large.
-#' @param limit integer, limit the number of records you wish to retrieve.
-#'   By default, 100 are returned.
+#' @param query character, search query. For more information on how to build a
+#'   search query, see \url{http://europepmc.org/Help}
+#' @param output character, what kind of output should be returned. One of
+#'   'parsed', 'id_list' or 'raw' As default, parsed key metadata will be
+#'   returned as data.frame. 'id_list' returns a list of IDs and sources. Use
+#'   'raw' to get full metadata as list. Please be aware that these lists can
+#'   become very large.
+#' @param limit integer, limit the number of records you wish to retrieve. By
+#'   default, 100 are returned.
 #' @param synonym logical, synonym search. If TRUE, synonym terms from MeSH
-#'  terminology and the UniProt synonym list are queried, too. Disabled by
-#'  default.
+#'   terminology and the UniProt synonym list are queried, too. Disabled by
+#'   default.
 #' @param sort character, sort results by order (\code{asc}, \code{desc}) and
-#'  sort field (e.g. \code{CITED}, \code{P_PDATE}), seperated with a blank.
-#'  For example, sort results  by times cited in descending order:
-#'  \code{sort = 'CITED desc'}.
+#'   sort field (e.g. \code{CITED}, \code{P_PDATE}), seperated with a blank. For
+#'   example, sort results  by times cited in descending order: \code{sort =
+#'   'CITED desc'}.
 #' @param verbose	logical, print some information on what is going on.
 #' @return tibble
 #' @examples \dontrun{
@@ -83,43 +86,46 @@ epmc_search <- function(query = NULL,
   res_chunks <- chunks(limit = limit)
   # super hacky to control limit, better approach using pageSize param needed
   hits <- epmc_hits(query, synonym = synonym)
-  if (hits == 0)
-    stop("There are no results matching your query")
-  limit <- as.integer(limit)
-  limit <- ifelse(hits <= limit, hits, limit)
-  # let's loop over until page max is reached,
-  # or until cursor marks are identical
-  i <- 0
-  while (i < res_chunks$page_max) {
-    out <-
-      epmc_search_(
-        query = query,
-        limit = limit,
-        output = output,
-        verbose = verbose,
-        page_token = page_token,
-        sort = sort
-      )
-    if (page_token == out$next_cursor)
-      break
-    i <- i + 1
-    if (verbose == TRUE)
-      message(paste("Retrieving result page", i))
-    page_token <- out$next_cursor
-    if (output == "raw") {
-      results <- c(results, out$results)
-    } else {
-      results <- dplyr::bind_rows(results, out$results)
-    }
-  }
-  # again, approach needed to use param pageSize instead
-  if (output == "raw") {
-    md <- results[1:limit]
+  if (hits == 0) {
+    message("There are no results matching your query")
+    md <- NULL
   } else {
-    md <- results[1:limit,]
-  }
+    limit <- as.integer(limit)
+    limit <- ifelse(hits <= limit, hits, limit)
+    # let's loop over until page max is reached,
+    # or until cursor marks are identical
+    i <- 0
+    while (i < res_chunks$page_max) {
+      out <-
+        epmc_search_(
+          query = query,
+          limit = limit,
+          output = output,
+          verbose = verbose,
+          page_token = page_token,
+          sort = sort
+        )
+      if (page_token == out$next_cursor)
+        break
+      i <- i + 1
+      if (verbose == TRUE)
+        message(paste("Retrieving result page", i))
+      page_token <- out$next_cursor
+      if (output == "raw") {
+        results <- c(results, out$results)
+      } else {
+        results <- dplyr::bind_rows(results, out$results)
+      }
+    }
+    # again, approach needed to use param pageSize instead
+    if (output == "raw") {
+      md <- results[1:limit]
+    } else {
+      md <- results[1:limit, ]
+    }
   # return hit counts(thanks to @cstubben)
   attr(md, "hit_count") <- hits
+  }
   return(md)
 }
 

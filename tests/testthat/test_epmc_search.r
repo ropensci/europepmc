@@ -6,11 +6,15 @@ test_that("epmc_search returns", {
   b <- epmc_search(query = 'DOI:10.1007/bf00197367')
   c <- epmc_search(query = 'EXT_ID:22246381')
   d <- epmc_search(query = 'ISSN:1553-7404 HAS_EMBL:y')
-  e <- epmc_search(query = 'ISSN:1553-7404', output = 'id_list', limit = 250)
+  e <- epmc_search(query = 'ISSN:1553-7404', output = 'id_list',
+                   limit = 250)
   f <- epmc_search(query = 'ISSN:1553-7404 HAS_EMBL:y', limit = 25)
   g <- epmc_search(query = 'aspirin', synonym = TRUE)
   h <- epmc_search(query = 'ISSN:	1932-6203', sort = 'CITED desc')
   i <- epmc_search("gabi-kat", limit = 125, output = "raw")
+  j <- epmc_search("123haha")
+  k <- lapply(c("kdkdkdkdkdkd", "najko"),
+              function(x) epmc_search(x, output = "raw"))
 
 
   #correct class metadata
@@ -22,6 +26,7 @@ test_that("epmc_search returns", {
   expect_is(g, "data.frame")
   expect_is(h, "data.frame")
   expect_is(i, "list")
+  expect_is(k, "list")
 
   #are diminsions correct?
   expect_equal(nrow(e), 250)
@@ -32,7 +37,9 @@ test_that("epmc_search returns", {
 
 
   # fails correctly
-  expect_error(epmc_search("123haha"), "There are no results matching your query")
+  expect_message(epmc_search("123haha"),
+                 "There are no results matching your query")
+  expect_null(j)
   expect_error(epmc_search(query = "malaria", limit = TRUE))
   expect_error(epmc_search(query = "malaria", verbose = "kdk"))
   expect_error(epmc_search(query = "malaria", synonym = "yes"))

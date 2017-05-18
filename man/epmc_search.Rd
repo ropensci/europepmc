@@ -8,14 +8,14 @@ epmc_search(query = NULL, output = "parsed", synonym = TRUE,
   verbose = TRUE, limit = 100, sort = NULL)
 }
 \arguments{
-\item{query}{character, search query. For more information on how to
-build a search query, see \url{http://europepmc.org/Help}}
+\item{query}{character, search query. For more information on how to build a
+search query, see \url{http://europepmc.org/Help}}
 
-\item{output}{character, what kind of output should be returned. One of 'parsed', 'id_list'
-or 'raw' As default, parsed key metadata will be returned as data.frame.
-'id_list' returns a list of IDs and sources.
-Use 'raw' to get full metadata as list. Please be aware that these lists
-can become very large.}
+\item{output}{character, what kind of output should be returned. One of
+'parsed', 'id_list' or 'raw' As default, parsed key metadata will be
+returned as data.frame. 'id_list' returns a list of IDs and sources. Use
+'raw' to get full metadata as list. Please be aware that these lists can
+become very large.}
 
 \item{synonym}{logical, synonym search. If TRUE, synonym terms from MeSH
 terminology and the UniProt synonym list are queried, too. Disabled by
@@ -23,20 +23,23 @@ default.}
 
 \item{verbose}{logical, print some information on what is going on.}
 
-\item{limit}{integer, limit the number of records you wish to retrieve.
-By default, 100 are returned.}
+\item{limit}{integer, limit the number of records you wish to retrieve. By
+default, 100 are returned.}
 
 \item{sort}{character, sort results by order (\code{asc}, \code{desc}) and
-sort field (e.g. \code{CITED}, \code{P_PDATE}), seperated with a blank.
-For example, sort results  by times cited in descending order:
-\code{sort = 'CITED desc'}.}
+sort field (e.g. \code{CITED}, \code{P_PDATE}), seperated with a blank. For
+example, sort results  by times cited in descending order: \code{sort =
+'CITED desc'}.}
 }
 \value{
 tibble
 }
 \description{
-This is the main function to search
-Europe PMC RESTful Web Service (\url{http://europepmc.org/RestfulWebService})
+This is the main function to search Europe PMC RESTful Web
+  Service (\url{http://europepmc.org/RestfulWebService}). It fully supports
+  the comprehensive Europe PMC query language. Simply copy & paste your query
+  terms to R. To get familiar with the Europe PMC query syntax, check the
+  Advanced Search Query Builder \url{https://europepmc.org/advancesearch}.
 }
 \examples{
 \dontrun{

@@ -10,7 +10,8 @@ test_that("epmc_lablinks_count returns", {
   expect_output(str(b), "data.frame")
 
   # fails correctly
-  expect_error(epmc_lablinks_count("239393"),
+  expect_message(epmc_lablinks_count("239393"),
                "Sorry, no links available")
+  expect_null(epmc_lablinks_count("239393"))
   expect_error(epmc_lablinks_count("13814508", data_src = "abc"))
 })

@@ -76,21 +76,24 @@ epmc_details <- function(ext_id = NULL, data_src = "med") {
   }
   req <- rebi_GET(path = path, query = q)
   doc <- jsonlite::fromJSON(req)
-  if (doc$hitCount == 0)
-    stop("nothing found, please check your query")
-  res <- doc$resultList$result
-  out <- list(
-    basic = res[, !names(res) %in% fix_list(res)],
-    author_details = parse_aut(res),
-    journal_info = parse_jn(res),
-    ftx = plyr::rbind.fill(res$fullTextUrlList$fullTextUrl),
-    chemical = plyr::rbind.fill(res$chemicalList$chemical),
-    mesh_topic = plyr::rbind.fill(res$meshHeadingList$meshHeading)[-3],
-    mesh_qualifiers = get_mesh_subheadings(res = res),
-    comments = plyr::rbind.fill(res$commentCorrectionList$commentCorrection),
-    grants =  plyr::rbind.fill(res$grantsList$grant)
-  )
-  lapply(out, dplyr::as_data_frame)
+  if (doc$hitCount == 0) {
+    message("nothing found, please check your query")
+    NULL
+  } else {
+    res <- doc$resultList$result
+    out <- list(
+      basic = res[,!names(res) %in% fix_list(res)],
+      author_details = parse_aut(res),
+      journal_info = parse_jn(res),
+      ftx = plyr::rbind.fill(res$fullTextUrlList$fullTextUrl),
+      chemical = plyr::rbind.fill(res$chemicalList$chemical),
+      mesh_topic = plyr::rbind.fill(res$meshHeadingList$meshHeading)[-3],
+      mesh_qualifiers = get_mesh_subheadings(res = res),
+      comments = plyr::rbind.fill(res$commentCorrectionList$commentCorrection),
+      grants =  plyr::rbind.fill(res$grantsList$grant)
+    )
+    lapply(out, dplyr::as_data_frame)
+  }
 }
 
 #' parsing MeSH subheadings to be returned as data.frame

@@ -68,37 +68,40 @@ epmc_tm <-
                   sep = "/")
     doc <- rebi_GET(path = path)
     hit_count <- doc$hitCount
-    if (hit_count == 0)
-      stop("Sorry, no text-mined terms found")
-    paths <-
-      make_path(
-        hit_count = hit_count,
-        limit = limit,
-        ext_id = ext_id,
-        data_src = data_src,
-        req_method = req_method,
-        type = semantic_type
-      )
-    out <- lapply(paths, function(x) {
-      if (verbose == TRUE)
-        message(paste0(
-          hit_count,
-          " records found. Returning ",
-          ifelse(hit_count <= limit, hit_count, limit)
-        ))
-      doc <- rebi_GET(path = x)
-      plyr::ldply(
-        doc$semanticTypeList$semanticType$tmSummary,
-        data.frame,
-        stringsAsFactors = FALSE,
-        .id = NULL
-      )
-    })
-    #combine all into one
-    result <- jsonlite::rbind.pages(out) # %>%
-    # TO DO: unnest dplyr::as_data_frame()
-    # return
-    attr(result, "hit_count") <- hit_count
+    if (hit_count == 0) {
+      message("Sorry, no text-mined terms found")
+      result <- NULL
+    } else {
+      paths <-
+        make_path(
+          hit_count = hit_count,
+          limit = limit,
+          ext_id = ext_id,
+          data_src = data_src,
+          req_method = req_method,
+          type = semantic_type
+        )
+      out <- lapply(paths, function(x) {
+        if (verbose == TRUE)
+          message(paste0(
+            hit_count,
+            " records found. Returning ",
+            ifelse(hit_count <= limit, hit_count, limit)
+          ))
+        doc <- rebi_GET(path = x)
+        plyr::ldply(
+          doc$semanticTypeList$semanticType$tmSummary,
+          data.frame,
+          stringsAsFactors = FALSE,
+          .id = NULL
+        )
+      })
+      #combine all into one
+      result <- jsonlite::rbind.pages(out) # %>%
+      # TO DO: unnest dplyr::as_data_frame()
+      # return
+      attr(result, "hit_count") <- hit_count
+    }
     result
   }
 
