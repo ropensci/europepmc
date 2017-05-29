@@ -21,7 +21,7 @@ become very large.}
 terminology and the UniProt synonym list are queried, too. Disabled by
 default.}
 
-\item{verbose}{logical, print some information on what is going on.}
+\item{verbose}{logical, print progress bar. Activated by default.}
 
 \item{limit}{integer, limit the number of records you wish to retrieve. By
 default, 100 are returned.}

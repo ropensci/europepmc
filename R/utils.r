@@ -224,3 +224,16 @@ VERB_n <- function(VERB, n = 5) {
 mpf <- function(...)
   message(sprintf(...))
 rGET <- VERB_n(httr::GET)
+
+#' Progress bar definition
+#'
+#' @param limit maximum number of hits to be returned
+#'
+#' @noRd
+pb <- function(limit) {
+  if(!is.integer(limit))
+    stop("Limit is not integer")
+  progress::progress_bar$new(total = limit / batch_size(),
+                                 format = "(:spin) [:bar] :percent",
+                                 clear = FALSE, width = 60)
+}

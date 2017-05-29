@@ -30,4 +30,5 @@
 #' @importFrom dplyr %>% as_data_frame select_if data_frame bind_rows
 #' @importFrom stats runif
 #' @importFrom xml2 read_xml
+#' @importFrom progress progress_bar
 NULL

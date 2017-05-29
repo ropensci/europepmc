@@ -24,7 +24,7 @@
 #'   sort field (e.g. \code{CITED}, \code{P_PDATE}), seperated with a blank. For
 #'   example, sort results  by times cited in descending order: \code{sort =
 #'   'CITED desc'}.
-#' @param verbose	logical, print some information on what is going on.
+#' @param verbose	logical, print progress bar. Activated by default.
 #' @return tibble
 #' @examples \dontrun{
 #' #Search articles for 'Gabi-Kat'
@@ -95,6 +95,8 @@ epmc_search <- function(query = NULL,
     # let's loop over until page max is reached,
     # or until cursor marks are identical
     i <- 0
+    # progress
+    pb <- pb(limit = limit)
     while (i < res_chunks$page_max) {
       out <-
         epmc_search_(
@@ -109,7 +111,7 @@ epmc_search <- function(query = NULL,
         break
       i <- i + 1
       if (verbose == TRUE)
-        message(paste("Retrieving result page", i))
+        pb$tick()
       page_token <- out$next_cursor
       if (output == "raw") {
         results <- c(results, out$results)
