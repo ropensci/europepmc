@@ -1,3 +1,10 @@
+---
+output:
+  rmarkdown::html_vignette:
+    self_contained: no
+---
+  		  
+
 # europepmc - R Interface to Europe PMC RESTful Web Service
 
 ```{r echo=FALSE}
