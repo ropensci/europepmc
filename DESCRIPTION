@@ -38,5 +38,6 @@ Suggests:
     knitr,
     rmarkdown,
     ggplot2,
-    purrr
+    purrr,
+    readr
 Encoding: UTF-8
