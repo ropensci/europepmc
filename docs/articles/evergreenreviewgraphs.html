@@ -5,8 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>
-<h1 id="evergreenreview-graphs">evergreenreview graphs</h1> • europepmc</title>
+<title>Making proper trend graphs • europepmc</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -58,17 +57,17 @@
       </header><div class="row">
   <div class="col-md-9">
     <div class="page-header toc-ignore">
-      <h1><h1 id="evergreenreview-graphs">evergreenreview graphs</h1></h1>
+      <h1>Making proper trend graphs</h1>
                         <h4 class="author">Najko Jahn</h4>
             
-            <h4 class="date">2017-06-07</h4>
+            <h4 class="date">2017-06-08</h4>
           </div>
 
     
     
 <div class="contents">
-<p>Trend graphs in literature reviews illustrate the development of concepts in scholarly communication. Some trend graphs, however, don’t acknowledge that the number of scholarly publications is growing each year, but simply display the absolute number of hits they have found for a given concept. According to Noam Ross, these misleading graphs are called evergreen review graphs, and examples can be found on Twitter under the hash-tag <a href="https://twitter.com/hashtag/evergreenreviewgraph">#evergreenreviewgraph</a>.</p>
-<p>This vignette guides you how to make proper review graphs. In these graphs, the number of hits found is divided by the total number of records indexed in Europe PMC for a given search query.</p>
+<p>Trend graphs in literature reviews show the development of concepts in scholarly communication. Some trend graphs, however, don’t acknowledge that the number of scholarly publications is growing each year, but simply display the absolute number of hits they have found for a given concept. Noam Ross called these misleading graphs evergreen review graphs because of their enduring popularity in review papers. Examples can be found on Twitter under the Hashtag <a href="https://twitter.com/hashtag/evergreenreviewgraph">#evergreenreviewgraph</a>.</p>
+<p>This vignette guides you how to make proper trend graphs when reviewing Europe PMC literature. In these graphs, the number of hits found is divided by the total number of records indexed in Europe PMC for a given search query.</p>
 <div id="preparing-proper-review-graphs-with-epmc_hits_trend" class="section level2">
 <h2 class="hasAnchor">
 <a href="#preparing-proper-review-graphs-with-epmc_hits_trend" class="anchor"></a>Preparing proper review graphs with <code><a href="../reference/epmc_hits_trend.html">epmc_hits_trend()</a></code>
@@ -119,7 +118,113 @@ tt_oa
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">"Year published"</span>) +<span class="st"> </span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">"Proportion of OA full-texts in Europe PMC"</span>)</code></pre></div>
 <p><img src="evergreenreviewgraphs_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;"></p>
-<p>Be careful with the interpretation of the slower growth in the last years because Europe PMC also contains journals, which make their articles openly available after an embargo period that can be up to two years.</p>
+<p>Be careful with the interpretation of the slower growth in the last years because Europe PMC also contains journals, which make their articles openly available after an embargo period that can be up to three years.</p>
+<p>To assess journal participation in Europe PMC and when Europe PMC journals make their content freely available, we can simply parse <a href="https://europepmc.org/journalList">Europe PMC’s Journal list</a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+u &lt;-<span class="st"> "https://europepmc.org/journalList?format=csv"</span>
+jn_access_lvl &lt;-<span class="st"> </span>httr::<span class="kw">GET</span>(u) %&gt;%
+<span class="st">  </span>httr::<span class="kw">content</span>(<span class="st">"text/csv"</span>, <span class="dt">as =</span> <span class="st">"parsed"</span>, <span class="dt">encoding =</span> <span class="st">"UTF-8"</span>) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">count</span>(<span class="st">`</span><span class="dt">Free access</span><span class="st">`</span>, <span class="dt">sort =</span> <span class="ot">TRUE</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span>dplyr::<span class="kw">mutate</span>(<span class="dt">proportion =</span> n /<span class="st"> </span><span class="kw">sum</span>(n))
+
+jn_access_lvl %&gt;%
+<span class="st">  </span>knitr::<span class="kw">kable</span>(<span class="dt">caption =</span> <span class="st">"How soon after publication do participating journals make their articles freely available in Europe PMC?"</span>)</code></pre></div>
+<table class="table">
+<caption>How soon after publication do participating journals make their articles freely available in Europe PMC?</caption>
+<thead><tr class="header">
+<th align="left">Free access</th>
+<th align="right">n</th>
+<th align="right">proportion</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Immediate</td>
+<td align="right">1935</td>
+<td align="right">0.69</td>
+</tr>
+<tr class="even">
+<td align="left">12 months</td>
+<td align="right">472</td>
+<td align="right">0.17</td>
+</tr>
+<tr class="odd">
+<td align="left">NA</td>
+<td align="right">276</td>
+<td align="right">0.10</td>
+</tr>
+<tr class="even">
+<td align="left">12 months or less</td>
+<td align="right">45</td>
+<td align="right">0.02</td>
+</tr>
+<tr class="odd">
+<td align="left">6 months</td>
+<td align="right">43</td>
+<td align="right">0.02</td>
+</tr>
+<tr class="even">
+<td align="left">6 months or less</td>
+<td align="right">13</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="odd">
+<td align="left">1 month</td>
+<td align="right">11</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="even">
+<td align="left">0 months or more</td>
+<td align="right">8</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="odd">
+<td align="left">24 months</td>
+<td align="right">6</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="even">
+<td align="left">24 months or less</td>
+<td align="right">4</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="odd">
+<td align="left">0 months or less</td>
+<td align="right">2</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="even">
+<td align="left">2 months</td>
+<td align="right">2</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="odd">
+<td align="left">3 months</td>
+<td align="right">2</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="even">
+<td align="left">2 months or less</td>
+<td align="right">1</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="odd">
+<td align="left">3 months or more</td>
+<td align="right">1</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="even">
+<td align="left">36 months</td>
+<td align="right">1</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="odd">
+<td align="left">36 months or less</td>
+<td align="right">1</td>
+<td align="right">0.00</td>
+</tr>
+</tbody>
+</table>
+<p>The table reveals that 69% of all journals make their content immediately available via Europe PMC.</p>
 </div>
 <div id="use-case-cited-open-source-software-in-scholarly-publications" class="section level3">
 <h3 class="hasAnchor">
@@ -130,24 +235,23 @@ tt_oa
 </blockquote>
 <p>So let’s see whether we can find evidence for this evolving practice by creating a proper review graph. As a start, we examine these four general purpose hosting services for version-controlled code:</p>
 <ul>
-<li>code.google.com</li>
-<li>github.com</li>
-<li>sourceforge.net</li>
-<li>bitbucket.org</li>
+<li><a href="https://code.google.com/">code.google.com</a></li>
+<li><a href="https://github.com/">github.com</a></li>
+<li><a href="https://sourceforge.net/">sourceforge.net</a></li>
+<li><a href="https://bitbucket.org/">bitbucket.org</a></li>
 </ul>
-<p>and, of course, CRAN, the R archive network.</p>
+<p>and, of course, <a href="https://cran.r-project.org/">CRAN</a>, the R archive network.</p>
 <div id="how-to-query-europe-pmc" class="section level4">
 <h4 class="hasAnchor">
 <a href="#how-to-query-europe-pmc" class="anchor"></a>How to query Europe PMC?</h4>
-<p>We only want to search reference lists Because Europe PMC does not index references for its complete collection, we use <code>has_reflist:y</code> to restrict our search to those publications with reference lists. These literature sections can be searched with the <code>REF:</code> parameter.</p>
+<p>We only want to search reference lists. Because Europe PMC does not index references for its complete collection, we use <code>has_reflist:y</code> to restrict our search to those publications with reference lists. These literature sections can be searched with the <code>REF:</code> parameter.</p>
 <p>Let’s prepare the queries for links to the above mentioned code hosting services:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dvcs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"code.google.com"</span>, <span class="st">"github.com"</span>, 
           <span class="st">"sourceforge.net"</span>, <span class="st">"bitbucket.org"</span>, <span class="st">"cran.r-project.org"</span>)
 <span class="co"># make queries including reference section</span>
 dvcs_query &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">'REF:"'</span>, dvcs, <span class="st">'"'</span>)</code></pre></div>
 <p>and get publications for which Europe PMC gives access to reference lists for normalizing the review graph.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-my_df &lt;-<span class="st"> </span>purrr::<span class="kw">map_df</span>(dvcs_query, function(x) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_df &lt;-<span class="st"> </span>purrr::<span class="kw">map_df</span>(dvcs_query, function(x) {
   <span class="co"># get number of publications with indexed reference lists</span>
   refs_hits &lt;-<span class="st"> </span>
 <span class="st">    </span>europepmc::<span class="kw"><a href="../reference/epmc_hits_trend.html">epmc_hits_trend</a></span>(<span class="st">"has_reflist:y"</span>, <span class="dt">period =</span> <span class="dv">2009</span>:<span class="dv">2016</span>, <span class="dt">synonym =</span> <span class="ot">FALSE</span>)$query_hits
@@ -163,12 +267,12 @@ my_df
 <span class="co">#&gt;    &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;                     &lt;chr&gt;</span>
 <span class="co">#&gt;  1  2009   824691    487744         13 "REF:\"code.google.com\""</span>
 <span class="co">#&gt;  2  2010   880875    500230         41 "REF:\"code.google.com\""</span>
-<span class="co">#&gt;  3  2011   932247    562666         67 "REF:\"code.google.com\""</span>
-<span class="co">#&gt;  4  2012   975738    592184         89 "REF:\"code.google.com\""</span>
+<span class="co">#&gt;  3  2011   932247    562667         67 "REF:\"code.google.com\""</span>
+<span class="co">#&gt;  4  2012   975738    592186         89 "REF:\"code.google.com\""</span>
 <span class="co">#&gt;  5  2013  1034123    723937        135 "REF:\"code.google.com\""</span>
 <span class="co">#&gt;  6  2014  1081397    761217        145 "REF:\"code.google.com\""</span>
-<span class="co">#&gt;  7  2015  1140352    713743        117 "REF:\"code.google.com\""</span>
-<span class="co">#&gt;  8  2016  1097992    538026         59 "REF:\"code.google.com\""</span>
+<span class="co">#&gt;  7  2015  1140352    713742        117 "REF:\"code.google.com\""</span>
+<span class="co">#&gt;  8  2016  1097992    538097         59 "REF:\"code.google.com\""</span>
 <span class="co">#&gt;  9  2009   824691    487744          4      "REF:\"github.com\""</span>
 <span class="co">#&gt; 10  2010   880875    500230         10      "REF:\"github.com\""</span>
 <span class="co">#&gt; # ... with 30 more rows</span>
@@ -187,7 +291,7 @@ hits_summary
 <span class="co">#&gt; 3         "REF:\"github.com\""  1551</span>
 <span class="co">#&gt; 4    "REF:\"code.google.com\""   666</span>
 <span class="co">#&gt; 5      "REF:\"bitbucket.org\""    96</span></code></pre></div>
-<p>The proportion of papers where Europe PMC was able to make the cited literature available was 61 for the period 2009-2016. There also seems to be a time-lag between indexing reference lists because the absolute number of publication was decreasing over the years. This is presumably because Europe PMC also includes mandated open access journals, i.e. journals which make their content freely available after a certain period of time.</p>
+<p>The proportion of papers where Europe PMC was able to make the cited literature available was 61 for the period 2009-2016. There also seems to be a time-lag between indexing reference lists because the absolute number of publication was decreasing over the years. This is presumably because Europe PMC also includes delayed open access journals, i.e. journals which make their content freely available after a certain period of time.</p>
 <p>Let’s make a proper review graph normalizing our query results with the number of publications with indexed references.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
 <span class="kw">ggplot</span>(my_df, <span class="kw">aes</span>(<span class="kw">factor</span>(year), query_hits /<span class="st"> </span>refs_hits, <span class="dt">group =</span> query_id, 
@@ -196,18 +300,28 @@ hits_summary
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">2</span>) +
 <span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">name =</span> <span class="st">"Query"</span>, <span class="dt">palette =</span> <span class="st">"Set1"</span>)+
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">"Year published"</span>) +
-<span class="st">  </span><span class="kw">ylab</span>(<span class="st">"Proportion of articles"</span>)</code></pre></div>
-<p><img src="evergreenreviewgraphs_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">"Proportion of article in Europepe PMC"</span>)</code></pre></div>
+<p><img src="evergreenreviewgraphs_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
 </div>
 <div id="discussion-and-conclusion" class="section level4">
 <h4 class="hasAnchor">
 <a href="#discussion-and-conclusion" class="anchor"></a>Discussion and Conclusion</h4>
-<p>Although this figure illustrates the relative popularity of citing code hosted by CRAN and GitHub in recent years, there are some limits that needs to be discussed. As said before, Europe PMC does not extract reference lists from every indexed publication. It furthermore remains open whether and to what extent software is cited outside the reference section, i.e. as footnote or in the acknowledgement.</p>
-<p>Another problem of our query approach is that we did consider that DOIs can also be used to cite software, a best-practice implemented by <a href="https://guides.github.com/activities/citable-code/">Zenodo and GitHub</a> or the <a href="http://joss.theoj.org/">The Journal of Open Source Software</a>.</p>
-<p>Lastly, it actually remains unclear, which and what kind of software is cited how often. We could not control if authors just cited the homepages and not a particular source code repository. One paper can also cite more than one code repository, which is also not represented in review graph.</p>
-<p>To conclude, a proper review graph on the extent of software citation can only be the start for a more sophisticated approach that mines links to software repositories from scientific literature and fetches metadata about these code repositories from the hosting facilities.</p>
+<p>Although this figure illustrates the relative popularity of citing code hosted by CRAN and GitHub in recent years, there are some limits that needs to be discussed. As said before, Europe PMC does not extract reference lists from every indexed publication. It furthermore remains open whether and to what extent software is cited outside the reference section, i.e. as footnote or in the acknowledgements.</p>
+<p>Another problem of our query approach is that we did not consider that DOIs can also be used to cite software, a best-practice implemented by <a href="https://guides.github.com/activities/citable-code/">Zenodo and GitHub</a> or the <a href="http://joss.theoj.org/">The Journal of Open Source Software</a>.</p>
+<p>Lastly, it actually remains unclear, which and what kind of software is cited how often. We could also not control if authors just cited the homepages and not a particular source code repository. One paper can also cite more than one code repository, which is also not represented in the trend graph.</p>
+<p>To conclude, a proper trend graph on the extent of software citation can only be the start for a more sophisticated approach that mines links to software repositories from scientific literature and fetches metadata about these code repositories from the hosting facilities.</p>
 </div>
 </div>
+</div>
+<div id="conclusion" class="section level2">
+<h2 class="hasAnchor">
+<a href="#conclusion" class="anchor"></a>Conclusion</h2>
+<p>This vignette presented first steps on how to make trend graphs with <code>europepmc</code>. As our use-cases suggest, please carefully consider how you queried Europe PMC in the interpretation of your graph. Although trend graphs are a nice way to illustrate the development of certain concepts in scientific literature or recent trends in scholalrly communication, they must be put in context in order to become meaningful.</p>
+</div>
+<div id="acknowledgements" class="section level2">
+<h2 class="hasAnchor">
+<a href="#acknowledgements" class="anchor"></a>Acknowledgements</h2>
+<p>Big thanks to Maëlle Salmon for getting me started to write this vignette.</p>
 </div>
 <div class="footnotes">
 <hr>
@@ -225,6 +339,8 @@ hits_summary
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#preparing-proper-review-graphs-with-epmc_hits_trend">Preparing proper review graphs with <code><a href="../reference/epmc_hits_trend.html">epmc_hits_trend()</a></code></a></li>
       <li><a href="#use-cases">Use Cases</a></li>
+      <li><a href="#conclusion">Conclusion</a></li>
+      <li><a href="#acknowledgements">Acknowledgements</a></li>
       </ul>
 </div>
       </div>

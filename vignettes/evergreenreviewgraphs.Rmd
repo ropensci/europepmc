@@ -1,5 +1,5 @@
 ---
-title: "#evergreenreview graphs"
+title: "Making proper trend graphs"
 author: "Najko Jahn"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -29,9 +29,9 @@ knitr::knit_hooks$set(inline = function(x) {
    })
 ```
 
-Trend graphs in literature reviews illustrate the development of concepts in scholarly communication. Some trend graphs, however, don't acknowledge that the number of scholarly publications is growing each year, but simply display the absolute number of hits they have found for a given concept. According to Noam Ross, these misleading graphs are called evergreen review graphs, and examples can be found on Twitter under the hash-tag [#evergreenreviewgraph](https://twitter.com/hashtag/evergreenreviewgraph). 
+Trend graphs in literature reviews show the development of concepts in scholarly communication. Some trend graphs, however, don't acknowledge that the number of scholarly publications is growing each year, but simply display the absolute number of hits they have found for a given concept. Noam Ross called these misleading graphs evergreen review graphs because of their enduring popularity in  review papers. Examples can be found on Twitter under the Hashtag [#evergreenreviewgraph](https://twitter.com/hashtag/evergreenreviewgraph).
 
-This vignette guides you how to make proper review graphs. In these graphs, the number of hits found is divided by the total number of records indexed in Europe PMC for a given search query. 
+This vignette guides you how to make proper trend graphs when reviewing Europe PMC literature. In these graphs, the number of hits found is divided by the total number of records indexed in Europe PMC for a given search query. 
 
 ## Preparing proper review graphs with `epmc_hits_trend()`
 
@@ -67,7 +67,23 @@ ggplot(tt_oa, aes(year, query_hits / all_hits)) +
   ylab("Proportion of OA full-texts in Europe PMC")
 ```
 
-Be careful with the interpretation of the slower growth in the last years because Europe PMC also contains journals, which make their articles openly available after an embargo period that can be up to two years. 
+Be careful with the interpretation of the slower growth in the last years because Europe PMC also contains journals, which make their articles openly available after an embargo period that can be up to three years.
+
+To assess journal participation in Europe PMC and when Europe PMC journals make their content freely available, we can simply parse [Europe PMC's Journal list](https://europepmc.org/journalList)
+
+```{r, results='asis'}
+library(dplyr)
+u <- "https://europepmc.org/journalList?format=csv"
+jn_access_lvl <- httr::GET(u) %>%
+  httr::content("text/csv", as = "parsed", encoding = "UTF-8") %>%
+  dplyr::count(`Free access`, sort = TRUE) %>% 
+  dplyr::mutate(proportion = n / sum(n))
+
+jn_access_lvl %>%
+  knitr::kable(caption = "How soon after publication do participating journals make their articles freely available in Europe PMC?")
+```
+
+The table reveals that `r round(jn_access_lvl[1,2] / sum(jn_access_lvl$n) * 100)`% of all journals make their content immediately available via Europe PMC.
 
 ### Use Case: Cited open source software in scholarly publications
 
@@ -77,16 +93,16 @@ Another nice use case for trend graphs is to study how code and software reposit
 
 So let's see whether we can find evidence for this evolving practice by creating a proper review graph. As a start, we examine these four general purpose hosting services for version-controlled code:
 
-- code.google.com
-- github.com
-- sourceforge.net
-- bitbucket.org
+- [code.google.com](https://code.google.com/)
+- [github.com](https://github.com/)
+- [sourceforge.net](https://sourceforge.net/)
+- [bitbucket.org](https://bitbucket.org/)
 
-and, of course, CRAN, the R archive network.
+and, of course, [CRAN](https://cran.r-project.org/), the R archive network.
 
 #### How to query Europe PMC?
 
-We only want to search reference lists Because Europe PMC does not index references for its complete collection, we use `has_reflist:y` to restrict our search to those publications with reference lists. These literature sections can be searched with the `REF:` parameter.
+We only want to search reference lists. Because Europe PMC does not index references for its complete collection, we use `has_reflist:y` to restrict our search to those publications with reference lists. These literature sections can be searched with the `REF:` parameter.
 
 Let's prepare the queries for links to the above mentioned code hosting services:
 
@@ -100,7 +116,6 @@ dvcs_query <- paste0('REF:"', dvcs, '"')
 and get publications for which Europe PMC gives access to reference lists for normalizing the review graph.
 
 ```{r}
-library(dplyr)
 my_df <- purrr::map_df(dvcs_query, function(x) {
   # get number of publications with indexed reference lists
   refs_hits <- 
@@ -121,7 +136,7 @@ hits_summary <- my_df %>%
 hits_summary
 ```
 
-The proportion of papers where Europe PMC was able to make the cited literature available was `r round(sum(my_df$refs_hits) / sum(my_df$all_hits), digits = 2) *100` for the period 2009-2016. There also seems to be a time-lag between indexing reference lists because the absolute number of publication was decreasing over the years. This is presumably because Europe PMC also includes mandated open access journals, i.e. journals which make their content freely available after a certain period of time.
+The proportion of papers where Europe PMC was able to make the cited literature available was `r round(sum(my_df$refs_hits) / sum(my_df$all_hits), digits = 2) *100` for the period 2009-2016. There also seems to be a time-lag between indexing reference lists because the absolute number of publication was decreasing over the years. This is presumably because Europe PMC also includes delayed open access journals, i.e. journals which make their content freely available after a certain period of time.
 
 Let's make a proper review graph normalizing our query results with the number of publications with indexed references.
 
@@ -133,15 +148,23 @@ ggplot(my_df, aes(factor(year), query_hits / refs_hits, group = query_id,
   geom_point(size = 2) +
   scale_color_brewer(name = "Query", palette = "Set1")+
   xlab("Year published") +
-  ylab("Proportion of articles")
+  ylab("Proportion of article in Europepe PMC")
 ```
 
 #### Discussion and Conclusion
 
-Although this figure illustrates the relative popularity of citing code hosted by CRAN and GitHub in recent years, there are some limits that needs to be discussed. As said before, Europe PMC does not extract reference lists from every indexed publication. It furthermore remains open whether and to what extent software is cited outside the reference section, i.e. as footnote or in the acknowledgement. 
+Although this figure illustrates the relative popularity of citing code hosted by CRAN and GitHub in recent years, there are some limits that needs to be discussed. As said before, Europe PMC does not extract reference lists from every indexed publication. It furthermore remains open whether and to what extent software is cited outside the reference section, i.e. as footnote or in the acknowledgements. 
 
-Another problem of our query approach is that we did consider that DOIs can also be used to cite software, a best-practice implemented by [Zenodo and GitHub](https://guides.github.com/activities/citable-code/) or the [The Journal of Open Source Software](http://joss.theoj.org/). 
+Another problem of our query approach is that we did not consider that DOIs can also be used to cite software, a best-practice implemented by [Zenodo and GitHub](https://guides.github.com/activities/citable-code/) or the [The Journal of Open Source Software](http://joss.theoj.org/). 
 
-Lastly, it actually remains unclear, which and what kind of software is cited how often. We could not control if authors just cited the homepages and not a particular source code repository. One paper can also cite more than one code repository, which is also not represented in review graph. 
+Lastly, it actually remains unclear, which and what kind of software is cited how often. We could also not control if authors just cited the homepages and not a particular source code repository. One paper can also cite more than one code repository, which is also not represented in the trend graph. 
 
-To conclude, a proper review graph on the extent of software citation can only be the start for a more sophisticated approach that mines links to software repositories from scientific literature and fetches metadata about these code repositories from the hosting facilities.
+To conclude, a proper trend graph on the extent of software citation can only be the start for a more sophisticated approach that mines links to software repositories from scientific literature and fetches metadata about these code repositories from the hosting facilities.
+
+## Conclusion
+
+This vignette presented first steps on how to make trend graphs with `europepmc`. As our use-cases suggest, please carefully consider how you queried Europe PMC in the interpretation of your graph. Although trend graphs are a nice way to illustrate the development of certain concepts in scientific literature or recent trends in scholalrly communication, they must be put in context in order to become meaningful. 
+
+## Acknowledgements
+
+Big thanks to Maëlle Salmon for getting me started to write this vignette.
