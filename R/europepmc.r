@@ -25,7 +25,7 @@
 #' @importFrom urltools url_decode
 #' @importFrom utils URLencode
 #' @importFrom plyr rbind.fill ldply
-#' @importFrom jsonlite fromJSON rbind.pages
+#' @importFrom jsonlite fromJSON rbind_pages
 #' @importFrom httr GET content stop_for_status status_code user_agent
 #' @importFrom dplyr %>% as_data_frame select_if data_frame bind_rows
 #' @importFrom stats runif

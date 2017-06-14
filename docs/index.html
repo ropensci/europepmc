@@ -211,27 +211,27 @@
 <span class="co">#&gt; #   hasTMAccessionNumbers &lt;chr&gt;, firstPublicationDate &lt;chr&gt;</span></code></pre></div>
 <p>Use <a href="http://orcid.org/">ORCID</a> to search for personal publications:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/epmc_search.html">epmc_search</a></span>(<span class="dt">query =</span> <span class="st">'AUTHORID:"0000-0002-7635-3473"'</span>, <span class="dt">limit =</span> <span class="dv">1000</span>)
-<span class="co">#&gt; # A tibble: 133 x 27</span>
-<span class="co">#&gt;          id source     pmid                          doi</span>
-<span class="co">#&gt;       &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;                        &lt;chr&gt;</span>
-<span class="co">#&gt;  1 28284041    MED 28284041        10.1515/znc-2016-0221</span>
-<span class="co">#&gt;  2 28013277    MED 28013277           10.1093/pcp/pcw205</span>
-<span class="co">#&gt;  3 27230558    MED 27230558    10.1186/s12870-016-0805-5</span>
-<span class="co">#&gt;  4 27214749    MED 27214749            10.1111/nph.14008</span>
-<span class="co">#&gt;  5 26980001    MED 26980001    10.1186/s12864-016-2566-9</span>
-<span class="co">#&gt;  6 27557761    MED 27557761  10.1007/978-1-4939-6396-6_5</span>
-<span class="co">#&gt;  7 26676716    MED 26676716            10.1111/tpj.13103</span>
-<span class="co">#&gt;  8 26343971    MED 26343971   10.1016/j.molp.2015.08.011</span>
-<span class="co">#&gt;  9 26328666    MED 26328666    10.1186/s13059-015-0729-7</span>
-<span class="co">#&gt; 10 27711162    MED 27711162 10.1371/journal.pone.0164321</span>
-<span class="co">#&gt; # ... with 123 more rows, and 23 more variables: title &lt;chr&gt;,</span>
-<span class="co">#&gt; #   authorString &lt;chr&gt;, journalTitle &lt;chr&gt;, pubYear &lt;chr&gt;,</span>
-<span class="co">#&gt; #   journalIssn &lt;chr&gt;, pubType &lt;chr&gt;, isOpenAccess &lt;chr&gt;, inEPMC &lt;chr&gt;,</span>
-<span class="co">#&gt; #   inPMC &lt;chr&gt;, hasPDF &lt;chr&gt;, hasBook &lt;chr&gt;, citedByCount &lt;int&gt;,</span>
-<span class="co">#&gt; #   hasReferences &lt;chr&gt;, hasTextMinedTerms &lt;chr&gt;,</span>
-<span class="co">#&gt; #   hasDbCrossReferences &lt;chr&gt;, hasLabsLinks &lt;chr&gt;,</span>
-<span class="co">#&gt; #   hasTMAccessionNumbers &lt;chr&gt;, firstPublicationDate &lt;chr&gt;, pmcid &lt;chr&gt;,</span>
-<span class="co">#&gt; #   issue &lt;chr&gt;, journalVolume &lt;chr&gt;, pageInfo &lt;chr&gt;, hasSuppl &lt;chr&gt;</span></code></pre></div>
+<span class="co">#&gt; # A tibble: 134 x 27</span>
+<span class="co">#&gt;          id source     pmid                         doi</span>
+<span class="co">#&gt;       &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;                       &lt;chr&gt;</span>
+<span class="co">#&gt;  1 28585529    MED 28585529         10.1038/ncomms15708</span>
+<span class="co">#&gt;  2 28284041    MED 28284041       10.1515/znc-2016-0221</span>
+<span class="co">#&gt;  3 28013277    MED 28013277          10.1093/pcp/pcw205</span>
+<span class="co">#&gt;  4 27230558    MED 27230558   10.1186/s12870-016-0805-5</span>
+<span class="co">#&gt;  5 27214749    MED 27214749           10.1111/nph.14008</span>
+<span class="co">#&gt;  6 26980001    MED 26980001   10.1186/s12864-016-2566-9</span>
+<span class="co">#&gt;  7 27557761    MED 27557761 10.1007/978-1-4939-6396-6_5</span>
+<span class="co">#&gt;  8 26676716    MED 26676716           10.1111/tpj.13103</span>
+<span class="co">#&gt;  9 26343971    MED 26343971  10.1016/j.molp.2015.08.011</span>
+<span class="co">#&gt; 10 26328666    MED 26328666   10.1186/s13059-015-0729-7</span>
+<span class="co">#&gt; # ... with 124 more rows, and 23 more variables: title &lt;chr&gt;,</span>
+<span class="co">#&gt; #   authorString &lt;chr&gt;, journalTitle &lt;chr&gt;, journalVolume &lt;chr&gt;,</span>
+<span class="co">#&gt; #   pubYear &lt;chr&gt;, journalIssn &lt;chr&gt;, pageInfo &lt;chr&gt;, pubType &lt;chr&gt;,</span>
+<span class="co">#&gt; #   isOpenAccess &lt;chr&gt;, inEPMC &lt;chr&gt;, inPMC &lt;chr&gt;, hasPDF &lt;chr&gt;,</span>
+<span class="co">#&gt; #   hasBook &lt;chr&gt;, citedByCount &lt;int&gt;, hasReferences &lt;chr&gt;,</span>
+<span class="co">#&gt; #   hasTextMinedTerms &lt;chr&gt;, hasDbCrossReferences &lt;chr&gt;,</span>
+<span class="co">#&gt; #   hasLabsLinks &lt;chr&gt;, hasTMAccessionNumbers &lt;chr&gt;,</span>
+<span class="co">#&gt; #   firstPublicationDate &lt;chr&gt;, pmcid &lt;chr&gt;, issue &lt;chr&gt;, hasSuppl &lt;chr&gt;</span></code></pre></div>
 </div>
 <div id="include-mesh-and-uniprot-synonyms" class="section level3">
 <h3 class="hasAnchor">
@@ -240,18 +240,18 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># with snyonyms</span>
 <span class="kw"><a href="reference/epmc_search.html">epmc_search</a></span>(<span class="st">'aspirin'</span>, <span class="dt">synonym =</span> <span class="ot">TRUE</span>)
 <span class="co">#&gt; # A tibble: 100 x 27</span>
-<span class="co">#&gt;          id source     pmid                                        doi</span>
-<span class="co">#&gt;       &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;                                      &lt;chr&gt;</span>
-<span class="co">#&gt;  1 28147891    MED 28147891              10.1080/13880209.2017.1283706</span>
-<span class="co">#&gt;  2 28142297    MED 28142297              10.1080/15419061.2017.1282469</span>
-<span class="co">#&gt;  3 28577622    MED 28577622                 10.1016/j.mcna.2017.03.004</span>
-<span class="co">#&gt;  4 28573479    MED 28573479                  10.1007/s40292-017-0213-4</span>
-<span class="co">#&gt;  5 28566591    MED 28566591           10.2169/internalmedicine.56.7760</span>
-<span class="co">#&gt;  6 28569372    MED 28569372                  10.1007/s11999-017-5394-6</span>
-<span class="co">#&gt;  7 28550988    MED 28550988                 10.1016/j.jaci.2017.05.006</span>
-<span class="co">#&gt;  8 28551293    MED 28551293 10.1016/j.jstrokecerebrovasdis.2017.04.034</span>
-<span class="co">#&gt;  9 28537451    MED 28537451                      10.1089/jwh.2016.6040</span>
-<span class="co">#&gt; 10 28570221    MED 28570221                        10.18176/jiaci.0118</span>
+<span class="co">#&gt;          id source     pmid                              doi</span>
+<span class="co">#&gt;       &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;                            &lt;chr&gt;</span>
+<span class="co">#&gt;  1 28147891    MED 28147891    10.1080/13880209.2017.1283706</span>
+<span class="co">#&gt;  2 28142297    MED 28142297    10.1080/15419061.2017.1282469</span>
+<span class="co">#&gt;  3 28597105    MED 28597105        10.1007/s11912-017-0605-6</span>
+<span class="co">#&gt;  4 28577622    MED 28577622       10.1016/j.mcna.2017.03.004</span>
+<span class="co">#&gt;  5 28599894    MED 28599894       10.1016/j.ajog.2017.05.062</span>
+<span class="co">#&gt;  6 28590311    MED 28590311     10.1097/aci.0000000000000374</span>
+<span class="co">#&gt;  7 28595197    MED 28595197                10.1159/000477203</span>
+<span class="co">#&gt;  8 28606562    MED 28606562  10.1016/j.clinthera.2017.04.008</span>
+<span class="co">#&gt;  9 28573479    MED 28573479        10.1007/s40292-017-0213-4</span>
+<span class="co">#&gt; 10 28566591    MED 28566591 10.2169/internalmedicine.56.7760</span>
 <span class="co">#&gt; # ... with 90 more rows, and 23 more variables: title &lt;chr&gt;,</span>
 <span class="co">#&gt; #   authorString &lt;chr&gt;, journalTitle &lt;chr&gt;, issue &lt;chr&gt;,</span>
 <span class="co">#&gt; #   journalVolume &lt;chr&gt;, pubYear &lt;chr&gt;, journalIssn &lt;chr&gt;, pageInfo &lt;chr&gt;,</span>
@@ -267,15 +267,15 @@
 <span class="co">#&gt;          id source     pmid                                        doi</span>
 <span class="co">#&gt;       &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;                                      &lt;chr&gt;</span>
 <span class="co">#&gt;  1 28147891    MED 28147891              10.1080/13880209.2017.1283706</span>
-<span class="co">#&gt;  2 28577622    MED 28577622                 10.1016/j.mcna.2017.03.004</span>
-<span class="co">#&gt;  3 28550988    MED 28550988                 10.1016/j.jaci.2017.05.006</span>
-<span class="co">#&gt;  4 28566591    MED 28566591           10.2169/internalmedicine.56.7760</span>
-<span class="co">#&gt;  5 28551293    MED 28551293 10.1016/j.jstrokecerebrovasdis.2017.04.034</span>
-<span class="co">#&gt;  6 28573479    MED 28573479                  10.1007/s40292-017-0213-4</span>
-<span class="co">#&gt;  7 28464540    MED 28464540                           10.1002/jhbp.461</span>
-<span class="co">#&gt;  8 28472145    MED 28472145               10.1371/journal.pone.0177201</span>
-<span class="co">#&gt;  9 28520220    MED 28520220                    10.1111/1755-5922.12273</span>
-<span class="co">#&gt; 10 28537451    MED 28537451                      10.1089/jwh.2016.6040</span>
+<span class="co">#&gt;  2 28597105    MED 28597105                  10.1007/s11912-017-0605-6</span>
+<span class="co">#&gt;  3 28590311    MED 28590311               10.1097/aci.0000000000000374</span>
+<span class="co">#&gt;  4 28577622    MED 28577622                 10.1016/j.mcna.2017.03.004</span>
+<span class="co">#&gt;  5 28599894    MED 28599894                 10.1016/j.ajog.2017.05.062</span>
+<span class="co">#&gt;  6 28550988    MED 28550988                 10.1016/j.jaci.2017.05.006</span>
+<span class="co">#&gt;  7 28566591    MED 28566591           10.2169/internalmedicine.56.7760</span>
+<span class="co">#&gt;  8 28551293    MED 28551293 10.1016/j.jstrokecerebrovasdis.2017.04.034</span>
+<span class="co">#&gt;  9 28573479    MED 28573479                  10.1007/s40292-017-0213-4</span>
+<span class="co">#&gt; 10 28464540    MED 28464540                           10.1002/jhbp.461</span>
 <span class="co">#&gt; # ... with 90 more rows, and 23 more variables: title &lt;chr&gt;,</span>
 <span class="co">#&gt; #   authorString &lt;chr&gt;, journalTitle &lt;chr&gt;, issue &lt;chr&gt;,</span>
 <span class="co">#&gt; #   journalVolume &lt;chr&gt;, pubYear &lt;chr&gt;, journalIssn &lt;chr&gt;, pageInfo &lt;chr&gt;,</span>
@@ -474,7 +474,7 @@
 <p>Count hits before with <code>epmc_hits</code> to define limit. For example, get list of ids that represent articles referencing DataCite DOIs:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">query &lt;-<span class="st"> "ACCESSION_TYPE:doi"</span>
 <span class="kw"><a href="reference/epmc_hits.html">epmc_hits</a></span>(query)
-<span class="co">#&gt; [1] 7238</span>
+<span class="co">#&gt; [1] 7213</span>
 <span class="co"># set limit to 10 records</span>
 my_data &lt;-<span class="st"> </span><span class="kw"><a href="reference/epmc_search.html">epmc_search</a></span>(<span class="dt">query =</span> query, <span class="dt">limit =</span> <span class="dv">10</span>)
 <span class="kw">head</span>(my_data)
@@ -496,7 +496,7 @@ my_data &lt;-<span class="st"> </span><span class="kw"><a href="reference/epmc_s
 <span class="co">#&gt; #   hasLabsLinks &lt;chr&gt;, hasTMAccessionNumbers &lt;chr&gt;,</span>
 <span class="co">#&gt; #   firstPublicationDate &lt;chr&gt;, issue &lt;chr&gt;</span>
 <span class="kw">attr</span>(my_data, <span class="st">"hit_count"</span>)
-<span class="co">#&gt; [1] 7238</span></code></pre></div>
+<span class="co">#&gt; [1] 7213</span></code></pre></div>
 <p>You may also use <code>epmc_profile</code> to retrieve a summary of hit counts.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/epmc_profile.html">epmc_profile</a></span>(<span class="dt">query =</span> <span class="st">'malaria'</span>)
 <span class="co">#&gt; $source</span>
@@ -508,21 +508,21 @@ my_data &lt;-<span class="st"> </span><span class="kw"><a href="reference/epmc_s
 <span class="co">#&gt;  3   CTX      8</span>
 <span class="co">#&gt;  4   ETH    239</span>
 <span class="co">#&gt;  5   HIR      4</span>
-<span class="co">#&gt;  6   MED 130647</span>
+<span class="co">#&gt;  6   MED 130829</span>
 <span class="co">#&gt;  7   PAT   2295</span>
 <span class="co">#&gt;  8   CIT      0</span>
-<span class="co">#&gt;  9   PMC  10870</span>
+<span class="co">#&gt;  9   PMC  10864</span>
 <span class="co">#&gt; 10   PPR      3</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $pubType</span>
 <span class="co">#&gt; # A tibble: 5 x 2</span>
 <span class="co">#&gt;                  name  count</span>
 <span class="co">#&gt; *               &lt;chr&gt;  &lt;int&gt;</span>
-<span class="co">#&gt; 1                 ALL 144305</span>
-<span class="co">#&gt; 2           FULL TEXT  82582</span>
-<span class="co">#&gt; 3         OPEN ACCESS  36412</span>
-<span class="co">#&gt; 4              REVIEW  17193</span>
-<span class="co">#&gt; 5 BOOKS AND DOCUMENTS     99</span>
+<span class="co">#&gt; 1                 ALL 144481</span>
+<span class="co">#&gt; 2           FULL TEXT  82687</span>
+<span class="co">#&gt; 3         OPEN ACCESS  36506</span>
+<span class="co">#&gt; 4              REVIEW  17233</span>
+<span class="co">#&gt; 5 BOOKS AND DOCUMENTS    102</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $subset</span>
 <span class="co">#&gt; # A tibble: 1 x 2</span>

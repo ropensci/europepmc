@@ -87,7 +87,7 @@ epmc_refs <-
                     .id = NULL)
       })
       #combine all into one
-      result <- jsonlite::rbind.pages(out) %>%
+      result <- jsonlite::rbind_pages(out) %>%
         dplyr::as_data_frame()
       # return (thanks to @cstubben)
       attr(result, "hit_count") <- hit_count

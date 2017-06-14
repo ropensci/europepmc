@@ -7,3 +7,4 @@ README.Rmd
 review_answer.md
 cran-comments.md
 ^revdep$
+^docs$

@@ -111,7 +111,7 @@ epmc_lablinks <-
         pages[[i + 1]] <- result
       }
       #combine all into one
-      tt <- jsonlite::rbind.pages(pages)
+      tt <- jsonlite::rbind_pages(pages)
       # add lablink metadata
       result <- cbind(
         tt,

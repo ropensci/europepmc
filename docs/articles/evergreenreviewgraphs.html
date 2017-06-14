@@ -60,7 +60,7 @@
       <h1>Making proper trend graphs</h1>
                         <h4 class="author">Najko Jahn</h4>
             
-            <h4 class="date">2017-06-08</h4>
+            <h4 class="date">2017-06-14</h4>
           </div>
 
     
@@ -79,12 +79,12 @@ europepmc::<span class="kw"><a href="../reference/epmc_hits_trend.html">epmc_hit
 <span class="co">#&gt;    year all_hits query_hits</span>
 <span class="co">#&gt;   &lt;int&gt;    &lt;dbl&gt;      &lt;dbl&gt;</span>
 <span class="co">#&gt; 1  2010   880875       5227</span>
-<span class="co">#&gt; 2  2011   932247       5670</span>
-<span class="co">#&gt; 3  2012   975738       6433</span>
-<span class="co">#&gt; 4  2013  1034123       7136</span>
-<span class="co">#&gt; 5  2014  1081397       7645</span>
-<span class="co">#&gt; 6  2015  1140352       8031</span>
-<span class="co">#&gt; 7  2016  1097992       6694</span></code></pre></div>
+<span class="co">#&gt; 2  2011   932239       5670</span>
+<span class="co">#&gt; 3  2012   975745       6433</span>
+<span class="co">#&gt; 4  2013  1034131       7136</span>
+<span class="co">#&gt; 5  2014  1081337       7649</span>
+<span class="co">#&gt; 6  2015  1140528       8035</span>
+<span class="co">#&gt; 7  2016  1098366       6709</span></code></pre></div>
 <p>By default, synonym search is disabled and only Medline/PubMed index is searched.</p>
 </div>
 <div id="use-cases" class="section level2">
@@ -93,22 +93,22 @@ europepmc::<span class="kw"><a href="../reference/epmc_hits_trend.html">epmc_hit
 <div id="use-case-growth-of-open-access-literature" class="section level3">
 <h3 class="hasAnchor">
 <a href="#use-case-growth-of-open-access-literature" class="anchor"></a>Use Case: Growth of Open Access Literature</h3>
-<p>There is a growing interest in knowing the proportion of open access to scholarly literature. Europe PMC allows searching for open access content with the <a href="https://europepmc.org/search?query=OPEN_ACCESS:Y&amp;page=1&amp;sortby=Relevance"><code>OPEN_ACCESS:Y</code> parameter</a>. At the moment, Europe PMC contains 1,605,260 open access full-texts. Let’s see how they are relatively distributed over the period 1995 - 2016.</p>
+<p>There is a growing interest in knowing the proportion of open access to scholarly literature. Europe PMC allows searching for open access content with the <a href="https://europepmc.org/search?query=OPEN_ACCESS:Y&amp;page=1&amp;sortby=Relevance"><code>OPEN_ACCESS:Y</code> parameter</a>. At the moment, Europe PMC contains 1,609,088 open access full-texts. Let’s see how they are relatively distributed over the period 1995 - 2016.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tt_oa &lt;-<span class="st"> </span>europepmc::<span class="kw"><a href="../reference/epmc_hits_trend.html">epmc_hits_trend</a></span>(<span class="st">"OPEN_ACCESS:Y"</span>, <span class="dt">period =</span> <span class="dv">1995</span>:<span class="dv">2016</span>, <span class="dt">synonym =</span> <span class="ot">FALSE</span>)
 tt_oa
 <span class="co">#&gt; # A tibble: 22 x 3</span>
 <span class="co">#&gt;     year all_hits query_hits</span>
 <span class="co">#&gt;    &lt;int&gt;    &lt;dbl&gt;      &lt;dbl&gt;</span>
-<span class="co">#&gt;  1  1995   474303       3098</span>
-<span class="co">#&gt;  2  1996   486976       3393</span>
-<span class="co">#&gt;  3  1997   485270       3684</span>
+<span class="co">#&gt;  1  1995   474323       3098</span>
+<span class="co">#&gt;  2  1996   487016       3393</span>
+<span class="co">#&gt;  3  1997   485400       3684</span>
 <span class="co">#&gt;  4  1998   505556       3976</span>
-<span class="co">#&gt;  5  1999   526210       4321</span>
-<span class="co">#&gt;  6  2000   567531       4695</span>
-<span class="co">#&gt;  7  2001   581841       5899</span>
-<span class="co">#&gt;  8  2002   603487       6591</span>
-<span class="co">#&gt;  9  2003   626205       7709</span>
-<span class="co">#&gt; 10  2004   679743      10033</span>
+<span class="co">#&gt;  5  1999   526230       4321</span>
+<span class="co">#&gt;  6  2000   567540       4695</span>
+<span class="co">#&gt;  7  2001   581840       5899</span>
+<span class="co">#&gt;  8  2002   603488       6591</span>
+<span class="co">#&gt;  9  2003   626189       7709</span>
+<span class="co">#&gt; 10  2004   679745      10033</span>
 <span class="co">#&gt; # ... with 12 more rows</span>
 <span class="co"># we use ggplot2 for plotting the graph</span>
 <span class="kw">library</span>(ggplot2)
@@ -118,113 +118,7 @@ tt_oa
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">"Year published"</span>) +<span class="st"> </span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">"Proportion of OA full-texts in Europe PMC"</span>)</code></pre></div>
 <p><img src="evergreenreviewgraphs_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;"></p>
-<p>Be careful with the interpretation of the slower growth in the last years because Europe PMC also contains journals, which make their articles openly available after an embargo period that can be up to three years.</p>
-<p>To assess journal participation in Europe PMC and when Europe PMC journals make their content freely available, we can simply parse <a href="https://europepmc.org/journalList">Europe PMC’s Journal list</a></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-u &lt;-<span class="st"> "https://europepmc.org/journalList?format=csv"</span>
-jn_access_lvl &lt;-<span class="st"> </span>httr::<span class="kw">GET</span>(u) %&gt;%
-<span class="st">  </span>httr::<span class="kw">content</span>(<span class="st">"text/csv"</span>, <span class="dt">as =</span> <span class="st">"parsed"</span>, <span class="dt">encoding =</span> <span class="st">"UTF-8"</span>) %&gt;%
-<span class="st">  </span>dplyr::<span class="kw">count</span>(<span class="st">`</span><span class="dt">Free access</span><span class="st">`</span>, <span class="dt">sort =</span> <span class="ot">TRUE</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span>dplyr::<span class="kw">mutate</span>(<span class="dt">proportion =</span> n /<span class="st"> </span><span class="kw">sum</span>(n))
-
-jn_access_lvl %&gt;%
-<span class="st">  </span>knitr::<span class="kw">kable</span>(<span class="dt">caption =</span> <span class="st">"How soon after publication do participating journals make their articles freely available in Europe PMC?"</span>)</code></pre></div>
-<table class="table">
-<caption>How soon after publication do participating journals make their articles freely available in Europe PMC?</caption>
-<thead><tr class="header">
-<th align="left">Free access</th>
-<th align="right">n</th>
-<th align="right">proportion</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">Immediate</td>
-<td align="right">1935</td>
-<td align="right">0.69</td>
-</tr>
-<tr class="even">
-<td align="left">12 months</td>
-<td align="right">472</td>
-<td align="right">0.17</td>
-</tr>
-<tr class="odd">
-<td align="left">NA</td>
-<td align="right">276</td>
-<td align="right">0.10</td>
-</tr>
-<tr class="even">
-<td align="left">12 months or less</td>
-<td align="right">45</td>
-<td align="right">0.02</td>
-</tr>
-<tr class="odd">
-<td align="left">6 months</td>
-<td align="right">43</td>
-<td align="right">0.02</td>
-</tr>
-<tr class="even">
-<td align="left">6 months or less</td>
-<td align="right">13</td>
-<td align="right">0.00</td>
-</tr>
-<tr class="odd">
-<td align="left">1 month</td>
-<td align="right">11</td>
-<td align="right">0.00</td>
-</tr>
-<tr class="even">
-<td align="left">0 months or more</td>
-<td align="right">8</td>
-<td align="right">0.00</td>
-</tr>
-<tr class="odd">
-<td align="left">24 months</td>
-<td align="right">6</td>
-<td align="right">0.00</td>
-</tr>
-<tr class="even">
-<td align="left">24 months or less</td>
-<td align="right">4</td>
-<td align="right">0.00</td>
-</tr>
-<tr class="odd">
-<td align="left">0 months or less</td>
-<td align="right">2</td>
-<td align="right">0.00</td>
-</tr>
-<tr class="even">
-<td align="left">2 months</td>
-<td align="right">2</td>
-<td align="right">0.00</td>
-</tr>
-<tr class="odd">
-<td align="left">3 months</td>
-<td align="right">2</td>
-<td align="right">0.00</td>
-</tr>
-<tr class="even">
-<td align="left">2 months or less</td>
-<td align="right">1</td>
-<td align="right">0.00</td>
-</tr>
-<tr class="odd">
-<td align="left">3 months or more</td>
-<td align="right">1</td>
-<td align="right">0.00</td>
-</tr>
-<tr class="even">
-<td align="left">36 months</td>
-<td align="right">1</td>
-<td align="right">0.00</td>
-</tr>
-<tr class="odd">
-<td align="left">36 months or less</td>
-<td align="right">1</td>
-<td align="right">0.00</td>
-</tr>
-</tbody>
-</table>
-<p>The table reveals that 69% of all journals make their content immediately available via Europe PMC.</p>
+<p>Be careful with the interpretation of the slower growth in the last years because there are several ways how open access content is added to Europe PMC including the digitalization of back issues.<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a></p>
 </div>
 <div id="use-case-cited-open-source-software-in-scholarly-publications" class="section level3">
 <h3 class="hasAnchor">
@@ -251,7 +145,8 @@ jn_access_lvl %&gt;%
 <span class="co"># make queries including reference section</span>
 dvcs_query &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">'REF:"'</span>, dvcs, <span class="st">'"'</span>)</code></pre></div>
 <p>and get publications for which Europe PMC gives access to reference lists for normalizing the review graph.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_df &lt;-<span class="st"> </span>purrr::<span class="kw">map_df</span>(dvcs_query, function(x) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+my_df &lt;-<span class="st"> </span>purrr::<span class="kw">map_df</span>(dvcs_query, function(x) {
   <span class="co"># get number of publications with indexed reference lists</span>
   refs_hits &lt;-<span class="st"> </span>
 <span class="st">    </span>europepmc::<span class="kw"><a href="../reference/epmc_hits_trend.html">epmc_hits_trend</a></span>(<span class="st">"has_reflist:y"</span>, <span class="dt">period =</span> <span class="dv">2009</span>:<span class="dv">2016</span>, <span class="dt">synonym =</span> <span class="ot">FALSE</span>)$query_hits
@@ -265,16 +160,16 @@ my_df
 <span class="co">#&gt; # A tibble: 40 x 5</span>
 <span class="co">#&gt;     year all_hits refs_hits query_hits                  query_id</span>
 <span class="co">#&gt;    &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;                     &lt;chr&gt;</span>
-<span class="co">#&gt;  1  2009   824691    487744         13 "REF:\"code.google.com\""</span>
-<span class="co">#&gt;  2  2010   880875    500230         41 "REF:\"code.google.com\""</span>
-<span class="co">#&gt;  3  2011   932247    562667         67 "REF:\"code.google.com\""</span>
-<span class="co">#&gt;  4  2012   975738    592186         89 "REF:\"code.google.com\""</span>
-<span class="co">#&gt;  5  2013  1034123    723937        135 "REF:\"code.google.com\""</span>
-<span class="co">#&gt;  6  2014  1081397    761217        145 "REF:\"code.google.com\""</span>
-<span class="co">#&gt;  7  2015  1140352    713742        117 "REF:\"code.google.com\""</span>
-<span class="co">#&gt;  8  2016  1097992    538097         59 "REF:\"code.google.com\""</span>
-<span class="co">#&gt;  9  2009   824691    487744          4      "REF:\"github.com\""</span>
-<span class="co">#&gt; 10  2010   880875    500230         10      "REF:\"github.com\""</span>
+<span class="co">#&gt;  1  2009   824692    487758         13 "REF:\"code.google.com\""</span>
+<span class="co">#&gt;  2  2010   880875    500249         41 "REF:\"code.google.com\""</span>
+<span class="co">#&gt;  3  2011   932239    562702         67 "REF:\"code.google.com\""</span>
+<span class="co">#&gt;  4  2012   975745    592222         89 "REF:\"code.google.com\""</span>
+<span class="co">#&gt;  5  2013  1034131    723986        135 "REF:\"code.google.com\""</span>
+<span class="co">#&gt;  6  2014  1081337    761381        145 "REF:\"code.google.com\""</span>
+<span class="co">#&gt;  7  2015  1140528    714094        117 "REF:\"code.google.com\""</span>
+<span class="co">#&gt;  8  2016  1098366    541721         59 "REF:\"code.google.com\""</span>
+<span class="co">#&gt;  9  2009   824692    487758          4      "REF:\"github.com\""</span>
+<span class="co">#&gt; 10  2010   880875    500249         10      "REF:\"github.com\""</span>
 <span class="co">#&gt; # ... with 30 more rows</span>
 
 ### total
@@ -286,13 +181,13 @@ hits_summary
 <span class="co">#&gt; # A tibble: 5 x 2</span>
 <span class="co">#&gt;                       query_id   all</span>
 <span class="co">#&gt;                          &lt;chr&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 "REF:\"cran.r-project.org\""  7771</span>
-<span class="co">#&gt; 2    "REF:\"sourceforge.net\""  2173</span>
-<span class="co">#&gt; 3         "REF:\"github.com\""  1551</span>
+<span class="co">#&gt; 1 "REF:\"cran.r-project.org\""  7774</span>
+<span class="co">#&gt; 2    "REF:\"sourceforge.net\""  2174</span>
+<span class="co">#&gt; 3         "REF:\"github.com\""  1553</span>
 <span class="co">#&gt; 4    "REF:\"code.google.com\""   666</span>
 <span class="co">#&gt; 5      "REF:\"bitbucket.org\""    96</span></code></pre></div>
-<p>The proportion of papers where Europe PMC was able to make the cited literature available was 61 for the period 2009-2016. There also seems to be a time-lag between indexing reference lists because the absolute number of publication was decreasing over the years. This is presumably because Europe PMC also includes delayed open access journals, i.e. journals which make their content freely available after a certain period of time.</p>
-<p>Let’s make a proper review graph normalizing our query results with the number of publications with indexed references.</p>
+<p>The proportion of papers where Europe PMC was able to make the cited literature available was 61 for the period 2009-2016. There also seems to be a time-lag between indexing reference lists because the absolute number of publication was decreasing over the years. This is presumably because Europe PMC also includes delayed open access content, i.e. content which is not added immediately with the original publication.<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a></p>
+<p>Now, let’s make a proper review graph normalizing our query results with the number of publications with indexed references.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
 <span class="kw">ggplot</span>(my_df, <span class="kw">aes</span>(<span class="kw">factor</span>(year), query_hits /<span class="st"> </span>refs_hits, <span class="dt">group =</span> query_id, 
                   <span class="dt">color =</span> query_id)) +
@@ -301,7 +196,7 @@ hits_summary
 <span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">name =</span> <span class="st">"Query"</span>, <span class="dt">palette =</span> <span class="st">"Set1"</span>)+
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">"Year published"</span>) +
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">"Proportion of article in Europepe PMC"</span>)</code></pre></div>
-<p><img src="evergreenreviewgraphs_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
+<p><img src="evergreenreviewgraphs_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
 </div>
 <div id="discussion-and-conclusion" class="section level4">
 <h4 class="hasAnchor">
@@ -328,6 +223,8 @@ hits_summary
 <ol>
 <li id="fn1"><p><a href="http://www.masalmon.eu/2017/05/14/evergreenreviewgraph/" class="uri">http://www.masalmon.eu/2017/05/14/evergreenreviewgraph/</a><a href="#fnref1">↩</a></p></li>
 <li id="fn2"><p>Europe PMC Search Syntax: <a href="https://europepmc.org/Help#mostofsearch" class="uri">https://europepmc.org/Help#mostofsearch</a><a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>See section “Content Growth” in: McEntyre JR, Ananiadou S, Andrews S, et al. UKPMC: a full text article resource for the life sciences. <em>Nucleic Acids Research</em>. 2011;39(Database):D58–D65. <a href="https://doi.org/10.1093/nar/gkq1063" class="uri">https://doi.org/10.1093/nar/gkq1063</a>.<a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p>Ebd.<a href="#fnref4">↩</a></p></li>
 </ol>
 </div>
 </div>
