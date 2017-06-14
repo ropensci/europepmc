@@ -67,23 +67,10 @@ ggplot(tt_oa, aes(year, query_hits / all_hits)) +
   ylab("Proportion of OA full-texts in Europe PMC")
 ```
 
-Be careful with the interpretation of the slower growth in the last years because Europe PMC also contains journals, which make their articles openly available after an embargo period that can be up to three years.
+Be careful with the interpretation of the slower growth in the last years because there are several ways how open access content is added to Europe PMC including the digitalization of back issues.[^3]
 
-To assess journal participation in Europe PMC and when Europe PMC journals make their content freely available, we can simply parse [Europe PMC's Journal list](https://europepmc.org/journalList)
-
-```{r, results='asis'}
-library(dplyr)
-u <- "https://europepmc.org/journalList?format=csv"
-jn_access_lvl <- httr::GET(u) %>%
-  httr::content("text/csv", as = "parsed", encoding = "UTF-8") %>%
-  dplyr::count(`Free access`, sort = TRUE) %>% 
-  dplyr::mutate(proportion = n / sum(n))
-
-jn_access_lvl %>%
-  knitr::kable(caption = "How soon after publication do participating journals make their articles freely available in Europe PMC?")
-```
-
-The table reveals that `r round(jn_access_lvl[1,2] / sum(jn_access_lvl$n) * 100)`% of all journals make their content immediately available via Europe PMC.
+[^3]: See section "Content Growth" in: McEntyre JR, Ananiadou S, Andrews S, et al. UKPMC: a full text article resource
+    for the life sciences. *Nucleic Acids Research*. 2011;39(Database):D58–D65. <https://doi.org/10.1093/nar/gkq1063>.
 
 ### Use Case: Cited open source software in scholarly publications
 
@@ -116,6 +103,7 @@ dvcs_query <- paste0('REF:"', dvcs, '"')
 and get publications for which Europe PMC gives access to reference lists for normalizing the review graph.
 
 ```{r}
+library(dplyr)
 my_df <- purrr::map_df(dvcs_query, function(x) {
   # get number of publications with indexed reference lists
   refs_hits <- 
@@ -136,9 +124,11 @@ hits_summary <- my_df %>%
 hits_summary
 ```
 
-The proportion of papers where Europe PMC was able to make the cited literature available was `r round(sum(my_df$refs_hits) / sum(my_df$all_hits), digits = 2) *100` for the period 2009-2016. There also seems to be a time-lag between indexing reference lists because the absolute number of publication was decreasing over the years. This is presumably because Europe PMC also includes delayed open access journals, i.e. journals which make their content freely available after a certain period of time.
+The proportion of papers where Europe PMC was able to make the cited literature available was `r round(sum(my_df$refs_hits) / sum(my_df$all_hits), digits = 2) *100` for the period 2009-2016. There also seems to be a time-lag between indexing reference lists because the absolute number of publication was decreasing over the years. This is presumably because Europe PMC also includes delayed open access content, i.e. content which is not added immediately with the original publication.[^4]
 
-Let's make a proper review graph normalizing our query results with the number of publications with indexed references.
+[^4]: Ebd.
+
+Now, let's make a proper review graph normalizing our query results with the number of publications with indexed references.
 
 ```{r}
 library(ggplot2)
