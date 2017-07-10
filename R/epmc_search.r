@@ -20,10 +20,9 @@
 #' @param synonym logical, synonym search. If TRUE, synonym terms from MeSH
 #'   terminology and the UniProt synonym list are queried, too. Disabled by
 #'   default.
-#' @param sort character, sort results by order (\code{asc}, \code{desc}) and
-#'   sort field (e.g. \code{CITED}, \code{P_PDATE}), seperated with a blank. For
-#'   example, sort results  by times cited in descending order: \code{sort =
-#'   'CITED desc'}.
+#' @param sort character, relevance ranking is used by default. Use
+#'   \code{sort = 'cited'} for sorting by the number of citations, or
+#'   \code{sort = 'date'} by the most recent publications.
 #' @param verbose	logical, print progress bar. Activated by default.
 #' @return tibble
 #' @examples \dontrun{
@@ -41,8 +40,8 @@
 #' #Limit search to 250 PLOS Genetics articles
 #' my.data <- epmc_search(query = 'ISSN:1553-7404', limit = 250)
 #'
-#' # include mesh and uniprot synonyms in search
-#' my.data <- epmc_search(query = 'aspirin', synonym = TRUE)
+#' # exclude MeSH synonyms in search
+#' my.data <- epmc_search(query = 'aspirin', synonym = FALSE)
 #'
 #' # get 100 most cited atricles from PLOS ONE
 #' epmc_search(query = 'ISSN:	1932-6203', sort = 'CITED desc')
@@ -60,7 +59,22 @@ epmc_search <- function(query = NULL,
                         verbose = TRUE,
                         limit = 100,
                         sort = NULL) {
+  #--- Input validation
   stopifnot(is.logical(c(verbose, synonym)))
+  stopifnot(is.numeric(limit))
+
+
+  # sort
+  if (!is.null(sort)) {
+    match.arg(sort, c("date", "cited"))
+    query <- switch(
+      sort,
+      date = paste(query, "sort_date:y"),
+      cited = paste(query, "sort_cited:y")
+    )
+  } else {
+    query <- query
+  }
   # get the correct hit count when mesh and uniprot synonyms are also searched
   # synonym <- ifelse(synonym == FALSE, "false", "true")
   # this is so far the only way how I got the synonym paramworking after
@@ -68,12 +82,13 @@ epmc_search <- function(query = NULL,
   # there is a possible conflict with the resumption token and decoding
   # the API call.
   query <- transform_query(paste0(query, "&synonym=", synonym))
-  stopifnot(is.numeric(limit))
+
   page_token <- "*"
   if (!output == "raw")
     results <- dplyr::data_frame()
   else
     results <- NULL
+  # search
   out <-
     epmc_search_(
       query = query,
@@ -123,10 +138,10 @@ epmc_search <- function(query = NULL,
     if (output == "raw") {
       md <- results[1:limit]
     } else {
-      md <- results[1:limit, ]
+      md <- results[1:limit,]
     }
-  # return hit counts(thanks to @cstubben)
-  attr(md, "hit_count") <- hits
+    # return hit counts(thanks to @cstubben)
+    attr(md, "hit_count") <- hits
   }
   return(md)
 }
@@ -145,10 +160,6 @@ epmc_search <- function(query = NULL,
 #'   can become very large.
 #' @param limit integer, limit the number of records you wish to retrieve.
 #'   By default, 25 are returned.
-#' @param sort character, sort results by order (\code{asc}, \code{desc}) and
-#'  sort field (e.g. \code{CITED}, \code{P_PDATE}), seperated with a blank.
-#'  For example, sort results  by times cited in descending order:
-#'  \code{sort = 'CITED desc'}.
 #' @param page_token cursor marking the page
 #'
 #' @param ... further params from \code{\link{epmc_search}}
@@ -161,7 +172,6 @@ epmc_search_ <-
            limit = 100,
            output = "parsed",
            page_token = NULL,
-           sort = NULL,
            ...) {
     # control limit
     limit <- as.integer(limit)
@@ -181,8 +191,7 @@ epmc_search_ <-
         format = "json",
         resulttype = resulttype,
         pageSize = page_size,
-        cursorMark = page_token,
-        sort = val_args(sort)
+        cursorMark = page_token
       )
     # call API
     out <-
@@ -204,12 +213,3 @@ epmc_search_ <-
     }
     list(next_cursor = out$nextCursorMark, results = md)
   }
-
-#' encode param for API call
-#' @param x API parameter
-#' @noRd
-val_args <- function(x) {
-  if (!is.null(x))
-    utils::URLencode(x)
-  NULL
-}
