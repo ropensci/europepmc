@@ -5,7 +5,7 @@
 \title{Get one page of results when searching Europe PubMed Central}
 \usage{
 epmc_search_(query = NULL, limit = 100, output = "parsed",
-  page_token = NULL, sort = NULL, ...)
+  page_token = NULL, ...)
 }
 \arguments{
 \item{query}{character, search query. For more information on how to
@@ -22,12 +22,12 @@ can become very large.}
 
 \item{page_token}{cursor marking the page}
 
+\item{...}{further params from \code{\link{epmc_search}}}
+
 \item{sort}{character, sort results by order (\code{asc}, \code{desc}) and
 sort field (e.g. \code{CITED}, \code{P_PDATE}), seperated with a blank.
 For example, sort results  by times cited in descending order:
 \code{sort = 'CITED desc'}.}
-
-\item{...}{further params from \code{\link{epmc_search}}}
 }
 \description{
 In general, use \code{\link{epmc_search}} instead. It calls this function, calling all

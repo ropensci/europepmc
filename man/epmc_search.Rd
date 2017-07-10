@@ -26,10 +26,9 @@ default.}
 \item{limit}{integer, limit the number of records you wish to retrieve. By
 default, 100 are returned.}
 
-\item{sort}{character, sort results by order (\code{asc}, \code{desc}) and
-sort field (e.g. \code{CITED}, \code{P_PDATE}), seperated with a blank. For
-example, sort results  by times cited in descending order: \code{sort =
-'CITED desc'}.}
+\item{sort}{character, relevance ranking is used by default. Use
+\code{sort = 'cited'} for sorting by the number of citations, or
+\code{sort = 'date'} by the most recent publications.}
 }
 \value{
 tibble
@@ -57,8 +56,8 @@ my.data <- epmc_search(query = 'ISSN:1553-7404 HAS_EMBL:y')
 #Limit search to 250 PLOS Genetics articles
 my.data <- epmc_search(query = 'ISSN:1553-7404', limit = 250)
 
-# include mesh and uniprot synonyms in search
-my.data <- epmc_search(query = 'aspirin', synonym = TRUE)
+# exclude MeSH synonyms in search
+my.data <- epmc_search(query = 'aspirin', synonym = FALSE)
 
 # get 100 most cited atricles from PLOS ONE
 epmc_search(query = 'ISSN:	1932-6203', sort = 'CITED desc')

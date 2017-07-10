@@ -10,11 +10,13 @@ test_that("epmc_search returns", {
                    limit = 250)
   f <- epmc_search(query = 'ISSN:1553-7404 HAS_EMBL:y', limit = 25)
   g <- epmc_search(query = 'aspirin', synonym = TRUE)
-  h <- epmc_search(query = 'ISSN:	1932-6203', sort = 'CITED desc')
-  i <- epmc_search("gabi-kat", limit = 125, output = "raw")
-  j <- epmc_search("123haha")
-  k <- lapply(c("kdkdkdkdkdkd", "najko"),
-              function(x) epmc_search(x, output = "raw"))
+  h <- epmc_search(query = 'ISSN:	1932-6203', sort = 'cited')
+  i <- epmc_search('gabi-kat', limit = 125, output = 'raw')
+  j <- epmc_search('123haha')
+  k <- lapply(c('kdkdkdkdkdkd', 'najko'),
+              function(x) epmc_search(x, output = 'raw'))
+  l <- epmc_search(query = 'ISSN:	1932-6203', sort = 'date')
+
 
 
   #correct class metadata
@@ -27,6 +29,7 @@ test_that("epmc_search returns", {
   expect_is(h, "data.frame")
   expect_is(i, "list")
   expect_is(k, "list")
+  expect_is(l, "data.frame")
 
   #are diminsions correct?
   expect_equal(nrow(e), 250)
@@ -34,6 +37,7 @@ test_that("epmc_search returns", {
   expect_equal(nrow(f), 25)
   expect_equal(nrow(h), 100)
   expect_equal(length(i), 125)
+  expect_equal(nrow(l), 100)
 
 
   # fails correctly
