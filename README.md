@@ -8,7 +8,7 @@
 [![codecov.io](https://codecov.io/github/ropensci/europepmc/coverage.svg?branch=master)](https://codecov.io/github/ropensci/europepmc?branch=master)
 [![cran version](http://www.r-pkg.org/badges/version/europepmc)](https://cran.r-project.org/package=europepmc)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/europepmc)](https://github.com/metacran/cranlogs.app)
-
+[![](https://badges.ropensci.org/29_status.svg)](https://github.com/ropensci/onboarding/issues/29)
 
 europepmc facilitates access to the [Europe PMC RESTful Web
 Service](http://europepmc.org/RestfulWebService).
