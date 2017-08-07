@@ -6,7 +6,7 @@ test_that("epmc_citations returns", {
   b <- epmc_citations("9338777")
   c <- epmc_citations("PMC3166943", data_src = "pmc")
   d <- epmc_citations("7535888", limit = 25)
-  e <- epmc_citations("27602289")
+  e <- epmc_citations("20895125")
 
   #correct dimensions and class
   expect_output(str(a), "data.frame")
