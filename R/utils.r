@@ -2,7 +2,7 @@
 
 # base uri
 base_uri <- function()
-  "http://www.ebi.ac.uk"
+  "https://www.ebi.ac.uk"
 
 # rest path
 rest_path <- function()
@@ -123,38 +123,6 @@ make_path <- function(hit_count = NULL,
   }
   paths
 }
-
-# make_queries <-
-#   function(hit_count = hit_count,
-#            limit = limit,
-#            query = query) {
-#     limit <- as.integer(limit)
-#     limit <- ifelse(hit_count <= limit, hit_count, limit)
-#     if (limit > batch_size()) {
-#       tt <- chunks(limit)
-#       queries <-
-#         lapply(1:(tt$page_max - 1),
-#                build_query,
-#                batch_size = batch_size(),
-#                query = query)
-#       queries <-
-#         append(queries, list(
-#           build_query(
-#             query = query,
-#             page = tt$page_max,
-#             batch_size = tt$last_chunk
-#           )
-#         ))
-#     } else {
-#       queries <-
-#         list(build_query(
-#           page = 1,
-#           query = query,
-#           batch_size = limit
-#         ))
-#     }
-#     queries
-#   }
 
 # calculate number of page chunks needed in accordance with limit param
 chunks <- function(limit, ...) {
