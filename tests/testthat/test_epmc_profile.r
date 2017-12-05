@@ -25,6 +25,6 @@ test_that("epmc_profile synonym parameter works", {
   c <- epmc_profile("jupyter")
   d <- epmc_profile("jupyter", synonym = FALSE)
 
-  expect_gt(sum(a$source$count), sum(b$source$count))
-  expect_gt(sum(c$source$count), sum(d$source$count))
+  expect_gte(sum(a$source$count), sum(b$source$count))
+  expect_gte(sum(c$source$count), sum(d$source$count))
 })

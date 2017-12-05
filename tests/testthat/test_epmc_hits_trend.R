@@ -39,5 +39,5 @@ test_that("epmc_hits_trend synonym search works correctly", {
   a <- epmc_hits_trend('malaria', period = 2012:2016, synonym = FALSE)
   b <- epmc_hits_trend('malaria', period = 2012:2016, synonym = TRUE)
 
-  expect_gt(sum(b$query_hits), sum(a$query_hits))
+  expect_gte(sum(b$query_hits), sum(a$query_hits))
 })

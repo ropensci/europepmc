@@ -57,6 +57,6 @@ test_that("epmc_search synonym parameter works", {
   c <- epmc_search("jupyter")
   d <- epmc_search("jupyter", synonym = FALSE)
 
-  expect_gt(attr(a, "hit_count"), attr(b, "hit_count"))
-  expect_gt(attr(c, "hit_count"), attr(d, "hit_count"))
+  expect_gte(attr(a, "hit_count"), attr(b, "hit_count"))
+  expect_gte(attr(c, "hit_count"), attr(d, "hit_count"))
 })
