@@ -29,10 +29,28 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
 </li>
 <li>
-  <a href="articles/index.html">Articles</a>
+  <a href="reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="articles/evergreenreviewgraphs.html">Making proper trend graphs</a>
+    </li>
+    <li>
+      <a href="articles/introducing-europepmc.html">Introducing europepmc, an R interface to Europe PMC RESTful API</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="news/index.html">News</a>
@@ -151,7 +169,7 @@
 <pre class="sourceCode r" id="cb1"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">"europepmc"</span>)</a></code></pre>
 <p>The latest development version can be installed using <a href="https://github.com/hadley/devtools">devtools</a> package:</p>
 <pre class="sourceCode r" id="cb2"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">require</span>(devtools)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">install_github</span>(<span class="st">"ropensci/europepmc"</span>)</a></code></pre>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"ropensci/europepmc"</span>)</a></code></pre>
 <p>Loading into R</p>
 <pre class="sourceCode r" id="cb3"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(europepmc)</a></code></pre>
 </div>
@@ -159,7 +177,7 @@
 <h2 class="hasAnchor">
 <a href="#search-europe-pmc" class="anchor"></a>Search Europe PMC</h2>
 <p>The search covers both metadata (e.g. abstracts or title) and full texts. To build your query, please refer to the comprehensive guidance on how to search Europe PMC: <a href="http://europepmc.org/help" class="uri">http://europepmc.org/help</a>. Simply provide your query in the Europe PMC search syntax to <code><a href="reference/epmc_search.html">epmc_search()</a></code>.</p>
-<pre class="sourceCode r" id="cb4"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">europepmc<span class="op">::</span><span class="kw"><a href="reference/epmc_search.html">epmc_search</a></span>(<span class="st">"Lagotto Romagnolo"</span>)</a>
+<pre class="sourceCode r" id="cb4"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">europepmc<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/europepmc/topics/epmc_search">epmc_search</a></span>(<span class="st">"Lagotto Romagnolo"</span>)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt; # A tibble: 39 x 27</span></a>
 <a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt;          id source     pmid                                doi</span></a>
 <a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt;       &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;                              &lt;chr&gt;</span></a>
@@ -189,7 +207,7 @@
 <a href="#creating-proper-review-graphs-with-epmc_hits_trend" class="anchor"></a>Creating proper review graphs with <code><a href="reference/epmc_hits_trend.html">epmc_hits_trend()</a></code>
 </h2>
 <p>There is also a nice function allowing you to easily create review graphs like described in Maëlle Salmon’s <a href="http://www.masalmon.eu/2017/05/14/evergreenreviewgraph/">blog post</a>:</p>
-<pre class="sourceCode r" id="cb5"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">tt_oa &lt;-<span class="st"> </span>europepmc<span class="op">::</span><span class="kw"><a href="reference/epmc_hits_trend.html">epmc_hits_trend</a></span>(<span class="st">"Malaria"</span>, <span class="dt">period =</span> <span class="dv">1995</span><span class="op">:</span><span class="dv">2016</span>, <span class="dt">synonym =</span> <span class="ot">FALSE</span>)</a>
+<pre class="sourceCode r" id="cb5"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">tt_oa &lt;-<span class="st"> </span>europepmc<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/europepmc/topics/epmc_hits_trend">epmc_hits_trend</a></span>(<span class="st">"Malaria"</span>, <span class="dt">period =</span> <span class="dv">1995</span><span class="op">:</span><span class="dv">2016</span>, <span class="dt">synonym =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">tt_oa</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; # A tibble: 22 x 3</span></a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt;     year all_hits query_hits</span></a>
@@ -207,12 +225,12 @@
 <a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; # ... with 12 more rows</span></a>
 <a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co"># we use ggplot2 for plotting the graph</span></a>
 <a class="sourceLine" id="cb5-18" data-line-number="18"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb5-19" data-line-number="19"><span class="kw">ggplot</span>(tt_oa, <span class="kw">aes</span>(year, query_hits <span class="op">/</span><span class="st"> </span>all_hits)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-20" data-line-number="20"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-21" data-line-number="21"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb5-22" data-line-number="22"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">"Year published"</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-23" data-line-number="23"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">"Proportion of articles on Malaria in Europe PMC"</span>)</a></code></pre>
-<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
+<a class="sourceLine" id="cb5-19" data-line-number="19"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(tt_oa, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(year, query_hits <span class="op">/</span><span class="st"> </span>all_hits)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-20" data-line-number="20"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-21" data-line-number="21"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-22" data-line-number="22"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">xlab</a></span>(<span class="st">"Year published"</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-23" data-line-number="23"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ylab</a></span>(<span class="st">"Proportion of articles on Malaria in Europe PMC"</span>)</a></code></pre>
+<p><img src="inst/image/unnamed-chunk-4-1.png" width="672"></p>
 <p>For more info, read the vignette about creating literature review graphs:</p>
 <p><a href="https://ropensci.github.io/europepmc/articles/evergreenreviewgraphs.html" class="uri">https://ropensci.github.io/europepmc/articles/evergreenreviewgraphs.html</a></p>
 </div>
@@ -266,7 +284,8 @@
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Links</h2>
+    <h2 class="hasAnchor">
+<a href="#sidebar" class="anchor"></a>Links</h2>
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cran.r-project.org/package=europepmc">https://​cran.r-project.org/​package=europepmc</a>
 </li>
@@ -279,7 +298,7 @@
 <p><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></p>
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Najko Jahn <br><small class="roles"> Author, maintainer, copyright holder </small> </li>
+<li>Najko Jahn <br><small class="roles"> Author, maintainer, copyright holder </small> </li>
 <li><a href="authors.html">All authors...</a></li>
 </ul>
 <h2>Dev status</h2>

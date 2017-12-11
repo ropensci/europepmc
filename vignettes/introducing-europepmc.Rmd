@@ -113,7 +113,7 @@ q <- 'AUTH:"PÜHLER Alfred" OR AUTH:"Pühler Alfred Prof. Dr." OR AUTH:"Puhler A
 europepmc::epmc_search(q, limit = 1000)
 ```
 
-There is a considerable overlap between common names. The integration of ORCID, a persistent author identifier, allows unambigous search for personal publications in Europe PMC. For example, to search for publications written by Bernd Weisshaar (ORCID: <https://orcid.org/0000-0002-7635-3473>) sorted by the number of times cited in descending order:
+There is a considerable overlap between common names. The integration of ORCID, a persistent author identifier, allows unambiguous search for personal publications in Europe PMC. For example, to search for publications written by Bernd Weisshaar (ORCID: <https://orcid.org/0000-0002-7635-3473>) sorted by the number of times cited in descending order:
 
 ```{r}
 europepmc::epmc_search('AUTHORID:"0000-0002-7635-3473"', limit = 200, sort = "cited")

@@ -29,10 +29,28 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
 </li>
 <li>
-  <a href="../articles/index.html">Articles</a>
+  <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="../articles/evergreenreviewgraphs.html">Making proper trend graphs</a>
+    </li>
+    <li>
+      <a href="../articles/introducing-europepmc.html">Introducing europepmc, an R interface to Europe PMC RESTful API</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -87,7 +105,7 @@
 <a href="#free-search" class="anchor"></a>Free search</h3>
 <p><code>empc_search()</code> is the main function to query Europe PMC. It searches both metadata and fulltexts.</p>
 <pre class="sourceCode r" id="cb1"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(europepmc)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">europepmc<span class="op">::</span><span class="kw"><a href="../reference/epmc_search.html">epmc_search</a></span>(<span class="st">'malaria'</span>)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">europepmc<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/europepmc/topics/epmc_search">epmc_search</a></span>(<span class="st">'malaria'</span>)</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co">#&gt; # A tibble: 100 x 27</span></a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co">#&gt;          id source     pmid      pmcid                          doi</span></a>
 <a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">#&gt;       &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;      &lt;chr&gt;                        &lt;chr&gt;</span></a>
@@ -110,7 +128,7 @@
 <a class="sourceLine" id="cb1-22" data-line-number="22"><span class="co">#&gt; #   hasDbCrossReferences &lt;chr&gt;, hasLabsLinks &lt;chr&gt;,</span></a>
 <a class="sourceLine" id="cb1-23" data-line-number="23"><span class="co">#&gt; #   hasTMAccessionNumbers &lt;chr&gt;, firstPublicationDate &lt;chr&gt;, issue &lt;chr&gt;</span></a></code></pre>
 <p>Please note that Europe PMC expands queries with MeSH synonyms by default, a behaviour which can be turned off with the <code>synonym</code> parameter.</p>
-<pre class="sourceCode r" id="cb2"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">europepmc<span class="op">::</span><span class="kw"><a href="../reference/epmc_search.html">epmc_search</a></span>(<span class="st">'malaria'</span>, <span class="dt">synonym =</span> <span class="ot">FALSE</span>)</a>
+<pre class="sourceCode r" id="cb2"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">europepmc<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/europepmc/topics/epmc_search">epmc_search</a></span>(<span class="st">'malaria'</span>, <span class="dt">synonym =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt; # A tibble: 100 x 27</span></a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt;          id source     pmid      pmcid                          doi</span></a>
 <a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt;       &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;      &lt;chr&gt;                        &lt;chr&gt;</span></a>
@@ -133,7 +151,7 @@
 <a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt; #   hasDbCrossReferences &lt;chr&gt;, hasLabsLinks &lt;chr&gt;,</span></a>
 <a class="sourceLine" id="cb2-22" data-line-number="22"><span class="co">#&gt; #   hasTMAccessionNumbers &lt;chr&gt;, firstPublicationDate &lt;chr&gt;</span></a></code></pre>
 <p>To get an exact match, use quotes as in the following example:</p>
-<pre class="sourceCode r" id="cb3"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">europepmc<span class="op">::</span><span class="kw"><a href="../reference/epmc_search.html">epmc_search</a></span>(<span class="st">'"Human malaria parasites"'</span>)</a>
+<pre class="sourceCode r" id="cb3"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">europepmc<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/europepmc/topics/epmc_search">epmc_search</a></span>(<span class="st">'"Human malaria parasites"'</span>)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt; # A tibble: 100 x 27</span></a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt;            id source     pmid                           doi</span></a>
 <a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt;         &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;                         &lt;chr&gt;</span></a>
@@ -160,7 +178,7 @@
 <h3 class="hasAnchor">
 <a href="#managing-search-results" class="anchor"></a>Managing search results</h3>
 <p>By default, 100 records are returned, but the number of results can be expanded or limited with the <code>limit</code> parameter.</p>
-<pre class="sourceCode r" id="cb4"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">europepmc<span class="op">::</span><span class="kw"><a href="../reference/epmc_search.html">epmc_search</a></span>(<span class="st">'"Human malaria parasites"'</span>, <span class="dt">limit =</span> <span class="dv">10</span>)</a>
+<pre class="sourceCode r" id="cb4"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">europepmc<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/europepmc/topics/epmc_search">epmc_search</a></span>(<span class="st">'"Human malaria parasites"'</span>, <span class="dt">limit =</span> <span class="dv">10</span>)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt; # A tibble: 10 x 27</span></a>
 <a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt;            id source     pmid                           doi</span></a>
 <a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt;         &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;                         &lt;chr&gt;</span></a>
@@ -193,15 +211,15 @@
 <div id="loop-over-queries" class="section level3">
 <h3 class="hasAnchor">
 <a href="#loop-over-queries" class="anchor"></a>Loop over queries</h3>
-<p>Sometimes, you would like to send more than one search to Europe PMC at once. A simple solution is using <code>plyr::ldply()</code>:</p>
+<p>Sometimes, you would like to send more than one search to Europe PMC at once. A simple solution is using <code><a href="http://www.rdocumentation.org/packages/plyr/topics/ldply">plyr::ldply()</a></code>:</p>
 <pre class="sourceCode r" id="cb5"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">my_dois &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">  <span class="st">"10.1159/000479962"</span>,</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3">  <span class="st">"10.1002/sctm.17-0081"</span>,</a>
 <a class="sourceLine" id="cb5-4" data-line-number="4">  <span class="st">"10.1161/strokeaha.117.018077"</span>,</a>
 <a class="sourceLine" id="cb5-5" data-line-number="5">  <span class="st">"10.1007/s12017-017-8447-9"</span></a>
 <a class="sourceLine" id="cb5-6" data-line-number="6">  )</a>
-<a class="sourceLine" id="cb5-7" data-line-number="7">  plyr<span class="op">::</span><span class="kw">ldply</span>(my_dois, <span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb5-8" data-line-number="8">  europepmc<span class="op">::</span><span class="kw"><a href="../reference/epmc_search.html">epmc_search</a></span>(<span class="kw">paste0</span>(<span class="st">"DOI:"</span>, x))</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">  plyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/plyr/topics/ldply">ldply</a></span>(my_dois, <span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">  europepmc<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/europepmc/topics/epmc_search">epmc_search</a></span>(<span class="kw">paste0</span>(<span class="st">"DOI:"</span>, x))</a>
 <a class="sourceLine" id="cb5-9" data-line-number="9">  })</a>
 <a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt;         id source     pmid                          doi</span></a>
 <a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt; 1 28957815    MED 28957815            10.1159/000479962</span></a>
@@ -256,7 +274,7 @@
 <h4 class="hasAnchor">
 <a href="#author-search" class="anchor"></a>Author search</h4>
 <p>Use the Europe PMC query syntax to search by author names:</p>
-<pre class="sourceCode r" id="cb6"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">europepmc<span class="op">::</span><span class="kw"><a href="../reference/epmc_search.html">epmc_search</a></span>(<span class="st">'AUTH:"Salmon Maelle"'</span>)</a>
+<pre class="sourceCode r" id="cb6"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">europepmc<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/europepmc/topics/epmc_search">epmc_search</a></span>(<span class="st">'AUTH:"Salmon Maelle"'</span>)</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt; # A tibble: 5 x 27</span></a>
 <a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt;         id source     pmid      pmcid</span></a>
 <a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt;      &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;      &lt;chr&gt;</span></a>
@@ -275,7 +293,7 @@
 <a class="sourceLine" id="cb6-17" data-line-number="17"><span class="co">#&gt; #   firstPublicationDate &lt;chr&gt;</span></a></code></pre>
 <p><a href="https://europepmc.org/advancesearch">Europe PMC Advanced Search</a> has a auto-suggest field for author names if you feel unsure how the name you are searching for is indexed in Europe PMC. Using the Boolean <code>OR</code> operator you can simply search for more than one spelling variant:</p>
 <pre class="sourceCode r" id="cb7"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">q &lt;-<span class="st"> 'AUTH:"PÜHLER Alfred" OR AUTH:"Pühler Alfred Prof. Dr." OR AUTH:"Puhler A"'</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">europepmc<span class="op">::</span><span class="kw"><a href="../reference/epmc_search.html">epmc_search</a></span>(q, <span class="dt">limit =</span> <span class="dv">1000</span>)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">europepmc<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/europepmc/topics/epmc_search">epmc_search</a></span>(q, <span class="dt">limit =</span> <span class="dv">1000</span>)</a>
 <a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt; # A tibble: 556 x 27</span></a>
 <a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt;          id source     pmid                            doi</span></a>
 <a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt;       &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;                          &lt;chr&gt;</span></a>
@@ -297,8 +315,8 @@
 <a class="sourceLine" id="cb7-21" data-line-number="21"><span class="co">#&gt; #   hasDbCrossReferences &lt;chr&gt;, hasLabsLinks &lt;chr&gt;,</span></a>
 <a class="sourceLine" id="cb7-22" data-line-number="22"><span class="co">#&gt; #   hasTMAccessionNumbers &lt;chr&gt;, firstPublicationDate &lt;chr&gt;, pmcid &lt;chr&gt;,</span></a>
 <a class="sourceLine" id="cb7-23" data-line-number="23"><span class="co">#&gt; #   journalVolume &lt;chr&gt;, pageInfo &lt;chr&gt;, hasSuppl &lt;chr&gt;, issue &lt;chr&gt;</span></a></code></pre>
-<p>There is a considerable overlap between common names. The integration of ORCID, a persistent author identifier, allows unambigous search for personal publications in Europe PMC. For example, to search for publications written by Bernd Weisshaar (ORCID: <a href="https://orcid.org/0000-0002-7635-3473" class="uri">https://orcid.org/0000-0002-7635-3473</a>) sorted by the number of times cited in descending order:</p>
-<pre class="sourceCode r" id="cb8"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">europepmc<span class="op">::</span><span class="kw"><a href="../reference/epmc_search.html">epmc_search</a></span>(<span class="st">'AUTHORID:"0000-0002-7635-3473"'</span>, <span class="dt">limit =</span> <span class="dv">200</span>, <span class="dt">sort =</span> <span class="st">"cited"</span>)</a>
+<p>There is a considerable overlap between common names. The integration of ORCID, a persistent author identifier, allows unambiguous search for personal publications in Europe PMC. For example, to search for publications written by Bernd Weisshaar (ORCID: <a href="https://orcid.org/0000-0002-7635-3473" class="uri">https://orcid.org/0000-0002-7635-3473</a>) sorted by the number of times cited in descending order:</p>
+<pre class="sourceCode r" id="cb8"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">europepmc<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/europepmc/topics/epmc_search">epmc_search</a></span>(<span class="st">'AUTHORID:"0000-0002-7635-3473"'</span>, <span class="dt">limit =</span> <span class="dv">200</span>, <span class="dt">sort =</span> <span class="st">"cited"</span>)</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; # A tibble: 135 x 27</span></a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt;          id source     pmid                                doi</span></a>
 <a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt;       &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;                              &lt;chr&gt;</span></a>
@@ -366,7 +384,7 @@
 </tbody>
 </table>
 <p>Here’s how to search for publications about meningitis:</p>
-<pre class="sourceCode r" id="cb9"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">europepmc<span class="op">::</span><span class="kw"><a href="../reference/epmc_search.html">epmc_search</a></span>(<span class="st">'disease:meningitis'</span>)</a>
+<pre class="sourceCode r" id="cb9"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">europepmc<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/europepmc/topics/epmc_search">epmc_search</a></span>(<span class="st">'disease:meningitis'</span>)</a>
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; # A tibble: 100 x 27</span></a>
 <a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt;            id source     pmid      pmcid                           doi</span></a>
 <a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt;         &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;      &lt;chr&gt;                         &lt;chr&gt;</span></a>
@@ -388,13 +406,13 @@
 <a class="sourceLine" id="cb9-20" data-line-number="20"><span class="co">#&gt; #   hasReferences &lt;chr&gt;, hasTextMinedTerms &lt;chr&gt;,</span></a>
 <a class="sourceLine" id="cb9-21" data-line-number="21"><span class="co">#&gt; #   hasDbCrossReferences &lt;chr&gt;, hasLabsLinks &lt;chr&gt;,</span></a>
 <a class="sourceLine" id="cb9-22" data-line-number="22"><span class="co">#&gt; #   hasTMAccessionNumbers &lt;chr&gt;, firstPublicationDate &lt;chr&gt;</span></a></code></pre>
-<p>To see, which other terms were text-mined on the article level, use the <code>europepmc::epmc_tm()</code> function.</p>
+<p>To see, which other terms were text-mined on the article level, use the <code><a href="http://www.rdocumentation.org/packages/europepmc/topics/epmc_tm">europepmc::epmc_tm()</a></code> function.</p>
 </div>
 <div id="data-integrations" class="section level4">
 <h4 class="hasAnchor">
 <a href="#data-integrations" class="anchor"></a>Data integrations</h4>
 <p>Another nice feature of Europe PMC is to search for cross-references between Europe PMC to other databases. For instance, to get publications cited by entries in the <a href="https://www.ebi.ac.uk/pdbe/node/1">Protein Data bank in Europe</a> published 2016:</p>
-<pre class="sourceCode r" id="cb10"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">europepmc<span class="op">::</span><span class="kw"><a href="../reference/epmc_search.html">epmc_search</a></span>(<span class="st">'(HAS_PDB:y) AND FIRST_PDATE:2016'</span>)</a>
+<pre class="sourceCode r" id="cb10"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">europepmc<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/europepmc/topics/epmc_search">epmc_search</a></span>(<span class="st">'(HAS_PDB:y) AND FIRST_PDATE:2016'</span>)</a>
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt; # A tibble: 100 x 27</span></a>
 <a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co">#&gt;          id source     pmid                           doi</span></a>
 <a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt;       &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;                         &lt;chr&gt;</span></a>
@@ -452,7 +470,7 @@
 <h4 class="hasAnchor">
 <a href="#citations-and-reference-sections" class="anchor"></a>Citations and reference sections</h4>
 <p>Europe PMC let us also obtain citation metadata and reference sections. For retrieving citation metadata per article, use</p>
-<pre class="sourceCode r" id="cb11"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">europepmc<span class="op">::</span><span class="kw"><a href="../reference/epmc_citations.html">epmc_citations</a></span>(<span class="st">"9338777"</span>, <span class="dt">limit =</span> <span class="dv">500</span>)</a>
+<pre class="sourceCode r" id="cb11"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">europepmc<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/europepmc/topics/epmc_citations">epmc_citations</a></span>(<span class="st">"9338777"</span>, <span class="dt">limit =</span> <span class="dv">500</span>)</a>
 <a class="sourceLine" id="cb11-2" data-line-number="2"><span class="co">#&gt; # A tibble: 211 x 12</span></a>
 <a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">#&gt;          id source</span></a>
 <a class="sourceLine" id="cb11-4" data-line-number="4"><span class="co">#&gt;       &lt;chr&gt;  &lt;chr&gt;</span></a>
@@ -471,7 +489,7 @@
 <a class="sourceLine" id="cb11-17" data-line-number="17"><span class="co">#&gt; #   pubYear &lt;int&gt;, volume &lt;chr&gt;, issue &lt;chr&gt;, pageInfo &lt;chr&gt;,</span></a>
 <a class="sourceLine" id="cb11-18" data-line-number="18"><span class="co">#&gt; #   citedByCount &lt;int&gt;, text &lt;chr&gt;</span></a></code></pre>
 <p>For reference section from an article:</p>
-<pre class="sourceCode r" id="cb12"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">europepmc<span class="op">::</span><span class="kw"><a href="../reference/epmc_refs.html">epmc_refs</a></span>(<span class="st">"28632490"</span>, <span class="dt">limit =</span> <span class="dv">200</span>)</a>
+<pre class="sourceCode r" id="cb12"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">europepmc<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/europepmc/topics/epmc_refs">epmc_refs</a></span>(<span class="st">"28632490"</span>, <span class="dt">limit =</span> <span class="dv">200</span>)</a>
 <a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co">#&gt; # A tibble: 169 x 19</span></a>
 <a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co">#&gt;          id source    citationType</span></a>
 <a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#&gt;       &lt;chr&gt;  &lt;chr&gt;           &lt;chr&gt;</span></a>
@@ -496,7 +514,7 @@
 <a href="#fulltext-access" class="anchor"></a>Fulltext access</h4>
 <p>Europe PMC gives not only access to metadata, but also to full-texts. Adding <code>AND (OPEN_ACCESS:y)</code> to your search query, returns only those articles where Europe PMC has also the fulltext.</p>
 <p>Fulltext as xml can accessed via the PubMed Central ID (PMCID):</p>
-<pre class="sourceCode r" id="cb13"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">europepmc<span class="op">::</span><span class="kw"><a href="../reference/epmc_ftxt.html">epmc_ftxt</a></span>(<span class="st">"PMC3257301"</span>)</a>
+<pre class="sourceCode r" id="cb13"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">europepmc<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/europepmc/topics/epmc_ftxt">epmc_ftxt</a></span>(<span class="st">"PMC3257301"</span>)</a>
 <a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt; {xml_document}</span></a>
 <a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">#&gt; &lt;article article-type="research-article" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mml="http://www.w3.org/1998/Math/MathML"&gt;</span></a>
 <a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co">#&gt; [1] &lt;front&gt;\n  &lt;journal-meta&gt;\n    &lt;journal-id journal-id-type="nlm-ta"&gt; ...</span></a>
@@ -510,7 +528,8 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#what-is-searched">What is searched?</a></li>
       <li><a href="#how-to-search-europe-pmc-with-r">How to search Europe PMC with R?</a></li>

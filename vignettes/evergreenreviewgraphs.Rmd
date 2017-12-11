@@ -153,7 +153,7 @@ To conclude, a proper trend graph on the extent of software citation can only be
 
 ## Conclusion
 
-This vignette presented first steps on how to make trend graphs with `europepmc`. As our use-cases suggest, please carefully consider how you queried Europe PMC in the interpretation of your graph. Although trend graphs are a nice way to illustrate the development of certain concepts in scientific literature or recent trends in scholalrly communication, they must be put in context in order to become meaningful. 
+This vignette presented first steps on how to make trend graphs with `europepmc`. As our use-cases suggest, please carefully consider how you queried Europe PMC in the interpretation of your graph. Although trend graphs are a nice way to illustrate the development of certain concepts in scientific literature or recent trends in scholarly communication, they must be put in context in order to become meaningful. 
 
 ## Acknowledgements
 

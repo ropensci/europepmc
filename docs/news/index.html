@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -51,10 +52,28 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
 </li>
 <li>
-  <a href="../articles/index.html">Articles</a>
+  <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/evergreenreviewgraphs.html">Making proper trend graphs</a>
+    </li>
+    <li>
+      <a href="../articles/introducing-europepmc.html">Introducing europepmc, an R interface to Europe PMC RESTful API</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -84,98 +103,6 @@
     </div>
 
     <div class="contents">
-    <div id="europepmc-0-1-4" class="section level1">
-<h1 class="hasAnchor">
-<a href="#europepmc-0-1-4" class="anchor"></a>europepmc 0.1.4</h1>
-<ul>
-<li>fixed example in vignette which lead to warnings</li>
-<li>synonym search is operational again</li>
-</ul>
-</div>
-    <div id="europepmc-0-1-3" class="section level1">
-<h1 class="hasAnchor">
-<a href="#europepmc-0-1-3" class="anchor"></a>europepmc 0.1.3</h1>
-<div id="minor-changes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#minor-changes" class="anchor"></a>Minor changes</h2>
-<ul>
-<li><a href="https://github.com/ropensci/europepmc/issues/13">removed explicit API versioning, so that the client now always supports the most recent API version #13</a></li>
-<li>set user agent to “ropensci/europepmc”</li>
-<li>
-<code><a href="../reference/epmc_db.html">epmc_db()</a></code>, <code><a href="../reference/epmc_db_count.html">epmc_db_count()</a></code>: add PRIDE archive as external database</li>
-</ul>
-</div>
-</div>
-    <div id="europepmc-0-1-2" class="section level1">
-<h1 class="hasAnchor">
-<a href="#europepmc-0-1-2" class="anchor"></a>europepmc 0.1.2</h1>
-<ul>
-<li>cache HTTP 500 errors which sometimes occur and re-try up to five times. It is based on <a href="https://github.com/jennybc/googlesheets/commit/a91403ecb8ab5d8059bf14a9f9878ab68a829f0a">googlesheet’s approach</a>
-</li>
-<li>new function <code><a href="../reference/epmc_profile.html">epmc_profile()</a></code> to get an overview of hit counts for several databases or publication types</li>
-<li>update imported packages in DESCRIPTION</li>
-</ul>
-</div>
-    <div id="europepmc-0-1-1" class="section level1">
-<h1 class="hasAnchor">
-<a href="#europepmc-0-1-1" class="anchor"></a>europepmc 0.1.1</h1>
-<p>Implement <a href="https://europepmc.org/docs/Europe_PMC_RESTful_Release_Notes.pdf">RESTful API v4.5.3</a></p>
-<div id="major-changes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#major-changes" class="anchor"></a>Major changes</h2>
-<ul>
-<li>
-<code><a href="../reference/epmc_search.html">epmc_search()</a></code>: implement cursorMark to paginate through results</li>
-<li>
-<code><a href="../reference/epmc_search.html">epmc_search()</a></code>: added sort parameter</li>
-<li>
-<code><a href="../reference/epmc_search.html">epmc_search()</a></code>: <a href="https://github.com/ropensci/europepmc/issues/7">support of <code>raw</code> output file #7</a>
-</li>
-</ul>
-</div>
-<div id="minor-changes-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#minor-changes-1" class="anchor"></a>Minor changes</h2>
-<ul>
-<li>
-<code><a href="../reference/epmc_search.html">epmc_search()</a></code> and other functions return non-nested data.frames as tibbles to better support the <a href="http://tidyverse.org/">tidyverse</a>
-</li>
-<li>
-<code><a href="../reference/epmc_search.html">epmc_search()</a></code> improve error handling when nothing was found</li>
-<li>
-<code><a href="../reference/epmc_details.html">epmc_details()</a></code> [added MeSH qualifer #8]((<a href="https://github.com/ropensci/europepmc/issues/8" class="uri">https://github.com/ropensci/europepmc/issues/8</a>)</li>
-<li>remove NBK<code>as data source for</code>epmc_details()<code>, use PMIDs (</code>MED`) instead</li>
-<li>fix warnings regarding vignettes and imported dependencies reported by CRAN</li>
-</ul>
-</div>
-</div>
-    <div id="europepmc-0-1" class="section level1">
-<h1 class="hasAnchor">
-<a href="#europepmc-0-1" class="anchor"></a>europepmc 0.1</h1>
-<p>Initial submission to CRAN</p>
-<div id="major-changes-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#major-changes-1" class="anchor"></a>Major changes</h2>
-<p>Support of the following Europe PMC RESTful API methods:</p>
-<ul>
-<li>search</li>
-<li>citations</li>
-<li>references</li>
-<li>databaseLinks</li>
-<li>labsLinks</li>
-<li>textMinedTerms</li>
-<li>fullTextXML</li>
-<li>bookXML</li>
-</ul>
-<p>Changes made during the ropensci onboarding review by @toph-allen <a href="https://github.com/ropensci/onboarding/issues/29" class="uri">https://github.com/ropensci/onboarding/issues/29</a></p>
-<p>Answering to @cstubben reports and suggestions:</p>
-<ul>
-<li><a href="https://github.com/ropensci/europepmc/issues/1">search returns data.frame of lists #1</a></li>
-<li><a href="https://github.com/ropensci/europepmc/issues/4">removed hit_count from epmc_search results #4</a></li>
-<li><a href="https://github.com/ropensci/europepmc/issues/4">set default batch_size to 1000 and limit to 25? #5</a></li>
-</ul>
-</div>
-</div>
     </div>
   </div>
 
@@ -183,11 +110,6 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#europepmc-0-1-4">0.1.4</a></li>
-        <li><a href="#europepmc-0-1-3">0.1.3</a></li>
-        <li><a href="#europepmc-0-1-2">0.1.2</a></li>
-        <li><a href="#europepmc-0-1-1">0.1.1</a></li>
-        <li><a href="#europepmc-0-1">0.1</a></li>
       </ul>
     </div>
   </div>
