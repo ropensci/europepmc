@@ -60,7 +60,7 @@
       <h1>Making proper trend graphs</h1>
                         <h4 class="author">Najko Jahn</h4>
             
-            <h4 class="date">2017-06-14</h4>
+            <h4 class="date">2017-12-11</h4>
           </div>
 
     
@@ -72,19 +72,19 @@
 <h2 class="hasAnchor">
 <a href="#preparing-proper-review-graphs-with-epmc_hits_trend" class="anchor"></a>Preparing proper review graphs with <code><a href="../reference/epmc_hits_trend.html">epmc_hits_trend()</a></code>
 </h2>
-<p>We use <code><a href="../reference/epmc_hits_trend.html">epmc_hits_trend()</a></code> function, which was firstly introduced in Maëlle Salmon’s blog post about “How not to make an evergreen review graph”<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>. The function takes a query in the Europe PMC search syntax<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> and the period of years over which to perform the search as arguments, and returns a data-frame with year, total number of hits (<code>all_hits</code>) and number of hits for the query (<code>query_hits</code>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(europepmc)
-europepmc::<span class="kw"><a href="../reference/epmc_hits_trend.html">epmc_hits_trend</a></span>(<span class="dt">query =</span> <span class="st">"aspirin"</span>, <span class="dt">period =</span> <span class="dv">2010</span>:<span class="dv">2016</span>)
-<span class="co">#&gt; # A tibble: 7 x 3</span>
-<span class="co">#&gt;    year all_hits query_hits</span>
-<span class="co">#&gt;   &lt;int&gt;    &lt;dbl&gt;      &lt;dbl&gt;</span>
-<span class="co">#&gt; 1  2010   880875       5227</span>
-<span class="co">#&gt; 2  2011   932239       5670</span>
-<span class="co">#&gt; 3  2012   975745       6433</span>
-<span class="co">#&gt; 4  2013  1034131       7136</span>
-<span class="co">#&gt; 5  2014  1081337       7649</span>
-<span class="co">#&gt; 6  2015  1140528       8035</span>
-<span class="co">#&gt; 7  2016  1098366       6709</span></code></pre></div>
+<p>We use <code><a href="../reference/epmc_hits_trend.html">epmc_hits_trend()</a></code> function, which was firstly introduced in Maëlle Salmon’s blog post about “How not to make an evergreen review graph”<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The function takes a query in the Europe PMC search syntax<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> and the period of years over which to perform the search as arguments, and returns a data-frame with year, total number of hits (<code>all_hits</code>) and number of hits for the query (<code>query_hits</code>).</p>
+<pre class="sourceCode r" id="cb1"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(europepmc)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">europepmc<span class="op">::</span><span class="kw"><a href="../reference/epmc_hits_trend.html">epmc_hits_trend</a></span>(<span class="dt">query =</span> <span class="st">"aspirin"</span>, <span class="dt">period =</span> <span class="dv">2010</span><span class="op">:</span><span class="dv">2016</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co">#&gt; # A tibble: 7 x 3</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co">#&gt;    year all_hits query_hits</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">#&gt;   &lt;int&gt;    &lt;dbl&gt;      &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co">#&gt; 1  2010   849133       6717</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co">#&gt; 2  2011   901186       7297</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">#&gt; 3  2012   943434       8299</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt; 4  2013  1000958       9267</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">#&gt; 5  2014  1054694       9996</span></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="co">#&gt; 6  2015  1118459      10814</span></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="co">#&gt; 7  2016  1097516       9981</span></a></code></pre>
 <p>By default, synonym search is disabled and only Medline/PubMed index is searched.</p>
 </div>
 <div id="use-cases" class="section level2">
@@ -93,32 +93,32 @@ europepmc::<span class="kw"><a href="../reference/epmc_hits_trend.html">epmc_hit
 <div id="use-case-growth-of-open-access-literature" class="section level3">
 <h3 class="hasAnchor">
 <a href="#use-case-growth-of-open-access-literature" class="anchor"></a>Use Case: Growth of Open Access Literature</h3>
-<p>There is a growing interest in knowing the proportion of open access to scholarly literature. Europe PMC allows searching for open access content with the <a href="https://europepmc.org/search?query=OPEN_ACCESS:Y&amp;page=1&amp;sortby=Relevance"><code>OPEN_ACCESS:Y</code> parameter</a>. At the moment, Europe PMC contains 1,609,088 open access full-texts. Let’s see how they are relatively distributed over the period 1995 - 2016.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tt_oa &lt;-<span class="st"> </span>europepmc::<span class="kw"><a href="../reference/epmc_hits_trend.html">epmc_hits_trend</a></span>(<span class="st">"OPEN_ACCESS:Y"</span>, <span class="dt">period =</span> <span class="dv">1995</span>:<span class="dv">2016</span>, <span class="dt">synonym =</span> <span class="ot">FALSE</span>)
-tt_oa
-<span class="co">#&gt; # A tibble: 22 x 3</span>
-<span class="co">#&gt;     year all_hits query_hits</span>
-<span class="co">#&gt;    &lt;int&gt;    &lt;dbl&gt;      &lt;dbl&gt;</span>
-<span class="co">#&gt;  1  1995   474323       3098</span>
-<span class="co">#&gt;  2  1996   487016       3393</span>
-<span class="co">#&gt;  3  1997   485400       3684</span>
-<span class="co">#&gt;  4  1998   505556       3976</span>
-<span class="co">#&gt;  5  1999   526230       4321</span>
-<span class="co">#&gt;  6  2000   567540       4695</span>
-<span class="co">#&gt;  7  2001   581840       5899</span>
-<span class="co">#&gt;  8  2002   603488       6591</span>
-<span class="co">#&gt;  9  2003   626189       7709</span>
-<span class="co">#&gt; 10  2004   679745      10033</span>
-<span class="co">#&gt; # ... with 12 more rows</span>
-<span class="co"># we use ggplot2 for plotting the graph</span>
-<span class="kw">library</span>(ggplot2)
-<span class="kw">ggplot</span>(tt_oa, <span class="kw">aes</span>(year, query_hits /<span class="st"> </span>all_hits)) +<span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>() +<span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_line</span>() +
-<span class="st">  </span><span class="kw">xlab</span>(<span class="st">"Year published"</span>) +<span class="st"> </span>
-<span class="st">  </span><span class="kw">ylab</span>(<span class="st">"Proportion of OA full-texts in Europe PMC"</span>)</code></pre></div>
+<p>There is a growing interest in knowing the proportion of open access to scholarly literature. Europe PMC allows searching for open access content with the <a href="https://europepmc.org/search?query=OPEN_ACCESS:Y&amp;page=1&amp;sortby=Relevance"><code>OPEN_ACCESS:Y</code> parameter</a>. At the moment, Europe PMC contains 1,809,023 open access full-texts. Let’s see how they are relatively distributed over the period 1995 - 2016.</p>
+<pre class="sourceCode r" id="cb2"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">tt_oa &lt;-<span class="st"> </span>europepmc<span class="op">::</span><span class="kw"><a href="../reference/epmc_hits_trend.html">epmc_hits_trend</a></span>(<span class="st">"OPEN_ACCESS:Y"</span>, <span class="dt">period =</span> <span class="dv">1995</span><span class="op">:</span><span class="dv">2016</span>, <span class="dt">synonym =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">tt_oa</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt; # A tibble: 22 x 3</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt;     year all_hits query_hits</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt;    &lt;int&gt;    &lt;dbl&gt;      &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt;  1  1995   448144       2866</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt;  2  1996   457900       3082</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt;  3  1997   455662       3235</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt;  4  1998   473286       3399</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt;  5  1999   492990       3429</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt;  6  2000   531375       3835</span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt;  7  2001   544462       4601</span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt;  8  2002   560839       5351</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt;  9  2003   587527       6137</span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt; 10  2004   627139       8225</span></a>
+<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt; # ... with 12 more rows</span></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co"># we use ggplot2 for plotting the graph</span></a>
+<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="kw">ggplot</span>(tt_oa, <span class="kw">aes</span>(year, query_hits <span class="op">/</span><span class="st"> </span>all_hits)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">"Year published"</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-23" data-line-number="23"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">"Proportion of OA full-texts in Europe PMC"</span>)</a></code></pre>
 <p><img src="evergreenreviewgraphs_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;"></p>
-<p>Be careful with the interpretation of the slower growth in the last years because there are several ways how open access content is added to Europe PMC including the digitalization of back issues.<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a></p>
+<p>Be careful with the interpretation of the slower growth in the last years because there are several ways how open access content is added to Europe PMC including the digitalization of back issues.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
 </div>
 <div id="use-case-cited-open-source-software-in-scholarly-publications" class="section level3">
 <h3 class="hasAnchor">
@@ -140,62 +140,62 @@ tt_oa
 <a href="#how-to-query-europe-pmc" class="anchor"></a>How to query Europe PMC?</h4>
 <p>We only want to search reference lists. Because Europe PMC does not index references for its complete collection, we use <code>has_reflist:y</code> to restrict our search to those publications with reference lists. These literature sections can be searched with the <code>REF:</code> parameter.</p>
 <p>Let’s prepare the queries for links to the above mentioned code hosting services:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dvcs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"code.google.com"</span>, <span class="st">"github.com"</span>, 
-          <span class="st">"sourceforge.net"</span>, <span class="st">"bitbucket.org"</span>, <span class="st">"cran.r-project.org"</span>)
-<span class="co"># make queries including reference section</span>
-dvcs_query &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">'REF:"'</span>, dvcs, <span class="st">'"'</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb3"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">dvcs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"code.google.com"</span>, <span class="st">"github.com"</span>, </a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">          <span class="st">"sourceforge.net"</span>, <span class="st">"bitbucket.org"</span>, <span class="st">"cran.r-project.org"</span>)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co"># make queries including reference section</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">dvcs_query &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">'REF:"'</span>, dvcs, <span class="st">'"'</span>)</a></code></pre>
 <p>and get publications for which Europe PMC gives access to reference lists for normalizing the review graph.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-my_df &lt;-<span class="st"> </span>purrr::<span class="kw">map_df</span>(dvcs_query, function(x) {
-  <span class="co"># get number of publications with indexed reference lists</span>
-  refs_hits &lt;-<span class="st"> </span>
-<span class="st">    </span>europepmc::<span class="kw"><a href="../reference/epmc_hits_trend.html">epmc_hits_trend</a></span>(<span class="st">"has_reflist:y"</span>, <span class="dt">period =</span> <span class="dv">2009</span>:<span class="dv">2016</span>, <span class="dt">synonym =</span> <span class="ot">FALSE</span>)$query_hits
-  <span class="co"># get hit count querying for code repositories </span>
-  europepmc::<span class="kw"><a href="../reference/epmc_hits_trend.html">epmc_hits_trend</a></span>(x, <span class="dt">period =</span> <span class="dv">2009</span>:<span class="dv">2016</span>, <span class="dt">synonym =</span> <span class="ot">FALSE</span>) %&gt;%<span class="st"> </span>
-<span class="st">    </span>dplyr::<span class="kw">mutate</span>(<span class="dt">query_id =</span> x) %&gt;%
-<span class="st">    </span>dplyr::<span class="kw">mutate</span>(<span class="dt">refs_hits =</span> refs_hits) %&gt;%
-<span class="st">    </span>dplyr::<span class="kw">select</span>(year, all_hits, refs_hits, query_hits, query_id)
-}) 
-my_df
-<span class="co">#&gt; # A tibble: 40 x 5</span>
-<span class="co">#&gt;     year all_hits refs_hits query_hits                  query_id</span>
-<span class="co">#&gt;    &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;                     &lt;chr&gt;</span>
-<span class="co">#&gt;  1  2009   824692    487758         13 "REF:\"code.google.com\""</span>
-<span class="co">#&gt;  2  2010   880875    500249         41 "REF:\"code.google.com\""</span>
-<span class="co">#&gt;  3  2011   932239    562702         67 "REF:\"code.google.com\""</span>
-<span class="co">#&gt;  4  2012   975745    592222         89 "REF:\"code.google.com\""</span>
-<span class="co">#&gt;  5  2013  1034131    723986        135 "REF:\"code.google.com\""</span>
-<span class="co">#&gt;  6  2014  1081337    761381        145 "REF:\"code.google.com\""</span>
-<span class="co">#&gt;  7  2015  1140528    714094        117 "REF:\"code.google.com\""</span>
-<span class="co">#&gt;  8  2016  1098366    541721         59 "REF:\"code.google.com\""</span>
-<span class="co">#&gt;  9  2009   824692    487758          4      "REF:\"github.com\""</span>
-<span class="co">#&gt; 10  2010   880875    500249         10      "REF:\"github.com\""</span>
-<span class="co">#&gt; # ... with 30 more rows</span>
-
-### total
-hits_summary &lt;-<span class="st"> </span>my_df %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(query_id) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">all =</span> <span class="kw">sum</span>(query_hits)) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(all))
-hits_summary
-<span class="co">#&gt; # A tibble: 5 x 2</span>
-<span class="co">#&gt;                       query_id   all</span>
-<span class="co">#&gt;                          &lt;chr&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 "REF:\"cran.r-project.org\""  7774</span>
-<span class="co">#&gt; 2    "REF:\"sourceforge.net\""  2174</span>
-<span class="co">#&gt; 3         "REF:\"github.com\""  1553</span>
-<span class="co">#&gt; 4    "REF:\"code.google.com\""   666</span>
-<span class="co">#&gt; 5      "REF:\"bitbucket.org\""    96</span></code></pre></div>
-<p>The proportion of papers where Europe PMC was able to make the cited literature available was 61 for the period 2009-2016. There also seems to be a time-lag between indexing reference lists because the absolute number of publication was decreasing over the years. This is presumably because Europe PMC also includes delayed open access content, i.e. content which is not added immediately with the original publication.<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a></p>
+<pre class="sourceCode r" id="cb4"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">my_df &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw">map_df</span>(dvcs_query, <span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">  <span class="co"># get number of publications with indexed reference lists</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">  refs_hits &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="st">    </span>europepmc<span class="op">::</span><span class="kw"><a href="../reference/epmc_hits_trend.html">epmc_hits_trend</a></span>(<span class="st">"has_reflist:y"</span>, <span class="dt">period =</span> <span class="dv">2009</span><span class="op">:</span><span class="dv">2016</span>, <span class="dt">synonym =</span> <span class="ot">FALSE</span>)<span class="op">$</span>query_hits</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">  <span class="co"># get hit count querying for code repositories </span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">  europepmc<span class="op">::</span><span class="kw"><a href="../reference/epmc_hits_trend.html">epmc_hits_trend</a></span>(x, <span class="dt">period =</span> <span class="dv">2009</span><span class="op">:</span><span class="dv">2016</span>, <span class="dt">synonym =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">query_id =</span> x) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">refs_hits =</span> refs_hits) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">select</span>(year, all_hits, refs_hits, query_hits, query_id)</a>
+<a class="sourceLine" id="cb4-11" data-line-number="11">}) </a>
+<a class="sourceLine" id="cb4-12" data-line-number="12">my_df</a>
+<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co">#&gt; # A tibble: 40 x 5</span></a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">#&gt;     year all_hits refs_hits query_hits                  query_id</span></a>
+<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="co">#&gt;    &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;                     &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb4-16" data-line-number="16"><span class="co">#&gt;  1  2009   791964    521650         13 "REF:\"code.google.com\""</span></a>
+<a class="sourceLine" id="cb4-17" data-line-number="17"><span class="co">#&gt;  2  2010   849133    506656         40 "REF:\"code.google.com\""</span></a>
+<a class="sourceLine" id="cb4-18" data-line-number="18"><span class="co">#&gt;  3  2011   901186    562329         66 "REF:\"code.google.com\""</span></a>
+<a class="sourceLine" id="cb4-19" data-line-number="19"><span class="co">#&gt;  4  2012   943434    594837         91 "REF:\"code.google.com\""</span></a>
+<a class="sourceLine" id="cb4-20" data-line-number="20"><span class="co">#&gt;  5  2013  1000958    729980        136 "REF:\"code.google.com\""</span></a>
+<a class="sourceLine" id="cb4-21" data-line-number="21"><span class="co">#&gt;  6  2014  1054694    767467        141 "REF:\"code.google.com\""</span></a>
+<a class="sourceLine" id="cb4-22" data-line-number="22"><span class="co">#&gt;  7  2015  1118459    755002        119 "REF:\"code.google.com\""</span></a>
+<a class="sourceLine" id="cb4-23" data-line-number="23"><span class="co">#&gt;  8  2016  1097516    698762         61 "REF:\"code.google.com\""</span></a>
+<a class="sourceLine" id="cb4-24" data-line-number="24"><span class="co">#&gt;  9  2009   791964    521650          4      "REF:\"github.com\""</span></a>
+<a class="sourceLine" id="cb4-25" data-line-number="25"><span class="co">#&gt; 10  2010   849133    506656         10      "REF:\"github.com\""</span></a>
+<a class="sourceLine" id="cb4-26" data-line-number="26"><span class="co">#&gt; # ... with 30 more rows</span></a>
+<a class="sourceLine" id="cb4-27" data-line-number="27"></a>
+<a class="sourceLine" id="cb4-28" data-line-number="28">### total</a>
+<a class="sourceLine" id="cb4-29" data-line-number="29">hits_summary &lt;-<span class="st"> </span>my_df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-30" data-line-number="30"><span class="st">  </span><span class="kw">group_by</span>(query_id) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-31" data-line-number="31"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">all =</span> <span class="kw">sum</span>(query_hits)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-32" data-line-number="32"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(all))</a>
+<a class="sourceLine" id="cb4-33" data-line-number="33">hits_summary</a>
+<a class="sourceLine" id="cb4-34" data-line-number="34"><span class="co">#&gt; # A tibble: 5 x 2</span></a>
+<a class="sourceLine" id="cb4-35" data-line-number="35"><span class="co">#&gt;                       query_id   all</span></a>
+<a class="sourceLine" id="cb4-36" data-line-number="36"><span class="co">#&gt;                          &lt;chr&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb4-37" data-line-number="37"><span class="co">#&gt; 1 "REF:\"cran.r-project.org\""  8088</span></a>
+<a class="sourceLine" id="cb4-38" data-line-number="38"><span class="co">#&gt; 2    "REF:\"sourceforge.net\""  2197</span></a>
+<a class="sourceLine" id="cb4-39" data-line-number="39"><span class="co">#&gt; 3         "REF:\"github.com\""  1603</span></a>
+<a class="sourceLine" id="cb4-40" data-line-number="40"><span class="co">#&gt; 4    "REF:\"code.google.com\""   667</span></a>
+<a class="sourceLine" id="cb4-41" data-line-number="41"><span class="co">#&gt; 5      "REF:\"bitbucket.org\""   101</span></a></code></pre>
+<p>The proportion of papers where Europe PMC was able to make the cited literature available was 66 for the period 2009-2016. There also seems to be a time-lag between indexing reference lists because the absolute number of publication was decreasing over the years. This is presumably because Europe PMC also includes delayed open access content, i.e. content which is not added immediately with the original publication.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
 <p>Now, let’s make a proper review graph normalizing our query results with the number of publications with indexed references.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
-<span class="kw">ggplot</span>(my_df, <span class="kw">aes</span>(<span class="kw">factor</span>(year), query_hits /<span class="st"> </span>refs_hits, <span class="dt">group =</span> query_id, 
-                  <span class="dt">color =</span> query_id)) +
-<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">alpha =</span> <span class="fl">0.8</span>) +
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">2</span>) +
-<span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">name =</span> <span class="st">"Query"</span>, <span class="dt">palette =</span> <span class="st">"Set1"</span>)+
-<span class="st">  </span><span class="kw">xlab</span>(<span class="st">"Year published"</span>) +
-<span class="st">  </span><span class="kw">ylab</span>(<span class="st">"Proportion of article in Europepe PMC"</span>)</code></pre></div>
+<pre class="sourceCode r" id="cb5"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">ggplot</span>(my_df, <span class="kw">aes</span>(<span class="kw">factor</span>(year), query_hits <span class="op">/</span><span class="st"> </span>refs_hits, <span class="dt">group =</span> query_id, </a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">                  <span class="dt">color =</span> query_id)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">alpha =</span> <span class="fl">0.8</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">name =</span> <span class="st">"Query"</span>, <span class="dt">palette =</span> <span class="st">"Set1"</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">"Year published"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">"Proportion of articles in Europe PMC"</span>)</a></code></pre>
 <p><img src="evergreenreviewgraphs_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
 </div>
 <div id="discussion-and-conclusion" class="section level4">
@@ -221,10 +221,10 @@ hits_summary
 <div class="footnotes">
 <hr>
 <ol>
-<li id="fn1"><p><a href="http://www.masalmon.eu/2017/05/14/evergreenreviewgraph/" class="uri">http://www.masalmon.eu/2017/05/14/evergreenreviewgraph/</a><a href="#fnref1">↩</a></p></li>
-<li id="fn2"><p>Europe PMC Search Syntax: <a href="https://europepmc.org/Help#mostofsearch" class="uri">https://europepmc.org/Help#mostofsearch</a><a href="#fnref2">↩</a></p></li>
-<li id="fn3"><p>See section “Content Growth” in: McEntyre JR, Ananiadou S, Andrews S, et al. UKPMC: a full text article resource for the life sciences. <em>Nucleic Acids Research</em>. 2011;39(Database):D58–D65. <a href="https://doi.org/10.1093/nar/gkq1063" class="uri">https://doi.org/10.1093/nar/gkq1063</a>.<a href="#fnref3">↩</a></p></li>
-<li id="fn4"><p>Ebd.<a href="#fnref4">↩</a></p></li>
+<li id="fn1"><p><a href="http://www.masalmon.eu/2017/05/14/evergreenreviewgraph/" class="uri">http://www.masalmon.eu/2017/05/14/evergreenreviewgraph/</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>Europe PMC Search Syntax: <a href="https://europepmc.org/Help#mostofsearch" class="uri">https://europepmc.org/Help#mostofsearch</a><a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>See section “Content Growth” in: McEntyre JR, Ananiadou S, Andrews S, et al. UKPMC: a full text article resource for the life sciences. <em>Nucleic Acids Research</em>. 2011;39(Database):D58–D65. <a href="https://doi.org/10.1093/nar/gkq1063" class="uri">https://doi.org/10.1093/nar/gkq1063</a>.<a href="#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p>Ebd.<a href="#fnref4" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 </div>

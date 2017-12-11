@@ -23,7 +23,6 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -126,10 +125,9 @@ default, 100 are returned.</p></td>
     </tr>
     <tr>
       <th>sort</th>
-      <td><p>character, sort results by order (<code>asc</code>, <code>desc</code>) and
-sort field (e.g. <code>CITED</code>, <code>P_PDATE</code>), seperated with a blank. For
-example, sort results  by times cited in descending order: <code>sort =
-'CITED desc'</code>.</p></td>
+      <td><p>character, relevance ranking is used by default. Use
+<code>sort = 'cited'</code> for sorting by the number of citations, or
+<code>sort = 'date'</code> by the most recent publications.</p></td>
     </tr>
     </table>
     
@@ -158,8 +156,8 @@ example, sort results  by times cited in descending order: <code>sort =
   <span class='co'>#Limit search to 250 PLOS Genetics articles</span>
   <span class='no'>my.data</span> <span class='kw'>&lt;-</span> <span class='fu'>epmc_search</span>(<span class='kw'>query</span> <span class='kw'>=</span> <span class='st'>'ISSN:1553-7404'</span>, <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>250</span>)
 
-  <span class='co'># include mesh and uniprot synonyms in search</span>
-  <span class='no'>my.data</span> <span class='kw'>&lt;-</span> <span class='fu'>epmc_search</span>(<span class='kw'>query</span> <span class='kw'>=</span> <span class='st'>'aspirin'</span>, <span class='kw'>synonym</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+  <span class='co'># exclude MeSH synonyms in search</span>
+  <span class='no'>my.data</span> <span class='kw'>&lt;-</span> <span class='fu'>epmc_search</span>(<span class='kw'>query</span> <span class='kw'>=</span> <span class='st'>'aspirin'</span>, <span class='kw'>synonym</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
   <span class='co'># get 100 most cited atricles from PLOS ONE</span>
   <span class='fu'>epmc_search</span>(<span class='kw'>query</span> <span class='kw'>=</span> <span class='st'>'ISSN:	1932-6203'</span>, <span class='kw'>sort</span> <span class='kw'>=</span> <span class='st'>'CITED desc'</span>)

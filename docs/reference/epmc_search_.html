@@ -23,7 +23,6 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -88,7 +87,7 @@ pages within the defined limit.</p>
     
 
     <pre class="usage"><span class='fu'>epmc_search_</span>(<span class='kw'>query</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"parsed"</span>,
-  <span class='kw'>page_token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sort</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>page_token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -114,13 +113,6 @@ can become very large.</p></td>
     <tr>
       <th>page_token</th>
       <td><p>cursor marking the page</p></td>
-    </tr>
-    <tr>
-      <th>sort</th>
-      <td><p>character, sort results by order (<code>asc</code>, <code>desc</code>) and
-sort field (e.g. <code>CITED</code>, <code>P_PDATE</code>), seperated with a blank.
-For example, sort results  by times cited in descending order:
-<code>sort = 'CITED desc'</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
