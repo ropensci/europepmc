@@ -1,7 +1,7 @@
 ---
 title: "Introducing europepmc, an R interface to Europe PMC RESTful API"
 author: "Najko Jahn"
-date: "6 January 2017"
+date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
@@ -19,13 +19,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-[Europe PMC](http://europepmc.org/) covers life science literature and
-gives access to open access full texts. Europe
-PMC ingests all PubMed content and extends its index with other sources,
-including Agricola, a bibliographic database of citations to the agricultural
-literature, or Biological Patents.
+## What is searched?
 
-![Index coverage](https://europepmc.org/wicket/resource/uk.bl.ukpmc.web.pages.faq.Help/images/EuropePMCContent-ver-4BB17F003F8F38DF2D3BBE48AB5896C6.png)
+[Europe PMC](http://europepmc.org/) is a repository of life science literature. Europe PMC ingests all PubMed content and extends its index with other sources, including Agricola, a bibliographic database of citations to the agricultural literature, or Biological Patents. 
+
+![Index coverage](http://europepmc.org/wicket/resource/uk.bl.ukpmc.web.pages.faq.Help/images/EuropePMCContent-ver-4BB17F003F8F38DF2D3BBE48AB5896C6.png)
 
 For more background on Europe PMC, see:
 
@@ -34,285 +32,159 @@ For more background on Europe PMC, see:
 Europe PMC: a full-text literature database for the life sciences and platform
 for innovation. (2014). Nucleic Acids Research, 43(D1), D1042–D1048. <http://doi.org/10.1093/nar/gku1061>
 
-## Implemented API methods
+## How to search Europe PMC with R?
 
-This client supports the following API methods:
+This client supports the [Europe PMC search syntax](http://europepmc.org/Help#SSR). If you are unfamiliar with searching Europe PMC, check out the [Europe PMC query builder](https://europepmc.org/advancesearch), a very nice tool that helps you to create your queries. To make use of your Europe PMC queries in R, simply copy & paste the search string to the search functions of this package. 
 
-|API-Method     |Description                                                                                  |R functions                                |
-|:--------------|:--------------------------------------------------------------------------------------------|:------------------------------------------|
-|search         |Search Europe PMC and get detailed metadata                                                  |`epmc_search()`, `epmc_details()`          |
-|profile        |Obtain a summary of hit counts for several Europe PMC databases                              |`epmc_profile()`                           |
-|citations      |Load metadata representing citing articles for a given publication                           |`epmc_citations()`                         |
-|references     |Retrieve the reference section of a pubication                                               |`epmc_refs()`                              |
-|databaseLinks  |Get links to biological databases such as UniProt or ENA                                     |`epmc_db()`, `epmc_db_count()`             |
-|labslinks      |Access links to Europe PMC provided by third parties                                         |`epmc_lablinks()`, `epmc_lablinks_count()` |
-|textMinedTerms |Retrieve text-mined terms                                                                    |`epmc_tm()`, `epmc_tm_count()`             |
-|fullTextXML    |Fetch full-texts deposited in PMC                                                            |`epmc_ftxt()`                              |
-|bookXML        |retrieve book XML formatted full text for the Open Access subset of the Europe PMC bookshelf |`epmc_ftxt_book()`                         |
+In the following, some examples how to search Europe PMC are presented.
 
-## Installation
+### Free search
 
-From CRAN
+`empc_search()` is the main function to query Europe PMC. It searches both metadata and fulltexts. 
 
-```r
-install.packages("europepmc")
-```
-
-The latest development version can be installed using
-[devtools](https://github.com/hadley/devtools) package:
-
-
-```r
-require(devtools)
-install_github("ropensci/europepmc")
-```
-
-Loading into R
 
 ```{r}
 library(europepmc)
+europepmc::epmc_search('malaria')
 ```
 
-## Search Europe PMC
-
-The search covers both metadata (e.g. abstracts or title) and full texts. To
-build your query, please refer to the comprehensive guidance on how to search
-Europe PMC: <http://europepmc.org/help>. Simply provide your query in the Europe
-PMC search syntax to `epmc_search()`. 
-
-By default, `epmc_search` returns 100 records. To adjust the limit, simply use
-the `limit` parameter.
-
-### Examples
-
-For instance, search for abstracts and full texts that mention 
-[`Gabi-Kat`](https://www.gabi-kat.de/),  a Flanking Sequence Tag 
-(FST)-based database for T-DNA insertion mutants:
+Please note that Europe PMC expands queries with MeSH synonyms by default, a behaviour which can be turned off with the `synonym` parameter. 
 
 ```{r}
-epmc_search(query = 'Gabi-Kat')
+europepmc::epmc_search('malaria', synonym = FALSE)
 ```
 
-Get PLOS Genetics (ISSN:1553-7404) articles that cross-reference EMBL:
+To get an exact match, use quotes as in the following example:
 
 ```{r}
-epmc_search(query = 'ISSN:1553-7404 HAS_EMBL:y')
+europepmc::epmc_search('"Human malaria parasites"')
 ```
 
-Use [ORCID](https://orcid.org/) to search for personal publications:
+### Managing search results
 
-```{r}
-epmc_search(query = 'AUTHORID:"0000-0002-7635-3473"', limit = 1000)
-```
-
-### Include MeSH and UniProt synonyms
-
-You may also want to include synonyms when searching Europe PMC. If
-`synonym = TRUE` MeSH and UniProt synonyms are searched as well.
-
-```{r}
-# with snyonyms
-epmc_search('aspirin', synonym = TRUE)
-
-# without synonyms
-epmc_search('aspirin', synonym = FALSE)
-```
-
-### Output types
-
-`epmc_search()` supports the following output types :
-
-#### Parsed key metadata (default)
-
-Key metadata parsed as non-nested tibble:
-
-```{r}
-epmc_search('Gabi-Kat', output = 'parsed')
-```
-
-In addition to fetch bibliographic metadata, the parsed output also helps you
-to get a general overview about additional information types that are offered by 
-Europe PMC and which can be retrieved through other `europepmc`-functions. 
-Columns inform whether open access full texts (`isOpenAccess`), cross-links to
-other EBI databases (`hasDbCrossReferences`), text-mined terms (`hasTextMinedTerms`)
-or references (`hasReferences`) are available.
-
-#### IDs
-
-List of literature database identifier including PMID:
-
-```{r}
-epmc_search('Gabi-Kat', output = 'id_list')
-```
-
-#### Record details
-
-Full metadata as list. Please be aware that these lists can become very large, and fetching these data from Europe PMC therefore takes some time.
-
-```{r}
-my_list <- epmc_search('Gabi-Kat', output = 'raw', limit = 10)
-# display the structure for one list element
-str(my_list[[10]])
-```
-
-### Get results number
-
-Count hits before with `epmc_hits` to define limit. For example, get list of ids
-that represent articles referencing DataCite DOIs:
-
-```{r}
-query <- "ACCESSION_TYPE:doi"
-epmc_hits(query)
-# set limit to 10 records
-my_data <- epmc_search(query = query, limit = 10)
-head(my_data)
-attr(my_data, "hit_count")
-```
-
-You may also use `epmc_profile` to retrieve a summary of hit counts.
-
-```{r}
-epmc_profile(query = 'malaria')
-```
-
-## Get article details
-
-In addition to key metadata, `epmc_details` also returns full metadata
-providing more comprehensive information on the article-level. By default,
-PubMed / Medline index is searched.
+By default, 100 records are returned, but the number of results can be expanded or limited with the `limit` parameter. 
 
 
 ```{r}
-epmc_details(ext_id = '24270414')
+europepmc::epmc_search('"Human malaria parasites"', limit = 10)
 ```
 
-Show author details including ORCID:
+Results are sorted by relevance. Other options via the `sort` parameter are 
+
+- `sort = 'cited'` by the number of citation, descending from the most cited publication
+- `sort = 'date'` by date published starting with the most recent publication
+
+### Loop over queries
+
+Sometimes, you would like to send more than one search to Europe PMC at once. A simple solution is using `plyr::ldply()`:
 
 ```{r}
-epmc_details(ext_id = '14756321')$author_details
+my_dois <- c(
+  "10.1159/000479962",
+  "10.1002/sctm.17-0081",
+  "10.1161/strokeaha.117.018077",
+  "10.1007/s12017-017-8447-9"
+  )
+  plyr::ldply(my_dois, function(x) {
+  europepmc::epmc_search(paste0("DOI:", x))
+  })
 ```
 
-## Get citation counts and citing publications
+### Output options
 
-Citing publications from the Europe PMC index can be retrieved like this:
+By default, a non-nested data frame printed as tibble is returned. 
+Other formats are `output = "id_list"`" returning a list of IDs and sources, 
+and output = "'raw'"" to get full metadata as list. Please be aware that these lists can become very large.
+
+### More advanced options to search Europe PMC
+
+#### Author search
+
+Use the Europe PMC query syntax to search by author names:
 
 ```{r}
-my_cites <- epmc_citations('9338777')
-my_cites
-# hits:
-attr(my_cites, 'hit_count')
+europepmc::epmc_search('AUTH:"Salmon Maelle"')
 ```
 
-Please note, that citation counts are often smaller than those held by toll-
-access services such as Web of Science or Scopus because the number of
-reference sections indexed for Europe PMC considerably differs due to the
-lack of full text accessibility.
-
-## Get reference section
-
-Europe PMC indexes more than 5 million reference sections.
+[Europe PMC Advanced Search](https://europepmc.org/advancesearch) has a auto-suggest field for author names if you feel unsure how the name you are searching for is indexed in Europe PMC. Using the Boolean `OR` operator you can simply search for more than one spelling variant:
 
 ```{r}
-epmc_refs('PMC3166943', data_src = 'pmc')
+q <- 'AUTH:"PÜHLER Alfred" OR AUTH:"Pühler Alfred Prof. Dr." OR AUTH:"Puhler A"'
+europepmc::epmc_search(q, limit = 1000)
 ```
 
-Tip: add `has_reflist:y` to your search string in `epmc_search` to make sure
-you only get publications whose reference sections are accessible through
-Europe PMC.
-
-## Retrieve links to other EBI databases
-
-Cross-links to EBI databases are either manually curated (ENA, InterPro, PDB,
-IntAct, ChEMBL, ChEBI and ArrayExpress) or automatically gathered through
-text-mining (European Nucleotide Archive, UniProt, PDB, OMIM, RefSNP, RefSeq,
-Pfam, InterPro, Ensembl, ArrayExpress and data DOIs).
-
-Before retrieving the links, please check availability and sources first:
+There is a considerable overlap between common names. The integration of ORCID, a persistent author identifier, allows unambigous search for personal publications in Europe PMC. For example, to search for publications written by Bernd Weisshaar (ORCID: <https://orcid.org/0000-0002-7635-3473>) sorted by the number of times cited in descending order:
 
 ```{r}
-epmc_db_count('12368864')
+europepmc::epmc_search('AUTHORID:"0000-0002-7635-3473"', limit = 200, sort = "cited")
 ```
 
-Add `has_xrefs:y` or to your search string in `epmc_search` to make sure
-you only get publications with cross-references to EBI databases.
+#### Text-mined terms
 
-Select database and get links:
+Europe PMC parses article metadata for various concepts and terms.
+
+|Semantic types |Description/Examples                                                                               |
+|:--------------|:--------------------------------------------------------------------------------------------------|
+|accession      |A unique identifier given to a DNA or protein sequence record                                      |
+|chemical       |e.g. Granzymes, Peptides, Hydrogen                                                                 |
+|disease        |e.g. dysthymias, gid, icterohemorrhagic                                                            |
+|efo            |Experimental Factor Ontology e.g. generation, health, mortality rate, scale, findings, genome etc. |
+|gene_protein   |e.g. atp, cl-43, ecoriir, gng11, ipt1, mlks                                                        |
+|go_term        |A Gene Ontology (GO) term e.g. annealing, neuroblasts                                              |
+|organism       |e.g. pneumocystidomycetes, sarus, terebratulide                                                    |
+
+Here's how to search for publications about meningitis:
 
 ```{r}
-epmc_db('12368864', db = 'embl')
+europepmc::epmc_search('disease:meningitis')
 ```
 
-## Get text-mined terms
+To see, which other terms were text-mined on the article level, use the `europepmc::epmc_tm()` function.
 
-Text-mined terms that can be accessed via Europe PMC are mapped against
-controlled vocabularies like [Gene Ontology](http://www.geneontology.org/).  
+#### Data integrations
 
-Before retrieving these terms, please check availability and vocabularies
-first:
+Another nice feature of Europe PMC is to search for cross-references between Europe PMC to other databases. For instance, to get publications cited by
+entries in the [Protein Data bank in Europe](https://www.ebi.ac.uk/pdbe/node/1) published 2016:
 
 ```{r}
-epmc_tm_count('25249410')
+europepmc::epmc_search('(HAS_PDB:y) AND FIRST_PDATE:2016')
 ```
 
-Select vocabulary to retrieve the terms:
+The following sources are supported
+
+- **CHEBI** a database and ontology of chemical entities of biological interest <http://www.ebi.ac.uk/chebi/>
+- **CHEMBL** a database of bioactive drug-like small molecules <https://www.ebi.ac.uk/chembldb/>
+- **EMBL** now ENA, provides a comprehensive record of the world's nucleotide sequencing information <http://www.ebi.ac.uk/ena/>
+- **INTACT** provides a freely available, open source database system and analysis tools for molecular interaction data <http://www.ebi.ac.uk/intact/>
+- **INTERPRO** provides functional analysis of proteins by classifying them into families and predicting domains and important sites <http://www.ebi.ac.uk/interpro/>
+- **OMIM** a comprehensive and authoritative compendium of human genes and genetic phenotypes http://www.ncbi.nlm.nih.gov/omim
+- **PDB** European resource for the collection, organisation and dissemination of data on biological macromolecular structures <http://www.ebi.ac.uk/pdbe/>
+- **UNIPROT** comprehensive and freely accessible resource of protein sequence and functional information <http://www.uniprot.org/>
+- **PRIDE** PRIDE Archive - proteomics data repository <https://www.ebi.ac.uk/pride/archive/>
+
+To retrieve metadata about these external database links, use `europepmc_epmc_db()`. 
+
+#### Citations and reference sections
+
+Europe PMC let us also obtain citation metadata and reference sections. For retrieving citation metadata per article, use
 
 ```{r}
-epmc_tm('25249410', semantic_type = 'GO_TERM')
+europepmc::epmc_citations("9338777", limit = 500)
 ```
 
-## Links to external sources
-
-With the External Link services, Europe PMC allows third parties to publish
-links from Europe PMC to other webpages. Current External Link providers,
-whose id can be found through Europe PMC's Advanced Search interface, include
-Wikipedia, Dryad Digital Repository or the institutional repo of Bielefeld
-University. For more information, see <http://europepmc.org/labslink>.
-
-Check availability and number of links:
+For reference section from an article:
 
 ```{r}
-epmc_lablinks_count('PMC3986813', data_src = 'pmc')
+europepmc::epmc_refs("28632490", limit = 200)
 ```
 
-Get links from Wikipedia (`lab_id = '1507'`)
+#### Fulltext access
+
+Europe PMC gives not only access to metadata, but also to full-texts. Adding `AND (OPEN_ACCESS:y)` to your search query, returns only those articles where Europe PMC has also the fulltext.
+
+Fulltext as xml can accessed via the PubMed Central ID (PMCID):
 
 ```{r}
-epmc_lablinks('20301687', lab_id = '1507')
+europepmc::epmc_ftxt("PMC3257301")
 ```
 
-## Full text access
-
-Full texts are in XML format and are only provided for the Open Access subset
-of Europe PMC. They can be retrieved by the PMCID.
-
-```{r}
-epmc_ftxt('PMC3257301')
-```
-
-Books, fetched through the PMID or the 'NBK' book number, can also be loaded
-as XML into R for further text-mining activities using `epmc_ftxt_book()`.
-
-
-Please check full-text availability before calling this method either with `epmc_search()` or `epmc_details()`.
-
-## Re-use of europepmc
-
-Chris Stubben (@cstubben) has created an Shiny App that allows you to search and
-browse Europe PMC:
-
-<https://cstubben.shinyapps.io/euPMC/>
-
-## Other ways to access Europe PubMed Central
-
-### Other APIs
-
-- Data dumps: <https://europepmc.org/FtpSite>
-- OAI service: <https://europepmc.org/OaiService>
-- SOAP web service: <https://europepmc.org/SoapWebServices>
-- Grants RESTful (Grist) API: <https://europepmc.org/GristAPI>
-
-### Other R clients
-
-- use rOpenSci's `oai` to get metadata and full text via Europe PMC's OAI interface: <https://github.com/ropensci/oai>
-- use rOpenSci's `rentrez` to interact with [NCBI databases](http://www.ncbi.nlm.nih.gov/) such as [PubMed](http://www.ncbi.nlm.nih.gov/pubmed): <https://github.com/ropensci/rentrez>
-- rOpenSci's `fulltext` package gives access to supplementary material of open access life-science publications in Europe PMC: <https://github.com/ropensci/fulltext>
