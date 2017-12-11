@@ -6,7 +6,7 @@ Authors@R: c(
            role = c("aut", "cre", "cph")),
            person("Maëlle", "Salmon", role = c("ctb")))
 License: GPL-3
-Date: 2017-04-09
+Date: 2017-12-11
 URL: http://github.com/ropensci/europepmc/
 BugReports: http://github.com/ropensci/europepmc/issues
 Description: An R Client for the Europe PubMed Central RESTful Web Service

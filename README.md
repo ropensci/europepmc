@@ -136,7 +136,7 @@ ggplot(tt_oa, aes(year, query_hits / all_hits)) +
   ylab("Proportion of articles on Malaria in Europe PMC")
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png)
+![plot of chunk unnamed-chunk-4](inst/image/unnamed-chunk-4-1.png)
 
 For more info, read the vignette about creating literature review graphs:
 

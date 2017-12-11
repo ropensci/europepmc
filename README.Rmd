@@ -93,7 +93,7 @@ See vignette [Introducing europepmc, an R interface to Europe PMC RESTful API](h
 There is also a nice function allowing you to easily create review graphs like described in Maëlle
 Salmon's [blog post](http://www.masalmon.eu/2017/05/14/evergreenreviewgraph/):
 
-```{r}
+```{r, fig.path="inst/image/"}
 tt_oa <- europepmc::epmc_hits_trend("Malaria", period = 1995:2016, synonym = FALSE)
 tt_oa
 # we use ggplot2 for plotting the graph
