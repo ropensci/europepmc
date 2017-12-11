@@ -39,6 +39,5 @@ Suggests:
     rmarkdown,
     ggplot2,
     purrr,
-    readr,
-    ggplot2
+    readr
 Encoding: UTF-8

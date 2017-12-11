@@ -49,17 +49,6 @@ rebi_GET <- function(path = NULL, query = NULL, ...) {
   return(doc)
 }
 
-# # build query
-# build_query <- function(query, page, batch_size, ...) {
-#   list(
-#     query = query,
-#     format = "json",
-#     page = page,
-#     pageSize = batch_size,
-#     ...
-#   )
-# }
-
 # Calculate pages. Each page consists of 25 records.
 rebi_pageing <- function(hitCount, pageSize) {
   if (all.equal((hitCount / pageSize), as.integer(hitCount / pageSize)) == TRUE) {
