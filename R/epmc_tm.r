@@ -1,7 +1,6 @@
 #' Get text-mined terms
 #'
-#' Retrieve a count and list of terms text-mined from
-#' full text publications by Europe PMC.
+#' Retrieve a count and a list of text-mined terms gathered by Europe PMC.
 #'
 #'@inheritParams epmc_refs
 #'
@@ -17,7 +16,7 @@
 #'     \item{GO_TERM}{Gene Ontology Terms (\url{http://geneontology.org/})}
 #'     \item{ORGANISM}{organism}
 #'     }
-#' @return Terms found as data.frame
+#' @return Terms found as tibble
 #' @examples
 #' \dontrun{
 #' epmc_tm("25249410", semantic_type = "GO_TERM")
@@ -81,7 +80,7 @@ epmc_tm <-
           req_method = req_method,
           type = semantic_type
         )
-      out <- lapply(paths, function(x) {
+      out <- plyr::ldply(paths, function(x) {
         if (verbose == TRUE)
           message(paste0(
             hit_count,
@@ -91,17 +90,21 @@ epmc_tm <-
         doc <- rebi_GET(path = x)
         plyr::ldply(
           doc$semanticTypeList$semanticType$tmSummary,
-          data.frame,
+          as.data.frame,
           stringsAsFactors = FALSE,
           .id = NULL
         )
       })
       #combine all into one
-      result <- jsonlite::rbind_pages(out) # %>%
-      # TO DO: unnest dplyr::as_data_frame()
-      # return
+      result <- dplyr::data_frame(
+        term = out$term,
+        alt_term = out$altNameList$altName,
+        db_name = out$dbName,
+        db_ids = unlist(out$dbIdList$dbId)
+      )
       attr(result, "hit_count") <- hit_count
     }
+    # result
     result
   }
 

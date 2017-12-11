@@ -47,11 +47,10 @@ returns 100 records.}
 \item{verbose}{logical, print some information on what is going on.}
 }
 \value{
-Terms found as data.frame
+Terms found as tibble
 }
 \description{
-Retrieve a count and list of terms text-mined from
-full text publications by Europe PMC.
+Retrieve a count and a list of text-mined terms gathered by Europe PMC.
 }
 \examples{
 \dontrun{
