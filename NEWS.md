@@ -1,3 +1,15 @@
+# europepmc 0.2
+
+- Move to HTTPS
+- new `epmc_hits_trends()` function to obtain data for review graphs (thanks @maelle)
+- new vignette "Making proper trend graphs" and updated search documentation
+
+## Minor changes
+
+- fix sort param
+- rename `jsonlite::rbind_pages()` function
+- improve `europepmc::epmc_tm()` output
+
 # europepmc 0.1.4
 
 - fixed example in vignette which lead to warnings
