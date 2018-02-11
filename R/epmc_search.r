@@ -43,8 +43,8 @@
 #' # exclude MeSH synonyms in search
 #' my.data <- epmc_search(query = 'aspirin', synonym = FALSE)
 #'
-#' # get 100 most cited atricles from PLOS ONE
-#' epmc_search(query = 'ISSN:	1932-6203', sort = 'CITED desc')
+#' # get 100 most cited atricles from PLOS ONE publsihed in 2014
+#' epmc_search(query = '(ISSN:1932-6203) AND FIRST_PDATE:2014', sort = 'cited')
 #'
 #' # print number of records found
 #' attr(my.data, "hit_count")
@@ -107,6 +107,7 @@ epmc_search <- function(query = NULL,
   } else {
     limit <- as.integer(limit)
     limit <- ifelse(hits <= limit, hits, limit)
+    message(paste(hits, "records found, returning", limit))
     # let's loop over until page max is reached,
     # or until cursor marks are identical
     i <- 0
@@ -138,7 +139,7 @@ epmc_search <- function(query = NULL,
     if (output == "raw") {
       md <- results[1:limit]
     } else {
-      md <- results[1:limit,]
+      md <- results[1:limit, ]
     }
     # return hit counts(thanks to @cstubben)
     attr(md, "hit_count") <- hits
@@ -197,7 +198,7 @@ epmc_search_ <-
     out <-
       rebi_GET(path = paste0(rest_path(), "/search"), query = args)
     # remove nested lists from resulting data.frame, get these infos
-    # with epmc_details
+    # with epmc_details or using output "raw"
     if (!resulttype == "core") {
       md <- out$resultList$result
       if (length(md) == 0) {
@@ -205,7 +206,7 @@ epmc_search_ <-
       } else {
         md <- md %>%
           dplyr::select_if(Negate(is.list)) %>%
-          as_data_frame()
+          dplyr::as_data_frame()
       }
     } else {
       out <- jsonlite::fromJSON(out, simplifyDataFrame = FALSE)

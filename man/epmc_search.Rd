@@ -59,8 +59,8 @@ my.data <- epmc_search(query = 'ISSN:1553-7404', limit = 250)
 # exclude MeSH synonyms in search
 my.data <- epmc_search(query = 'aspirin', synonym = FALSE)
 
-# get 100 most cited atricles from PLOS ONE
-epmc_search(query = 'ISSN:	1932-6203', sort = 'CITED desc')
+# get 100 most cited atricles from PLOS ONE publsihed in 2014
+epmc_search(query = '(ISSN:1932-6203) AND FIRST_PDATE:2014', sort = 'cited')
 
 # print number of records found
 attr(my.data, "hit_count")

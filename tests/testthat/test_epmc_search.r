@@ -10,7 +10,7 @@ test_that("epmc_search returns", {
                    limit = 250)
   f <- epmc_search(query = 'ISSN:1553-7404 HAS_EMBL:y', limit = 25)
   g <- epmc_search(query = 'aspirin', synonym = TRUE)
-  h <- epmc_search(query = 'ISSN:	1932-6203', sort = 'cited')
+  h <- epmc_search(query = 'ISSN:1932-6203', sort = 'cited')
   i <- epmc_search('gabi-kat', limit = 125, output = 'raw')
   j <- epmc_search('123haha')
   k <- lapply(c('kdkdkdkdkdkd', 'najko'),
