@@ -23,8 +23,7 @@ For more infos on Europe PMC, see:
 
 <https://europepmc.org/About>
 
-Europe PMC: a full-text literature database for the life sciences and platform
-for innovation. (2014). Nucleic Acids Research, 43(D1), D1042–D1048. doi:[10.1093/nar/gku1061](http://doi.org/10.1093/nar/gku1061)
+Levchenko, M., Gou, Y., Graef, F., Hamelers, A., Huang, Z., Ide-Smith, M., … McEntyre, J. (2017). Europe PMC in 2017. Nucleic Acids Research, 46(D1), D1254–D1260. <https://doi.org/10.1093/nar/gkx1005>
 
 ## Implemented API methods
 
@@ -76,24 +75,23 @@ PMC search syntax to `epmc_search()`.
 
 ```r
 europepmc::epmc_search("Lagotto Romagnolo")
-#> # A tibble: 39 x 27
-#>          id source     pmid                                doi
-#>       <chr>  <chr>    <chr>                              <chr>
-#>  1 28583040    MED 28583040           10.1177/0300985817712793
-#>  2 25945683    MED 25945683                 10.1111/jvim.12611
-#>  3 24354474    MED 24354474                  10.1111/vru.12129
-#>  4 17552452    MED 17552452 10.1111/j.1939-1676.2007.tb02991.x
-#>  5 17490444    MED 17490444   10.1111/j.1748-5827.2006.00298.x
-#>  6 29056526    MED 29056526       10.1016/j.beproc.2017.10.009
-#>  7 27525650    MED 27525650       10.1371/journal.pone.0161005
-#>  8 29166669    MED 29166669       10.1371/journal.pone.0188543
-#>  9 25875846    MED 25875846       10.1371/journal.pgen.1005169
-#> 10 26316206    MED 26316206          10.1186/s12917-015-0463-0
-#> # ... with 29 more rows, and 23 more variables: title <chr>,
-#> #   authorString <chr>, journalTitle <chr>, issue <chr>,
-#> #   journalVolume <chr>, pubYear <chr>, journalIssn <chr>, pageInfo <chr>,
-#> #   pubType <chr>, isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>,
-#> #   hasPDF <chr>, hasBook <chr>, citedByCount <int>, hasReferences <chr>,
+#> # A tibble: 42 x 27
+#>    id     source pmid   doi   title    authorString     journalTitle issue
+#>    <chr>  <chr>  <chr>  <chr> <chr>    <chr>            <chr>        <chr>
+#>  1 28583… MED    28583… 10.1… Basal A… Syrjä P, Anwar … Vet Pathol   6    
+#>  2 25945… MED    25945… 10.1… Behavio… Jokinen TS, Tii… J Vet Inter… 4    
+#>  3 24354… MED    24354… 10.1… FDG-PET… Jokinen TS, Haa… Vet Radiol … 3    
+#>  4 17552… MED    17552… 10.1… Benign … Jokinen TS, Met… J Vet Inter… 3    
+#>  5 17490… MED    17490… 10.1… Cerebel… Jokinen TS, Rus… J Small Ani… 8    
+#>  6 29056… MED    29056… 10.1… Relatio… Byosiere SE, Fe… Behav Proce… <NA> 
+#>  7 27525… MED    27525… 10.1… Genetic… Donner J, Kauko… PLoS One     8    
+#>  8 29166… MED    29166… 10.1… Frequen… Zierath S, Hugh… PLoS One     11   
+#>  9 29237… MED    29237… 10.1… Molecul… Yu Y, Hasegawa … BMC Vet Res  1    
+#> 10 25875… MED    25875… 10.1… A misse… Kyöstilä K, Syr… PLoS Genet   4    
+#> # ... with 32 more rows, and 19 more variables: journalVolume <chr>,
+#> #   pubYear <chr>, journalIssn <chr>, pageInfo <chr>, pubType <chr>,
+#> #   isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>, hasPDF <chr>,
+#> #   hasBook <chr>, citedByCount <int>, hasReferences <chr>,
 #> #   hasTextMinedTerms <chr>, hasDbCrossReferences <chr>,
 #> #   hasLabsLinks <chr>, hasTMAccessionNumbers <chr>,
 #> #   firstPublicationDate <chr>, pmcid <chr>, hasSuppl <chr>
@@ -116,16 +114,16 @@ tt_oa
 #> # A tibble: 22 x 3
 #>     year all_hits query_hits
 #>    <int>    <dbl>      <dbl>
-#>  1  1995   448144       1485
-#>  2  1996   457900       1560
-#>  3  1997   455662       1853
-#>  4  1998   473286       1749
-#>  5  1999   492990       1935
-#>  6  2000   531375       2127
-#>  7  2001   544462       2203
-#>  8  2002   560839       2352
-#>  9  2003   587527       2553
-#> 10  2004   627139       2748
+#>  1  1995   448477       1485
+#>  2  1996   458064       1560
+#>  3  1997   455691       1853
+#>  4  1998   473173       1749
+#>  5  1999   492786       1935
+#>  6  2000   531286       2127
+#>  7  2001   544411       2203
+#>  8  2002   560843       2352
+#>  9  2003   587503       2554
+#> 10  2004   627130       2748
 #> # ... with 12 more rows
 # we use ggplot2 for plotting the graph
 library(ggplot2)
