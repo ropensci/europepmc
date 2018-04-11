@@ -6,7 +6,7 @@ base_uri <- function()
 
 # rest path
 rest_path <- function()
-  "europepmc/webservices/rest"
+  "europepmc/webservices/test/rest"
 
 # set user agent
 ua <- httr::user_agent("https://github.com/ropensci/europepmc")
@@ -28,9 +28,11 @@ rebi_GET <- function(path = NULL, query = NULL, ...) {
   if (is.null(path) && is.null(query))
     stop("Nothing to search")
   # call api, decode workaround because Europe PMC only accepts decoded cursor
-  req <- rGET(urltools::url_decode(httr::modify_url(
+  req <- rGET(urltools::url_decode(
+    httr::modify_url(
     base_uri(), path = path, query = query
-  )), ua)
+    )
+  ), ua, httr::verbose())
   # check for http status
   httr::stop_for_status(req)
   # load json into r
@@ -39,11 +41,11 @@ rebi_GET <- function(path = NULL, query = NULL, ...) {
   if (!jsonlite::validate(out))
     stop("Upps, nothing to parse, please check your query")
   # return core format as list
-  if (length(query$resulttype) == 1 && query$resulttype == "core") {
-    doc <- out
-  } else {
+ # if (length(query$resulttype) == 1 && query$resulttype == "core") {
+ #  doc <- out
+  else
     doc <- jsonlite::fromJSON(out)
-  }
+  #}
   if (!exists("doc"))
     stop("No json to parse", call. = FALSE)
   return(doc)
@@ -61,56 +63,28 @@ rebi_pageing <- function(hitCount, pageSize) {
 # make paths according to limit and request methods
 make_path <- function(hit_count = NULL,
                       limit = NULL,
-                      ext_id = NULL,
-                      data_src = NULL,
-                      req_method = NULL,
-                      type = NULL) {
+                 #     ext_id = NULL,
+                 #      data_src = NULL,
+                 #      req_method = NULL,
+                      format = "json",
+                 ...) {
   limit <- as.integer(limit)
   limit <- ifelse(hit_count <= limit, hit_count, limit)
   if (limit > batch_size()) {
     tt <- chunks(limit)
-    paths <- lapply(1:(tt$page_max - 1), function(x)
-      paste(
-        c(
-          rest_path(),
-          data_src,
-          ext_id,
-          req_method,
-          type,
-          x,
-          batch_size(),
-          "json"
-        ),
-        collapse = "/"
-      ))
-    paths <- append(paths, list(paste(
-      c(
-        rest_path(),
-        data_src,
-        ext_id,
-        req_method,
-        type,
-        tt$page_max,
-        tt$last_chunk,
-        "json"
-      ),
-      collapse = "/"
-    )))
+    arg <- lapply(1:(tt$page_max - 1), function(x)
+      list(page = x,
+           pageSize = batch_size(),
+           format = format)
+    )
+    arg[[tt$page_max]] <- list(page = tt$page_max,
+                              pageSize = tt$last_chunk,
+                              format = format)
   } else {
-    paths <-
-      paste(c(
-        rest_path(),
-        data_src,
-        ext_id,
-        req_method,
-        type,
-        1,
-        limit,
-        "json"
-      ),
-      collapse = "/")
+    arg <- NULL
+    arg[[1]] <- list(pageSize = limit, format = format)
   }
-  paths
+    arg
 }
 
 # calculate number of page chunks needed in accordance with limit param
