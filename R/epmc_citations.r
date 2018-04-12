@@ -17,56 +17,37 @@ epmc_citations <-
            data_src = "med",
            limit = 100,
            verbose = TRUE) {
-    if (is.null(ext_id))
-      stop("Please provide a publication id")
-    if (!tolower(data_src) %in% supported_data_src)
-      stop(
-        paste0(
-          "Data source '",
-          data_src,
-          "' not supported. Try one of the
-          following sources: ",
-          paste0(supported_data_src, collapse = ", ")
-        )
-      )
-    stopifnot(is.numeric(limit))
-    stopifnot(is.logical(verbose))
+    # validate input
+    val_input(ext_id, data_src, limit, verbose)
     # build request
-    req_method <- "citations"
-    path <- paste(rest_path(), data_src, ext_id, req_method,
-                  "json", sep = "/")
-    doc <- rebi_GET(path = path)
-    hit_count <- doc$hitCount
+    path <- mk_path(data_src, ext_id, req_method = "citations")
+    # how many records are found?
+    hit_count <- get_counts(path = path)
     if (hit_count == 0) {
       message("No citing documents found")
-      result <- NULL
+      out <- NULL
     } else {
-      if (verbose == TRUE)
-        message(paste0(
-          hit_count,
-          " records found. Returning ",
-          ifelse(hit_count <= limit, hit_count, limit)
-        ))
-      paths <-
-        make_path(
-          hit_count = hit_count,
+      # provide info
+      msg(hit_count = hit_count,
           limit = limit,
-          ext_id = ext_id,
-          data_src = data_src,
-          req_method = req_method
-        )
-      out <- lapply(paths, function(x) {
-        doc <- rebi_GET(path = x)
-        plyr::ldply(doc$citationList,
-                    data.frame,
-                    stringsAsFactors = FALSE,
-                    .id = NULL)
-      })
-      #combine all into one
-      result <- jsonlite::rbind_pages(out) %>%
-        dplyr::as_data_frame()
-      # return
-      attr(result, "hit_count") <- hit_count
+          verbose = verbose)
+      # request records and parse them
+      if (hit_count >= limit) {
+        req <-
+          rebi_GET(path = path,
+                   query = list(format = "json", pageSize = limit))
+        out <- dplyr::as_data_frame(req$citationList$citation)
+      } else {
+        query <-
+          make_path(hit_count = hit_count,
+                    limit = limit)
+        out <- purrr::map_df(query, function(x) {
+          req <- rebi_GET(path = path, query = x)
+          dplyr::as_data_frame(req$citationList$citation)
+        })
+      }
+      # return hit count as attribute
+      attr(out, "hit_count") <- hit_count
     }
-    result
+    out
   }

@@ -168,3 +168,57 @@ pb <- function(limit) {
                                  format = "(:spin) [:bar] :percent",
                                  clear = FALSE, width = 60)
 }
+
+# common methods for id based request -------------------------------------
+
+#' Validate inputs for ID-based requests
+#'
+#' @noRd
+val_input <- function(ext_id,
+                      data_src,
+                      limit,
+                      verbose) {
+  if (is.null(ext_id))
+    stop("Please provide a publication id")
+  if (!tolower(data_src) %in% supported_data_src)
+    stop(
+      paste0(
+        "Data source '",
+        data_src,
+        "' not supported. Try one of the
+        following sources: ",
+        paste0(supported_data_src, collapse = ", ")
+      )
+    )
+  stopifnot(is.numeric(limit), is.logical(verbose))
+}
+#' Make path for  ID-based requests
+#'
+#'@noRd
+mk_path <- function(req_method, data_src, ext_id, ...) {
+  if (!is.null(req_method))
+    c(rest_path(), data_src, ext_id, req_method)
+  else
+    stop("No request method provided")
+}
+#' Get hit counts for ID-based requests
+#'
+#' @noRd
+get_counts <- function(path, ...) {
+  if (!is.null(path))
+    doc <- rebi_GET(path = path,
+                    query = list(format = "json", pageSize = batch_size()))
+  doc$hitCount
+}
+#' Provide feedback about how many records where found and
+#' will be returned
+#'
+#' @noRd
+msg <- function(hit_count, limit, verbose) {
+  if (verbose == TRUE)
+    message(paste0(
+      hit_count,
+      " records found. Returning ",
+      ifelse(hit_count <= limit, hit_count, limit)
+    ))
+}
