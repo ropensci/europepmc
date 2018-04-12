@@ -32,7 +32,7 @@ rebi_GET <- function(path = NULL, query = NULL, ...) {
     httr::modify_url(
     base_uri(), path = path, query = query
     )
-  ), ua, httr::verbose())
+  ), ua)#, httr::verbose())
   # check for http status
   httr::stop_for_status(req)
   # load json into r
@@ -41,15 +41,15 @@ rebi_GET <- function(path = NULL, query = NULL, ...) {
   if (!jsonlite::validate(out))
     stop("Upps, nothing to parse, please check your query")
   # return core format as list
- # if (length(query$resulttype) == 1 && query$resulttype == "core") {
- #  doc <- out
-  else
+  if (length(query$resulttype) == 1 && query$resulttype == "core") {
+    doc <- out
+  } else {
     doc <- jsonlite::fromJSON(out)
-  #}
+  }
   if (!exists("doc"))
     stop("No json to parse", call. = FALSE)
   return(doc)
-}
+  }
 
 # Calculate pages. Each page consists of 25 records.
 rebi_pageing <- function(hitCount, pageSize) {
