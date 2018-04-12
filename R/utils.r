@@ -192,7 +192,7 @@ val_input <- function(ext_id,
         paste0(supported_data_src, collapse = ", ")
       )
     )
-  stopifnot(is.numeric(limit), is.logical(verbose))
+    stopifnot(is.numeric(limit), is.logical(verbose))
 }
 #' Make path for  ID-based requests
 #'
