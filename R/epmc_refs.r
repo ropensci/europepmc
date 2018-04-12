@@ -35,7 +35,6 @@
 #' epmc_refs("21753913")
 #' }
 epmc_refs <-
-
   function(ext_id = NULL,
            data_src = "med",
            limit = 100,
