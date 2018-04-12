@@ -75,14 +75,16 @@ make_path <- function(hit_count = NULL,
     arg <- lapply(1:(tt$page_max - 1), function(x)
       list(page = x,
            pageSize = batch_size(),
-           format = format)
+           format = format,
+           ...)
     )
     arg[[tt$page_max]] <- list(page = tt$page_max,
                               pageSize = tt$last_chunk,
-                              format = format)
+                              format = format,
+                              ...)
   } else {
     arg <- NULL
-    arg[[1]] <- list(pageSize = limit, format = format)
+    arg[[1]] <- list(pageSize = limit, format = format, ...)
   }
     arg
 }
@@ -207,7 +209,7 @@ mk_path <- function(req_method, data_src, ext_id, ...) {
 get_counts <- function(path, ...) {
   if (!is.null(path))
     doc <- rebi_GET(path = path,
-                    query = list(format = "json", pageSize = batch_size()))
+                    query = list(format = "json", pageSize = batch_size(), ...))
   doc$hitCount
 }
 #' Provide feedback about how many records where found and
