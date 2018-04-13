@@ -32,23 +32,11 @@
 #'    epmc_lablinks_count("PMC3986813", data_src = "pmc")
 #'    }
 epmc_lablinks_count <- function(ext_id = NULL, data_src = "med") {
-  if (is.null(ext_id))
-    stop("Please provide a publication id")
-  if (!tolower(data_src) %in% supported_data_src)
-    stop(
-      paste0(
-        "Data source '",
-        data_src,
-        "' not supported. Try one of the
-        following sources: ",
-        paste0(supported_data_src, collapse = ", ")
-      )
-    )
+  # validate input
+  val_input(ext_id, data_src, limit = 1, verbose = FALSE)
   # build request
-  path <- paste(rest_path(), data_src, ext_id, "labsLinks",
-                "/json", sep = "/")
-  doc <- rebi_GET(path = path)
-  hitCount <- doc$hitCount
+  path <- mk_path(data_src, ext_id, req_method = "labsLinks")
+  doc <- rebi_GET(path = path, query = list(format = "json"))
   if (doc$hitCount == 0) {
     message("Sorry, no links available")
     NULL

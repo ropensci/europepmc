@@ -48,7 +48,7 @@ epmc_db_count <- function(ext_id = NULL, data_src = "med") { # validate input
   # build request
   path <- mk_path(data_src, ext_id, req_method = "databaseLinks")
   doc <- rebi_GET(path = path, query = list(format = "json"))
-  if (is.null(doc$dbCountList)) {
+  if (doc$hitCount == 0) {
     message("Nothing found")
     NULL
   } else {
