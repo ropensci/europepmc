@@ -22,13 +22,15 @@ publication.
 \details{
 Europe PMC supports cross-references between literature and the
   following databases:
-  \describe{
+ \describe{
+ \item{'ARXPR'}{Array Express, a database of functional genomics experiments
+    \url{https://www.ebi.ac.uk/arrayexpress/}}
  \item{'CHEBI'}{a database and ontology of chemical entities of biological
      interest \url{http://www.ebi.ac.uk/chebi/}}
   \item{'CHEMBL'}{a database of bioactive drug-like small molecules
      \url{https://www.ebi.ac.uk/chembldb/}}
   \item{'EMBL'}{now ENA, provides a comprehensive record of the world's
-     nucleotide sequencing information \url{http://www.ebi.ac.uk/ena/}}
+  nucleotide sequencing information \url{http://www.ebi.ac.uk/ena/}}
   \item{'INTACT'}{provides a freely available, open
      source database system and analysis tools for molecular interaction data
      \url{http://www.ebi.ac.uk/intact/}}
@@ -43,7 +45,8 @@ Europe PMC supports cross-references between literature and the
   \item{'UNIPROT'}{comprehensive and freely accessible
      resource of protein sequence and functional information
   \url{http://www.uniprot.org/}}
-  }
+  \item{'PRIDE'}{PRIDE Archive - proteomics data repository
+  \url{https://www.ebi.ac.uk/pride/archive/}}}
 }
 \examples{
   \dontrun{

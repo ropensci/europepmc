@@ -5,7 +5,7 @@
 \title{Get links to external sources}
 \usage{
 epmc_lablinks(ext_id = NULL, data_src = "med", lab_id = NULL,
-  n_pages = 20)
+  limit = 100, verbose = TRUE)
 }
 \arguments{
 \item{ext_id}{publication identifier}
@@ -27,14 +27,16 @@ Europe PubMed Central supports:
   \item{pmc}{PubMed Central}
   }}
 
-\item{lab_id}{identifier of the external link service. Use Europe PMC's
-advanced search form to find an id.}
+\item{lab_id}{character vector, identifiers of the external link service.
+Use Europe PMC's advanced search form to find ids.}
 
-\item{n_pages}{Number of pages to be returned. By default, this function
-returns 10 records for each page.}
+\item{limit}{Number of records to be returned. By default, this function
+returns 100 records.}
+
+\item{verbose}{print information about what's going on}
 }
 \value{
-Links found as data.frame
+Links found as nested data_frame
 }
 \description{
 With the External Link services, Europe PMC allows third parties to publish
@@ -46,7 +48,9 @@ For more information, see
 }
 \examples{
   \dontrun{
-  # Link to Altmetric (lab_id = 1562)
+  # Fetch links
+  epmc_lablinks("24007304")
+  # Link to Altmetric (lab_id = "1562")
   epmc_lablinks("25389392", lab_id = "1562")
 
   # Links to Wikipedia

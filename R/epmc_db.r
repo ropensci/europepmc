@@ -6,7 +6,7 @@
 #' @inheritParams epmc_refs
 #' @param db character, specify database:
 #'  \describe{
-#'  \item{'ARXPR'} {Array Express, a database of functional genomics experiments
+#'  \item{'ARXPR'}{Array Express, a database of functional genomics experiments
 #'     \url{https://www.ebi.ac.uk/arrayexpress/}}
 #'  \item{'CHEBI'}{a database and ontology of chemical entities of biological
 #'      interest \url{http://www.ebi.ac.uk/chebi/}}
@@ -29,8 +29,7 @@
 #'      resource of protein sequence and functional information
 #'   \url{http://www.uniprot.org/}}
 #'   \item{'PRIDE'}{PRIDE Archive - proteomics data repository
-#'   \url{https://www.ebi.ac.uk/pride/archive/}}
-#'   }
+#'   \url{https://www.ebi.ac.uk/pride/archive/}}}
 #'
 #' @return Cross-references as data.frame
 #' @examples

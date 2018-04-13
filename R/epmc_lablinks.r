@@ -28,6 +28,7 @@
 #'   Use Europe PMC's advanced search form to find ids.
 #' @param limit Number of records to be returned. By default, this function
 #'   returns 100 records.
+#' @param verbose print information about what's going on
 #'
 #' @return Links found as nested data_frame
 #' @export

@@ -55,9 +55,6 @@ rebi_GET <- function(path = NULL, query = NULL, ...) {
 # make paths according to limit and request methods
 make_path <- function(hit_count = NULL,
                       limit = NULL,
-                 #     ext_id = NULL,
-                 #      data_src = NULL,
-                 #      req_method = NULL,
                       format = "json",
                  ...) {
   limit <- as.integer(limit)

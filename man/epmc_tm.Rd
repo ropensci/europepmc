@@ -10,23 +10,11 @@ epmc_tm(ext_id = NULL, data_src = "med", semantic_type = NULL,
 \arguments{
 \item{ext_id}{character, publication identifier}
 
-\item{data_src}{character, data source, by default Pubmed/MedLine index will
-be searched.
-The following three letter codes represent the sources
-Europe PubMed Central supports:
+\item{data_src}{character, data source, by default Pubmed/MedLine index will be searched.
+The only sources relevant to this methods are \code{med} and \code{pmc}.
 \describe{
-  \item{agr}{Agricola is a bibliographic database of citations to the
-  agricultural literature created by the US National Agricultural Library
-  and its co-operators.}
-  \item{cba}{Chinese Biological Abstracts}
-  \item{ctx}{CiteXplore}
-  \item{eth}{EthOs Theses, i.e. PhD theses (British Library)}
-  \item{hir}{NHS Evidence}
-  \item{med}{PubMed/Medline NLM}
-  \item{nbk}{Europe PMC Book metadata}
-  \item{pat}{Biological Patents}
-  \item{pmc}{PubMed Central}
-  }}
+\item{med}{Publications from PubMed and MEDLINE}
+\item{pmc}{Publications from PubMed Central}}}
 
 \item{semantic_type}{controlled vocabulary. Specify the semantic type you
 wish to retrieve. The following types are supported:
@@ -41,10 +29,10 @@ wish to retrieve. The following types are supported:
   \item{ORGANISM}{organism}
   }}
 
-\item{limit}{integer, number of results. By default, this function
+\item{limit}{Number of records to be returned. By default, this function
 returns 100 records.}
 
-\item{verbose}{logical, print some information on what is going on.}
+\item{verbose}{print information about what's going on}
 }
 \value{
 Terms found as tibble
@@ -54,6 +42,7 @@ Retrieve a count and a list of text-mined terms gathered by Europe PMC.
 }
 \examples{
 \dontrun{
+epmc_tm("25249410")
 epmc_tm("25249410", semantic_type = "GO_TERM")
 epmc_tm("PMC4340542", data_src = "pmc", semantic_type = "GO_TERM")
 }

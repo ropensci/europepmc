@@ -24,8 +24,8 @@ retrieve reference sections and citations, text-mined terms or cross-links
 to other databases hosted by the European Bioinformatics Institute (EBI).
 
 For more information about Europe PMC, see their current paper:
-Europe PMC: a full-text literature database for the life sciences and
-platform for innovation. (2014). Nucleic Acids Research, 43(D1), D1042-D1048.
-\url{http://doi.org/10.1093/nar/gku1061}.
+Levchenko, M., Gou, Y., Graef, F., Hamelers, A., Huang, Z., Ide-Smith, M.,
+ … McEntyre, J. (2017). Europe PMC in 2017. Nucleic Acids Research, 46(D1),
+ D1254–D1260. \url{https://doi.org/10.1093/nar/gkx1005}.
 }
 

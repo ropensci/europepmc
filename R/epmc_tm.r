@@ -3,14 +3,11 @@
 #' Retrieve a count and a list of text-mined terms gathered by Europe PMC.
 #'
 #' @param ext_id character, publication identifier
-#' @param data_src character, data source, by default Pubmed/MedLine index will
-#'   be searched.
+#' @param data_src character, data source, by default Pubmed/MedLine index will be searched.
 #'   The only sources relevant to this methods are \code{med} and \code{pmc}.
 #'   \describe{
-#'   \item{med} {Publications from PubMed and MEDLINE,
-#'   curated by the U.S. National Institutes of Health's National Library of Medicine}
-#'   \ite{pmc} {Publications from PubMed Central
-#'   curated by the U.S. National Institutes of Health's National Library of Medicine.}
+#'   \item{med}{Publications from PubMed and MEDLINE}
+#'   \item{pmc}{Publications from PubMed Central}}
 #'
 #' @param semantic_type controlled vocabulary. Specify the semantic type you
 #'   wish to retrieve. The following types are supported:
@@ -24,6 +21,10 @@
 #'     \item{GO_TERM}{Gene Ontology Terms (\url{http://geneontology.org/})}
 #'     \item{ORGANISM}{organism}
 #'     }
+#' @param limit Number of records to be returned. By default, this function
+#'   returns 100 records.
+#' @param verbose print information about what's going on
+#'
 #' @return Terms found as tibble
 #' @examples
 #' \dontrun{
