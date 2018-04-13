@@ -51,14 +51,6 @@ rebi_GET <- function(path = NULL, query = NULL, ...) {
   return(doc)
   }
 
-# Calculate pages. Each page consists of 25 records.
-rebi_pageing <- function(hitCount, pageSize) {
-  if (all.equal((hitCount / pageSize), as.integer(hitCount / pageSize)) == TRUE) {
-    1:(hitCount / pageSize)
-  } else {
-    1:(hitCount / pageSize + 1)
-  }
-}
 
 # make paths according to limit and request methods
 make_path <- function(hit_count = NULL,
