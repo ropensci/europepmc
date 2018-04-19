@@ -28,8 +28,10 @@ Europe PubMed Central supports:
   \item{pmc}{PubMed Central}
   }}
 
-\item{db}{character, restrict the response to a specific database:
+\item{db}{character, specify database:
 \describe{
+\item{'ARXPR'}{Array Express, a database of functional genomics experiments
+   \url{https://www.ebi.ac.uk/arrayexpress/}}
 \item{'CHEBI'}{a database and ontology of chemical entities of biological
     interest \url{http://www.ebi.ac.uk/chebi/}}
  \item{'CHEMBL'}{a database of bioactive drug-like small molecules
@@ -51,8 +53,7 @@ Europe PubMed Central supports:
     resource of protein sequence and functional information
  \url{http://www.uniprot.org/}}
  \item{'PRIDE'}{PRIDE Archive - proteomics data repository
- \url{https://www.ebi.ac.uk/pride/archive/}}
- }}
+ \url{https://www.ebi.ac.uk/pride/archive/}}}}
 
 \item{limit}{integer, number of results. By default, this function
 returns 100 records.}

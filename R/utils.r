@@ -28,9 +28,11 @@ rebi_GET <- function(path = NULL, query = NULL, ...) {
   if (is.null(path) && is.null(query))
     stop("Nothing to search")
   # call api, decode workaround because Europe PMC only accepts decoded cursor
-  req <- rGET(urltools::url_decode(httr::modify_url(
+  req <- rGET(urltools::url_decode(
+    httr::modify_url(
     base_uri(), path = path, query = query
-  )), ua)
+    )
+  ), ua)#, httr::verbose())
   # check for http status
   httr::stop_for_status(req)
   # load json into r
@@ -47,70 +49,33 @@ rebi_GET <- function(path = NULL, query = NULL, ...) {
   if (!exists("doc"))
     stop("No json to parse", call. = FALSE)
   return(doc)
-}
-
-# Calculate pages. Each page consists of 25 records.
-rebi_pageing <- function(hitCount, pageSize) {
-  if (all.equal((hitCount / pageSize), as.integer(hitCount / pageSize)) == TRUE) {
-    1:(hitCount / pageSize)
-  } else {
-    1:(hitCount / pageSize + 1)
   }
-}
+
 
 # make paths according to limit and request methods
 make_path <- function(hit_count = NULL,
                       limit = NULL,
-                      ext_id = NULL,
-                      data_src = NULL,
-                      req_method = NULL,
-                      type = NULL) {
+                      format = "json",
+                 ...) {
   limit <- as.integer(limit)
   limit <- ifelse(hit_count <= limit, hit_count, limit)
   if (limit > batch_size()) {
     tt <- chunks(limit)
-    paths <- lapply(1:(tt$page_max - 1), function(x)
-      paste(
-        c(
-          rest_path(),
-          data_src,
-          ext_id,
-          req_method,
-          type,
-          x,
-          batch_size(),
-          "json"
-        ),
-        collapse = "/"
-      ))
-    paths <- append(paths, list(paste(
-      c(
-        rest_path(),
-        data_src,
-        ext_id,
-        req_method,
-        type,
-        tt$page_max,
-        tt$last_chunk,
-        "json"
-      ),
-      collapse = "/"
-    )))
+    arg <- lapply(1:(tt$page_max - 1), function(x)
+      list(page = x,
+           pageSize = batch_size(),
+           format = format,
+           ...)
+    )
+    arg[[tt$page_max]] <- list(page = tt$page_max,
+                              pageSize = tt$last_chunk,
+                              format = format,
+                              ...)
   } else {
-    paths <-
-      paste(c(
-        rest_path(),
-        data_src,
-        ext_id,
-        req_method,
-        type,
-        1,
-        limit,
-        "json"
-      ),
-      collapse = "/")
+    arg <- NULL
+    arg[[1]] <- list(pageSize = limit, format = format, ...)
   }
-  paths
+    arg
 }
 
 # calculate number of page chunks needed in accordance with limit param
@@ -193,4 +158,58 @@ pb <- function(limit) {
   progress::progress_bar$new(total = limit / batch_size(),
                                  format = "(:spin) [:bar] :percent",
                                  clear = FALSE, width = 60)
+}
+
+# common methods for id based request -------------------------------------
+
+#' Validate inputs for ID-based requests
+#'
+#' @noRd
+val_input <- function(ext_id,
+                      data_src,
+                      limit,
+                      verbose) {
+  if (is.null(ext_id))
+    stop("Please provide a publication id")
+  if (!tolower(data_src) %in% supported_data_src)
+    stop(
+      paste0(
+        "Data source '",
+        data_src,
+        "' not supported. Try one of the
+        following sources: ",
+        paste0(supported_data_src, collapse = ", ")
+      )
+    )
+    stopifnot(is.numeric(limit), is.logical(verbose))
+}
+#' Make path for  ID-based requests
+#'
+#'@noRd
+mk_path <- function(req_method, data_src, ext_id, ...) {
+  if (!is.null(req_method))
+    c(rest_path(), data_src, ext_id, req_method)
+  else
+    stop("No request method provided")
+}
+#' Get hit counts for ID-based requests
+#'
+#' @noRd
+get_counts <- function(path, ...) {
+  if (!is.null(path))
+    doc <- rebi_GET(path = path,
+                    query = list(format = "json", pageSize = batch_size(), ...))
+  doc$hitCount
+}
+#' Provide feedback about how many records where found and
+#' will be returned
+#'
+#' @noRd
+msg <- function(hit_count, limit, verbose) {
+  if (verbose == TRUE)
+    message(paste0(
+      hit_count,
+      " records found. Returning ",
+      ifelse(hit_count <= limit, hit_count, limit)
+    ))
 }

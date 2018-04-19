@@ -5,13 +5,15 @@
 #'
 #' @details Europe PMC supports cross-references between literature and the
 #'   following databases:
-#'   \describe{
+#'  \describe{
+#'  \item{'ARXPR'}{Array Express, a database of functional genomics experiments
+#'     \url{https://www.ebi.ac.uk/arrayexpress/}}
 #'  \item{'CHEBI'}{a database and ontology of chemical entities of biological
 #'      interest \url{http://www.ebi.ac.uk/chebi/}}
 #'   \item{'CHEMBL'}{a database of bioactive drug-like small molecules
 #'      \url{https://www.ebi.ac.uk/chembldb/}}
 #'   \item{'EMBL'}{now ENA, provides a comprehensive record of the world's
-#'      nucleotide sequencing information \url{http://www.ebi.ac.uk/ena/}}
+#'   nucleotide sequencing information \url{http://www.ebi.ac.uk/ena/}}
 #'   \item{'INTACT'}{provides a freely available, open
 #'      source database system and analysis tools for molecular interaction data
 #'      \url{http://www.ebi.ac.uk/intact/}}
@@ -26,7 +28,8 @@
 #'   \item{'UNIPROT'}{comprehensive and freely accessible
 #'      resource of protein sequence and functional information
 #'   \url{http://www.uniprot.org/}}
-#'   }
+#'   \item{'PRIDE'}{PRIDE Archive - proteomics data repository
+#'   \url{https://www.ebi.ac.uk/pride/archive/}}}
 #'
 #' @param ext_id character, publication identifier
 #' @param data_src character, data source, by default Pubmed/MedLine index will
@@ -38,24 +41,13 @@
 #'   epmc_db_count(ext_id = "10779411")
 #'   epmc_db_count(ext_id = "PMC3245140", data_src = "PMC")
 #'   }
-epmc_db_count <- function(ext_id = NULL, data_src = "med") {
-  if (is.null(ext_id))
-    stop("Please provide a publication id")
-  if (!tolower(data_src) %in% supported_data_src)
-    stop(
-      paste0(
-        "Data source '",
-        data_src,
-        "' not supported. Try one of the
-        following sources: ",
-        paste0(supported_data_src, collapse = ", ")
-      )
-    )
+epmc_db_count <- function(ext_id = NULL, data_src = "med") { # validate input
+  val_input(ext_id, data_src, limit = 1, verbose = FALSE)
   # build request
-  path <- paste(rest_path(), data_src, ext_id, "databaseLinks",
-                "/json", sep = "/")
-  doc <- rebi_GET(path = path)
-  if (is.null(doc$dbCountList)) {
+  # build request
+  path <- mk_path(data_src, ext_id, req_method = "databaseLinks")
+  doc <- rebi_GET(path = path, query = list(format = "json"))
+  if (doc$hitCount == 0) {
     message("Nothing found")
     NULL
   } else {

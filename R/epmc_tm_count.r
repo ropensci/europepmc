@@ -25,26 +25,21 @@
 #'   }
 
 epmc_tm_count <- function(ext_id = NULL, data_src = "med") {
-  if (is.null(ext_id))
-    stop("Please provide a publication id")
-  if (!tolower(data_src) %in% supported_data_src)
+  if (!tolower(data_src) %in% c("pmc", "med"))
     stop(
       paste0(
         "Data source '",
         data_src,
         "' not supported. Try one of the
         following sources: ",
-        paste0(supported_data_src, collapse = ", ")
+        paste0(c("med", "pmc"), collapse = ", ")
       )
     )
   # build request
-  path <- paste(rest_path(),
-                data_src,
-                ext_id,
-                "textMinedTerms",
-                "/json",
-                sep = "/")
-  doc <- rebi_GET(path = path)
+  path <- mk_path(data_src, ext_id, req_method = "textMinedTerms")
+  # how many records are found?
+  doc <- rebi_GET(path = path,
+                  query = list(format = "json"))
   if (doc$hitCount == 0) {
     message("Sorry, no text-mined terms found")
     NULL

@@ -24,17 +24,20 @@
 #'     \item{pat}{Biological Patents}
 #'     \item{pmc}{PubMed Central}
 #'     }
-#' @param lab_id identifier of the external link service. Use Europe PMC's
-#'   advanced search form to find an id.
-#' @param n_pages Number of pages to be returned. By default, this function
-#'   returns 10 records for each page.
+#' @param lab_id character vector, identifiers of the external link service.
+#'   Use Europe PMC's advanced search form to find ids.
+#' @param limit Number of records to be returned. By default, this function
+#'   returns 100 records.
+#' @param verbose print information about what's going on
 #'
-#' @return Links found as data.frame
+#' @return Links found as nested data_frame
 #' @export
 #'
 #' @examples
 #'   \dontrun{
-#'   # Link to Altmetric (lab_id = 1562)
+#'   # Fetch links
+#'   epmc_lablinks("24007304")
+#'   # Link to Altmetric (lab_id = "1562")
 #'   epmc_lablinks("25389392", lab_id = "1562")
 #'
 #'   # Links to Wikipedia
@@ -45,81 +48,59 @@
 #'   epmc_lablinks("12736239", lab_id = "1056")
 #'   }
 
-epmc_lablinks <-
-  function(ext_id = NULL,
+epmc_lablinks <- function(ext_id = NULL,
            data_src = "med",
            lab_id = NULL,
-           n_pages = 20) {
-    if (is.null(ext_id))
-      stop("Please provide a publication id")
-    if (!is.numeric(n_pages))
-      stop("n_pages must be of type 'numeric'")
-    if (!tolower(data_src) %in% supported_data_src)
-      stop(
-        paste0(
-          "Data source '",
-          data_src,
-          "' not supported. Try one of the
-          following sources: ",
-          paste0(supported_data_src, collapse = ", ")
-        )
-      )
+           limit = 100,
+           verbose = TRUE) {
+    # validate input
+    val_input(ext_id, data_src, limit, verbose)
     # build request
-    if (is.null(lab_id))
-      stop(
-        "Please restrict your query to one external link provider. You'll find
-        all providers in Europe PMC's advanced search form."
-      )
-    path <- paste(rest_path(),
-                  data_src,
-                  ext_id,
-                  "labsLinks",
-                  lab_id,
-                  "json",
-                  sep = "/")
-    doc <- rebi_GET(path = path)
-    hitCount <- doc$hitCount
-    if (doc$hitCount == 0) {
+    path <- mk_path(data_src, ext_id, req_method = "labsLinks")
+    # manipulate lab ids
+    if(!is.null(lab_id))
+      lab_id <- lab_ids_(lab_id)
+    # how many records are found?
+    if (!is.null(path))
+      doc <- rebi_GET(path = path,
+                      query = append(list(format = "json", pageSize = batch_size()),
+                                           lab_id)
+    )
+    hit_count <- doc$hitCount
+    if (hit_count == 0) {
       message("Sorry, no links available")
-      result <- NULL
+      out <- NULL
     } else {
-      no_pages <-
-        rebi_pageing(hitCount = hitCount,
-                     pageSize = doc$request$pageSize)
-      # limit number of pages that will be retrieved
-      if (max(no_pages) > n_pages)
-        no_pages <- 1:n_pages
-      pages <- list()
-      for (i in no_pages) {
-        out <- rebi_GET(path = paste(
-          rest_path(),
-          data_src,
-          ext_id,
-          "labsLinks",
-          lab_id,
-          i,
-          "json",
-          sep = "/"
-        ))
-        message("Retrieving page ", i)
-        result <- plyr::ldply(
-          out$providers$provider$link,
-          data.frame,
-          stringsAsFactors = FALSE,
-          .id = NULL
-        )
-        pages[[i + 1]] <- result
+      # provide info
+      msg(hit_count = hit_count,
+          limit = limit,
+          verbose = verbose)
+      # request records and parse them
+      if (hit_count >= limit) {
+        req <-
+          rebi_GET(path = path,
+                   query = append(list(format = "json", pageSize = limit), lab_id))
+        out <- req$providers$provider %>%
+          as_data_frame()
+      } else {
+        query <-
+          make_path(hit_count = hit_count,
+                    limit = limit)
+        out <- purrr::map_df(query, function(x) {
+          req <- rebi_GET(path = path, query = append(x, lab_id))
+          req$providers$provider %>%
+            dplyr::as_data_frame()
+        })
       }
-      #combine all into one
-      tt <- jsonlite::rbind_pages(pages)
-      # add lablink metadata
-      result <- cbind(
-        tt,
-        lab_id = doc$providers$provider$id,
-        lab_name = doc$providers$provider$name,
-        lab_description = doc$providers$provider$description
-      )
-      attr(result, "hit_count") <- hitCount
-      dplyr::as_data_frame(result)
+      # return hit count as attribute
+      attr(out, "hit_count") <- hit_count
     }
+    out
   }
+
+#' helper function for labids
+#' @noRd
+lab_ids_ <- function(x) {
+  names(x) <- rep("providerIds", length(x))
+  as.list(x)
+}
