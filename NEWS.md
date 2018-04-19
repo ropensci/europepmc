@@ -1,3 +1,12 @@
+# europepmc 0.3
+
+- Implement API version 6.0
+
+## Minor changes
+
+- improved feedback when calling the API
+- link to most current paper from the Europe PMC team
+
 # europepmc 0.2
 
 - Move to HTTPS

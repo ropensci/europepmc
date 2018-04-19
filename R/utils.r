@@ -6,7 +6,7 @@ base_uri <- function()
 
 # rest path
 rest_path <- function()
-  "europepmc/webservices/test/rest"
+  "europepmc/webservices/rest"
 
 # set user agent
 ua <- httr::user_agent("https://github.com/ropensci/europepmc")
