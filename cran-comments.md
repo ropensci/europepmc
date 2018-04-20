@@ -12,7 +12,11 @@ On local machine (OS):
 
 Status: OK
 
+Win-Builder:
+
 The win-builder send one NOTE about possibly mis-spelled words in DESCRIPTION, which are, in fact, correctly spelled.
+
+Win-builder R version 3.3.3 (2017-03-06) notes about (possibly) invalid URLs, which, in fact, are valid.
 
 ## Reverse dependencies
 
