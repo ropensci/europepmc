@@ -69,7 +69,7 @@ epmc_details <- function(ext_id = NULL, data_src = "med") {
     )
   } else {
     q <- list(
-      query = paste0("ext_id:", ext_id, "%20src:", data_src),
+      query = toupper(paste0("ext_id:", ext_id, "%20src:", data_src)),
       format = "json",
       resulttype = "core"
     )

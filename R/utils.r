@@ -14,7 +14,7 @@ ua <- httr::user_agent("https://github.com/ropensci/europepmc")
 # check data sources
 supported_data_src <-
   c("agr", "cba", "ctx", "eth", "hir", "med", "pat",
-    "pmc", "ppr")
+    "pmc")
 
 # default batch size
 batch_size <- function()
@@ -32,7 +32,8 @@ rebi_GET <- function(path = NULL, query = NULL, ...) {
     httr::modify_url(
     base_uri(), path = path, query = query
     )
-  ), ua)
+  ), #httr::verbose(),
+  ua)
   # check for http status
   httr::stop_for_status(req)
   # load json into r
