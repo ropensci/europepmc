@@ -6,7 +6,7 @@ test_that("epmc_db returns", {
   b <- epmc_db("25249410", db = "embl")
   c <- epmc_db("14756321", db = "uniprot")
   d <- epmc_db("11805837", db = "pride")
-  e <- epmc_db("29472496", db = "ARXPR")
+  e <- epmc_db("10676951", db = "ARXPR")
 
   #correct dimensions and class
   expect_output(str(a), "data.frame")
