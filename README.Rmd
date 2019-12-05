@@ -85,7 +85,7 @@ europepmc::epmc_search("Lagotto Romagnolo")
 By default, `epmc_search()` returns 100 records. To adjust the limit, simply use
 the `limit` parameter.
 
-See vignette [Introducing europepmc, an R interface to Europe PMC RESTful API](https://ropensci.github.io/europepmc/articles/introducing-europepmc.html) for a long-form documentation about how to search Europe PMC with this client.
+See vignette [Introducing europepmc, an R interface to Europe PMC RESTful API](https://docs.ropensci.org/europepmc/articles/introducing-europepmc.html) for a long-form documentation about how to search Europe PMC with this client.
 
 ## Creating proper review graphs with `epmc_hits_trend()`
 
@@ -106,7 +106,7 @@ ggplot(tt_oa, aes(year, query_hits / all_hits)) +
 
 For more info, read the vignette about creating literature review graphs:
 
-<https://ropensci.github.io/europepmc/articles/evergreenreviewgraphs.html>
+<https://docs.ropensci.org/europepmc/articles/evergreenreviewgraphs.html>
 
 ## Re-use of europepmc
 
