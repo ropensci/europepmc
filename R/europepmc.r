@@ -27,7 +27,7 @@
 #' @importFrom utils URLencode
 #' @importFrom plyr rbind.fill ldply
 #' @importFrom jsonlite fromJSON rbind_pages
-#' @importFrom httr GET content stop_for_status status_code user_agent
+#' @importFrom httr GET RETRY content stop_for_status status_code user_agent
 #' @importFrom dplyr %>% as_data_frame select_if data_frame bind_rows bind_cols
 #' @importFrom stats runif
 #' @importFrom xml2 read_xml
