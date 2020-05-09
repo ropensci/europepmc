@@ -33,4 +33,5 @@
 #' @importFrom xml2 read_xml
 #' @importFrom progress progress_bar
 #' @importFrom purrr map map_df
+#' @importFrom tibble as_tibble
 NULL

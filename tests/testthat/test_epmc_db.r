@@ -15,6 +15,12 @@ test_that("epmc_db returns", {
   expect_output(str(d), "data.frame")
   expect_output(str(e), "data.frame")
 
+  expect_output(str(a), "tbl_df")
+  expect_output(str(b), "tbl_df")
+  expect_output(str(c), "tbl_df")
+  expect_output(str(d), "tbl_df")
+  expect_output(str(e), "tbl_df")
+
 
 
   expect_is(attr(a, "hit_count"), "integer")
@@ -30,7 +36,7 @@ test_that("epmc_db returns", {
   # fails correctly
   expect_error(epmc_db("14756321"), "Please restrict reponse to a database")
   expect_message(epmc_db("14756321", db = "intact"), "No links found")
-  expect_null(epmc_db("14756321", db = "intact"))
+  expect_equal(nrow(epmc_db("14756321", db = "intact")), 0)
   expect_error(epmc_db("13814508", data_src = "abc"))
   expect_error(epmc_db("14756321", db = "uniprotl"))
   expect_error(epmc_db("12368864", db = "uniprot", limit = "no"))

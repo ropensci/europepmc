@@ -4,7 +4,8 @@
 \alias{epmc_refs}
 \title{Get references for a given publication}
 \usage{
-epmc_refs(ext_id = NULL, data_src = "med", limit = 100, verbose = TRUE)
+epmc_refs(ext_id = NULL, data_src = "med", limit = 100,
+  verbose = TRUE)
 }
 \arguments{
 \item{ext_id}{character, publication identifier}
