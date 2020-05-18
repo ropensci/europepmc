@@ -1,7 +1,7 @@
 #' Get annotations by article
 #'
 #' Retrieve text-mined annotations contained in abstracts and open access
-#' full-text articles provided by the Europe PMC Annotations API.
+#' full-text articles.
 #'
 #' @param ids, character vector with publication identifiers
 #'  following the structure "source:ext_id", e.g. `"MED:28585529"`
@@ -25,8 +25,10 @@
 #'   \item{subtype}{Sub-data provider}
 #'}
 #'
-#' @example \dontrun{
+#' @examples \dontrun{
 #'   annotations_by_id("MED:28585529")
+#'   # multiple ids
+#'   annotations_by_id(c("MED:28585529", "PMC:PMC1664601"))
 #' }
 annotations_by_id <- function(ids = NULL){
   # input validation
@@ -52,6 +54,9 @@ annotations_by_id_ <- function(ids = NULL, .pb = NULL) {
     format = "json"
   )
   req <- rebi_GET(path = c(anno_path(), "annotationsByArticleIds"), query = args)
+  # API sometimes returns empty response when nothing is found,
+  # but id is syntactically correct
+  if(length(req) != 0) {
   out <- tibble::tibble(source = req[["source"]],
                  ext_id = req[["extId"]],
                  pmcid = req[["pmcid"]],
@@ -59,4 +64,7 @@ annotations_by_id_ <- function(ids = NULL, .pb = NULL) {
   tidyr::unnest(
     tidyr::unnest(out, annotations),
     tags)
+  } else {
+    NULL
+  }
 }
