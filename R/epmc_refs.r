@@ -6,6 +6,8 @@
 #' @param ext_id character, publication identifier
 #' @param data_src character, data source, by default Pubmed/MedLine index will
 #'   be searched.
+#'
+#'
 #'   The following three letter codes represent the sources
 #'   Europe PubMed Central supports:
 #'   \describe{

@@ -5,8 +5,7 @@
 \title{Get the yearly number of hits for a query and the total
 yearly number of hits for a given period}
 \usage{
-epmc_hits_trend(query, synonym = TRUE, data_src = "med",
-  period = 1975:2016)
+epmc_hits_trend(query, synonym = TRUE, data_src = "med", period = 1975:2016)
 }
 \arguments{
 \item{query}{query in the Europe PMC syntax}

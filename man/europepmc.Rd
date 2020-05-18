@@ -3,11 +3,7 @@
 \docType{package}
 \name{europepmc}
 \alias{europepmc}
-\alias{europepmc-package}
 \title{europepmc - an R client for the Europe PMC RESTful article API}
-\description{
-europepmc - an R client for the Europe PMC RESTful article API
-}
 \section{What is europepmc?}{
 
 
