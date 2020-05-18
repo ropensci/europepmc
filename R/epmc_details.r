@@ -92,7 +92,7 @@ epmc_details <- function(ext_id = NULL, data_src = "med") {
       comments = plyr::rbind.fill(res$commentCorrectionList$commentCorrection),
       grants =  plyr::rbind.fill(res$grantsList$grant)
     )
-    lapply(out, dplyr::as_data_frame)
+    lapply(out, tibble::as_tibble)
   }
 }
 

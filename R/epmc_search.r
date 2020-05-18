@@ -85,7 +85,7 @@ epmc_search <- function(query = NULL,
 
   page_token <- "*"
   if (!output == "raw")
-    results <- dplyr::data_frame()
+    results <- tibble::tibble()
   else
     results <- NULL
   # search
@@ -202,11 +202,11 @@ epmc_search_ <-
     if (!resulttype == "core") {
       md <- out$resultList$result
       if (length(md) == 0) {
-        md <- dplyr::data_frame()
+        md <- tibble::tibble()
       } else {
         md <- md %>%
           dplyr::select_if(Negate(is.list)) %>%
-          dplyr::as_data_frame()
+          tibble::as_tibble()
       }
     } else {
       out <- jsonlite::fromJSON(out, simplifyDataFrame = FALSE)

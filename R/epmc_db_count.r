@@ -52,6 +52,6 @@ epmc_db_count <- function(ext_id = NULL, data_src = "med") { # validate input
     NULL
   } else {
     plyr::rbind.fill(doc$dbCountList) %>%
-      dplyr::as_data_frame()
+      tibble::as_tibble()
   }
 }

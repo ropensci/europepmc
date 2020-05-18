@@ -36,14 +36,14 @@ epmc_citations <-
         req <-
           rebi_GET(path = path,
                    query = list(format = "json", pageSize = limit))
-        out <- dplyr::as_data_frame(req$citationList$citation)
+        out <- dplyr::as_tibble(req$citationList$citation)
       } else {
         query <-
           make_path(hit_count = hit_count,
                     limit = limit)
         out <- purrr::map_df(query, function(x) {
           req <- rebi_GET(path = path, query = x)
-          dplyr::as_data_frame(req$citationList$citation)
+          dplyr::as_tibble(req$citationList$citation)
         })
       }
       # return hit count as attribute

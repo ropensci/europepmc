@@ -27,5 +27,5 @@ epmc_profile <- function(query = NULL, synonym = TRUE) {
          format = "json")
   out <-
     rebi_GET(path = paste0(rest_path(), "/profile"), query = args)
-  lapply(out$profileList, dplyr::as_data_frame)
+  lapply(out$profileList, tibble::as_tibble)
 }

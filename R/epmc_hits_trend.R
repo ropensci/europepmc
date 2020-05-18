@@ -41,7 +41,7 @@
 #' epmc_hits_trend('REF:"cran.r-project.org*"', period = 2006:2016, synonym = FALSE)
 #' # more complex with publication type review
 #' epmc_hits_trend('(REF:"cran.r-project.org*") AND (PUB_TYPE:"Review" OR PUB_TYPE:"review-article")',
-#'   period = 2006:2016, synonym = FALSE)
+#' period = 2006:2016, synonym = FALSE)
 #' }
 epmc_hits_trend <- function(query,
                             synonym = TRUE,
@@ -99,7 +99,7 @@ epmc_hits_trend_by_year <-
     query_hits <-
       as.numeric(europepmc::epmc_profile(queryforterm, synonym)$pubType[1, 2])
 
-    return(dplyr::data_frame(
+    return(tibble::tibble(
       year = year,
       all_hits = all_hits,
       query_hits = query_hits
