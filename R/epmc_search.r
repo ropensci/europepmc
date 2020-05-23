@@ -102,12 +102,14 @@ epmc_search <- function(query = NULL,
   # super hacky to control limit, better approach using pageSize param needed
   hits <- epmc_hits(query, synonym = synonym)
   if (hits == 0) {
-    message("There are no results matching your query")
+    if(isTRUE(verbose))
+      message("There are no results matching your query")
     md <- NULL
   } else {
     limit <- as.integer(limit)
     limit <- ifelse(hits <= limit, hits, limit)
-    message(paste(hits, "records found, returning", limit))
+    if(isTRUE(verbose))
+      message(paste(hits, "records found, returning", limit))
     # let's loop over until page max is reached,
     # or until cursor marks are identical
     i <- 0
