@@ -56,6 +56,6 @@ epmc_hits_trend('aspirin', period = 2006:2016, synonym = FALSE)
 epmc_hits_trend('REF:"cran.r-project.org*"', period = 2006:2016, synonym = FALSE)
 # more complex with publication type review
 epmc_hits_trend('(REF:"cran.r-project.org*") AND (PUB_TYPE:"Review" OR PUB_TYPE:"review-article")',
-  period = 2006:2016, synonym = FALSE)
+period = 2006:2016, synonym = FALSE)
 }
 }
