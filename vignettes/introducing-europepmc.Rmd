@@ -82,7 +82,7 @@ my_dois <- c(
   "10.1161/strokeaha.117.018077",
   "10.1007/s12017-017-8447-9"
   )
-epmc_search_by_doi(doi = my_dois)
+europepmc::epmc_search_by_doi(doi = my_dois)
 ```
 
 ### Output options
@@ -122,7 +122,7 @@ Europe PMC provides text-mined annotations contained in abstracts and open acces
 These automatically identified concepts and term can be retrieved at the article-level:
 
 ```{r}
-annotations_by_id(c("MED:28585529", "PMC:PMC1664601"))
+europepmc::annotations_by_id(c("MED:28585529", "PMC:PMC1664601"))
 ```
 
 To obtain a list of articles where Europe PMC has text-minded annotations, either subset the resulting data.frame 

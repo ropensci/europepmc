@@ -30,6 +30,7 @@
 #'   # multiple ids
 #'   annotations_by_id(c("MED:28585529", "PMC:PMC1664601"))
 #' }
+#' @export
 annotations_by_id <- function(ids = NULL){
   # input validation
   stopifnot(!is.null(ids))
