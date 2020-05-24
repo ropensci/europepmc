@@ -33,7 +33,8 @@ Imports:
     urltools,
     purrr,
     xml2, 
-    tibble
+    tibble,
+    tidyr
 RoxygenNote: 7.1.0
 Suggests:
     testthat,

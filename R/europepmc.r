@@ -35,4 +35,5 @@
 #' @importFrom progress progress_bar
 #' @importFrom purrr map map_df
 #' @importFrom tibble as_tibble tibble
+#' @importFrom tidyr unnest
 NULL
