@@ -32,7 +32,8 @@ Imports:
     progress,
     urltools,
     purrr,
-    xml2
+    xml2, 
+    tibble
 RoxygenNote: 7.1.0
 Suggests:
     testthat,
