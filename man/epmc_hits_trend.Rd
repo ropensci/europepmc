@@ -30,6 +30,7 @@ supported
   \item{nbk}{Europe PMC Book metadata}
   \item{pat}{Biological Patents}
   \item{pmc}{PubMed Central}
+  \item{ppr}{Preprint records}
   }}
 
 \item{period}{a vector of years (numeric) over which to perform the search}

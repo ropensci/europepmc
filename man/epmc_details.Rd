@@ -23,6 +23,7 @@ Other sources Europe PubMed Central supports are:
   \item{med}{PubMed/Medline NLM}
   \item{pat}{Biological Patents}
   \item{pmc}{PubMed Central}
+  \item{ppr}{Preprint records}
   }}
 }
 \value{
@@ -54,5 +55,7 @@ epmc_details("C6802", data_src = "ctx")
 epmc_details("338638", data_src = "hir")
 # Theses
 epmc_details("409323", data_src = "eth")
+# Preprint
+epmc_details("PPR158112", data_src = "ppr")
 }
 }

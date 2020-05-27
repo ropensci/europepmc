@@ -47,8 +47,17 @@ epmc_search_by_doi <- function(doi = NULL, output = "parsed") {
   }
   return(out)
 }
+#' Search Europe PMC by a DOI name
+#'
+#' Please use \code{\link{epmc_search_by_doi}} instead. It calls this
+#' method, returning open access status information from all your requests.
+#'
+#' @inheritParams epmc_search_by_doi
+#' @param .pb progress bar object
 #' @export
-#' @rdname epmc_search_by_doi
+#' @examples \dontrun{
+#'   epmc_search_by_doi_("10.1159/000479962")
+#' }
 epmc_search_by_doi_ <-
   function(doi,
            .pb = NULL,

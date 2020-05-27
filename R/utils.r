@@ -17,7 +17,7 @@ ua <- httr::user_agent("https://github.com/ropensci/europepmc")
 # check data sources
 supported_data_src <-
   c("agr", "cba", "ctx", "eth", "hir", "med", "pat",
-    "pmc")
+    "pmc", "ppr")
 
 # default batch size
 batch_size <- function()

@@ -22,6 +22,7 @@
 #'     \item{nbk}{Europe PMC Book metadata}
 #'     \item{pat}{Biological Patents}
 #'     \item{pmc}{PubMed Central}
+#'     \item{ppr}{Preprint records}
 #'     }
 #'
 #' @details A similar function was used in

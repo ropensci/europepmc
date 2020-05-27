@@ -19,6 +19,7 @@
 #'     \item{med}{PubMed/Medline NLM}
 #'     \item{pat}{Biological Patents}
 #'     \item{pmc}{PubMed Central}
+#'     \item{ppr}{Preprint records}
 #'     }
 #'
 #' @return list of data frames
@@ -45,6 +46,8 @@
 #' epmc_details("338638", data_src = "hir")
 #' # Theses
 #' epmc_details("409323", data_src = "eth")
+#' # Preprint
+#' epmc_details("PPR158112", data_src = "ppr")
 #' }
 epmc_details <- function(ext_id = NULL, data_src = "med") {
   if (is.null(ext_id))

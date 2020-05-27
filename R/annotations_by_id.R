@@ -31,7 +31,7 @@
 #'   annotations_by_id(c("MED:28585529", "PMC:PMC1664601"))
 #' }
 #' @export
-annotations_by_id <- function(ids = NULL){
+epmc_annotations_by_id <- function(ids = NULL){
   # input validation
   stopifnot(!is.null(ids))
   # remove empty characters
@@ -41,10 +41,10 @@ annotations_by_id <- function(ids = NULL){
   }
   # progress
   pb <- dplyr::progress_estimated(length(ids))
-  purrr::map_df(ids, annotations_by_id_, .pb = pb)
+  purrr::map_df(ids, epmc_annotations_by_id_, .pb = pb)
 }
 
-annotations_by_id_ <- function(ids = NULL, .pb = NULL) {
+epmc_annotations_by_id_ <- function(ids = NULL, .pb = NULL) {
   # https://rud.is/b/2017/03/27/all-in-on-r%E2%81%B4-progress-bars-on-first-post/
   if ((!is.null(.pb)) &&
       inherits(.pb, "Progress") && (.pb$i < .pb$n))
@@ -63,8 +63,8 @@ annotations_by_id_ <- function(ids = NULL, .pb = NULL) {
                  pmcid = req[["pmcid"]],
                  annotations = req[["annotations"]])
   tidyr::unnest(
-    tidyr::unnest(out, annotations),
-    tags)
+    tidyr::unnest(out, .data$annotations),
+    .data$tags)
   } else {
     NULL
   }

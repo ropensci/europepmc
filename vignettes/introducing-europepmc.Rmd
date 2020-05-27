@@ -122,7 +122,7 @@ Europe PMC provides text-mined annotations contained in abstracts and open acces
 These automatically identified concepts and term can be retrieved at the article-level:
 
 ```{r}
-europepmc::annotations_by_id(c("MED:28585529", "PMC:PMC1664601"))
+europepmc::epmc_annotations_by_id(c("MED:28585529", "PMC:PMC1664601"))
 ```
 
 To obtain a list of articles where Europe PMC has text-minded annotations, either subset the resulting data.frame 

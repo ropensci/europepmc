@@ -2,12 +2,9 @@
 % Please edit documentation in R/epmc_search_by_doi.r
 \name{epmc_search_by_doi}
 \alias{epmc_search_by_doi}
-\alias{epmc_search_by_doi_}
 \title{Search Europe PMC by DOIs}
 \usage{
 epmc_search_by_doi(doi = NULL, output = "parsed")
-
-epmc_search_by_doi_(doi, .pb = NULL, output = NULL)
 }
 \arguments{
 \item{doi, }{character vector containing DOI names.}
