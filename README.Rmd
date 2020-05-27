@@ -1,6 +1,5 @@
----
-title: "europepmc - R Interface to Europe PMC RESTful Web Service"
---- 
+europepmc - R Interface to Europe PMC RESTful Web Service
+=== 
 
 
 ```{r echo=FALSE}

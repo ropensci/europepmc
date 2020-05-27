@@ -1,6 +1,5 @@
----
-title: "europepmc - R Interface to Europe PMC RESTful Web Service"
---- 
+europepmc - R Interface to Europe PMC RESTful Web Service
+=== 
 
 
 
@@ -45,7 +44,7 @@ From the [Europe PMC Annotations API](https://europepmc.org/AnnotationsApi):
 
 |API-Method     |Description |R functions |
 |:-----------|:-------------|:-------------|:-------------|
-annotationsByArticleIds | Get the annotations contained in the list of articles specified | `annotations_by_id()` |
+annotationsByArticleIds | Get the annotations contained in the list of articles specified | `epmc_annotations_by_id()` |
 
 ## Installation
 
@@ -91,9 +90,9 @@ europepmc::epmc_search(query = '"2019-nCoV" OR "2019nCoV"')
 #>  5 3203… MED    3203… PMC7… 10.1… Coro… Bonilla-Ald… Travel Med … 2020    "1477-8939… resear… Y            Y     
 #>  6 3230… MED    3230… PMC7… 10.1… A ca… Yang X, Zha… Clin Res He… 2020    "2210-7401… case r… Y            Y     
 #>  7 3220… MED    3220… PMC7… 10.4… Ther… Sarma P, Pr… Indian J Ph… 2020    "0253-7613… editor… Y            Y     
-#>  8 3217… MED    3217… PMC7… 10.1… Anes… Zhao S, Lin… J Cardiotho… 2020    "1053-0770… resear… Y            Y     
-#>  9 3240… MED    3240… PMC7… 10.1… Prev… Wang X, Wan… Diabetes Re… 2020    "0168-8227… resear… Y            Y     
-#> 10 PMC7… PMC    <NA>  PMC7… 10.1… Myst… Hemmati-Din… Arch Med Res <NA>    "0188-4409… review… Y            Y     
+#>  8 PMC7… PMC    <NA>  PMC7… 10.1… Myst… Hemmati-Din… Arch Med Res <NA>    "0188-4409… review… Y            Y     
+#>  9 3217… MED    3217… PMC7… 10.1… Anes… Zhao S, Lin… J Cardiotho… 2020    "1053-0770… resear… Y            Y     
+#> 10 3232… MED    3232… PMC7… 10.1… The … Li H, Chen … J Infect     2020    "0163-4453… resear… Y            Y     
 #> # … with 90 more rows, and 16 more variables: inPMC <chr>, hasPDF <chr>, hasBook <chr>, hasSuppl <chr>,
 #> #   citedByCount <int>, hasReferences <chr>, hasTextMinedTerms <chr>, hasDbCrossReferences <chr>,
 #> #   hasLabsLinks <chr>, hasTMAccessionNumbers <chr>, firstIndexDate <chr>, firstPublicationDate <chr>,
