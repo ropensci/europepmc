@@ -74,7 +74,7 @@ library(europepmc)
 
 The search covers both metadata (e.g. abstracts or title) and full texts. To
 build your query, please refer to the comprehensive guidance on how to search
-Europe PMC: <http://europepmc.org/help>. Simply provide your query in the Europe
+Europe PMC: <http://europepmc.org/help>. Provide your query in the Europe
 PMC search syntax to `epmc_search()`. 
 
 
@@ -98,6 +98,8 @@ europepmc::epmc_search(query = '"2019-nCoV" OR "2019nCoV"')
 #> #   hasLabsLinks <chr>, hasTMAccessionNumbers <chr>, firstIndexDate <chr>, firstPublicationDate <chr>,
 #> #   issue <chr>, journalVolume <chr>, pageInfo <chr>, versionNumber <int>
 ```
+
+Be aware that Europe PMC expands queries with MeSH synonyms by default. You can turn this behavior off using the `synonym = FALSE` parameter.
 
 By default, `epmc_search()` returns 100 records. To adjust the limit, simply use
 the `limit` parameter.

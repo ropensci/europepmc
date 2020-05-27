@@ -18,8 +18,9 @@
 #' @param limit integer, limit the number of records you wish to retrieve. By
 #'   default, 100 are returned.
 #' @param synonym logical, synonym search. If TRUE, synonym terms from MeSH
-#'   terminology and the UniProt synonym list are queried, too. Disabled by
-#'   default.
+#'   terminology and the UniProt synonym list are queried, too.
+#'   In order to replicate results from the website, with the Rest API
+#'   you need to turn synonyms ON!
 #' @param sort character, relevance ranking is used by default. Use
 #'   \code{sort = 'cited'} for sorting by the number of citations, or
 #'   \code{sort = 'date'} by the most recent publications.
