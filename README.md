@@ -43,7 +43,7 @@ This client supports the following API methods from the [Articles RESTful API](h
 From the [Europe PMC Annotations API](https://europepmc.org/AnnotationsApi):
 
 |API-Method     |Description |R functions |
-|:-----------|:-------------|:-------------|:-------------|
+|:-----------|:-------------|:-------------|
 annotationsByArticleIds | Get the annotations contained in the list of articles specified | `epmc_annotations_by_id()` |
 
 ## Installation
