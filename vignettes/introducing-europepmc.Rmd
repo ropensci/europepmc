@@ -21,9 +21,7 @@ knitr::opts_chunk$set(
 
 ## What is searched?
 
-[Europe PMC](http://europepmc.org/) is a repository of life science literature. Europe PMC ingests all PubMed content and extends its index with other sources, including Agricola, a bibliographic database of citations to the agricultural literature, or Biological Patents. 
-
-![Index coverage](http://europepmc.org/wicket/resource/uk.bl.ukpmc.web.pages.faq.Help/images/EuropePMCContent-ver-4BB17F003F8F38DF2D3BBE48AB5896C6.png)
+[Europe PMC](http://europepmc.org/) is a repository of life science literature. Europe PMC ingests all PubMed content and extends its index with other literature and patent sources. 
 
 For more background on Europe PMC, see:
 
@@ -33,9 +31,9 @@ Levchenko, M., Gou, Y., Graef, F., Hamelers, A., Huang, Z., Ide-Smith, M., … M
 
 ## How to search Europe PMC with R?
 
-This client supports the [Europe PMC search syntax](http://europepmc.org/Help#SSR). If you are unfamiliar with searching Europe PMC, check out the [Europe PMC query builder](https://europepmc.org/advancesearch), a very nice tool that helps you to create your queries. To make use of your Europe PMC queries in R, simply copy & paste the search string to the search functions of this package. 
+This client supports the [Europe PMC search syntax](http://europepmc.org/Help#SSR). If you are unfamiliar with searching Europe PMC, check out the [Europe PMC query builder](https://europepmc.org/advancesearch), a very nice tool that helps you to build queries. To make use of Europe PMC queries in R, copy & paste the search string to the search functions of this package. 
 
-In the following, some examples how to search Europe PMC are presented.
+In the following, some examples demonstrate how to search Europe PMC with R.
 
 ### Free search
 
@@ -47,7 +45,7 @@ library(europepmc)
 europepmc::epmc_search('malaria')
 ```
 
-Please note that Europe PMC expands queries with MeSH synonyms by default, a behaviour which can be turned off with the `synonym` parameter. 
+It is worth noting that Europe PMC expands queries with MeSH synonyms by default, a behavior which can be turned off with the `synonym` parameter. 
 
 ```{r}
 europepmc::epmc_search('malaria', synonym = FALSE)
@@ -73,9 +71,9 @@ Results are sorted by relevance. Other options via the `sort` parameter are
 - `sort = 'cited'` by the number of citation, descending from the most cited publication
 - `sort = 'date'` by date published starting with the most recent publication
 
-### Loop over queries
+### Search by DOIs
 
-Sometimes, you would like to send more than one search to Europe PMC at once. A simple solution is using `plyr::ldply()`:
+Sometimes, you would like to check, if articles are indexed in Europe PMC using DOI names, a widely used identifier for scholarly articles. Use `epmc_search_by_doi()` for this purpose.
 
 ```{r}
 my_dois <- c(
@@ -84,16 +82,15 @@ my_dois <- c(
   "10.1161/strokeaha.117.018077",
   "10.1007/s12017-017-8447-9"
   )
-  plyr::ldply(my_dois, function(x) {
-  europepmc::epmc_search(paste0("DOI:", x))
-  })
+europepmc::epmc_search_by_doi(doi = my_dois)
 ```
 
 ### Output options
 
 By default, a non-nested data frame printed as tibble is returned. 
-Other formats are `output = "id_list"`" returning a list of IDs and sources, 
-and output = "'raw'"" to get full metadata as list. Please be aware that these lists can become very large.
+Other formats are `output = "id_list"` returning a list of IDs and sources, 
+and output = "'raw'"" for getting full metadata as list. 
+Please be aware that these lists can become very large.
 
 ### More advanced options to search Europe PMC
 
@@ -105,40 +102,41 @@ Use the Europe PMC query syntax to search by author names:
 europepmc::epmc_search('AUTH:"Salmon Maelle"')
 ```
 
-[Europe PMC Advanced Search](https://europepmc.org/advancesearch) has a auto-suggest field for author names if you feel unsure how the name you are searching for is indexed in Europe PMC. Using the Boolean `OR` operator you can simply search for more than one spelling variant:
+[Europe PMC Advanced Search](https://europepmc.org/advancesearch) has a auto-suggest field for author names if you feel unsure how the name you are searching for is indexed in Europe PMC. Using the Boolean `OR` operator allows searching for more than one spelling variant:
 
 ```{r}
 q <- 'AUTH:"PÜHLER Alfred" OR AUTH:"Pühler Alfred Prof. Dr." OR AUTH:"Puhler A"'
 europepmc::epmc_search(q, limit = 1000)
 ```
 
-There is a considerable overlap between common names. The integration of ORCID, a persistent author identifier, allows unambiguous search for personal publications in Europe PMC. For example, to search for publications written by Bernd Weisshaar (ORCID: <https://orcid.org/0000-0002-7635-3473>) sorted by the number of times cited in descending order:
+There is a considerable overlap between common names. The integration of ORCID, a persistent author identifier, allows unambiguous search for personal publications in Europe PMC. For example, here's how to search for publications written by Bernd Weisshaar (ORCID: <https://orcid.org/0000-0002-7635-3473>) sorted by the number of times cited in descending order:
 
 ```{r}
 europepmc::epmc_search('AUTHORID:"0000-0002-7635-3473"', limit = 200, sort = "cited")
 ```
 
-#### Text-mined terms
+#### Annotations 
 
-Europe PMC parses article metadata for various concepts and terms.
+Europe PMC provides text-mined annotations contained in abstracts and open access full-text articles.
 
-|Semantic types |Description/Examples                                                                               |
-|:--------------|:--------------------------------------------------------------------------------------------------|
-|accession      |A unique identifier given to a DNA or protein sequence record                                      |
-|chemical       |e.g. Granzymes, Peptides, Hydrogen                                                                 |
-|disease        |e.g. dysthymias, gid, icterohemorrhagic                                                            |
-|efo            |Experimental Factor Ontology e.g. generation, health, mortality rate, scale, findings, genome etc. |
-|gene_protein   |e.g. atp, cl-43, ecoriir, gng11, ipt1, mlks                                                        |
-|go_term        |A Gene Ontology (GO) term e.g. annealing, neuroblasts                                              |
-|organism       |e.g. pneumocystidomycetes, sarus, terebratulide                                                    |
-
-Here's how to search for publications about meningitis:
+These automatically identified concepts and term can be retrieved at the article-level:
 
 ```{r}
-europepmc::epmc_search('disease:meningitis')
+europepmc::epmc_annotations_by_id(c("MED:28585529", "PMC:PMC1664601"))
 ```
 
-To see, which other terms were text-mined on the article level, use the `europepmc::epmc_tm()` function.
+To obtain a list of articles where Europe PMC has text-minded annotations, either subset the resulting data.frame 
+
+```{r}
+tt <- epmc_search("malaria")
+tt[tt$hasTextMinedTerms == "Y" | tt$hasTMAccessionNumbers == "Y",]
+```
+
+or expand the query choosing an annotation type or provider from the [Europe PMC Advanced Search](https://europepmc.org/advancesearch) query builder.
+
+```{r}
+epmc_search('malaria AND (ANNOTATION_TYPE:"Cell") AND (ANNOTATION_PROVIDER:"Europe PMC")')
+```
 
 #### Data integrations
 
@@ -181,7 +179,7 @@ europepmc::epmc_refs("28632490", limit = 200)
 
 Europe PMC gives not only access to metadata, but also to full-texts. Adding `AND (OPEN_ACCESS:y)` to your search query, returns only those articles where Europe PMC has also the fulltext.
 
-Fulltext as xml can accessed via the PubMed Central ID (PMCID):
+Fulltext as xml document can accessed via the PMID or the PubMed Central ID (PMCID):
 
 ```{r}
 europepmc::epmc_ftxt("PMC3257301")

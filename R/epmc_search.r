@@ -85,7 +85,7 @@ epmc_search <- function(query = NULL,
 
   page_token <- "*"
   if (!output == "raw")
-    results <- dplyr::data_frame()
+    results <- tibble::tibble()
   else
     results <- NULL
   # search
@@ -179,7 +179,7 @@ epmc_search_ <-
     page_size <- ifelse(batch_size() <= limit, batch_size(), limit)
     # choose output
     if (!output %in% c("id_list", "parsed", "raw"))
-      stop("'output' must be one of 'parsed', 'id_list'. 'raw'",
+      stop("'output' must be one of 'parsed', 'id_list', or 'raw'",
            call. = FALSE)
     result_types <- c("id_list" = "idlist",
                       "parsed" = "lite",
@@ -202,11 +202,11 @@ epmc_search_ <-
     if (!resulttype == "core") {
       md <- out$resultList$result
       if (length(md) == 0) {
-        md <- dplyr::data_frame()
+        md <- tibble::tibble()
       } else {
         md <- md %>%
           dplyr::select_if(Negate(is.list)) %>%
-          dplyr::as_data_frame()
+          tibble::as_tibble()
       }
     } else {
       out <- jsonlite::fromJSON(out, simplifyDataFrame = FALSE)

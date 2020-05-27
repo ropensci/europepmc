@@ -91,3 +91,15 @@ dblinkdata <-function(...)
 {
   .Defunct("dblinkdata", "europepmc", "Function removed, use epmc_db instead")
 }
+
+epmc_tm <- function(...)
+{
+  .Defunct("epmc_tm", "europepmc", "Function removed,
+           use annotations_by_id instead")
+}
+
+epmc_tm_count <- function(...)
+{
+  .Defunct("epmc_tm_count", "europepmc", "Function removed,
+           use annotations_by_id instead")
+}

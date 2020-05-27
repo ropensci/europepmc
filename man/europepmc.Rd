@@ -3,13 +3,9 @@
 \docType{package}
 \name{europepmc}
 \alias{europepmc}
-\alias{europepmc-package}
 \title{europepmc - an R client for the Europe PMC RESTful article API}
 \description{
-europepmc - an R client for the Europe PMC RESTful article API
-}
-\section{What is europepmc?}{
-
+What is europepmc?:
 
 europepmc facilitates access to Europe PMC RESTful Web Service. Europe
 PMC covers life science literature and gives access to open access full
@@ -28,4 +24,3 @@ Levchenko, M., Gou, Y., Graef, F., Hamelers, A., Huang, Z., Ide-Smith, M.,
  … McEntyre, J. (2017). Europe PMC in 2017. Nucleic Acids Research, 46(D1),
  D1254–D1260. \url{https://doi.org/10.1093/nar/gkx1005}.
 }
-

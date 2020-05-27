@@ -1,3 +1,23 @@
+# europepmc 0.4
+
+- update to API changes
+- Support of Europe PMC Annotations ID
+
+New functionalities:
+
+- `epmc_annotations_by_id()` get text-mined concepts and full-texts from Europe PMC indexed full-texts;  `epmc_tm()`and `epmc_tm_count()` deprecated, use `epmc_annotations_by_id()` instead
+- `epmc_search_by_doi()` get PubMed metadata by DOI names
+
+Minor changes:
+
+- improved retry in case API call fails accidentially
+- preprint records collection added
+- retrieve full-text by PMID
+- improved long-form documentation
+- improved testing
+- new official docs site
+- use *tibble instead of deprecated *data_frame functions
+
 # europepmc 0.3
 
 - Implement API version 6.0

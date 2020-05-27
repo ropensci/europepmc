@@ -1,12 +1,12 @@
 Package: europepmc
 Title: R Interface to the Europe PubMed Central RESTful Web Service
-Version: 0.3
+Version: 0.3.990
 Authors@R: c(
            person("Najko", "Jahn", email = "najko.jahn@gmail.com",
            role = c("aut", "cre", "cph")),
            person("Maëlle", "Salmon", role = c("ctb")))
 License: GPL-3
-Date: 2018-04-19
+Date: 2020-05-27
 URL: https://docs.ropensci.org/europepmc, http://github.com/ropensci/europepmc/
 BugReports: http://github.com/ropensci/europepmc/issues
 Description: An R Client for the Europe PubMed Central RESTful Web Service
@@ -32,12 +32,14 @@ Imports:
     progress,
     urltools,
     purrr,
-    xml2
-RoxygenNote: 6.0.1
+    xml2, 
+    tibble,
+    tidyr,
+    rlang
+RoxygenNote: 7.1.0
 Suggests:
     testthat,
     knitr,
     rmarkdown,
-    ggplot2,
-    readr
+    ggplot2
 Encoding: UTF-8

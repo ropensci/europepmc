@@ -81,7 +81,7 @@ epmc_lablinks <- function(ext_id = NULL,
           rebi_GET(path = path,
                    query = append(list(format = "json", pageSize = limit), lab_id))
         out <- req$providers$provider %>%
-          as_data_frame()
+          dplyr::as_data_frame()
       } else {
         query <-
           make_path(hit_count = hit_count,
@@ -89,7 +89,7 @@ epmc_lablinks <- function(ext_id = NULL,
         out <- purrr::map_df(query, function(x) {
           req <- rebi_GET(path = path, query = append(x, lab_id))
           req$providers$provider %>%
-            dplyr::as_data_frame()
+            tibble::as_tibble()
         })
       }
       # return hit count as attribute

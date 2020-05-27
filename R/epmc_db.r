@@ -72,8 +72,7 @@ epmc_db <- function(ext_id = NULL,
         limit = limit,
         verbose = verbose)
     # request records and parse them
-    # request records and parse them
-    if (hit_count >= limit) {
+    if (limit <= batch_size()) {
       req <-
         rebi_GET(path = path,
                  query = list(format = "json", pageSize = limit, database = db))
@@ -87,12 +86,11 @@ epmc_db <- function(ext_id = NULL,
         dplyr::bind_cols(req$dbCrossReferenceList$dbCrossReference$dbCrossReferenceInfo)
       })
     }
-    dplyr::as_data_frame(out)
     # return hit count as attribute
     attr(out, "hit_count") <- hit_count
   }
-  out
-}
+  tibble::as_tibble(out)
+ }
 
 
 

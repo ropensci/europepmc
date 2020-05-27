@@ -10,22 +10,24 @@ epmc_refs(ext_id = NULL, data_src = "med", limit = 100, verbose = TRUE)
 \item{ext_id}{character, publication identifier}
 
 \item{data_src}{character, data source, by default Pubmed/MedLine index will
-be searched.
-The following three letter codes represent the sources
-Europe PubMed Central supports:
-\describe{
-  \item{agr}{Agricola is a bibliographic database of citations to the
-  agricultural literature created by the US National Agricultural Library
-  and its co-operators.}
-  \item{cba}{Chinese Biological Abstracts}
-  \item{ctx}{CiteXplore}
-  \item{eth}{EthOs Theses, i.e. PhD theses (British Library)}
-  \item{hir}{NHS Evidence}
-  \item{med}{PubMed/Medline NLM}
-  \item{nbk}{Europe PMC Book metadata}
-  \item{pat}{Biological Patents}
-  \item{pmc}{PubMed Central}
-  }}
+  be searched.
+
+
+  The following three letter codes represent the sources
+  Europe PubMed Central supports:
+  \describe{
+    \item{agr}{Agricola is a bibliographic database of citations to the
+    agricultural literature created by the US National Agricultural Library
+    and its co-operators.}
+    \item{cba}{Chinese Biological Abstracts}
+    \item{ctx}{CiteXplore}
+    \item{eth}{EthOs Theses, i.e. PhD theses (British Library)}
+    \item{hir}{NHS Evidence}
+    \item{med}{PubMed/Medline NLM}
+    \item{nbk}{Europe PMC Book metadata}
+    \item{pat}{Biological Patents}
+    \item{pmc}{PubMed Central}
+    }}
 
 \item{limit}{integer, number of results. By default, this function
 returns 100 records.}

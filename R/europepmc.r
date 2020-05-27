@@ -1,6 +1,6 @@
 #' europepmc - an R client for the Europe PMC RESTful article API
 #'
-#' @section What is europepmc?:
+#' @description What is europepmc?:
 #'
 #' europepmc facilitates access to Europe PMC RESTful Web Service. Europe
 #' PMC covers life science literature and gives access to open access full
@@ -26,11 +26,16 @@
 #' @importFrom urltools url_decode
 #' @importFrom utils URLencode
 #' @importFrom plyr rbind.fill ldply
-#' @importFrom jsonlite fromJSON rbind_pages
-#' @importFrom httr GET content stop_for_status status_code user_agent
-#' @importFrom dplyr %>% as_data_frame select_if data_frame bind_rows bind_cols
+#' @importFrom jsonlite fromJSON rbind_pages validate
+#' @importFrom httr GET RETRY content stop_for_status status_code user_agent
+#'   modify_url
+#' @importFrom dplyr %>% select_if bind_rows bind_cols
+#'   progress_estimated
 #' @importFrom stats runif
 #' @importFrom xml2 read_xml
 #' @importFrom progress progress_bar
 #' @importFrom purrr map map_df
+#' @importFrom tibble as_tibble tibble
+#' @importFrom tidyr unnest
+#' @importFrom rlang .data
 NULL

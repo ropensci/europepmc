@@ -41,7 +41,6 @@ epmc_lablinks_count <- function(ext_id = NULL, data_src = "med") {
     message("Sorry, no links available")
     NULL
   } else {
-    plyr::rbind.fill(doc$linksCountList) %>%
-      dplyr::as_data_frame()
+    tibble::as_tibble(plyr::rbind.fill(doc$linksCountList))
   }
 }

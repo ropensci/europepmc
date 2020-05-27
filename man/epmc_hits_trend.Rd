@@ -5,8 +5,7 @@
 \title{Get the yearly number of hits for a query and the total
 yearly number of hits for a given period}
 \usage{
-epmc_hits_trend(query, synonym = TRUE, data_src = "med",
-  period = 1975:2016)
+epmc_hits_trend(query, synonym = TRUE, data_src = "med", period = 1975:2016)
 }
 \arguments{
 \item{query}{query in the Europe PMC syntax}
@@ -31,6 +30,7 @@ supported
   \item{nbk}{Europe PMC Book metadata}
   \item{pat}{Biological Patents}
   \item{pmc}{PubMed Central}
+  \item{ppr}{Preprint records}
   }}
 
 \item{period}{a vector of years (numeric) over which to perform the search}
@@ -57,6 +57,6 @@ epmc_hits_trend('aspirin', period = 2006:2016, synonym = FALSE)
 epmc_hits_trend('REF:"cran.r-project.org*"', period = 2006:2016, synonym = FALSE)
 # more complex with publication type review
 epmc_hits_trend('(REF:"cran.r-project.org*") AND (PUB_TYPE:"Review" OR PUB_TYPE:"review-article")',
-  period = 2006:2016, synonym = FALSE)
+period = 2006:2016, synonym = FALSE)
 }
 }

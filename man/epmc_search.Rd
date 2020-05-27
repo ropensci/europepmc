@@ -4,8 +4,14 @@
 \alias{epmc_search}
 \title{Search Europe PMC publication database}
 \usage{
-epmc_search(query = NULL, output = "parsed", synonym = TRUE,
-  verbose = TRUE, limit = 100, sort = NULL)
+epmc_search(
+  query = NULL,
+  output = "parsed",
+  synonym = TRUE,
+  verbose = TRUE,
+  limit = 100,
+  sort = NULL
+)
 }
 \arguments{
 \item{query}{character, search query. For more information on how to build a

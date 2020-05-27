@@ -4,8 +4,13 @@
 \alias{epmc_lablinks}
 \title{Get links to external sources}
 \usage{
-epmc_lablinks(ext_id = NULL, data_src = "med", lab_id = NULL,
-  limit = 100, verbose = TRUE)
+epmc_lablinks(
+  ext_id = NULL,
+  data_src = "med",
+  lab_id = NULL,
+  limit = 100,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{ext_id}{publication identifier}

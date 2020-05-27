@@ -1,4 +1,6 @@
-# europepmc - R Interface to Europe PMC RESTful Web Service
+europepmc - R Interface to Europe PMC RESTful Web Service
+=== 
+
 
 
 
@@ -11,13 +13,11 @@
 [![](https://badges.ropensci.org/29_status.svg)](https://github.com/ropensci/onboarding/issues/29)
 
 europepmc facilitates access to the [Europe PMC RESTful Web
-Service](http://europepmc.org/RestfulWebService).
+Service](http://europepmc.org/RestfulWebService). The client furthermore supports the [Europe PMC Annotations API](https://europepmc.org/AnnotationsApi) to retrieve text-mined concepts and terms per article.
 
 [Europe PMC](http://europepmc.org/) covers life science literature and
 gives access to open access full texts. Europe
-PMC ingests all PubMed content and extends its index with other sources,
-including Agricola, a bibliographic database of citations to the agricultural
-literature, or Biological Patents.
+PMC ingests all PubMed content and extends its index with other literature and patent sources.
 
 For more infos on Europe PMC, see:
 
@@ -27,19 +27,24 @@ Levchenko, M., Gou, Y., Graef, F., Hamelers, A., Huang, Z., Ide-Smith, M., … M
 
 ## Implemented API methods
 
-This client supports the following API methods:
+This client supports the following API methods from the [Articles RESTful API](https://europepmc.org/RestfulWebService):
 
 |API-Method     |Description                                                                                  |R functions                                |
 |:--------------|:--------------------------------------------------------------------------------------------|:------------------------------------------|
-|search         |Search Europe PMC and get detailed metadata                                                  |`epmc_search()`, `epmc_details()`          |
-|profile        |Obtain a summary of hit counts for several Europe PMC databases                              |`epmc_profile()`, `epmc_profile_hits()`                           |
+|search         |Search Europe PMC and get detailed metadata                                                  |`epmc_search()`, `epmc_details()`, `epmc_search_by_doi()`          |
+|profile        |Obtain a summary of hit counts for several Europe PMC databases                              |`epmc_profile()`                           |
 |citations      |Load metadata representing citing articles for a given publication                           |`epmc_citations()`                         |
-|references     |Retrieve the reference section of a pubication                                               |`epmc_refs()`                              |
+|references     |Retrieve the reference section of a publication                                               |`epmc_refs()`                              |
 |databaseLinks  |Get links to biological databases such as UniProt or ENA                                     |`epmc_db()`, `epmc_db_count()`             |
 |labslinks      |Access links to Europe PMC provided by third parties                                         |`epmc_lablinks()`, `epmc_lablinks_count()` |
-|textMinedTerms |Retrieve text-mined terms                                                                    |`epmc_tm()`, `epmc_tm_count()`             |
 |fullTextXML    |Fetch full-texts deposited in PMC                                                            |`epmc_ftxt()`                              |
 |bookXML        |retrieve book XML formatted full text for the Open Access subset of the Europe PMC bookshelf |`epmc_ftxt_book()`                         |
+
+From the [Europe PMC Annotations API](https://europepmc.org/AnnotationsApi):
+
+|API-Method     |Description |R functions |
+|:-----------|:-------------|:-------------|
+annotationsByArticleIds | Get the annotations contained in the list of articles specified | `epmc_annotations_by_id()` |
 
 ## Installation
 
@@ -49,12 +54,12 @@ From CRAN
 install.packages("europepmc")
 ```
 
-The latest development version can be installed using
-[devtools](https://github.com/hadley/devtools) package:
+The latest development version can be installed using the
+[remotes](https://github.com/r-lib/remotes/) package:
 
 
 ```r
-require(devtools)
+require(remotes)
 install_github("ropensci/europepmc")
 ```
 
@@ -74,27 +79,24 @@ PMC search syntax to `epmc_search()`.
 
 
 ```r
-europepmc::epmc_search("Lagotto Romagnolo")
-#> # A tibble: 42 x 27
-#>    id     source pmid   doi   title    authorString     journalTitle issue
-#>    <chr>  <chr>  <chr>  <chr> <chr>    <chr>            <chr>        <chr>
-#>  1 28583… MED    28583… 10.1… Basal A… Syrjä P, Anwar … Vet Pathol   6    
-#>  2 25945… MED    25945… 10.1… Behavio… Jokinen TS, Tii… J Vet Inter… 4    
-#>  3 24354… MED    24354… 10.1… FDG-PET… Jokinen TS, Haa… Vet Radiol … 3    
-#>  4 17552… MED    17552… 10.1… Benign … Jokinen TS, Met… J Vet Inter… 3    
-#>  5 17490… MED    17490… 10.1… Cerebel… Jokinen TS, Rus… J Small Ani… 8    
-#>  6 29056… MED    29056… 10.1… Relatio… Byosiere SE, Fe… Behav Proce… <NA> 
-#>  7 27525… MED    27525… 10.1… Genetic… Donner J, Kauko… PLoS One     8    
-#>  8 29166… MED    29166… 10.1… Frequen… Zierath S, Hugh… PLoS One     11   
-#>  9 29237… MED    29237… 10.1… Molecul… Yu Y, Hasegawa … BMC Vet Res  1    
-#> 10 25875… MED    25875… 10.1… A misse… Kyöstilä K, Syr… PLoS Genet   4    
-#> # ... with 32 more rows, and 19 more variables: journalVolume <chr>,
-#> #   pubYear <chr>, journalIssn <chr>, pageInfo <chr>, pubType <chr>,
-#> #   isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>, hasPDF <chr>,
-#> #   hasBook <chr>, citedByCount <int>, hasReferences <chr>,
-#> #   hasTextMinedTerms <chr>, hasDbCrossReferences <chr>,
-#> #   hasLabsLinks <chr>, hasTMAccessionNumbers <chr>,
-#> #   firstPublicationDate <chr>, pmcid <chr>, hasSuppl <chr>
+europepmc::epmc_search(query = '"2019-nCoV" OR "2019nCoV"')
+#> # A tibble: 100 x 29
+#>    id    source pmid  pmcid doi   title authorString journalTitle pubYear journalIssn pubType isOpenAccess inEPMC
+#>    <chr> <chr>  <chr> <chr> <chr> <chr> <chr>        <chr>        <chr>   <chr>       <chr>   <chr>        <chr> 
+#>  1 3240… MED    3240… PMC7… 10.1… Livi… Santillan-G… Med Intensi… 2020    "0210-5691… letter  Y            Y     
+#>  2 PPR1… PPR    <NA>  <NA>  10.1… The … Benvenuto D… <NA>         2020     <NA>       prepri… N            N     
+#>  3 3203… MED    3203… PMC7… 10.1… Emer… Malik YS, S… Vet Q        2020    "0165-2176… other;… Y            Y     
+#>  4 3238… MED    3238… PMC7… 10.1… Comp… Yu R, Chen … Int J Antim… 2020    "1872-7913… resear… Y            Y     
+#>  5 3203… MED    3203… PMC7… 10.1… Coro… Bonilla-Ald… Travel Med … 2020    "1477-8939… resear… Y            Y     
+#>  6 3230… MED    3230… PMC7… 10.1… A ca… Yang X, Zha… Clin Res He… 2020    "2210-7401… case r… Y            Y     
+#>  7 3220… MED    3220… PMC7… 10.4… Ther… Sarma P, Pr… Indian J Ph… 2020    "0253-7613… editor… Y            Y     
+#>  8 PMC7… PMC    <NA>  PMC7… 10.1… Myst… Hemmati-Din… Arch Med Res <NA>    "0188-4409… review… Y            Y     
+#>  9 3217… MED    3217… PMC7… 10.1… Anes… Zhao S, Lin… J Cardiotho… 2020    "1053-0770… resear… Y            Y     
+#> 10 3232… MED    3232… PMC7… 10.1… The … Li H, Chen … J Infect     2020    "0163-4453… resear… Y            Y     
+#> # … with 90 more rows, and 16 more variables: inPMC <chr>, hasPDF <chr>, hasBook <chr>, hasSuppl <chr>,
+#> #   citedByCount <int>, hasReferences <chr>, hasTextMinedTerms <chr>, hasDbCrossReferences <chr>,
+#> #   hasLabsLinks <chr>, hasTMAccessionNumbers <chr>, firstIndexDate <chr>, firstPublicationDate <chr>,
+#> #   issue <chr>, journalVolume <chr>, pageInfo <chr>, versionNumber <int>
 ```
 
 By default, `epmc_search()` returns 100 records. To adjust the limit, simply use
@@ -109,22 +111,22 @@ Salmon's [blog post](http://www.masalmon.eu/2017/05/14/evergreenreviewgraph/):
 
 
 ```r
-tt_oa <- europepmc::epmc_hits_trend("Malaria", period = 1995:2016, synonym = FALSE)
+tt_oa <- europepmc::epmc_hits_trend("Malaria", period = 1995:2019, synonym = FALSE)
 tt_oa
-#> # A tibble: 22 x 3
+#> # A tibble: 25 x 3
 #>     year all_hits query_hits
 #>    <int>    <dbl>      <dbl>
-#>  1  1995   448477       1485
-#>  2  1996   458064       1560
-#>  3  1997   455691       1853
-#>  4  1998   473173       1749
-#>  5  1999   492786       1935
-#>  6  2000   531286       2127
-#>  7  2001   544411       2203
-#>  8  2002   560843       2352
-#>  9  2003   587503       2554
-#> 10  2004   627130       2748
-#> # ... with 12 more rows
+#>  1  1995   448961       1486
+#>  2  1996   458444       1560
+#>  3  1997   456594       1857
+#>  4  1998   474525       1751
+#>  5  1999   493574       1935
+#>  6  2000   531892       2130
+#>  7  2001   545533       2204
+#>  8  2002   561118       2355
+#>  9  2003   588172       2588
+#> 10  2004   627729       2806
+#> # … with 15 more rows
 # we use ggplot2 for plotting the graph
 library(ggplot2)
 ggplot(tt_oa, aes(year, query_hits / all_hits)) + 
@@ -142,10 +144,15 @@ For more info, read the vignette about creating literature review graphs:
 
 ## Re-use of europepmc
 
-Chris Stubben (@cstubben) has created an Shiny App that allows you to search and
-browse Europe PMC:
+Check out the tidypmc package
+
+<https://github.com/ropensci/tidypmc>
+
+The package maintainer, Chris Stubben (@cstubben), has also created an Shiny App that allows you to search and browse Europe PMC:
 
 <https://cstubben.shinyapps.io/euPMC/>
+
+
 
 ## Other ways to access Europe PubMed Central
 

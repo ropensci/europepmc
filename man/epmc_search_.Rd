@@ -4,8 +4,13 @@
 \alias{epmc_search_}
 \title{Get one page of results when searching Europe PubMed Central}
 \usage{
-epmc_search_(query = NULL, limit = 100, output = "parsed",
-  page_token = NULL, ...)
+epmc_search_(
+  query = NULL,
+  limit = 100,
+  output = "parsed",
+  page_token = NULL,
+  ...
+)
 }
 \arguments{
 \item{query}{character, search query. For more information on how to

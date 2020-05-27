@@ -12,6 +12,7 @@ test_that("epmc_details returns", {
   h <- epmc_details("409323", data_src = "eth")
   j <- epmc_details("20585653")
   k <- epmc_details(ext_id = "26980001")
+  l <- epmc_details("PPR158112", data_src = "ppr")
 
 
   #correct dimensions and class
@@ -25,6 +26,7 @@ test_that("epmc_details returns", {
   expect_output(str(h), "List of 9")
   expect_output(str(j), "List of 9")
   expect_output(str(k), "List of 9")
+  expect_output(str(l), "List of 9")
 
   #correct class metadata
   expect_is(a$basic, "data.frame")
@@ -49,7 +51,7 @@ test_that("epmc_details returns", {
   expect_equal(ncol(a$mesh_topic), 2)
 
   # fails correctly
-  expect_message(epmc_details("123hah"), 
+  expect_message(epmc_details("123hah"),
     "nothing found, please check your query")
   expect_null(epmc_details("123hah"))
   expect_error(epmc_details("NBK338142", data_src = "nbks"))

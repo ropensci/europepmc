@@ -4,29 +4,36 @@
 \alias{epmc_db}
 \title{Retrieve external database entities referenced in a given publication}
 \usage{
-epmc_db(ext_id = NULL, data_src = "med", db = NULL, limit = 100,
-  verbose = TRUE)
+epmc_db(
+  ext_id = NULL,
+  data_src = "med",
+  db = NULL,
+  limit = 100,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{ext_id}{character, publication identifier}
 
 \item{data_src}{character, data source, by default Pubmed/MedLine index will
-be searched.
-The following three letter codes represent the sources
-Europe PubMed Central supports:
-\describe{
-  \item{agr}{Agricola is a bibliographic database of citations to the
-  agricultural literature created by the US National Agricultural Library
-  and its co-operators.}
-  \item{cba}{Chinese Biological Abstracts}
-  \item{ctx}{CiteXplore}
-  \item{eth}{EthOs Theses, i.e. PhD theses (British Library)}
-  \item{hir}{NHS Evidence}
-  \item{med}{PubMed/Medline NLM}
-  \item{nbk}{Europe PMC Book metadata}
-  \item{pat}{Biological Patents}
-  \item{pmc}{PubMed Central}
-  }}
+  be searched.
+
+
+  The following three letter codes represent the sources
+  Europe PubMed Central supports:
+  \describe{
+    \item{agr}{Agricola is a bibliographic database of citations to the
+    agricultural literature created by the US National Agricultural Library
+    and its co-operators.}
+    \item{cba}{Chinese Biological Abstracts}
+    \item{ctx}{CiteXplore}
+    \item{eth}{EthOs Theses, i.e. PhD theses (British Library)}
+    \item{hir}{NHS Evidence}
+    \item{med}{PubMed/Medline NLM}
+    \item{nbk}{Europe PMC Book metadata}
+    \item{pat}{Biological Patents}
+    \item{pmc}{PubMed Central}
+    }}
 
 \item{db}{character, specify database:
 \describe{

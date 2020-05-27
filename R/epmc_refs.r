@@ -6,6 +6,8 @@
 #' @param ext_id character, publication identifier
 #' @param data_src character, data source, by default Pubmed/MedLine index will
 #'   be searched.
+#'
+#'
 #'   The following three letter codes represent the sources
 #'   Europe PubMed Central supports:
 #'   \describe{
@@ -58,14 +60,14 @@ epmc_refs <-
         req <-
           rebi_GET(path = path,
                    query = list(format = "json", pageSize = limit))
-        out <- dplyr::as_data_frame(req$referenceList$reference)
+        out <- tibble::as_tibble(req$referenceList$reference)
       } else {
         query <-
           make_path(hit_count = hit_count,
                     limit = limit)
         out <- purrr::map_df(query, function(x) {
           req <- rebi_GET(path = path, query = x)
-          dplyr::as_data_frame(req$referenceList$reference)
+          tibble::as_tibble(req$referenceList$reference)
         })
       }
       # return hit count as attribute
