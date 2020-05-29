@@ -1,6 +1,6 @@
 #' Get details for individual records
 #'
-#' This function returns full metadata for a given publication ID
+#' This function returns parsed metadata for a given publication ID
 #' including abstract, full text links, author details including ORCID and affiliation,
 #' MeSH terms, chemicals, grants.
 #'

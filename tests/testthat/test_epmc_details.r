@@ -13,6 +13,7 @@ test_that("epmc_details returns", {
   j <- epmc_details("20585653")
   k <- epmc_details(ext_id = "26980001")
   l <- epmc_details("PPR158112", data_src = "ppr")
+  m <- epmc_details("30937518")
 
 
   #correct dimensions and class
@@ -27,6 +28,8 @@ test_that("epmc_details returns", {
   expect_output(str(j), "List of 9")
   expect_output(str(k), "List of 9")
   expect_output(str(l), "List of 9")
+  expect_output(str(m), "List of 9")
+
 
   #correct class metadata
   expect_is(a$basic, "data.frame")
@@ -42,6 +45,7 @@ test_that("epmc_details returns", {
   expect_is(a$mesh_topic, "data.frame")
   expect_is(a$mesh_qualifiers, "data.frame")
   expect_is(a$comments, "data.frame")
+  expect_is(m$author_details$authorAffiliationsList.authorAffiliation, "list")
 
   # returns NULL if no mesh qualifiers were found
   expect_equal(j$mesh_qualifiers, NULL)

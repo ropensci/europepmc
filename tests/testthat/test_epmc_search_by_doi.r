@@ -19,4 +19,4 @@ test_that("epmc_search_by_doi returns", {
 
   expect_error(epmc_search_by_doi(doi = my_dois, output = "kd"))
   expect_error(epmc_search_by_doi(doi = my_dois, verbose = "no"))
-})
+ })
