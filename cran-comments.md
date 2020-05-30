@@ -1,9 +1,9 @@
-# europepmc v0.3
+# europepmc v 0.4
 
 ## Test environments
 
-* local OS X install, R version 3.4.4
-* Ubuntu 14.04.5 LTS (on travis-ci), R version 3.4.4 
+* local OS X install, R version R version 4.0.0 
+* Ubuntu Ubuntu 16.04.6 LTS (on travis-ci), R version 4.0.0
 * win-builder (devel and release) and appveyor CI
 
 ## R CMD check results
@@ -14,9 +14,6 @@ Status: OK
 
 Win-Builder:
 
-The win-builder send one NOTE about possibly mis-spelled words in DESCRIPTION, which are, in fact, correctly spelled.
-
-Win-builder R version 3.3.3 (2017-03-06) notes about (possibly) invalid URLs, which, in fact, are valid.
 
 ## Reverse dependencies
 

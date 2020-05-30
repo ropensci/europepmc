@@ -81,22 +81,22 @@ PMC search syntax to `epmc_search()`.
 ```r
 europepmc::epmc_search(query = '"2019-nCoV" OR "2019nCoV"')
 #> # A tibble: 100 x 29
-#>    id    source pmid  pmcid doi   title authorString journalTitle pubYear journalIssn pubType isOpenAccess inEPMC
-#>    <chr> <chr>  <chr> <chr> <chr> <chr> <chr>        <chr>        <chr>   <chr>       <chr>   <chr>        <chr> 
-#>  1 3240… MED    3240… PMC7… 10.1… Livi… Santillan-G… Med Intensi… 2020    "0210-5691… letter  Y            Y     
-#>  2 PPR1… PPR    <NA>  <NA>  10.1… The … Benvenuto D… <NA>         2020     <NA>       prepri… N            N     
-#>  3 3203… MED    3203… PMC7… 10.1… Emer… Malik YS, S… Vet Q        2020    "0165-2176… other;… Y            Y     
-#>  4 3238… MED    3238… PMC7… 10.1… Comp… Yu R, Chen … Int J Antim… 2020    "1872-7913… resear… Y            Y     
-#>  5 3203… MED    3203… PMC7… 10.1… Coro… Bonilla-Ald… Travel Med … 2020    "1477-8939… resear… Y            Y     
-#>  6 3230… MED    3230… PMC7… 10.1… A ca… Yang X, Zha… Clin Res He… 2020    "2210-7401… case r… Y            Y     
-#>  7 3220… MED    3220… PMC7… 10.4… Ther… Sarma P, Pr… Indian J Ph… 2020    "0253-7613… editor… Y            Y     
-#>  8 PMC7… PMC    <NA>  PMC7… 10.1… Myst… Hemmati-Din… Arch Med Res <NA>    "0188-4409… review… Y            Y     
-#>  9 3217… MED    3217… PMC7… 10.1… Anes… Zhao S, Lin… J Cardiotho… 2020    "1053-0770… resear… Y            Y     
-#> 10 3232… MED    3232… PMC7… 10.1… The … Li H, Chen … J Infect     2020    "0163-4453… resear… Y            Y     
-#> # … with 90 more rows, and 16 more variables: inPMC <chr>, hasPDF <chr>, hasBook <chr>, hasSuppl <chr>,
-#> #   citedByCount <int>, hasReferences <chr>, hasTextMinedTerms <chr>, hasDbCrossReferences <chr>,
-#> #   hasLabsLinks <chr>, hasTMAccessionNumbers <chr>, firstIndexDate <chr>, firstPublicationDate <chr>,
-#> #   issue <chr>, journalVolume <chr>, pageInfo <chr>, versionNumber <int>
+#>    id    source pmid  pmcid doi   title authorString journalTitle pubYear journalIssn pubType isOpenAccess
+#>    <chr> <chr>  <chr> <chr> <chr> <chr> <chr>        <chr>        <chr>   <chr>       <chr>   <chr>       
+#>  1 3240… MED    3240… PMC7… 10.1… Livi… Santillan-G… Med Intensi… 2020    "0210-5691… letter  Y           
+#>  2 PPR1… PPR    <NA>  <NA>  10.1… The … Benvenuto D… <NA>         2020     <NA>       prepri… N           
+#>  3 3203… MED    3203… PMC7… 10.1… Emer… Malik YS, S… Vet Q        2020    "0165-2176… other;… Y           
+#>  4 3238… MED    3238… PMC7… 10.1… Comp… Yu R, Chen … Int J Antim… 2020    "1872-7913… resear… Y           
+#>  5 3230… MED    3230… PMC7… 10.1… A ca… Yang X, Zha… Clin Res He… 2020    "2210-7401… case r… Y           
+#>  6 3203… MED    3203… PMC7… 10.1… Coro… Bonilla-Ald… Travel Med … 2020    "1477-8939… resear… Y           
+#>  7 3220… MED    3220… PMC7… 10.4… Ther… Sarma P, Pr… Indian J Ph… 2020    "0253-7613… editor… Y           
+#>  8 3217… MED    3217… PMC7… 10.1… Anes… Zhao S, Lin… J Cardiotho… 2020    "1053-0770… resear… Y           
+#>  9 3240… MED    3240… PMC7… 10.1… Prev… Wang X, Wan… Diabetes Re… 2020    "0168-8227… resear… Y           
+#> 10 PMC7… PMC    <NA>  PMC7… 10.1… The … Rastogi YR,… Int J Envir… <NA>    "1735-1472… review… Y           
+#> # … with 90 more rows, and 17 more variables: inEPMC <chr>, inPMC <chr>, hasPDF <chr>, hasBook <chr>,
+#> #   hasSuppl <chr>, citedByCount <int>, hasReferences <chr>, hasTextMinedTerms <chr>,
+#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>, hasTMAccessionNumbers <chr>, firstIndexDate <chr>,
+#> #   firstPublicationDate <chr>, issue <chr>, journalVolume <chr>, pageInfo <chr>, versionNumber <int>
 ```
 
 Be aware that Europe PMC expands queries with MeSH synonyms by default. You can turn this behavior off using the `synonym = FALSE` parameter.
@@ -121,7 +121,7 @@ tt_oa
 #>  1  1995   448961       1486
 #>  2  1996   458444       1560
 #>  3  1997   456594       1857
-#>  4  1998   474525       1751
+#>  4  1998   474525       1748
 #>  5  1999   493574       1935
 #>  6  2000   531892       2130
 #>  7  2001   545533       2204
@@ -173,7 +173,7 @@ The package maintainer, Chris Stubben (@cstubben), has also created an Shiny App
 
 ## Meta
 
-Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+Please note that this project is released with a [Contributor Code of Conduct](https://docs.ropensci.org/europepmc/CONDUCT.html). By participating in this project you agree to abide by its terms.
 
 License: GPL-3
 

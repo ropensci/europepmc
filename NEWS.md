@@ -1,7 +1,7 @@
 # europepmc 0.4
 
-- update to API changes
-- Support of Europe PMC Annotations ID
+- Support API version 6.3
+- Europe PMC Annotations ID integration
 
 New functionalities:
 

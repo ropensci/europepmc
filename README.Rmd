@@ -144,7 +144,7 @@ The package maintainer, Chris Stubben (@cstubben), has also created an Shiny App
 
 ## Meta
 
-Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+Please note that this project is released with a [Contributor Code of Conduct](https://docs.ropensci.org/europepmc/CONDUCT.html). By participating in this project you agree to abide by its terms.
 
 License: GPL-3
 
