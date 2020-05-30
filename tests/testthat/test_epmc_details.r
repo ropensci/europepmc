@@ -47,10 +47,10 @@ test_that("epmc_details returns", {
   expect_is(a$comments, "data.frame")
   expect_is(m$author_details$authorAffiliationsList.authorAffiliation, "list")
 
-  # returns NULL if no mesh qualifiers were found
-  expect_equal(j$mesh_qualifiers, NULL)
+  # returns empty tibble if no mesh qualifiers were found
+  expect_equal(nrow(j$mesh_qualifiers), 0)
 
-  #are diminsions correct?
+  #are dimensions correct?
   expect_equal(nrow(a$basic), 1)
   expect_equal(ncol(a$mesh_topic), 2)
 
