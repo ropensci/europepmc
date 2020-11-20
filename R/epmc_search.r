@@ -127,7 +127,7 @@ epmc_search <- function(query = NULL,
       if (page_token == out$next_cursor)
         break
       i <- i + 1
-      if (verbose == TRUE)
+      if (verbose == TRUE && hits > 100)
         pb$tick()
       page_token <- out$next_cursor
       if (output == "raw") {
