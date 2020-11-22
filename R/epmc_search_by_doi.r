@@ -33,7 +33,7 @@ epmc_search_by_doi <- function(doi = NULL, output = "parsed") {
     doi <- doi[doi != ""]
     warning("Removed empty characters from DOI vector")
   }
-  pb <- dplyr::progress_estimated(length(doi))
+  pb <- pb(length(doi))
   if (output != "raw") {
     out <- purrr::map_df(paste0("DOI:", doi),
                          epmc_search_by_doi_,

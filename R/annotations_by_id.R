@@ -40,7 +40,7 @@ epmc_annotations_by_id <- function(ids = NULL){
     warning("Removed empty characters from DOI vector")
   }
   # progress
-  pb <- dplyr::progress_estimated(length(ids))
+  pb <- pb(length(ids))
   purrr::map_df(ids, epmc_annotations_by_id_, .pb = pb)
 }
 
