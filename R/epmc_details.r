@@ -120,10 +120,15 @@ get_mesh_subheadings <- function(res) {
 #' @param res json results node
 #' @noRd
 parse_aut <- function(res) {
-  if (!is.null(res$authorList$author))
-    res$authorList$author %>%
-    plyr::rbind.fill() %>%
-    jsonlite::flatten()
+  if (!is.null(res$authorList$author)) {
+    out <- plyr::rbind.fill(res$authorList$author) %>%
+      jsonlite::flatten()
+  } else {
+    out <- tibble::tibble()
+      }
+  if("authorAffiliationDetailsList.authorAffiliation" %in% colnames(out))
+    out <- tidyr::unnest(out, cols = c(authorAffiliationDetailsList.authorAffiliation))
+  return(out)
 }
 
 #' get nested journal info

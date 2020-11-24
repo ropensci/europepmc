@@ -45,7 +45,7 @@ test_that("epmc_details returns", {
   expect_is(a$mesh_topic, "data.frame")
   expect_is(a$mesh_qualifiers, "data.frame")
   expect_is(a$comments, "data.frame")
-  expect_is(m$author_details$authorAffiliationsList.authorAffiliation, "list")
+  expect_is(m$author_details, "data.frame")
 
   # returns empty tibble if no mesh qualifiers were found
   expect_equal(nrow(j$mesh_qualifiers), 0)
