@@ -6,6 +6,7 @@ europepmc - R Interface to Europe PMC RESTful Web Service
 
 
 [![Build Status](https://travis-ci.org/ropensci/europepmc.svg?branch=master)](https://travis-ci.org/ropensci/europepmc)
+[![R build status](https://github.com/ropensci/europepmc/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/europepmc/actions)
 [![Build status](https://ci.appveyor.com/api/projects/status/f8xtpvhhr074lk44?svg=true)](https://ci.appveyor.com/project/sckott/europepmc)
 [![codecov.io](https://codecov.io/github/ropensci/europepmc/coverage.svg?branch=master)](https://codecov.io/github/ropensci/europepmc?branch=master)
 [![cran version](http://www.r-pkg.org/badges/version/europepmc)](https://cran.r-project.org/package=europepmc)
@@ -81,22 +82,23 @@ PMC search syntax to `epmc_search()`.
 ```r
 europepmc::epmc_search(query = '"2019-nCoV" OR "2019nCoV"')
 #> # A tibble: 100 x 29
-#>    id    source pmid  pmcid doi   title authorString journalTitle pubYear journalIssn pubType isOpenAccess
-#>    <chr> <chr>  <chr> <chr> <chr> <chr> <chr>        <chr>        <chr>   <chr>       <chr>   <chr>       
-#>  1 3240… MED    3240… PMC7… 10.1… Livi… Santillan-G… Med Intensi… 2020    "0210-5691… letter  Y           
-#>  2 PPR1… PPR    <NA>  <NA>  10.1… The … Benvenuto D… <NA>         2020     <NA>       prepri… N           
-#>  3 3203… MED    3203… PMC7… 10.1… Emer… Malik YS, S… Vet Q        2020    "0165-2176… other;… Y           
-#>  4 3238… MED    3238… PMC7… 10.1… Comp… Yu R, Chen … Int J Antim… 2020    "1872-7913… resear… Y           
-#>  5 3230… MED    3230… PMC7… 10.1… A ca… Yang X, Zha… Clin Res He… 2020    "2210-7401… case r… Y           
-#>  6 3203… MED    3203… PMC7… 10.1… Coro… Bonilla-Ald… Travel Med … 2020    "1477-8939… resear… Y           
-#>  7 3220… MED    3220… PMC7… 10.4… Ther… Sarma P, Pr… Indian J Ph… 2020    "0253-7613… editor… Y           
-#>  8 3217… MED    3217… PMC7… 10.1… Anes… Zhao S, Lin… J Cardiotho… 2020    "1053-0770… resear… Y           
-#>  9 3240… MED    3240… PMC7… 10.1… Prev… Wang X, Wan… Diabetes Re… 2020    "0168-8227… resear… Y           
-#> 10 PMC7… PMC    <NA>  PMC7… 10.1… The … Rastogi YR,… Int J Envir… <NA>    "1735-1472… review… Y           
-#> # … with 90 more rows, and 17 more variables: inEPMC <chr>, inPMC <chr>, hasPDF <chr>, hasBook <chr>,
-#> #   hasSuppl <chr>, citedByCount <int>, hasReferences <chr>, hasTextMinedTerms <chr>,
-#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>, hasTMAccessionNumbers <chr>, firstIndexDate <chr>,
-#> #   firstPublicationDate <chr>, issue <chr>, journalVolume <chr>, pageInfo <chr>, versionNumber <int>
+#>    id    source pmid  pmcid doi   title authorString journalTitle issue journalVolume pubYear
+#>    <chr> <chr>  <chr> <chr> <chr> <chr> <chr>        <chr>        <chr> <chr>         <chr>  
+#>  1 3318… MED    3318… PMC7… 10.1… The … Kim YJ, Qia… Medicine (B… 46    99            2020   
+#>  2 3240… MED    3240… PMC7… 10.1… Livi… Santillan-G… Med Intensi… <NA>  <NA>          2020   
+#>  3 3259… MED    3259… PMC7… 10.1… Earl… Hanrahan JG… World Neuro… <NA>  141           2020   
+#>  4 3311… MED    3311… PMC7… 10.7… UNCO… Xu W, Zhang… J Glob Heal… 2     10            2020   
+#>  5 3234… MED    3234… PMC7… 10.1… Obes… Carretero G… Rev Clin Esp 6     220           2020   
+#>  6 PMC7… PMC    <NA>  PMC7… <NA>  Obes… Carretero G… Rev Clin Es… 6     220           2020   
+#>  7 PPR1… PPR    <NA>  <NA>  10.2… Comp… Han Y, Feng… <NA>         <NA>  <NA>          2020   
+#>  8 3283… MED    3283… PMC7… 10.1… New … Gao W, Bask… Adv Differ … 1     2020          2020   
+#>  9 PPR1… PPR    <NA>  <NA>  10.2… Clin… Lu H, Zheng… <NA>         <NA>  <NA>          2020   
+#> 10 PPR1… PPR    <NA>  <NA>  10.1… The … Benvenuto D… <NA>         <NA>  <NA>          2020   
+#> # … with 90 more rows, and 18 more variables: journalIssn <chr>, pageInfo <chr>, pubType <chr>,
+#> #   isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>, hasPDF <chr>, hasBook <chr>, hasSuppl <chr>,
+#> #   citedByCount <int>, hasReferences <chr>, hasTextMinedTerms <chr>,
+#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>, hasTMAccessionNumbers <chr>,
+#> #   firstIndexDate <chr>, firstPublicationDate <chr>, versionNumber <int>
 ```
 
 Be aware that Europe PMC expands queries with MeSH synonyms by default. You can turn this behavior off using the `synonym = FALSE` parameter.
@@ -118,16 +120,16 @@ tt_oa
 #> # A tibble: 25 x 3
 #>     year all_hits query_hits
 #>    <int>    <dbl>      <dbl>
-#>  1  1995   448961       1486
-#>  2  1996   458444       1560
-#>  3  1997   456594       1857
-#>  4  1998   474525       1748
-#>  5  1999   493574       1935
-#>  6  2000   531892       2130
-#>  7  2001   545533       2204
-#>  8  2002   561118       2355
-#>  9  2003   588172       2588
-#> 10  2004   627729       2806
+#>  1  1995   448921       1482
+#>  2  1996   458439       1557
+#>  3  1997   456592       1858
+#>  4  1998   474523       1767
+#>  5  1999   493567       1945
+#>  6  2000   531927       2154
+#>  7  2001   545527       2221
+#>  8  2002   561251       2388
+#>  9  2003   588341       2635
+#> 10  2004   627949       2849
 #> # … with 15 more rows
 # we use ggplot2 for plotting the graph
 library(ggplot2)
