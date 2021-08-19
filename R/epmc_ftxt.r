@@ -3,8 +3,8 @@
 #' This function loads full texts into R. Full texts are in XML format and are
 #' only provided for the Open Access subset of Europe PMC.
 #'
-#' @param ext_id character, publication identifier. PMID or PMCID for articles
-#'   where Europe PMC indexes the full-text.
+#' @param ext_id character, PMCID. 
+#'   All full text publications have external IDs starting 'PMC_'
 #'
 #' @export
 #' @return xml_document
@@ -13,11 +13,10 @@
 #'   \dontrun{
 #'   epmc_ftxt("PMC3257301")
 #'   epmc_ftxt("PMC3639880")
-#'   epmc_ftxt("29456894")
 #'   }
 epmc_ftxt <- function(ext_id = NULL) {
-  if (is.null(ext_id))
-    stop("Please provide a PMID or PMCID, i.e. ids starting with 'PMC'")
+  if (!grepl("^PMC", ext_id))
+    stop("Please provide a PMCID, i.e. ids starting with 'PMC'")
   # call api
   req <-
     httr::RETRY("GET",
