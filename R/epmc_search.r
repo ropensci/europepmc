@@ -111,6 +111,7 @@ epmc_search <- function(query = NULL,
     message(paste(hits, "records found, returning", limit))
     # let's loop over until page max is reached,
     # or until cursor marks are identical
+    if (!is.null(out$next_cursor)) {
     i <- 0
     # progress
     pb <- pb(limit = limit)
@@ -124,7 +125,7 @@ epmc_search <- function(query = NULL,
           page_token = page_token,
           sort = sort
         )
-      if (page_token == out$next_cursor)
+      if (is.null(out$next_cursor))
         break
       i <- i + 1
       if (verbose == TRUE && hits > 100)
@@ -144,6 +145,10 @@ epmc_search <- function(query = NULL,
     }
     # return hit counts(thanks to @cstubben)
     attr(md, "hit_count") <- hits
+  } else {
+    md <- out$results
+    attr(md, "hit_count") <- hits
+  }
   }
   return(md)
 }
