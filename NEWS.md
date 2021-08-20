@@ -1,3 +1,11 @@
+# europepmc 0.4.1
+
+- Implement API version 6.6 support
+
+Minor changes:
+
+-  Allow full-text retrieval only by PMCID, thanks @ESPoppelaars
+
 # europepmc 0.4
 
 - Support API version 6.3
