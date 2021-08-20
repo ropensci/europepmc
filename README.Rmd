@@ -12,18 +12,17 @@ knitr::opts_chunk$set(
 ```
 
 
-[![Build Status](https://travis-ci.org/ropensci/europepmc.svg?branch=master)](https://travis-ci.org/ropensci/europepmc)
 [![R build status](https://github.com/ropensci/europepmc/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/europepmc/actions)
 [![Build status](https://ci.appveyor.com/api/projects/status/f8xtpvhhr074lk44?svg=true)](https://ci.appveyor.com/project/sckott/europepmc)
 [![codecov.io](https://codecov.io/github/ropensci/europepmc/coverage.svg?branch=master)](https://codecov.io/github/ropensci/europepmc?branch=master)
-[![cran version](http://www.r-pkg.org/badges/version/europepmc)](https://cran.r-project.org/package=europepmc)
-[![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/europepmc)](https://github.com/metacran/cranlogs.app)
-[![](https://badges.ropensci.org/29_status.svg)](https://github.com/ropensci/onboarding/issues/29)
+[![cran version](https://www.r-pkg.org/badges/version/europepmc)](https://cran.r-project.org/package=europepmc)
+[![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/europepmc)](https://github.com/r-hub/cranlogs.app)
+[![](https://badges.ropensci.org/29_status.svg)](https://github.com/ropensci/software-review/issues/29)
 
 europepmc facilitates access to the [Europe PMC RESTful Web
-Service](http://europepmc.org/RestfulWebService). The client furthermore supports the [Europe PMC Annotations API](https://europepmc.org/AnnotationsApi) to retrieve text-mined concepts and terms per article.
+Service](https://europepmc.org/RestfulWebService). The client furthermore supports the [Europe PMC Annotations API](https://europepmc.org/AnnotationsApi) to retrieve text-mined concepts and terms per article.
 
-[Europe PMC](http://europepmc.org/) covers life science literature and
+[Europe PMC](https://europepmc.org/) covers life science literature and
 gives access to open access full texts. Europe
 PMC ingests all PubMed content and extends its index with other literature and patent sources.
 
@@ -81,7 +80,7 @@ library(europepmc)
 
 The search covers both metadata (e.g. abstracts or title) and full texts. To
 build your query, please refer to the comprehensive guidance on how to search
-Europe PMC: <http://europepmc.org/help>. Provide your query in the Europe
+Europe PMC: <https://europepmc.org/help>. Provide your query in the Europe
 PMC search syntax to `epmc_search()`. 
 
 ```{r}
@@ -98,7 +97,7 @@ See vignette [Introducing europepmc, an R interface to Europe PMC RESTful API](h
 ## Creating proper review graphs with `epmc_hits_trend()`
 
 There is also a nice function allowing you to easily create review graphs like described in Maëlle
-Salmon's [blog post](http://www.masalmon.eu/2017/05/14/evergreenreviewgraph/):
+Salmon's [blog post](https://masalmon.eu/2017/05/14/evergreenreviewgraph/):
 
 ```{r, fig.path="man/figures/"}
 tt_oa <- europepmc::epmc_hits_trend("Malaria", period = 1995:2019, synonym = FALSE)
@@ -140,7 +139,7 @@ The package maintainer, Chris Stubben (@cstubben), has also created an Shiny App
 ### Other R clients
 
 - use rOpenSci's `oai` to get metadata and full text via Europe PMC's OAI interface: <https://github.com/ropensci/oai>
-- use rOpenSci's `rentrez` to interact with [NCBI databases](http://www.ncbi.nlm.nih.gov/) such as [PubMed](http://www.ncbi.nlm.nih.gov/pubmed): <https://github.com/ropensci/rentrez>
+- use rOpenSci's `rentrez` to interact with [NCBI databases](https://www.ncbi.nlm.nih.gov/) such as PubMed: <https://github.com/ropensci/rentrez>
 - rOpenSci's `fulltext` package gives access to supplementary material of open access life-science publications in Europe PMC: <https://github.com/ropensci/fulltext>
 
 ## Meta
@@ -153,4 +152,4 @@ Please use the issue tracker for bug reporting and feature requests.
 
 ---
 
-[![rofooter](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
+[![rofooter](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)

@@ -1,3 +1,11 @@
+# europepmc 0.4.1
+
+- Implement API version 6.6 support
+
+Minor changes:
+
+-  Allow full-text retrieval only by PMCID, thanks @ESPoppelaars
+
 # europepmc 0.4
 
 - Support API version 6.3
@@ -70,7 +78,7 @@ Implement [RESTful API v4.5.3](https://europepmc.org/docs/Europe_PMC_RESTful_Rel
 
 ## Minor changes
 
-- `epmc_search()` and other functions return non-nested data.frames as tibbles to better support the [tidyverse](http://tidyverse.org/)
+- `epmc_search()` and other functions return non-nested data.frames as tibbles to better support the tidyverse
 - `epmc_search()` improve error handling when nothing was found
 - `epmc_details()` [added MeSH qualifer #8]((https://github.com/ropensci/europepmc/issues/8)
 - remove NBK` as data source for `epmc_details()`, use PMIDs (`MED`) instead
@@ -93,7 +101,7 @@ Support of the following  Europe PMC RESTful API methods:
 - fullTextXML
 - bookXML
 
-Changes made during the ropensci onboarding review by @toph-allen <https://github.com/ropensci/onboarding/issues/29>
+Changes made during the ropensci onboarding review by @toph-allen <https://github.com/ropensci/software-review/issues/29>
 
 Answering to @cstubben reports and suggestions:
 

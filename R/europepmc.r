@@ -17,7 +17,7 @@
 #' For more information about Europe PMC, see their current paper:
 #' Levchenko, M., Gou, Y., Graef, F., Hamelers, A., Huang, Z., Ide-Smith, M.,
 #'  … McEntyre, J. (2017). Europe PMC in 2017. Nucleic Acids Research, 46(D1),
-#'  D1254–D1260. \url{https://doi.org/10.1093/nar/gkx1005}.
+#'  D1254–D1260. \doi{10.1093/nar/gkx1005}.
 
 #'
 #' @name europepmc

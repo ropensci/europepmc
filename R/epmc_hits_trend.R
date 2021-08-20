@@ -26,7 +26,7 @@
 #'     }
 #'
 #' @details A similar function was used in
-#'  \url{http://www.masalmon.eu/2017/05/14/evergreenreviewgraph/} where
+#'  \url{https://masalmon.eu/2017/05/14/evergreenreviewgraph/} where
 #'  it was advised to not plot no. of hits over time for a query,
 #'  but to normalize it by the total no. of hits.
 #'

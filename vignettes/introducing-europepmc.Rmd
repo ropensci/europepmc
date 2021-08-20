@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 
 ## What is searched?
 
-[Europe PMC](http://europepmc.org/) is a repository of life science literature. Europe PMC ingests all PubMed content and extends its index with other literature and patent sources. 
+[Europe PMC](https://europepmc.org/) is a repository of life science literature. Europe PMC ingests all PubMed content and extends its index with other literature and patent sources. 
 
 For more background on Europe PMC, see:
 
@@ -31,7 +31,7 @@ Levchenko, M., Gou, Y., Graef, F., Hamelers, A., Huang, Z., Ide-Smith, M., … M
 
 ## How to search Europe PMC with R?
 
-This client supports the [Europe PMC search syntax](http://europepmc.org/Help#SSR). If you are unfamiliar with searching Europe PMC, check out the [Europe PMC query builder](https://europepmc.org/advancesearch), a very nice tool that helps you to build queries. To make use of Europe PMC queries in R, copy & paste the search string to the search functions of this package. 
+This client supports the [Europe PMC search syntax](https://europepmc.org/Help#SSR). If you are unfamiliar with searching Europe PMC, check out the [Europe PMC query builder](https://europepmc.org/advancesearch), a very nice tool that helps you to build queries. To make use of Europe PMC queries in R, copy & paste the search string to the search functions of this package. 
 
 In the following, some examples demonstrate how to search Europe PMC with R.
 
@@ -149,14 +149,14 @@ europepmc::epmc_search('(HAS_PDB:y) AND FIRST_PDATE:2016')
 
 The following sources are supported
 
-- **CHEBI** a database and ontology of chemical entities of biological interest <http://www.ebi.ac.uk/chebi/>
+- **CHEBI** a database and ontology of chemical entities of biological interest <https://www.ebi.ac.uk/chebi/>
 - **CHEMBL** a database of bioactive drug-like small molecules <https://www.ebi.ac.uk/chembldb/>
-- **EMBL** now ENA, provides a comprehensive record of the world's nucleotide sequencing information <http://www.ebi.ac.uk/ena/>
-- **INTACT** provides a freely available, open source database system and analysis tools for molecular interaction data <http://www.ebi.ac.uk/intact/>
-- **INTERPRO** provides functional analysis of proteins by classifying them into families and predicting domains and important sites <http://www.ebi.ac.uk/interpro/>
-- **OMIM** a comprehensive and authoritative compendium of human genes and genetic phenotypes http://www.ncbi.nlm.nih.gov/omim
-- **PDB** European resource for the collection, organisation and dissemination of data on biological macromolecular structures <http://www.ebi.ac.uk/pdbe/>
-- **UNIPROT** comprehensive and freely accessible resource of protein sequence and functional information <http://www.uniprot.org/>
+- **EMBL** now ENA, provides a comprehensive record of the world's nucleotide sequencing information <https://www.ebi.ac.uk/ena/browser/>
+- **INTACT** provides a freely available, open source database system and analysis tools for molecular interaction data <https://www.ebi.ac.uk/intact/>
+- **INTERPRO** provides functional analysis of proteins by classifying them into families and predicting domains and important sites <https://www.ebi.ac.uk/interpro/>
+- **OMIM** a comprehensive and authoritative compendium of human genes and genetic phenotypes <https://www.omim.org/about>
+- **PDB** European resource for the collection, organisation and dissemination of data on biological macromolecular structures <https://www.ebi.ac.uk/pdbe/>
+- **UNIPROT** comprehensive and freely accessible resource of protein sequence and functional information <https://www.uniprot.org/>
 - **PRIDE** PRIDE Archive - proteomics data repository <https://www.ebi.ac.uk/pride/archive/>
 
 To retrieve metadata about these external database links, use `europepmc_epmc_db()`. 
