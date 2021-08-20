@@ -5,7 +5,6 @@ europepmc - R Interface to Europe PMC RESTful Web Service
 
 
 
-[![Build Status](https://travis-ci.org/ropensci/europepmc.svg?branch=master)](https://travis-ci.org/ropensci/europepmc)
 [![R build status](https://github.com/ropensci/europepmc/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/europepmc/actions)
 [![Build status](https://ci.appveyor.com/api/projects/status/f8xtpvhhr074lk44?svg=true)](https://ci.appveyor.com/project/sckott/europepmc)
 [![codecov.io](https://codecov.io/github/ropensci/europepmc/coverage.svg?branch=master)](https://codecov.io/github/ropensci/europepmc?branch=master)
@@ -69,6 +68,7 @@ Loading into R
 
 ```r
 library(europepmc)
+#> Error in library(europepmc): there is no package called 'europepmc'
 ```
 
 ## Search Europe PMC
@@ -81,24 +81,7 @@ PMC search syntax to `epmc_search()`.
 
 ```r
 europepmc::epmc_search(query = '"2019-nCoV" OR "2019nCoV"')
-#> # A tibble: 100 x 29
-#>    id    source pmid  pmcid doi   title authorString journalTitle issue journalVolume pubYear
-#>    <chr> <chr>  <chr> <chr> <chr> <chr> <chr>        <chr>        <chr> <chr>         <chr>  
-#>  1 3318… MED    3318… PMC7… 10.1… The … Kim YJ, Qia… Medicine (B… 46    99            2020   
-#>  2 3240… MED    3240… PMC7… 10.1… Livi… Santillan-G… Med Intensi… <NA>  <NA>          2020   
-#>  3 3259… MED    3259… PMC7… 10.1… Earl… Hanrahan JG… World Neuro… <NA>  141           2020   
-#>  4 3311… MED    3311… PMC7… 10.7… UNCO… Xu W, Zhang… J Glob Heal… 2     10            2020   
-#>  5 3234… MED    3234… PMC7… 10.1… Obes… Carretero G… Rev Clin Esp 6     220           2020   
-#>  6 PMC7… PMC    <NA>  PMC7… <NA>  Obes… Carretero G… Rev Clin Es… 6     220           2020   
-#>  7 PPR1… PPR    <NA>  <NA>  10.2… Comp… Han Y, Feng… <NA>         <NA>  <NA>          2020   
-#>  8 3283… MED    3283… PMC7… 10.1… New … Gao W, Bask… Adv Differ … 1     2020          2020   
-#>  9 PPR1… PPR    <NA>  <NA>  10.2… Clin… Lu H, Zheng… <NA>         <NA>  <NA>          2020   
-#> 10 PPR1… PPR    <NA>  <NA>  10.1… The … Benvenuto D… <NA>         <NA>  <NA>          2020   
-#> # … with 90 more rows, and 18 more variables: journalIssn <chr>, pageInfo <chr>, pubType <chr>,
-#> #   isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>, hasPDF <chr>, hasBook <chr>, hasSuppl <chr>,
-#> #   citedByCount <int>, hasReferences <chr>, hasTextMinedTerms <chr>,
-#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>, hasTMAccessionNumbers <chr>,
-#> #   firstIndexDate <chr>, firstPublicationDate <chr>, versionNumber <int>
+#> Error in loadNamespace(x): there is no package called 'europepmc'
 ```
 
 Be aware that Europe PMC expands queries with MeSH synonyms by default. You can turn this behavior off using the `synonym = FALSE` parameter.
@@ -116,21 +99,9 @@ Salmon's [blog post](http://www.masalmon.eu/2017/05/14/evergreenreviewgraph/):
 
 ```r
 tt_oa <- europepmc::epmc_hits_trend("Malaria", period = 1995:2019, synonym = FALSE)
+#> Error in loadNamespace(x): there is no package called 'europepmc'
 tt_oa
-#> # A tibble: 25 x 3
-#>     year all_hits query_hits
-#>    <int>    <dbl>      <dbl>
-#>  1  1995   448921       1482
-#>  2  1996   458439       1557
-#>  3  1997   456592       1858
-#>  4  1998   474523       1767
-#>  5  1999   493567       1945
-#>  6  2000   531927       2154
-#>  7  2001   545527       2221
-#>  8  2002   561251       2388
-#>  9  2003   588341       2635
-#> 10  2004   627949       2849
-#> # … with 15 more rows
+#> Error in eval(expr, envir, enclos): object 'tt_oa' not found
 # we use ggplot2 for plotting the graph
 library(ggplot2)
 ggplot(tt_oa, aes(year, query_hits / all_hits)) + 
@@ -138,9 +109,8 @@ ggplot(tt_oa, aes(year, query_hits / all_hits)) +
   geom_line() +
   xlab("Year published") + 
   ylab("Proportion of articles on Malaria in Europe PMC")
+#> Error in ggplot(tt_oa, aes(year, query_hits/all_hits)): object 'tt_oa' not found
 ```
-
-![plot of chunk unnamed-chunk-4](man/figures/unnamed-chunk-4-1.png)
 
 For more info, read the vignette about creating literature review graphs:
 
