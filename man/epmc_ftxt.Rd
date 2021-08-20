@@ -7,8 +7,8 @@
 epmc_ftxt(ext_id = NULL)
 }
 \arguments{
-\item{ext_id}{character, publication identifier. PMID or PMCID for articles
-where Europe PMC indexes the full-text.}
+\item{ext_id}{character, PMCID. 
+All full text publications have external IDs starting 'PMC_'}
 }
 \value{
 xml_document
@@ -21,6 +21,5 @@ only provided for the Open Access subset of Europe PMC.
   \dontrun{
   epmc_ftxt("PMC3257301")
   epmc_ftxt("PMC3639880")
-  epmc_ftxt("29456894")
   }
 }
