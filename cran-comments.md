@@ -1,10 +1,10 @@
-# europepmc v 0.4
+# europepmc v 0.4.1
 
 ## Test environments
 
-* local OS X install, R version R version 4.0.0 
-* Ubuntu 16.04.6 LTS (on travis-ci), R version 4.0.0
-* win-builder (oldrelease, release and devel) and appveyor CI
+* local OS X install (Platform: aarch64-apple-darwin20 (64-bit)), R version 4.1.0 (2021-05-18)
+* GitHub Actions initialized with `usethis::use_github_action("check-standard")`: windows-latest (release), macOS-latest (release), ubuntu-20.04 (release, devel)
+* Win-Builder 
 
 ## R CMD check results
 
@@ -23,7 +23,7 @@ Status: OK
 
 ---
 
-This submission implements the most recent API changes. This will fix current R checks problems. It also provides new functionalities and improved documentation.
+This submission implements the most recent API changes. This will fix current R checks problems. 
 
 Thanks!
 
