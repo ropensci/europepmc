@@ -40,25 +40,25 @@ epmc_db(
 \item{'ARXPR'}{Array Express, a database of functional genomics experiments
    \url{https://www.ebi.ac.uk/arrayexpress/}}
 \item{'CHEBI'}{a database and ontology of chemical entities of biological
-    interest \url{http://www.ebi.ac.uk/chebi/}}
+    interest \url{https://www.ebi.ac.uk/chebi/}}
  \item{'CHEMBL'}{a database of bioactive drug-like small molecules
     \url{https://www.ebi.ac.uk/chembldb/}}
  \item{'EMBL'}{now ENA, provides a comprehensive record of the world's
- nucleotide sequencing information \url{http://www.ebi.ac.uk/ena/}}
+ nucleotide sequencing information \url{https://www.ebi.ac.uk/ena/browser}}
  \item{'INTACT'}{provides a freely available, open
     source database system and analysis tools for molecular interaction data
-    \url{http://www.ebi.ac.uk/intact/}}
+    \url{https://www.ebi.ac.uk/intact/}}
  \item{'INTERPRO'}{provides functional analysis of proteins by classifying
     them into families and predicting domains and important sites
-    \url{http://www.ebi.ac.uk/interpro/}}
+    \url{https://www.ebi.ac.uk/interpro/}}
  \item{'OMIM'}{a comprehensive and authoritative compendium of human genes and
-    genetic phenotypes \url{http://www.ncbi.nlm.nih.gov/omim}}
+    genetic phenotypes \url{https://www.ncbi.nlm.nih.gov/omim}}
  \item{'PDB'}{European resource for the collection,
     organisation and dissemination of data on biological macromolecular
-    structures \url{http://www.ebi.ac.uk/pdbe/}}
+    structures \url{https://www.ebi.ac.uk/pdbe/}}
  \item{'UNIPROT'}{comprehensive and freely accessible
     resource of protein sequence and functional information
- \url{http://www.uniprot.org/}}
+ \url{https://www.uniprot.org/}}
  \item{'PRIDE'}{PRIDE Archive - proteomics data repository
  \url{https://www.ebi.ac.uk/pride/archive/}}}}
 

@@ -45,7 +45,7 @@ europepmc::epmc_hits_trend(query = "aspirin", period = 2010:2016)
 
 By default, synonym search is disabled and only Medline/PubMed index is searched.
 
-[^1]: <http://www.masalmon.eu/2017/05/14/evergreenreviewgraph/>
+[^1]: <https://masalmon.eu/2017/05/14/evergreenreviewgraph/>
 
 [^2]: Europe PMC Search Syntax: <https://europepmc.org/Help#mostofsearch>
 
@@ -145,7 +145,7 @@ ggplot(my_df, aes(factor(year), query_hits / refs_hits, group = query_id,
 
 Although this figure illustrates the relative popularity of citing code hosted by CRAN and GitHub in recent years, there are some limits that needs to be discussed. As said before, Europe PMC does not extract reference lists from every indexed publication. It furthermore remains open whether and to what extent software is cited outside the reference section, i.e. as footnote or in the acknowledgements. 
 
-Another problem of our query approach is that we did not consider that DOIs can also be used to cite software, a best-practice implemented by [Zenodo and GitHub](https://guides.github.com/activities/citable-code/) or the [The Journal of Open Source Software](http://joss.theoj.org/). 
+Another problem of our query approach is that we did not consider that DOIs can also be used to cite software, a best-practice implemented by [Zenodo and GitHub](https://guides.github.com/activities/citable-code/) or the [The Journal of Open Source Software](https://joss.theoj.org/). 
 
 Lastly, it actually remains unclear, which and what kind of software is cited how often. We could also not control if authors just cited the homepages and not a particular source code repository. One paper can also cite more than one code repository, which is also not represented in the trend graph. 
 

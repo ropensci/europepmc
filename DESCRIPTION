@@ -7,8 +7,8 @@ Authors@R: c(
            person("Maëlle", "Salmon", role = c("ctb")))
 License: GPL-3
 Date: 2021-08-20
-URL: https://docs.ropensci.org/europepmc, http://github.com/ropensci/europepmc/
-BugReports: http://github.com/ropensci/europepmc/issues
+URL: https://docs.ropensci.org/europepmc/, https://github.com/ropensci/europepmc/
+BugReports: https://github.com/ropensci/europepmc/issues
 Description: An R Client for the Europe PubMed Central RESTful Web Service
     (see <https://europepmc.org/RestfulWebService> for more information). It
     gives access to both metadata on life science literature and open access

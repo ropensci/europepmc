@@ -8,14 +8,14 @@ europepmc - R Interface to Europe PMC RESTful Web Service
 [![R build status](https://github.com/ropensci/europepmc/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/europepmc/actions)
 [![Build status](https://ci.appveyor.com/api/projects/status/f8xtpvhhr074lk44?svg=true)](https://ci.appveyor.com/project/sckott/europepmc)
 [![codecov.io](https://codecov.io/github/ropensci/europepmc/coverage.svg?branch=master)](https://codecov.io/github/ropensci/europepmc?branch=master)
-[![cran version](http://www.r-pkg.org/badges/version/europepmc)](https://cran.r-project.org/package=europepmc)
-[![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/europepmc)](https://github.com/metacran/cranlogs.app)
-[![](https://badges.ropensci.org/29_status.svg)](https://github.com/ropensci/onboarding/issues/29)
+[![cran version](https://www.r-pkg.org/badges/version/europepmc)](https://cran.r-project.org/package=europepmc)
+[![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/europepmc)](https://github.com/r-hub/cranlogs.app)
+[![](https://badges.ropensci.org/29_status.svg)](https://github.com/ropensci/software-review/issues/29)
 
 europepmc facilitates access to the [Europe PMC RESTful Web
-Service](http://europepmc.org/RestfulWebService). The client furthermore supports the [Europe PMC Annotations API](https://europepmc.org/AnnotationsApi) to retrieve text-mined concepts and terms per article.
+Service](https://europepmc.org/RestfulWebService). The client furthermore supports the [Europe PMC Annotations API](https://europepmc.org/AnnotationsApi) to retrieve text-mined concepts and terms per article.
 
-[Europe PMC](http://europepmc.org/) covers life science literature and
+[Europe PMC](https://europepmc.org/) covers life science literature and
 gives access to open access full texts. Europe
 PMC ingests all PubMed content and extends its index with other literature and patent sources.
 
@@ -68,20 +68,38 @@ Loading into R
 
 ```r
 library(europepmc)
-#> Error in library(europepmc): there is no package called 'europepmc'
 ```
 
 ## Search Europe PMC
 
 The search covers both metadata (e.g. abstracts or title) and full texts. To
 build your query, please refer to the comprehensive guidance on how to search
-Europe PMC: <http://europepmc.org/help>. Provide your query in the Europe
+Europe PMC: <https://europepmc.org/help>. Provide your query in the Europe
 PMC search syntax to `epmc_search()`. 
 
 
 ```r
 europepmc::epmc_search(query = '"2019-nCoV" OR "2019nCoV"')
-#> Error in loadNamespace(x): there is no package called 'europepmc'
+#> # A tibble: 100 × 29
+#>    id       source pmid     doi   title authorString journalTitle issue journalVolume
+#>    <chr>    <chr>  <chr>    <chr> <chr> <chr>        <chr>        <chr> <chr>        
+#>  1 33406042 MED    33406042 10.1… 2019… Xiao M, Liu… IEEE/ACM Tr… 4     18           
+#>  2 34059225 MED    34059225 10.1… Livi… Santillan-G… Med Intensi… 5     45           
+#>  3 34181072 MED    34181072 10.1… Self… Varghese JJ… Support Car… <NA>  <NA>         
+#>  4 34108756 MED    34108756 10.2… COVI… Gabarron E,… Bull World … 6     99           
+#>  5 33197230 MED    33197230 10.2… Sear… Lazarus JV,… J Med Inter… 11    22           
+#>  6 33181701 MED    33181701 10.1… The … Kim YJ, Qia… Medicine (B… 46    99           
+#>  7 34291001 MED    34291001 10.4… How … Moradi G, G… Med J Islam… <NA>  35           
+#>  8 33521188 MED    33521188 10.1… Tota… Chen AZ, Sh… Arthroplast… <NA>  8            
+#>  9 33009914 MED    33009914 10.1… A da… Zhu Z, Meng… Database (O… <NA>  2020         
+#> 10 32341597 MED    32341597 10.1… Obes… Carretero G… Rev Clin Es… 6     220          
+#> # … with 90 more rows, and 20 more variables: pubYear <chr>, journalIssn <chr>,
+#> #   pageInfo <chr>, pubType <chr>, isOpenAccess <chr>, inEPMC <chr>,
+#> #   inPMC <chr>, hasPDF <chr>, hasBook <chr>, hasSuppl <chr>,
+#> #   citedByCount <int>, hasReferences <chr>, hasTextMinedTerms <chr>,
+#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>,
+#> #   hasTMAccessionNumbers <chr>, firstIndexDate <chr>,
+#> #   firstPublicationDate <chr>, pmcid <chr>, versionNumber <int>
 ```
 
 Be aware that Europe PMC expands queries with MeSH synonyms by default. You can turn this behavior off using the `synonym = FALSE` parameter.
@@ -94,14 +112,26 @@ See vignette [Introducing europepmc, an R interface to Europe PMC RESTful API](h
 ## Creating proper review graphs with `epmc_hits_trend()`
 
 There is also a nice function allowing you to easily create review graphs like described in Maëlle
-Salmon's [blog post](http://www.masalmon.eu/2017/05/14/evergreenreviewgraph/):
+Salmon's [blog post](https://masalmon.eu/2017/05/14/evergreenreviewgraph/):
 
 
 ```r
 tt_oa <- europepmc::epmc_hits_trend("Malaria", period = 1995:2019, synonym = FALSE)
-#> Error in loadNamespace(x): there is no package called 'europepmc'
 tt_oa
-#> Error in eval(expr, envir, enclos): object 'tt_oa' not found
+#> # A tibble: 25 × 3
+#>     year all_hits query_hits
+#>    <int>    <dbl>      <dbl>
+#>  1  1995   449064       1495
+#>  2  1996   458526       1572
+#>  3  1997   456744       1873
+#>  4  1998   474613       1762
+#>  5  1999   493745       1947
+#>  6  2000   532019       2092
+#>  7  2001   545674       2187
+#>  8  2002   561425       2378
+#>  9  2003   588572       2612
+#> 10  2004   628141       2845
+#> # … with 15 more rows
 # we use ggplot2 for plotting the graph
 library(ggplot2)
 ggplot(tt_oa, aes(year, query_hits / all_hits)) + 
@@ -109,8 +139,9 @@ ggplot(tt_oa, aes(year, query_hits / all_hits)) +
   geom_line() +
   xlab("Year published") + 
   ylab("Proportion of articles on Malaria in Europe PMC")
-#> Error in ggplot(tt_oa, aes(year, query_hits/all_hits)): object 'tt_oa' not found
 ```
+
+![plot of chunk unnamed-chunk-4](man/figures/unnamed-chunk-4-1.png)
 
 For more info, read the vignette about creating literature review graphs:
 
@@ -140,7 +171,7 @@ The package maintainer, Chris Stubben (@cstubben), has also created an Shiny App
 ### Other R clients
 
 - use rOpenSci's `oai` to get metadata and full text via Europe PMC's OAI interface: <https://github.com/ropensci/oai>
-- use rOpenSci's `rentrez` to interact with [NCBI databases](http://www.ncbi.nlm.nih.gov/) such as [PubMed](http://www.ncbi.nlm.nih.gov/pubmed): <https://github.com/ropensci/rentrez>
+- use rOpenSci's `rentrez` to interact with [NCBI databases](https://www.ncbi.nlm.nih.gov/) such as PubMed: <https://github.com/ropensci/rentrez>
 - rOpenSci's `fulltext` package gives access to supplementary material of open access life-science publications in Europe PMC: <https://github.com/ropensci/fulltext>
 
 ## Meta
@@ -153,4 +184,4 @@ Please use the issue tracker for bug reporting and feature requests.
 
 ---
 
-[![rofooter](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
+[![rofooter](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
