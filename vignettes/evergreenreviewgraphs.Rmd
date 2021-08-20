@@ -74,7 +74,7 @@ Be careful with the interpretation of the slower growth in the last years becaus
 
 ### Use Case: Cited open source software in scholarly publications
 
-Another nice use case for trend graphs is to study how code and software repositories are cited in scientific literature. In recent years, it has become a good practice not only to re-use openly available software, but also to cite them. The [FORCE11 Software Citation Working Group](https://www.force11.org/group/software-citation-working-group) states:
+Another nice use case for trend graphs is to study how code and software repositories are cited in scientific literature. In recent years, it has become a good practice not only to re-use openly available software, but also to cite them. The FORCE11 Software Citation Working Group states:
 
 > In general, we believe that software should be cited on the same basis as any other research product such as a paper or book; that is, authors should cite the appropriate set of software products just as they cite the appropriate set of papers. [(doi:10.7717/peerj-cs.86)](https://doi.org/10.7717/peerj-cs.86)
 

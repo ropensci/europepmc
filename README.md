@@ -155,7 +155,7 @@ Check out the tidypmc package
 
 The package maintainer, Chris Stubben (@cstubben), has also created an Shiny App that allows you to search and browse Europe PMC:
 
-<https://cstubben.shinyapps.io/euPMC/>
+<https://github.com/cstubben/euPMC>
 
 
 
