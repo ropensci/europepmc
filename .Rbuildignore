@@ -9,3 +9,5 @@ cran-comments.md
 ^revdep$
 ^docs$
 ^\.github$
+^vignettes/evergreenreviewgraphs\.Rmd\.orig$
+^vignettes/introducing-europepmc\.Rmd\.orig$

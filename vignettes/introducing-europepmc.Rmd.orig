@@ -1,0 +1,187 @@
+---
+title: "Overview"
+author: "Najko Jahn"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Overview}
+  \usepackage[utf8]{inputenc}
+---
+
+
+```{r echo=FALSE}
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE,
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+## What is searched?
+
+[Europe PMC](https://europepmc.org/) is a repository of life science literature. Europe PMC ingests all PubMed content and extends its index with other literature and patent sources. 
+
+For more background on Europe PMC, see:
+
+<https://europepmc.org/About>
+
+Levchenko, M., Gou, Y., Graef, F., Hamelers, A., Huang, Z., Ide-Smith, M., … McEntyre, J. (2017). Europe PMC in 2017. Nucleic Acids Research, 46(D1), D1254–D1260. <https://doi.org/10.1093/nar/gkx1005>
+
+## How to search Europe PMC with R?
+
+This client supports the [Europe PMC search syntax](https://europepmc.org/Help#SSR). If you are unfamiliar with searching Europe PMC, check out the [Europe PMC query builder](https://europepmc.org/advancesearch), a very nice tool that helps you to build queries. To make use of Europe PMC queries in R, copy & paste the search string to the search functions of this package. 
+
+In the following, some examples demonstrate how to search Europe PMC with R.
+
+### Free search
+
+`empc_search()` is the main function to query Europe PMC. It searches both metadata and fulltexts. 
+
+
+```{r}
+library(europepmc)
+europepmc::epmc_search('malaria')
+```
+
+It is worth noting that Europe PMC expands queries with MeSH synonyms by default, a behavior which can be turned off with the `synonym` parameter. 
+
+```{r}
+europepmc::epmc_search('malaria', synonym = FALSE)
+```
+
+To get an exact match, use quotes as in the following example:
+
+```{r}
+europepmc::epmc_search('"Human malaria parasites"')
+```
+
+### Managing search results
+
+By default, 100 records are returned, but the number of results can be expanded or limited with the `limit` parameter. 
+
+
+```{r}
+europepmc::epmc_search('"Human malaria parasites"', limit = 10)
+```
+
+Results are sorted by relevance. Other options via the `sort` parameter are 
+
+- `sort = 'cited'` by the number of citation, descending from the most cited publication
+- `sort = 'date'` by date published starting with the most recent publication
+
+### Search by DOIs
+
+Sometimes, you would like to check, if articles are indexed in Europe PMC using DOI names, a widely used identifier for scholarly articles. Use `epmc_search_by_doi()` for this purpose.
+
+```{r}
+my_dois <- c(
+  "10.1159/000479962",
+  "10.1002/sctm.17-0081",
+  "10.1161/strokeaha.117.018077",
+  "10.1007/s12017-017-8447-9"
+  )
+europepmc::epmc_search_by_doi(doi = my_dois)
+```
+
+### Output options
+
+By default, a non-nested data frame printed as tibble is returned. 
+Other formats are `output = "id_list"` returning a list of IDs and sources, 
+and output = "'raw'"" for getting full metadata as list. 
+Please be aware that these lists can become very large.
+
+### More advanced options to search Europe PMC
+
+#### Author search
+
+Use the Europe PMC query syntax to search by author names:
+
+```{r}
+europepmc::epmc_search('AUTH:"Salmon Maelle"')
+```
+
+[Europe PMC Advanced Search](https://europepmc.org/advancesearch) has a auto-suggest field for author names if you feel unsure how the name you are searching for is indexed in Europe PMC. Using the Boolean `OR` operator allows searching for more than one spelling variant:
+
+```{r}
+q <- 'AUTH:"PÜHLER Alfred" OR AUTH:"Pühler Alfred Prof. Dr." OR AUTH:"Puhler A"'
+europepmc::epmc_search(q, limit = 1000)
+```
+
+There is a considerable overlap between common names. The integration of ORCID, a persistent author identifier, allows unambiguous search for personal publications in Europe PMC. For example, here's how to search for publications written by Bernd Weisshaar (ORCID: <https://orcid.org/0000-0002-7635-3473>) sorted by the number of times cited in descending order:
+
+```{r}
+europepmc::epmc_search('AUTHORID:"0000-0002-7635-3473"', limit = 200, sort = "cited")
+```
+
+#### Annotations 
+
+Europe PMC provides text-mined annotations contained in abstracts and open access full-text articles.
+
+These automatically identified concepts and term can be retrieved at the article-level:
+
+```{r}
+europepmc::epmc_annotations_by_id(c("MED:28585529", "PMC:PMC1664601"))
+```
+
+To obtain a list of articles where Europe PMC has text-minded annotations, either subset the resulting data.frame 
+
+```{r}
+tt <- epmc_search("malaria")
+tt[tt$hasTextMinedTerms == "Y" | tt$hasTMAccessionNumbers == "Y",]
+```
+
+or expand the query choosing an annotation type or provider from the [Europe PMC Advanced Search](https://europepmc.org/advancesearch) query builder.
+
+```{r}
+epmc_search('malaria AND (ANNOTATION_TYPE:"Cell") AND (ANNOTATION_PROVIDER:"Europe PMC")')
+```
+
+#### Data integrations
+
+Another nice feature of Europe PMC is to search for cross-references between Europe PMC to other databases. For instance, to get publications cited by
+entries in the [Protein Data bank in Europe](https://www.ebi.ac.uk/pdbe/node/1) published 2016:
+
+```{r}
+europepmc::epmc_search('(HAS_PDB:y) AND FIRST_PDATE:2016')
+```
+
+The following sources are supported
+
+- **CHEBI** a database and ontology of chemical entities of biological interest <https://www.ebi.ac.uk/chebi/>
+- **CHEMBL** a database of bioactive drug-like small molecules <https://www.ebi.ac.uk/chembldb/>
+- **EMBL** now ENA, provides a comprehensive record of the world's nucleotide sequencing information <https://www.ebi.ac.uk/ena/browser/>
+- **INTACT** provides a freely available, open source database system and analysis tools for molecular interaction data <https://www.ebi.ac.uk/intact/>
+- **INTERPRO** provides functional analysis of proteins by classifying them into families and predicting domains and important sites <https://www.ebi.ac.uk/interpro/>
+- **OMIM** a comprehensive and authoritative compendium of human genes and genetic phenotypes <https://www.omim.org/about>
+- **PDB** European resource for the collection, organisation and dissemination of data on biological macromolecular structures <https://www.ebi.ac.uk/pdbe/>
+- **UNIPROT** comprehensive and freely accessible resource of protein sequence and functional information <https://www.uniprot.org/>
+- **PRIDE** PRIDE Archive - proteomics data repository <https://www.ebi.ac.uk/pride/archive/>
+
+To retrieve metadata about these external database links, use `europepmc_epmc_db()`. 
+
+#### Citations and reference sections
+
+Europe PMC let us also obtain citation metadata and reference sections. For retrieving citation metadata per article, use
+
+```{r}
+europepmc::epmc_citations("9338777", limit = 500)
+```
+
+For reference section from an article:
+
+```{r}
+europepmc::epmc_refs("28632490", limit = 200)
+```
+
+#### Fulltext access
+
+Europe PMC gives not only access to metadata, but also to full-texts. Adding `AND (OPEN_ACCESS:y)` to your search query, returns only those articles where Europe PMC has also the fulltext.
+
+Fulltext as xml document can accessed via the PMID or the PubMed Central ID (PMCID):
+
+```{r}
+europepmc::epmc_ftxt("PMC3257301")
+```
+
