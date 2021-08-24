@@ -1,6 +1,7 @@
 context("testing epmc_search_by_doi")
 
 test_that("epmc_search_by_doi returns", {
+  skip_on_cran()
   a <- epmc_search_by_doi(doi = "10.1161/strokeaha.117.018077")
   my_dois <- c(
     "10.1159/000479962",
