@@ -23,7 +23,7 @@ Status: OK
 
 ---
 
-This submission implements the most recent API changes. This will fix current R checks problems. 
+This submission implements the most recent API changes. This will fix current R checks problems. It will also prevent warnings and errors on CRAN when internet resource should fail.
 
 Thanks!
 
