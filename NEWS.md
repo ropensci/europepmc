@@ -4,7 +4,8 @@
 
 Minor changes:
 
--  Allow full-text retrieval only by PMCID, thanks @ESPoppelaars
+- Allow full-text retrieval only by PMCID, thanks @ESPoppelaars
+- Bug fix: `epmc_search()` limit can now be larger than the expected number of results
 
 # europepmc 0.4
 
