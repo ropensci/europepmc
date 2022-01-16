@@ -31,7 +31,7 @@
 #'   annotations_by_id(c("MED:28585529", "PMC:PMC1664601"))
 #' }
 #' @export
-epmc_annotations_by_id <- function(ids = NULL){
+epmc_annotations_by_id <- function(ids = NULL) {
   # input validation
   stopifnot(!is.null(ids))
   # remove empty characters
@@ -50,21 +50,24 @@ epmc_annotations_by_id_ <- function(ids = NULL, .pb = NULL) {
       inherits(.pb, "Progress") && (.pb$i < .pb$n))
     .pb$tick()$print()
 
-  args <- list(
-    articleIds = ids,
-    format = "json"
-  )
-  req <- rebi_GET(path = c(anno_path(), "annotationsByArticleIds"), query = args)
+  args <- list(articleIds = ids,
+               format = "json")
+  req <-
+    rebi_GET(path = c(anno_path(), "annotationsByArticleIds"),
+             query = args)
   # API sometimes returns empty response when nothing is found,
   # but id is syntactically correct
-  if(length(req) != 0) {
-  out <- tibble::tibble(source = req[["source"]],
-                 ext_id = req[["extId"]],
-                 pmcid = req[["pmcid"]],
-                 annotations = req[["annotations"]])
-  tidyr::unnest(
-    tidyr::unnest(out, .data$annotations),
-    .data$tags)
+  if (length(req) != 0) {
+    out <- tibble::tibble(
+      source = req[["source"]],
+      ext_id = req[["extId"]],
+      pmcid = dplyr::if_else(
+        is.null(req[["pmcid"]]), NA_character_, req[["pmcid"]]
+        ),
+      annotations = req[["annotations"]]
+    )
+    tidyr::unnest(tidyr::unnest(out, .data$annotations),
+                  .data$tags)
   } else {
     NULL
   }
