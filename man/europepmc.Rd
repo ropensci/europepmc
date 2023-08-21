@@ -3,6 +3,7 @@
 \docType{package}
 \name{europepmc}
 \alias{europepmc}
+\alias{europepmc-package}
 \title{europepmc - an R client for the Europe PMC RESTful article API}
 \description{
 What is europepmc?:
@@ -20,7 +21,27 @@ retrieve reference sections and citations, text-mined terms or cross-links
 to other databases hosted by the European Bioinformatics Institute (EBI).
 
 For more information about Europe PMC, see their current paper:
-Levchenko, M., Gou, Y., Graef, F., Hamelers, A., Huang, Z., Ide-Smith, M.,
- … McEntyre, J. (2017). Europe PMC in 2017. Nucleic Acids Research, 46(D1),
- D1254–D1260. \doi{10.1093/nar/gkx1005}.
+Ferguson, C., Araújo, D., Faulk, L., Gou, Y., Hamelers, A., Huang, Z., 
+Ide-Smith, M., Levchenko, M., Marinos, N., Nambiar, R., Nassar, M., Parkin, M.,
+Pi, X., Rahman, F., Rogers, F., Roochun, Y., Saha, S., Selim, M., Shafique, Z.,
+… McEntyre, J. (2020). Europe PMC in 2020. Nucleic Acids Research, 49(D1), 
+D1507–D1514. \doi{10.1093/nar/gkaa994}.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://docs.ropensci.org/europepmc/}
+  \item \url{https://github.com/ropensci/europepmc/}
+  \item Report bugs at \url{https://github.com/ropensci/europepmc/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Najko Jahn \email{najko.jahn@gmail.com} [copyright holder]
+
+Other contributors:
+\itemize{
+  \item Maëlle Salmon [contributor]
+}
+
 }
