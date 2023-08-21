@@ -140,8 +140,7 @@ epmc_search('malaria AND (ANNOTATION_TYPE:"Cell") AND (ANNOTATION_PROVIDER:"Euro
 
 #### Data integrations
 
-Another nice feature of Europe PMC is to search for cross-references between Europe PMC to other databases. For instance, to get publications cited by
-entries in the [Protein Data bank in Europe](https://www.ebi.ac.uk/pdbe/node/1) published 2016:
+Another nice feature of Europe PMC is to search for cross-references between Europe PMC to other databases. For instance, to get publications cited by entries in the [Protein Data bank in Europe](https://www.ebi.ac.uk/pdbe/) published 2016:
 
 ```{r}
 europepmc::epmc_search('(HAS_PDB:y) AND FIRST_PDATE:2016')
