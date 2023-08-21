@@ -1,15 +1,15 @@
 #' Search Europe PMC publication database
 #'
 #' @description This is the main function to search Europe PMC RESTful Web
-#'   Service (\url{http://europepmc.org/RestfulWebService}). It fully supports
+#'   Service (\url{https://europepmc.org/RestfulWebService}). It fully supports
 #'   the comprehensive Europe PMC query language. Simply copy & paste your query
 #'   terms to R. To get familiar with the Europe PMC query syntax, check the
 #'   Advanced Search Query Builder \url{https://europepmc.org/advancesearch}.
 #'
-#' @seealso \url{http://europepmc.org/Help}
+#' @seealso \url{https://europepmc.org/Help}
 #'
 #' @param query character, search query. For more information on how to build a
-#'   search query, see \url{http://europepmc.org/Help}
+#'   search query, see \url{https://europepmc.org/Help}
 #' @param output character, what kind of output should be returned. One of
 #'   'parsed', 'id_list' or 'raw' As default, parsed key metadata will be
 #'   returned as data.frame. 'id_list' returns a list of IDs and sources. Use
@@ -159,7 +159,7 @@ epmc_search <- function(query = NULL,
 #' pages within the defined limit.
 #'
 #' @param query character, search query. For more information on how to
-#'   build a search query, see \url{http://europepmc.org/Help}
+#'   build a search query, see \url{https://europepmc.org/Help}
 #' @param output character, what kind of output should be returned. One of 'parsed', 'id_list'
 #'   or 'raw' As default, parsed key metadata will be returned as data.frame.
 #'   'id_list returns a list of IDs and sources.

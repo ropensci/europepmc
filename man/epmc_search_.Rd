@@ -14,7 +14,7 @@ epmc_search_(
 }
 \arguments{
 \item{query}{character, search query. For more information on how to
-build a search query, see \url{http://europepmc.org/Help}}
+build a search query, see \url{https://europepmc.org/Help}}
 
 \item{limit}{integer, limit the number of records you wish to retrieve.
 By default, 25 are returned.}

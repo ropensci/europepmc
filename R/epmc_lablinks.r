@@ -5,7 +5,7 @@
 #' providers, which can be selected through Europe PMC's advanced search,
 #' include Wikipedia, Dryad Digital Repository or other open services.
 #' For more information, see
-#' \url{http://europepmc.org/labslink}.
+#' \url{https://europepmc.org/labslink}.
 #'
 #' @param ext_id publication identifier
 #' @param data_src data source, by default Pubmed/MedLine index will be searched.

@@ -15,7 +15,7 @@ epmc_search(
 }
 \arguments{
 \item{query}{character, search query. For more information on how to build a
-search query, see \url{http://europepmc.org/Help}}
+search query, see \url{https://europepmc.org/Help}}
 
 \item{output}{character, what kind of output should be returned. One of
 'parsed', 'id_list' or 'raw' As default, parsed key metadata will be
@@ -42,7 +42,7 @@ tibble
 }
 \description{
 This is the main function to search Europe PMC RESTful Web
-  Service (\url{http://europepmc.org/RestfulWebService}). It fully supports
+  Service (\url{https://europepmc.org/RestfulWebService}). It fully supports
   the comprehensive Europe PMC query language. Simply copy & paste your query
   terms to R. To get familiar with the Europe PMC query syntax, check the
   Advanced Search Query Builder \url{https://europepmc.org/advancesearch}.
@@ -77,5 +77,5 @@ attr(my.data, "hit_count")
 }
 }
 \seealso{
-\url{http://europepmc.org/Help}
+\url{https://europepmc.org/Help}
 }

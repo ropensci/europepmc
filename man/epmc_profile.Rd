@@ -8,7 +8,7 @@ epmc_profile(query = NULL, synonym = TRUE)
 }
 \arguments{
 \item{query}{character, search query. For more information on how to
-build a search query, see \url{http://europepmc.org/Help}}
+build a search query, see \url{https://europepmc.org/Help}}
 
 \item{synonym}{logical, synonym search. If TRUE, synonym terms from MeSH
 terminology and the UniProt synonym list are queried, too. Enabled by
