@@ -1,3 +1,7 @@
+# europepmc 0.4.2
+
+- Minor fixes documentation
+
 # europepmc 0.4.1
 
 - Implement API version 6.6 support

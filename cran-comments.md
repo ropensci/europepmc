@@ -1,9 +1,9 @@
-# europepmc v 0.4.1
+# europepmc v 0.4.2
 
 ## Test environments
 
-* local OS X install (Platform: aarch64-apple-darwin20 (64-bit)), R version 4.1.0 (2021-05-18)
-* GitHub Actions initialized with `usethis::use_github_action("check-standard")`: windows-latest (release), macOS-latest (release), ubuntu-20.04 (release, devel)
+* local OS X install (Platform: aarch64-apple-darwin20 (64-bit)), R version 4.3.1 (2023-06-16)
+* GitHub Actions r-lib/actions check-standard: windows-latest (release), macOS-latest (release), ubuntu-20.04 (release, devel)
 * Win-Builder 
 
 ## R CMD check results
@@ -23,7 +23,7 @@ Status: OK
 
 ---
 
-This submission implements the most recent API changes. This will fix current R checks problems. It will also prevent warnings and errors on CRAN when the internet resource should fail.
+This submission fixes the package manual entry as requested by the CRAN team.
 
 Thanks!
 
