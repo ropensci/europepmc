@@ -35,7 +35,7 @@ links from Europe PMC to other webpages or tools. Current External Link
 providers, which can be selected through Europe PMC's advanced search,
 include Wikipedia, Dryad Digital Repository or the institutional repo of
 Bielefeld University. For more information, see
-\url{http://europepmc.org/labslink}.
+\url{https://europepmc.org/labslink}.
 }
 \examples{
    \dontrun{

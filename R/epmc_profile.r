@@ -4,7 +4,7 @@
 #'   and breaks it down to the various publication types, data sources, and
 #'   subsets Europe PMC provides.
 #' @param query character, search query. For more information on how to
-#'   build a search query, see \url{http://europepmc.org/Help}
+#'   build a search query, see \url{https://europepmc.org/Help}
 #' @param synonym logical, synonym search. If TRUE, synonym terms from MeSH
 #'  terminology and the UniProt synonym list are queried, too. Enabled by
 #'  default.

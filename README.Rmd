@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 
 [![R build status](https://github.com/ropensci/europepmc/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/europepmc/actions)
 [![Build status](https://ci.appveyor.com/api/projects/status/f8xtpvhhr074lk44?svg=true)](https://ci.appveyor.com/project/sckott/europepmc)
-[![codecov.io](https://codecov.io/github/ropensci/europepmc/coverage.svg?branch=master)](https://codecov.io/github/ropensci/europepmc?branch=master)
+[![codecov.io](https://codecov.io/github/ropensci/europepmc/coverage.svg?branch=master)](https://app.codecov.io/github/ropensci/europepmc?branch=master)
 [![cran version](https://www.r-pkg.org/badges/version/europepmc)](https://cran.r-project.org/package=europepmc)
 [![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/europepmc)](https://github.com/r-hub/cranlogs.app)
 [![](https://badges.ropensci.org/29_status.svg)](https://github.com/ropensci/software-review/issues/29)
@@ -30,7 +30,8 @@ For more infos on Europe PMC, see:
 
 <https://europepmc.org/About>
 
-Levchenko, M., Gou, Y., Graef, F., Hamelers, A., Huang, Z., Ide-Smith, M., … McEntyre, J. (2017). Europe PMC in 2017. Nucleic Acids Research, 46(D1), D1254–D1260. <https://doi.org/10.1093/nar/gkx1005>
+Ferguson, C., Araújo, D., Faulk, L., Gou, Y., Hamelers, A., Huang, Z., 
+Ide-Smith, M., Levchenko, M., Marinos, N., Nambiar, R., Nassar, M., Parkin, M., Pi, X., Rahman, F., Rogers, F., Roochun, Y., Saha, S., Selim, M., Shafique, Z., … McEntyre, J. (2020). Europe PMC in 2020. Nucleic Acids Research, 49(D1), D1507–D1514. <https://doi.org/10.1093/nar/gkaa994>.
 
 ## Implemented API methods
 
@@ -140,7 +141,7 @@ The package maintainer, Chris Stubben (@cstubben), has also created an Shiny App
 
 - use rOpenSci's `oai` to get metadata and full text via Europe PMC's OAI interface: <https://github.com/ropensci/oai>
 - use rOpenSci's `rentrez` to interact with [NCBI databases](https://www.ncbi.nlm.nih.gov/) such as PubMed: <https://github.com/ropensci/rentrez>
-- rOpenSci's `fulltext` package gives access to supplementary material of open access life-science publications in Europe PMC: <https://github.com/ropensci/fulltext>
+- rOpenSci's `fulltext` package gives access to supplementary material of open access life-science publications in Europe PMC: <https://github.com/ropensci-archive/fulltext>
 
 ## Meta
 

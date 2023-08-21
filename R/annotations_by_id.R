@@ -61,13 +61,13 @@ epmc_annotations_by_id_ <- function(ids = NULL, .pb = NULL) {
     out <- tibble::tibble(
       source = req[["source"]],
       ext_id = req[["extId"]],
-      pmcid = dplyr::if_else(
+      pmcid = ifelse(
         is.null(req[["pmcid"]]), NA_character_, req[["pmcid"]]
         ),
       annotations = req[["annotations"]]
     )
-    tidyr::unnest(tidyr::unnest(out, .data$annotations),
-                  .data$tags)
+    tidyr::unnest(tidyr::unnest(out, "annotations"),
+                  "tags")
   } else {
     NULL
   }

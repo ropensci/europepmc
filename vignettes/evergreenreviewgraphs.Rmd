@@ -1,7 +1,7 @@
 ---
 title: "Making trend graphs"
 author: "Najko Jahn"
-date: "2021-08-24"
+date: "2023-08-21"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
@@ -11,29 +11,35 @@ vignette: >
 
 
 
-Trend graphs in literature reviews show the development of concepts in scholarly communication. Some trend graphs, however, don't acknowledge that the number of scholarly publications is growing each year, but simply display the absolute number of hits they have found for a given concept. Noam Ross called these misleading graphs evergreen review graphs because of their enduring popularity in  review papers. Examples can be found on Twitter under the Hashtag [#evergreenreviewgraph](https://twitter.com/hashtag/evergreenreviewgraph).
+Trend graphs in literature reviews show the development of concepts in scholarly communication. Some trend graphs, however, don't acknowledge that the number of scholarly publications is growing each year, but simply display the absolute number of hits they have found for a given concept. Noam Ross called these misleading graphs evergreen review graphs because of their enduring popularity in  review papers.
 
-This vignette guides you how to make proper trend graphs when reviewing Europe PMC literature. In these graphs, the number of hits found is divided by the total number of records indexed in Europe PMC for a given search query. 
+This vignette guides you how to make proper trend graphs when reviewing Europe PMC literature. In these graphs, the number of hits found is divided by the total number of records indexed in Europe PMC for a given search query.
 
 ## Preparing proper review graphs with `epmc_hits_trend()`
 
-We use `epmc_hits_trend()` function, which was firstly introduced in Maëlle Salmon's blog post about "How not to make an evergreen review graph"[^1]. The function takes a query in the Europe PMC search syntax[^2] and the period of years over which to perform the search as arguments, and returns a data-frame with year, total number of hits (`all_hits`) and number of hits for the query (`query_hits`).   
+We use `epmc_hits_trend()` function, which was firstly introduced in Maëlle Salmon's blog post about "How not to make an evergreen review graph"[^1]. The function takes a query in the Europe PMC search syntax[^2] and the period of years over which to perform the search as arguments, and returns a data-frame with year, total number of hits (`all_hits`) and number of hits for the query (`query_hits`).
 
 
 
 ```r
 library(europepmc)
-europepmc::epmc_hits_trend(query = "aspirin", period = 2010:2016)
-#> # A tibble: 7 × 3
-#>    year all_hits query_hits
-#>   <int>    <dbl>      <dbl>
-#> 1  2010   851021       7219
-#> 2  2011   904618       7888
-#> 3  2012   945899       9054
-#> 4  2013  1003845      10127
-#> 5  2014  1055435      10895
-#> 6  2015  1095859      11750
-#> 7  2016  1116157      12099
+europepmc::epmc_hits_trend(query = "aspirin", period = 2010:2022)
+#> # A tibble: 13 × 3
+#>     year all_hits query_hits
+#>    <int>    <dbl>      <dbl>
+#>  1  2010   851063       5507
+#>  2  2011   904794       6003
+#>  3  2012   946175       6833
+#>  4  2013  1004386       7652
+#>  5  2014  1055159       8210
+#>  6  2015  1096370       8779
+#>  7  2016  1117117       8950
+#>  8  2017  1138383       9394
+#>  9  2018  1180056      10103
+#> 10  2019  1243536      10666
+#> 11  2020  1450476      14294
+#> 12  2021  1549953      16643
+#> 13  2022  1542398      15975
 ```
 
 By default, synonym search is disabled and only Medline/PubMed index is searched.
@@ -42,40 +48,45 @@ By default, synonym search is disabled and only Medline/PubMed index is searched
 
 [^2]: Europe PMC Search Syntax: <https://europepmc.org/Help#mostofsearch>
 
-## Use Cases 
+## Use Cases
 
 ### Use Case: Growth of Open Access Literature
 
-There is a growing interest in knowing the proportion of open access to scholarly literature. Europe PMC allows searching for open access content with the [`OPEN_ACCESS:Y` parameter](https://europepmc.org/search?query=OPEN_ACCESS:Y&page=1&sortby=Relevance). At the moment, Europe PMC contains 3,740,002 open access full-texts. Let's see how they are relatively distributed over the period 1995 - 2016.
+There is a growing interest in knowing the proportion of open access to scholarly literature. Europe PMC allows searching for open access content with the [`OPEN_ACCESS:Y` parameter](https://europepmc.org/search?query=OPEN_ACCESS:Y&page=1&sortby=Relevance). At the moment, Europe PMC contains 5,509,277 open access full-texts. Let's see how they are relatively distributed over the period 2010 - 2022.
 
 
 ```r
-tt_oa <- europepmc::epmc_hits_trend("OPEN_ACCESS:Y", period = 1995:2016, synonym = FALSE)
+tt_oa <- europepmc::epmc_hits_trend("OPEN_ACCESS:Y", period = 2010:2022, synonym = FALSE)
 tt_oa
-#> # A tibble: 22 × 3
+#> # A tibble: 13 × 3
 #>     year all_hits query_hits
 #>    <int>    <dbl>      <dbl>
-#>  1  1995   449064       3337
-#>  2  1996   458526       3508
-#>  3  1997   456744       3665
-#>  4  1998   474613       3836
-#>  5  1999   493745       3918
-#>  6  2000   532019       4328
-#>  7  2001   545674       5479
-#>  8  2002   561426       5894
-#>  9  2003   588572       7148
-#> 10  2004   628141       9795
-#> # … with 12 more rows
+#>  1  2010   851063      78677
+#>  2  2011   904794     105675
+#>  3  2012   946175     140016
+#>  4  2013  1004386     176541
+#>  5  2014  1055159     212039
+#>  6  2015  1096370     244234
+#>  7  2016  1117117     273364
+#>  8  2017  1138383     312717
+#>  9  2018  1180056     352067
+#> 10  2019  1243536     405927
+#> 11  2020  1450476     585116
+#> 12  2021  1549953     714017
+#> 13  2022  1542398     790600
 # we use ggplot2 for plotting the graph
 library(ggplot2)
-ggplot(tt_oa, aes(year, query_hits / all_hits)) + 
-  geom_point() + 
+ggplot(tt_oa, aes(factor(year), query_hits / all_hits, group = 1)) +
+  geom_point() +
   geom_line() +
-  xlab("Year published") + 
+  xlab("Year published") +
   ylab("Proportion of OA full-texts in Europe PMC")
 ```
 
-<img src="../vignettes/oa_pmc-1.png" title="oa in europe pmc" alt="oa in europe pmc" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="oa_pmc-1.png" alt="oa in europe pmc"  />
+<p class="caption">plot of chunk oa_pmc</p>
+</div>
 
 Be careful with the interpretation of the slower growth in the last years because there are several ways how open access content is added to Europe PMC including the digitalization of back issues.[^3]
 
@@ -105,7 +116,7 @@ Let's prepare the queries for links to the above mentioned code hosting services
 
 
 ```r
-dvcs <- c("code.google.com", "github.com", 
+dvcs <- c("code.google.com", "github.com",
           "sourceforge.net", "bitbucket.org", "cran.r-project.org")
 # make queries including reference section
 dvcs_query <- paste0('REF:"', dvcs, '"')
@@ -118,47 +129,47 @@ and get publications for which Europe PMC gives access to reference lists for no
 library(dplyr)
 my_df <- purrr::map_df(dvcs_query, function(x) {
   # get number of publications with indexed reference lists
-  refs_hits <- 
-    europepmc::epmc_hits_trend("has_reflist:y", period = 2009:2016, synonym = FALSE)$query_hits
-  # get hit count querying for code repositories 
-  europepmc::epmc_hits_trend(x, period = 2009:2016, synonym = FALSE) %>% 
+  refs_hits <-
+    europepmc::epmc_hits_trend("has_reflist:y", period = 2009:2022, synonym = FALSE)$query_hits
+  # get hit count querying for code repositories
+  europepmc::epmc_hits_trend(x, period = 2009:2022, synonym = FALSE) %>%
     dplyr::mutate(query_id = x) %>%
     dplyr::mutate(refs_hits = refs_hits) %>%
     dplyr::select(year, all_hits, refs_hits, query_hits, query_id)
-}) 
+})
 my_df
-#> # A tibble: 40 × 5
+#> # A tibble: 70 × 5
 #>     year all_hits refs_hits query_hits query_id                 
 #>    <int>    <dbl>     <dbl>      <dbl> <chr>                    
-#>  1  2009   793068    555477         13 "REF:\"code.google.com\""
-#>  2  2010   851021    540514         40 "REF:\"code.google.com\""
-#>  3  2011   904618    603060         65 "REF:\"code.google.com\""
-#>  4  2012   945899    635448         92 "REF:\"code.google.com\""
-#>  5  2013  1003845    761512        135 "REF:\"code.google.com\""
-#>  6  2014  1055435    797039        140 "REF:\"code.google.com\""
-#>  7  2015  1095859    779562        117 "REF:\"code.google.com\""
-#>  8  2016  1116157    782630         65 "REF:\"code.google.com\""
-#>  9  2009   793068    555477          2 "REF:\"github.com\""     
-#> 10  2010   851021    540514         10 "REF:\"github.com\""     
-#> # … with 30 more rows
+#>  1  2009   793211    555994         13 "REF:\"code.google.com\""
+#>  2  2010   851063    541440         40 "REF:\"code.google.com\""
+#>  3  2011   904794    604311         65 "REF:\"code.google.com\""
+#>  4  2012   946175    636818         92 "REF:\"code.google.com\""
+#>  5  2013  1004386    763699        135 "REF:\"code.google.com\""
+#>  6  2014  1055159    797691        140 "REF:\"code.google.com\""
+#>  7  2015  1096370    780509        117 "REF:\"code.google.com\""
+#>  8  2016  1117117    783865         65 "REF:\"code.google.com\""
+#>  9  2017  1138383    819481         52 "REF:\"code.google.com\""
+#> 10  2018  1180056    757547         29 "REF:\"code.google.com\""
+#> # ℹ 60 more rows
 
 ### total
-hits_summary <- my_df %>% 
-  group_by(query_id) %>% 
-  summarise(all = sum(query_hits)) %>% 
+hits_summary <- my_df %>%
+  group_by(query_id) %>%
+  summarise(all = sum(query_hits)) %>%
   arrange(desc(all))
 hits_summary
 #> # A tibble: 5 × 2
 #>   query_id                       all
 #>   <chr>                        <dbl>
-#> 1 "REF:\"cran.r-project.org\""  8221
-#> 2 "REF:\"github.com\""          1609
-#> 3 "REF:\"code.google.com\""      667
-#> 4 "REF:\"sourceforge.net\""      643
-#> 5 "REF:\"bitbucket.org\""         94
+#> 1 "REF:\"cran.r-project.org\"" 44677
+#> 2 "REF:\"github.com\""         28886
+#> 3 "REF:\"sourceforge.net\""     1777
+#> 4 "REF:\"code.google.com\""      896
+#> 5 "REF:\"bitbucket.org\""        440
 ```
 
-The proportion of papers where Europe PMC was able to make the cited literature available was 70 for the period 2009-2016. There also seems to be a time-lag between indexing reference lists because the absolute number of publication was decreasing over the years. This is presumably because Europe PMC also includes delayed open access content, i.e. content which is not added immediately with the original publication.[^4]
+The proportion of papers where Europe PMC was able to make the cited literature available was 63 for the period 2009-2022. There also seems to be a time-lag between indexing reference lists because the absolute number of publication was decreasing over the years. This is presumably because Europe PMC also includes delayed open access content, i.e. content which is not added immediately with the original publication.[^4]
 
 [^4]: Ebd.
 
@@ -167,7 +178,7 @@ Now, let's make a proper review graph normalizing our query results with the num
 
 ```r
 library(ggplot2)
-ggplot(my_df, aes(factor(year), query_hits / refs_hits, group = query_id, 
+ggplot(my_df, aes(factor(year), query_hits / refs_hits, group = query_id,
                   color = query_id)) +
   geom_line(size = 1, alpha = 0.8) +
   geom_point(size = 2) +
@@ -176,21 +187,24 @@ ggplot(my_df, aes(factor(year), query_hits / refs_hits, group = query_id,
   ylab("Proportion of articles in Europe PMC")
 ```
 
-<img src="../vignettes/software_lit-1.png" title="literature links to software in europe pmc" alt="literature links to software in europe pmc" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="software_lit-1.png" alt="literature links to software in europe pmc"  />
+<p class="caption">plot of chunk software_lit</p>
+</div>
 
 #### Discussion and Conclusion
 
-Although this figure illustrates the relative popularity of citing code hosted by CRAN and GitHub in recent years, there are some limits that needs to be discussed. As said before, Europe PMC does not extract reference lists from every indexed publication. It furthermore remains open whether and to what extent software is cited outside the reference section, i.e. as footnote or in the acknowledgements. 
+Although this figure illustrates the relative popularity of citing code hosted by CRAN and GitHub in recent years, there are some limits that needs to be discussed. As said before, Europe PMC does not extract reference lists from every indexed publication. It furthermore remains open whether and to what extent software is cited outside the reference section, i.e. as footnote or in the acknowledgements.
 
-Another problem of our query approach is that we did not consider that DOIs can also be used to cite software, a best-practice implemented by [Zenodo and GitHub](https://guides.github.com/activities/citable-code/) or the [The Journal of Open Source Software](https://joss.theoj.org/). 
+Another problem of our query approach is that we did not consider that DOIs can also be used to cite software, a best-practice implemented by [Zenodo and GitHub](https://docs.github.com/repositories/archiving-a-github-repository/referencing-and-citing-content) or the [The Journal of Open Source Software](https://joss.theoj.org/).
 
-Lastly, it actually remains unclear, which and what kind of software is cited how often. We could also not control if authors just cited the homepages and not a particular source code repository. One paper can also cite more than one code repository, which is also not represented in the trend graph. 
+Lastly, it actually remains unclear, which and what kind of software is cited how often. We could also not control if authors just cited the homepages and not a particular source code repository. One paper can also cite more than one code repository, which is also not represented in the trend graph.
 
 To conclude, a proper trend graph on the extent of software citation can only be the start for a more sophisticated approach that mines links to software repositories from scientific literature and fetches metadata about these code repositories from the hosting facilities.
 
 ## Conclusion
 
-This vignette presented first steps on how to make trend graphs with `europepmc`. As our use-cases suggest, please carefully consider how you queried Europe PMC in the interpretation of your graph. Although trend graphs are a nice way to illustrate the development of certain concepts in scientific literature or recent trends in scholarly communication, they must be put in context in order to become meaningful. 
+This vignette presented first steps on how to make trend graphs with `europepmc`. As our use-cases suggest, please carefully consider how you queried Europe PMC in the interpretation of your graph. Although trend graphs are a nice way to illustrate the development of certain concepts in scientific literature or recent trends in scholarly communication, they must be put in context in order to become meaningful.
 
 ## Acknowledgements
 
