@@ -127,7 +127,7 @@ parse_aut <- function(res) {
     out <- tibble::tibble()
       }
   if("authorAffiliationDetailsList.authorAffiliation" %in% colnames(out))
-    out <- tidyr::unnest(out, cols = c(.data$authorAffiliationDetailsList.authorAffiliation))
+    out <- tidyr::unnest(out, cols = c("authorAffiliationDetailsList.authorAffiliation"))
   return(out)
 }
 
