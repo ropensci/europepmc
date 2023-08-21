@@ -1,6 +1,6 @@
 Package: europepmc
 Title: R Interface to the Europe PubMed Central RESTful Web Service
-Version: 0.4.1.09
+Version: 0.4.2
 Authors@R: c(
            person("Najko", "Jahn", email = "najko.jahn@gmail.com",
            role = c("aut", "cre", "cph")),
@@ -36,7 +36,7 @@ Imports:
     tibble,
     tidyr,
     rlang
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.3
 Suggests:
     testthat,
     knitr,
