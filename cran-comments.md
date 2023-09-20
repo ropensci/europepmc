@@ -23,7 +23,8 @@ Status: OK
 
 ---
 
-This submission fixes the package manual entry as requested by the CRAN team.
+This submission fixes the problems shown on
+<https://cran.r-project.org/web/checks/check_results_europepmc.html>
 
 Thanks!
 

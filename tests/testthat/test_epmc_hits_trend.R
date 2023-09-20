@@ -36,6 +36,8 @@ test_that("epmc_hits_trend fails correctly", {
 })
 
 test_that("epmc_hits_trend synonym search works correctly", {
+  skip_on_cran()
+
   a <- epmc_hits_trend('malaria', period = 2012:2016, synonym = FALSE)
   b <- epmc_hits_trend('malaria', period = 2012:2016, synonym = TRUE)
 

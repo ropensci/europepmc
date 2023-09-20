@@ -1,7 +1,7 @@
 ---
 title: "Making trend graphs"
 author: "Najko Jahn"
-date: "2023-08-21"
+date: "2023-09-20"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
@@ -27,19 +27,19 @@ europepmc::epmc_hits_trend(query = "aspirin", period = 2010:2022)
 #> # A tibble: 13 × 3
 #>     year all_hits query_hits
 #>    <int>    <dbl>      <dbl>
-#>  1  2010   851063       5507
-#>  2  2011   904794       6003
-#>  3  2012   946175       6833
-#>  4  2013  1004386       7652
-#>  5  2014  1055159       8210
-#>  6  2015  1096370       8779
-#>  7  2016  1117117       8950
-#>  8  2017  1138383       9394
-#>  9  2018  1180056      10103
-#> 10  2019  1243536      10666
-#> 11  2020  1450476      14294
-#> 12  2021  1549953      16643
-#> 13  2022  1542398      15975
+#>  1  2010   851106       5513
+#>  2  2011   904847       6009
+#>  3  2012   946206       6840
+#>  4  2013  1004432       7658
+#>  5  2014  1055201       8226
+#>  6  2015  1096429       8789
+#>  7  2016  1117164       8965
+#>  8  2017  1138419       9411
+#>  9  2018  1180115      10116
+#> 10  2019  1243574      10675
+#> 11  2020  1450562      14358
+#> 12  2021  1550459      16755
+#> 13  2022  1542959      16214
 ```
 
 By default, synonym search is disabled and only Medline/PubMed index is searched.
@@ -52,7 +52,7 @@ By default, synonym search is disabled and only Medline/PubMed index is searched
 
 ### Use Case: Growth of Open Access Literature
 
-There is a growing interest in knowing the proportion of open access to scholarly literature. Europe PMC allows searching for open access content with the [`OPEN_ACCESS:Y` parameter](https://europepmc.org/search?query=OPEN_ACCESS:Y&page=1&sortby=Relevance). At the moment, Europe PMC contains 5,509,277 open access full-texts. Let's see how they are relatively distributed over the period 2010 - 2022.
+There is a growing interest in knowing the proportion of open access to scholarly literature. Europe PMC allows searching for open access content with the [`OPEN_ACCESS:Y` parameter](https://europepmc.org/search?query=OPEN_ACCESS:Y&page=1&sortby=Relevance). At the moment, Europe PMC contains 5,641,836 open access full-texts. Let's see how they are relatively distributed over the period 2010 - 2022.
 
 
 ```r
@@ -61,19 +61,19 @@ tt_oa
 #> # A tibble: 13 × 3
 #>     year all_hits query_hits
 #>    <int>    <dbl>      <dbl>
-#>  1  2010   851063      78677
-#>  2  2011   904794     105675
-#>  3  2012   946175     140016
-#>  4  2013  1004386     176541
-#>  5  2014  1055159     212039
-#>  6  2015  1096370     244234
-#>  7  2016  1117117     273364
-#>  8  2017  1138383     312717
-#>  9  2018  1180056     352067
-#> 10  2019  1243536     405927
-#> 11  2020  1450476     585116
-#> 12  2021  1549953     714017
-#> 13  2022  1542398     790600
+#>  1  2010   851106      78743
+#>  2  2011   904847     105737
+#>  3  2012   946206     140082
+#>  4  2013  1004432     176617
+#>  5  2014  1055201     212221
+#>  6  2015  1096429     244342
+#>  7  2016  1117164     273575
+#>  8  2017  1138419     312877
+#>  9  2018  1180115     352369
+#> 10  2019  1243574     406182
+#> 11  2020  1450562     585074
+#> 12  2021  1550459     714651
+#> 13  2022  1542959     794387
 # we use ggplot2 for plotting the graph
 library(ggplot2)
 ggplot(tt_oa, aes(factor(year), query_hits / all_hits, group = 1)) +
@@ -141,16 +141,16 @@ my_df
 #> # A tibble: 70 × 5
 #>     year all_hits refs_hits query_hits query_id                 
 #>    <int>    <dbl>     <dbl>      <dbl> <chr>                    
-#>  1  2009   793211    555994         13 "REF:\"code.google.com\""
-#>  2  2010   851063    541440         40 "REF:\"code.google.com\""
-#>  3  2011   904794    604311         65 "REF:\"code.google.com\""
-#>  4  2012   946175    636818         92 "REF:\"code.google.com\""
-#>  5  2013  1004386    763699        135 "REF:\"code.google.com\""
-#>  6  2014  1055159    797691        140 "REF:\"code.google.com\""
-#>  7  2015  1096370    780509        117 "REF:\"code.google.com\""
-#>  8  2016  1117117    783865         65 "REF:\"code.google.com\""
-#>  9  2017  1138383    819481         52 "REF:\"code.google.com\""
-#> 10  2018  1180056    757547         29 "REF:\"code.google.com\""
+#>  1  2009   793210    556002         13 "REF:\"code.google.com\""
+#>  2  2010   851106    541447         40 "REF:\"code.google.com\""
+#>  3  2011   904847    604315         65 "REF:\"code.google.com\""
+#>  4  2012   946206    636843         92 "REF:\"code.google.com\""
+#>  5  2013  1004432    763720        135 "REF:\"code.google.com\""
+#>  6  2014  1055201    797730        140 "REF:\"code.google.com\""
+#>  7  2015  1096429    780777        117 "REF:\"code.google.com\""
+#>  8  2016  1117164    784272         65 "REF:\"code.google.com\""
+#>  9  2017  1138419    819735         52 "REF:\"code.google.com\""
+#> 10  2018  1180115    757852         29 "REF:\"code.google.com\""
 #> # ℹ 60 more rows
 
 ### total
@@ -162,14 +162,14 @@ hits_summary
 #> # A tibble: 5 × 2
 #>   query_id                       all
 #>   <chr>                        <dbl>
-#> 1 "REF:\"cran.r-project.org\"" 44677
-#> 2 "REF:\"github.com\""         28886
-#> 3 "REF:\"sourceforge.net\""     1777
-#> 4 "REF:\"code.google.com\""      896
-#> 5 "REF:\"bitbucket.org\""        440
+#> 1 "REF:\"cran.r-project.org\"" 44864
+#> 2 "REF:\"github.com\""         29009
+#> 3 "REF:\"sourceforge.net\""     1779
+#> 4 "REF:\"code.google.com\""      897
+#> 5 "REF:\"bitbucket.org\""        442
 ```
 
-The proportion of papers where Europe PMC was able to make the cited literature available was 63 for the period 2009-2022. There also seems to be a time-lag between indexing reference lists because the absolute number of publication was decreasing over the years. This is presumably because Europe PMC also includes delayed open access content, i.e. content which is not added immediately with the original publication.[^4]
+The proportion of papers where Europe PMC was able to make the cited literature available was 64 for the period 2009-2022. There also seems to be a time-lag between indexing reference lists because the absolute number of publication was decreasing over the years. This is presumably because Europe PMC also includes delayed open access content, i.e. content which is not added immediately with the original publication.[^4]
 
 [^4]: Ebd.
 

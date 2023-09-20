@@ -13,7 +13,6 @@ knitr::opts_chunk$set(
 
 
 [![R build status](https://github.com/ropensci/europepmc/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/europepmc/actions)
-[![Build status](https://ci.appveyor.com/api/projects/status/f8xtpvhhr074lk44?svg=true)](https://ci.appveyor.com/project/sckott/europepmc)
 [![codecov.io](https://codecov.io/github/ropensci/europepmc/coverage.svg?branch=master)](https://app.codecov.io/github/ropensci/europepmc?branch=master)
 [![cran version](https://www.r-pkg.org/badges/version/europepmc)](https://cran.r-project.org/package=europepmc)
 [![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/europepmc)](https://github.com/r-hub/cranlogs.app)
@@ -100,7 +99,7 @@ See vignette [Introducing europepmc, an R interface to Europe PMC RESTful API](h
 There is also a nice function allowing you to easily create review graphs like described in Maëlle
 Salmon's [blog post](https://masalmon.eu/2017/05/14/evergreenreviewgraph/):
 
-```{r, fig.path="man/figures/"}
+```{r, fig.path="man/figures/", fig.retina = 1}
 tt_oa <- europepmc::epmc_hits_trend("Malaria", period = 1995:2019, synonym = FALSE)
 tt_oa
 # we use ggplot2 for plotting the graph
