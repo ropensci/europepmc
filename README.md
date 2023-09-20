@@ -6,7 +6,6 @@ europepmc - R Interface to Europe PMC RESTful Web Service
 
 
 [![R build status](https://github.com/ropensci/europepmc/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/europepmc/actions)
-[![Build status](https://ci.appveyor.com/api/projects/status/f8xtpvhhr074lk44?svg=true)](https://ci.appveyor.com/project/sckott/europepmc)
 [![codecov.io](https://codecov.io/github/ropensci/europepmc/coverage.svg?branch=master)](https://app.codecov.io/github/ropensci/europepmc?branch=master)
 [![cran version](https://www.r-pkg.org/badges/version/europepmc)](https://cran.r-project.org/package=europepmc)
 [![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/europepmc)](https://github.com/r-hub/cranlogs.app)
@@ -82,25 +81,24 @@ PMC search syntax to `epmc_search()`.
 ```r
 europepmc::epmc_search(query = '"2019-nCoV" OR "2019nCoV"')
 #> # A tibble: 100 × 29
-#>    id        source pmid     pmcid   doi   title authorString journalTitle issue
-#>    <chr>     <chr>  <chr>    <chr>   <chr> <chr> <chr>        <chr>        <chr>
-#>  1 36754560  MED    36754560 PMC992… 10.1… Inno… Yerlikaya S… BMJ Open     2    
-#>  2 37400836  MED    37400836 PMC103… 10.1… Effe… Ebrahimi T,… BMC Oral He… 1    
-#>  3 37223279  MED    37223279 PMC101… 10.1… Bill… Lamsal R, R… Data Brief   <NA> 
-#>  4 36727245  MED    36727245 PMC101… 10.1… Vasc… Morrissey E… JBI Evid Sy… 5    
-#>  5 37211453  MED    37211453 PMC101… 10.1… Safe… Smith K, He… Vaccine      26   
-#>  6 PPR525786 PPR    <NA>     <NA>    10.1… The … Alihsan B, … <NA>         <NA> 
-#>  7 PPR621660 PPR    <NA>     <NA>    10.1… Safe… Smith K, He… <NA>         <NA> 
-#>  8 36679914  MED    36679914 PMC986… 10.3… The … Cherif YYS,… Vaccines (B… 1    
-#>  9 PPR689808 PPR    <NA>     <NA>    10.2… Perf… MOUNA L, BO… <NA>         <NA> 
-#> 10 37258070  MED    37258070 PMC102… 10.1… Comp… Hui L, Garn… BMJ Open     5    
+#>    id        source pmid     pmcid doi   title authorString journalTitle issue journalVolume
+#>    <chr>     <chr>  <chr>    <chr> <chr> <chr> <chr>        <chr>        <chr> <chr>        
+#>  1 36754560  MED    36754560 PMC9… 10.1… Inno… Yerlikaya S… BMJ Open     2     13           
+#>  2 37400836  MED    37400836 PMC1… 10.1… Effe… Ebrahimi T,… BMC Oral He… 1     23           
+#>  3 37223279  MED    37223279 PMC1… 10.1… Bill… Lamsal R, R… Data Brief   <NA>  48           
+#>  4 36727245  MED    36727245 PMC1… 10.1… Vasc… Morrissey E… JBI Evid Sy… 5     21           
+#>  5 37648680  MED    37648680 <NA>  10.3… [Cli… Liu ZT, Che… Zhonghua Ya… 10    59           
+#>  6 37211453  MED    37211453 PMC1… 10.1… Safe… Smith K, He… Vaccine      26    41           
+#>  7 37479685  MED    37479685 PMC1… 10.1… SuPA… Wei C, Datt… Nat Commun   1     14           
+#>  8 37652823  MED    37652823 <NA>  10.1… Immu… Raiser F, D… Vaccine      <NA>  <NA>         
+#>  9 37714559  MED    37714559 <NA>  10.1… New-… Kobayashi N… BMJ Case Rep 9     16           
+#> 10 PPR525786 PPR    <NA>     <NA>  10.1… The … Alihsan B, … <NA>         <NA>  <NA>         
 #> # ℹ 90 more rows
-#> # ℹ 20 more variables: journalVolume <chr>, pubYear <chr>, journalIssn <chr>,
-#> #   pageInfo <chr>, pubType <chr>, isOpenAccess <chr>, inEPMC <chr>,
-#> #   inPMC <chr>, hasPDF <chr>, hasBook <chr>, hasSuppl <chr>,
-#> #   citedByCount <int>, hasReferences <chr>, hasTextMinedTerms <chr>,
-#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>,
-#> #   hasTMAccessionNumbers <chr>, firstIndexDate <chr>, …
+#> # ℹ 19 more variables: pubYear <chr>, journalIssn <chr>, pageInfo <chr>, pubType <chr>,
+#> #   isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>, hasPDF <chr>, hasBook <chr>,
+#> #   hasSuppl <chr>, citedByCount <int>, hasReferences <chr>, hasTextMinedTerms <chr>,
+#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>, hasTMAccessionNumbers <chr>,
+#> #   firstIndexDate <chr>, firstPublicationDate <chr>, versionNumber <int>
 ```
 
 Be aware that Europe PMC expands queries with MeSH synonyms by default. You can turn this behavior off using the `synonym = FALSE` parameter.
@@ -124,14 +122,14 @@ tt_oa
 #>    <int>    <dbl>      <dbl>
 #>  1  1995   449216       1471
 #>  2  1996   458644       1529
-#>  3  1997   456805       1834
-#>  4  1998   474695       1756
+#>  3  1997   456804       1834
+#>  4  1998   474693       1756
 #>  5  1999   493837       1951
 #>  6  2000   532142       2078
-#>  7  2001   545709       2179
-#>  8  2002   561496       2350
+#>  7  2001   545702       2180
+#>  8  2002   561497       2351
 #>  9  2003   588612       2596
-#> 10  2004   628192       2830
+#> 10  2004   628176       2831
 #> # ℹ 15 more rows
 # we use ggplot2 for plotting the graph
 library(ggplot2)
