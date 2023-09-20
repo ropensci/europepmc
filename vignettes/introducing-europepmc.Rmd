@@ -1,7 +1,7 @@
 ---
 title: "Overview"
 author: "Najko Jahn"
-date: "2023-08-21"
+date: "2023-09-20"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
@@ -37,26 +37,25 @@ In the following, some examples demonstrate how to search Europe PMC with R.
 ```r
 library(europepmc)
 europepmc::epmc_search('malaria')
-#> # A tibble: 100 × 28
-#>    id           source pmid    pmcid doi   title authorString journalTitle issue
-#>    <chr>        <chr>  <chr>   <chr> <chr> <chr> <chr>        <chr>        <chr>
-#>  1 36419237     MED    364192… PMC9… 10.1… Path… Walker IS, … Virulence    1    
-#>  2 37158217     MED    371582… PMC1… 10.1… Mobi… Kollipara A… Glob Health… 1    
-#>  3 37310126     MED    373101… PMC1… 10.1… Clin… Bi D, Huang… Ann Med      1    
-#>  4 37459385     MED    374593… <NA>  10.1… A co… Eisenberg S… Glob Health… 1    
-#>  5 36871259     MED    368712… PMC9… 10.1… Asse… Jantausch B… Med Educ On… 1    
-#>  6 37053493     MED    370534… <NA>  10.1… Opti… Kalula A, M… J Biol Dyn   1    
-#>  7 37191627     MED    371916… PMC1… 10.1… Huma… Ellis R, We… Hum Vaccin … 1    
-#>  8 37165851     MED    371658… PMC1… 10.1… Tria… Cho Y, Awoo… Glob Health… 1    
-#>  9 37074313     MED    370743… PMC9… 10.1… Deng… Asaga Mac P… Ann Med      1    
-#> 10 IND607962262 AGR    <NA>    <NA>  <NA>  Effe… Ojueromi OO… Journal of … 11   
+#> # A tibble: 100 × 29
+#>    id       source pmid     pmcid  doi   title authorString journalTitle issue journalVolume
+#>    <chr>    <chr>  <chr>    <chr>  <chr> <chr> <chr>        <chr>        <chr> <chr>        
+#>  1 36419237 MED    36419237 PMC98… 10.1… Path… Walker IS, … Virulence    1     14           
+#>  2 37158217 MED    37158217 PMC10… 10.1… Mobi… Kollipara A… Glob Health… 1     16           
+#>  3 37459385 MED    37459385 PMC10… 10.1… A co… Eisenberg S… Glob Health… 1     16           
+#>  4 37310126 MED    37310126 PMC10… 10.1… Clin… Bi D, Huang… Ann Med      1     55           
+#>  5 36871259 MED    36871259 PMC99… 10.1… Asse… Jantausch B… Med Educ On… 1     28           
+#>  6 37053493 MED    37053493 <NA>   10.1… Opti… Kalula A, M… J Biol Dyn   1     17           
+#>  7 37191627 MED    37191627 PMC10… 10.1… Huma… Ellis R, We… Hum Vaccin … 1     19           
+#>  8 37490025 MED    37490025 PMC10… 10.1… Mort… Oduor C, Om… Glob Health… 1     16           
+#>  9 37165851 MED    37165851 PMC10… 10.1… Tria… Cho Y, Awoo… Glob Health… 1     16           
+#> 10 37074313 MED    37074313 PMC99… 10.1… Deng… Asaga Mac P… Ann Med      1     55           
 #> # ℹ 90 more rows
-#> # ℹ 19 more variables: journalVolume <chr>, pubYear <chr>, journalIssn <chr>,
-#> #   pageInfo <chr>, pubType <chr>, isOpenAccess <chr>, inEPMC <chr>,
-#> #   inPMC <chr>, hasPDF <chr>, hasBook <chr>, hasSuppl <chr>,
-#> #   citedByCount <int>, hasReferences <chr>, hasTextMinedTerms <chr>,
-#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>,
-#> #   hasTMAccessionNumbers <chr>, firstIndexDate <chr>, …
+#> # ℹ 19 more variables: pubYear <chr>, journalIssn <chr>, pageInfo <chr>, pubType <chr>,
+#> #   isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>, hasPDF <chr>, hasBook <chr>,
+#> #   hasSuppl <chr>, citedByCount <int>, hasReferences <chr>, hasTextMinedTerms <chr>,
+#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>, hasTMAccessionNumbers <chr>,
+#> #   firstIndexDate <chr>, firstPublicationDate <chr>, versionNumber <int>
 ```
 
 It is worth noting that Europe PMC expands queries with MeSH synonyms by default, a behavior which can be turned off with the `synonym` parameter. 
@@ -64,26 +63,25 @@ It is worth noting that Europe PMC expands queries with MeSH synonyms by default
 
 ```r
 europepmc::epmc_search('malaria', synonym = FALSE)
-#> # A tibble: 100 × 28
-#>    id           source pmid    pmcid doi   title authorString journalTitle issue
-#>    <chr>        <chr>  <chr>   <chr> <chr> <chr> <chr>        <chr>        <chr>
-#>  1 37158217     MED    371582… PMC1… 10.1… Mobi… Kollipara A… Glob Health… 1    
-#>  2 36419237     MED    364192… PMC9… 10.1… Path… Walker IS, … Virulence    1    
-#>  3 37459385     MED    374593… <NA>  10.1… A co… Eisenberg S… Glob Health… 1    
-#>  4 37053493     MED    370534… <NA>  10.1… Opti… Kalula A, M… J Biol Dyn   1    
-#>  5 37310126     MED    373101… PMC1… 10.1… Clin… Bi D, Huang… Ann Med      1    
-#>  6 36871259     MED    368712… PMC9… 10.1… Asse… Jantausch B… Med Educ On… 1    
-#>  7 37165851     MED    371658… PMC1… 10.1… Tria… Cho Y, Awoo… Glob Health… 1    
-#>  8 37074313     MED    370743… PMC9… 10.1… Deng… Asaga Mac P… Ann Med      1    
-#>  9 IND607962262 AGR    <NA>    <NA>  <NA>  Effe… Ojueromi OO… Journal of … 11   
-#> 10 37580690     MED    375806… <NA>  10.1… Tren… Teka H, Gol… Malar J      1    
+#> # A tibble: 100 × 29
+#>    id       source pmid     pmcid  doi   title authorString journalTitle issue journalVolume
+#>    <chr>    <chr>  <chr>    <chr>  <chr> <chr> <chr>        <chr>        <chr> <chr>        
+#>  1 37158217 MED    37158217 PMC10… 10.1… Mobi… Kollipara A… Glob Health… 1     16           
+#>  2 36419237 MED    36419237 PMC98… 10.1… Path… Walker IS, … Virulence    1     14           
+#>  3 37459385 MED    37459385 PMC10… 10.1… A co… Eisenberg S… Glob Health… 1     16           
+#>  4 37053493 MED    37053493 <NA>   10.1… Opti… Kalula A, M… J Biol Dyn   1     17           
+#>  5 37310126 MED    37310126 PMC10… 10.1… Clin… Bi D, Huang… Ann Med      1     55           
+#>  6 36871259 MED    36871259 PMC99… 10.1… Asse… Jantausch B… Med Educ On… 1     28           
+#>  7 37717079 MED    37717079 PMC10… 10.1… Zoon… Fornace KM,… Nat Commun   1     14           
+#>  8 37691114 MED    37691114 PMC10… 10.1… Mala… Chen Y, Zha… Malar J      1     22           
+#>  9 37700307 MED    37700307 PMC10… 10.1… Asse… Abdul Rahim… Malar J      1     22           
+#> 10 37700321 MED    37700321 PMC10… 10.1… Know… Adum P, Agy… Malar J      1     22           
 #> # ℹ 90 more rows
-#> # ℹ 19 more variables: journalVolume <chr>, pubYear <chr>, journalIssn <chr>,
-#> #   pageInfo <chr>, pubType <chr>, isOpenAccess <chr>, inEPMC <chr>,
-#> #   inPMC <chr>, hasPDF <chr>, hasBook <chr>, hasSuppl <chr>,
-#> #   citedByCount <int>, hasReferences <chr>, hasTextMinedTerms <chr>,
-#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>,
-#> #   hasTMAccessionNumbers <chr>, firstIndexDate <chr>, …
+#> # ℹ 19 more variables: pubYear <chr>, journalIssn <chr>, pageInfo <chr>, pubType <chr>,
+#> #   isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>, hasPDF <chr>, hasBook <chr>,
+#> #   hasSuppl <chr>, citedByCount <int>, hasReferences <chr>, hasTextMinedTerms <chr>,
+#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>, hasTMAccessionNumbers <chr>,
+#> #   firstIndexDate <chr>, firstPublicationDate <chr>, versionNumber <int>
 ```
 
 To get an exact match, use quotes as in the following example:
@@ -92,25 +90,24 @@ To get an exact match, use quotes as in the following example:
 ```r
 europepmc::epmc_search('"Human malaria parasites"')
 #> # A tibble: 100 × 29
-#>    id     source pmid  doi   title authorString journalTitle issue journalVolume
-#>    <chr>  <chr>  <chr> <chr> <chr> <chr>        <chr>        <chr> <chr>        
-#>  1 37452… MED    3745… 10.1… Mole… Lazrek Y, F… Sci Rep      1     13           
-#>  2 37277… MED    3727… 10.1… Sexu… Harris CT, … Nat Microbi… 7     8            
-#>  3 36777… MED    3677… 10.3… A no… Das R, Vash… Front Vet S… <NA>  10           
-#>  4 37365… MED    3736… 10.2… Virt… Yasir M, Pa… Curr Comput… <NA>  <NA>         
-#>  5 37454… MED    3745… 10.1… Simi… Fornace KM,… Lancet Infe… <NA>  <NA>         
-#>  6 PPR66… PPR    <NA>  10.1… Gene… Suárez-Cort… <NA>         <NA>  <NA>         
-#>  7 37121… MED    3712… 10.1… The … Thompson TA… Trends Para… 7     39           
-#>  8 36007… MED    3600… 10.1… Bulk… Li X, Kumar… Parasitol I… <NA>  91           
-#>  9 PPR55… PPR    <NA>  10.1… A co… Zhang X, Fl… <NA>         <NA>  <NA>         
-#> 10 36495… MED    3649… 10.1… A ra… Dong L, Li … Clin Chim A… <NA>  539          
+#>    id        source pmid   doi   title authorString journalTitle issue journalVolume pubYear
+#>    <chr>     <chr>  <chr>  <chr> <chr> <chr>        <chr>        <chr> <chr>         <chr>  
+#>  1 37277533  MED    37277… 10.1… Sexu… Harris CT, … Nat Microbi… 7     8             2023   
+#>  2 36777671  MED    36777… 10.3… A no… Das R, Vash… Front Vet S… <NA>  10            2023   
+#>  3 37696509  MED    37696… 10.4… A No… Chaianantak… Am J Trop M… <NA>  <NA>          2023   
+#>  4 37365785  MED    37365… 10.2… Virt… Yasir M, Pa… Curr Comput… <NA>  <NA>          2023   
+#>  5 37454671  MED    37454… 10.1… Simi… Fornace KM,… Lancet Infe… <NA>  <NA>          2023   
+#>  6 PPR665403 PPR    <NA>   10.1… Gene… Suárez-Cort… <NA>         <NA>  <NA>          2023   
+#>  7 36007706  MED    36007… 10.1… Bulk… Li X, Kumar… Parasitol I… <NA>  91            2022   
+#>  8 PPR552791 PPR    <NA>   10.1… A co… Zhang X, Fl… <NA>         <NA>  <NA>          2022   
+#>  9 37121862  MED    37121… 10.1… The … Thompson TA… Trends Para… 7     39            2023   
+#> 10 36495929  MED    36495… 10.1… A ra… Dong L, Li … Clin Chim A… <NA>  539           2023   
 #> # ℹ 90 more rows
-#> # ℹ 20 more variables: pubYear <chr>, journalIssn <chr>, pageInfo <chr>,
-#> #   pubType <chr>, isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>, hasPDF <chr>,
-#> #   hasBook <chr>, hasSuppl <chr>, citedByCount <int>, hasReferences <chr>,
-#> #   hasTextMinedTerms <chr>, hasDbCrossReferences <chr>, hasLabsLinks <chr>,
-#> #   hasTMAccessionNumbers <chr>, firstIndexDate <chr>,
-#> #   firstPublicationDate <chr>, pmcid <chr>, versionNumber <int>
+#> # ℹ 19 more variables: journalIssn <chr>, pageInfo <chr>, pubType <chr>,
+#> #   isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>, hasPDF <chr>, hasBook <chr>,
+#> #   hasSuppl <chr>, citedByCount <int>, hasReferences <chr>, hasTextMinedTerms <chr>,
+#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>, hasTMAccessionNumbers <chr>,
+#> #   firstIndexDate <chr>, firstPublicationDate <chr>, pmcid <chr>, versionNumber <int>
 ```
 
 ### Managing search results
@@ -122,24 +119,23 @@ By default, 100 records are returned, but the number of results can be expanded 
 ```r
 europepmc::epmc_search('"Human malaria parasites"', limit = 10)
 #> # A tibble: 10 × 28
-#>    id     source pmid  doi   title authorString journalTitle issue journalVolume
-#>    <chr>  <chr>  <chr> <chr> <chr> <chr>        <chr>        <chr> <chr>        
-#>  1 37452… MED    3745… 10.1… Mole… Lazrek Y, F… Sci Rep      1     13           
-#>  2 37277… MED    3727… 10.1… Sexu… Harris CT, … Nat Microbi… 7     8            
-#>  3 36777… MED    3677… 10.3… A no… Das R, Vash… Front Vet S… <NA>  10           
-#>  4 37365… MED    3736… 10.2… Virt… Yasir M, Pa… Curr Comput… <NA>  <NA>         
-#>  5 37454… MED    3745… 10.1… Simi… Fornace KM,… Lancet Infe… <NA>  <NA>         
-#>  6 PPR66… PPR    <NA>  10.1… Gene… Suárez-Cort… <NA>         <NA>  <NA>         
-#>  7 37121… MED    3712… 10.1… The … Thompson TA… Trends Para… 7     39           
-#>  8 36007… MED    3600… 10.1… Bulk… Li X, Kumar… Parasitol I… <NA>  91           
-#>  9 PPR55… PPR    <NA>  10.1… A co… Zhang X, Fl… <NA>         <NA>  <NA>         
-#> 10 36495… MED    3649… 10.1… A ra… Dong L, Li … Clin Chim A… <NA>  539          
-#> # ℹ 19 more variables: pubYear <chr>, journalIssn <chr>, pageInfo <chr>,
-#> #   pubType <chr>, isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>, hasPDF <chr>,
-#> #   hasBook <chr>, hasSuppl <chr>, citedByCount <int>, hasReferences <chr>,
-#> #   hasTextMinedTerms <chr>, hasDbCrossReferences <chr>, hasLabsLinks <chr>,
-#> #   hasTMAccessionNumbers <chr>, firstIndexDate <chr>,
-#> #   firstPublicationDate <chr>, pmcid <chr>
+#>    id        source pmid   doi   title authorString journalTitle issue journalVolume pubYear
+#>    <chr>     <chr>  <chr>  <chr> <chr> <chr>        <chr>        <chr> <chr>         <chr>  
+#>  1 37277533  MED    37277… 10.1… Sexu… Harris CT, … Nat Microbi… 7     8             2023   
+#>  2 36777671  MED    36777… 10.3… A no… Das R, Vash… Front Vet S… <NA>  10            2023   
+#>  3 37696509  MED    37696… 10.4… A No… Chaianantak… Am J Trop M… <NA>  <NA>          2023   
+#>  4 37365785  MED    37365… 10.2… Virt… Yasir M, Pa… Curr Comput… <NA>  <NA>          2023   
+#>  5 37454671  MED    37454… 10.1… Simi… Fornace KM,… Lancet Infe… <NA>  <NA>          2023   
+#>  6 PPR665403 PPR    <NA>   10.1… Gene… Suárez-Cort… <NA>         <NA>  <NA>          2023   
+#>  7 36007706  MED    36007… 10.1… Bulk… Li X, Kumar… Parasitol I… <NA>  91            2022   
+#>  8 PPR552791 PPR    <NA>   10.1… A co… Zhang X, Fl… <NA>         <NA>  <NA>          2022   
+#>  9 37121862  MED    37121… 10.1… The … Thompson TA… Trends Para… 7     39            2023   
+#> 10 36495929  MED    36495… 10.1… A ra… Dong L, Li … Clin Chim A… <NA>  539           2023   
+#> # ℹ 18 more variables: journalIssn <chr>, pageInfo <chr>, pubType <chr>,
+#> #   isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>, hasPDF <chr>, hasBook <chr>,
+#> #   hasSuppl <chr>, citedByCount <int>, hasReferences <chr>, hasTextMinedTerms <chr>,
+#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>, hasTMAccessionNumbers <chr>,
+#> #   firstIndexDate <chr>, firstPublicationDate <chr>, pmcid <chr>
 ```
 
 Results are sorted by relevance. Other options via the `sort` parameter are 
@@ -161,18 +157,17 @@ my_dois <- c(
   )
 europepmc::epmc_search_by_doi(doi = my_dois)
 #> # A tibble: 4 × 28
-#>   id      source pmid  doi   title authorString journalTitle issue journalVolume
-#>   <chr>   <chr>  <chr> <chr> <chr> <chr>        <chr>        <chr> <chr>        
-#> 1 289578… MED    2895… 10.1… Clin… Schnieder M… Eur Neurol   5-6   78           
-#> 2 289413… MED    2894… 10.1… Conc… Doeppner TR… Stem Cells … 11    6            
-#> 3 290181… MED    2901… 10.1… One-… Psychogios … Stroke       11    48           
-#> 4 286236… MED    2862… 10.1… Defe… Carboni E, … Neuromolecu… 2-3   19           
-#> # ℹ 19 more variables: pubYear <chr>, journalIssn <chr>, pageInfo <chr>,
-#> #   pubType <chr>, isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>, hasPDF <chr>,
-#> #   hasBook <chr>, hasSuppl <chr>, citedByCount <int>, hasReferences <chr>,
-#> #   hasTextMinedTerms <chr>, hasDbCrossReferences <chr>, hasLabsLinks <chr>,
-#> #   hasTMAccessionNumbers <chr>, firstIndexDate <chr>,
-#> #   firstPublicationDate <chr>, pmcid <chr>
+#>   id       source pmid     doi   title authorString journalTitle issue journalVolume pubYear
+#>   <chr>    <chr>  <chr>    <chr> <chr> <chr>        <chr>        <chr> <chr>         <chr>  
+#> 1 28957815 MED    28957815 10.1… Clin… Schnieder M… Eur Neurol   5-6   78            2017   
+#> 2 28941317 MED    28941317 10.1… Conc… Doeppner TR… Stem Cells … 11    6             2017   
+#> 3 29018132 MED    29018132 10.1… One-… Psychogios … Stroke       11    48            2017   
+#> 4 28623611 MED    28623611 10.1… Defe… Carboni E, … Neuromolecu… 2-3   19            2017   
+#> # ℹ 18 more variables: journalIssn <chr>, pageInfo <chr>, pubType <chr>,
+#> #   isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>, hasPDF <chr>, hasBook <chr>,
+#> #   hasSuppl <chr>, citedByCount <int>, hasReferences <chr>, hasTextMinedTerms <chr>,
+#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>, hasTMAccessionNumbers <chr>,
+#> #   firstIndexDate <chr>, firstPublicationDate <chr>, pmcid <chr>
 ```
 
 ### Output options
@@ -192,24 +187,23 @@ Use the Europe PMC query syntax to search by author names:
 ```r
 europepmc::epmc_search('AUTH:"Salmon Maelle"')
 #> # A tibble: 10 × 28
-#>    id     source pmid  doi   title authorString journalTitle issue journalVolume
-#>    <chr>  <chr>  <chr> <chr> <chr> <chr>        <chr>        <chr> <chr>        
-#>  1 30378… MED    3037… 10.1… "Whe… Milà C, Sal… Environ Sci… 22    52           
-#>  2 29751… MED    2975… 10.1… "Use… Kumar MK, S… Environ Pol… <NA>  239          
-#>  3 29778… MED    2977… 10.1… "Wea… Salmon M, M… Environ Int  <NA>  117          
-#>  4 29088… MED    2908… 10.1… "Tim… Schumacher … PLoS One     10    12           
-#>  5 29330… MED    2933… 10.1… "Hea… Mueller N, … Prev Med     <NA>  109          
-#>  6 29626… MED    2962… 10.1… "Dev… Sanchez M, … Sci Total E… <NA>  634          
-#>  7 28606… MED    2860… 10.1… "Int… Tonne C, Sa… Int J Hyg E… 6     220          
-#>  8 28708… MED    2870… 10.3… "Pre… Sanchez M, … Int J Envir… 7     14           
-#>  9 27063… MED    2706… 10.2… "A s… Salmon M, S… Euro Survei… 13    21           
-#> 10 26250… MED    2625… 10.1… "Bay… Salmon M, S… Biom J       6     57           
-#> # ℹ 19 more variables: pubYear <chr>, journalIssn <chr>, pageInfo <chr>,
-#> #   pubType <chr>, isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>, hasPDF <chr>,
-#> #   hasBook <chr>, hasSuppl <chr>, citedByCount <int>, hasReferences <chr>,
-#> #   hasTextMinedTerms <chr>, hasDbCrossReferences <chr>, hasLabsLinks <chr>,
-#> #   hasTMAccessionNumbers <chr>, firstIndexDate <chr>,
-#> #   firstPublicationDate <chr>, pmcid <chr>
+#>    id       source pmid    doi   title authorString journalTitle issue journalVolume pubYear
+#>    <chr>    <chr>  <chr>   <chr> <chr> <chr>        <chr>        <chr> <chr>         <chr>  
+#>  1 30378432 MED    303784… 10.1… "Whe… Milà C, Sal… Environ Sci… 22    52            2018   
+#>  2 29778830 MED    297788… 10.1… "Wea… Salmon M, M… Environ Int  <NA>  117           2018   
+#>  3 29751338 MED    297513… 10.1… "Use… Kumar MK, S… Environ Pol… <NA>  239           2018   
+#>  4 29330030 MED    293300… 10.1… "Hea… Mueller N, … Prev Med     <NA>  109           2018   
+#>  5 29626773 MED    296267… 10.1… "Dev… Sanchez M, … Sci Total E… <NA>  634           2018   
+#>  6 29088243 MED    290882… 10.1… "Tim… Schumacher … PLoS One     10    12            2017   
+#>  7 28606699 MED    286066… 10.1… "Int… Tonne C, Sa… Int J Hyg E… 6     220           2017   
+#>  8 28708095 MED    287080… 10.3… "Pre… Sanchez M, … Int J Envir… 7     14            2017   
+#>  9 27063588 MED    270635… 10.2… "A s… Salmon M, S… Euro Survei… 13    21            2016   
+#> 10 26250543 MED    262505… 10.1… "Bay… Salmon M, S… Biom J       6     57            2015   
+#> # ℹ 18 more variables: journalIssn <chr>, pageInfo <chr>, pubType <chr>,
+#> #   isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>, hasPDF <chr>, hasBook <chr>,
+#> #   hasSuppl <chr>, citedByCount <int>, hasReferences <chr>, hasTextMinedTerms <chr>,
+#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>, hasTMAccessionNumbers <chr>,
+#> #   firstIndexDate <chr>, firstPublicationDate <chr>, pmcid <chr>
 ```
 
 [Europe PMC Advanced Search](https://europepmc.org/advancesearch) has a auto-suggest field for author names if you feel unsure how the name you are searching for is indexed in Europe PMC. Using the Boolean `OR` operator allows searching for more than one spelling variant:
@@ -218,26 +212,25 @@ europepmc::epmc_search('AUTH:"Salmon Maelle"')
 ```r
 q <- 'AUTH:"PÜHLER Alfred" OR AUTH:"Pühler Alfred Prof. Dr." OR AUTH:"Puhler A"'
 europepmc::epmc_search(q, limit = 1000)
-#> # A tibble: 602 × 29
-#>    id       source pmid     pmcid    doi   title authorString journalTitle issue
-#>    <chr>    <chr>  <chr>    <chr>    <chr> <chr> <chr>        <chr>        <chr>
-#>  1 36998097 MED    36998097 PMC1006… 10.1… "Abu… Nelkner J, … Environ Mic… 1    
-#>  2 36748496 MED    36748496 <NA>     10.1… "<i>… Köller N, H… Int J Syst … 12   
-#>  3 36439843 MED    36439843 PMC9682… 10.3… "The… Maus I, Wib… Front Micro… <NA> 
-#>  4 36305336 MED    36305336 PMC9615… 10.2… "Int… Houwaart T,… Euro Survei… 43   
-#>  5 36073816 MED    36073816 PMC9601… 10.1… "Rcg… Castellani … mBio         5    
-#>  6 35151713 MED    35151713 <NA>     10.1… "Two… Steffens T,… J Biotechnol <NA> 
-#>  7 34181711 MED    34181711 PMC8406… 10.1… "Cha… Walker A, H… Clin Infect… 6    
-#>  8 34682252 MED    34682252 PMC8537… 10.3… "Gen… Wibberg D, … J Fungi (Ba… 10   
-#>  9 34592166 MED    34592166 PMC8416… 10.1… "Ear… Krämer B, K… Immunity     11   
-#> 10 33589928 MED    33589928 PMC8425… 10.1… "Imp… Mayer G, Mü… Brief Bioin… 5    
-#> # ℹ 592 more rows
-#> # ℹ 20 more variables: journalVolume <chr>, pubYear <chr>, journalIssn <chr>,
-#> #   pageInfo <chr>, pubType <chr>, isOpenAccess <chr>, inEPMC <chr>,
-#> #   inPMC <chr>, hasPDF <chr>, hasBook <chr>, hasSuppl <chr>,
-#> #   citedByCount <int>, hasReferences <chr>, hasTextMinedTerms <chr>,
-#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>,
-#> #   hasTMAccessionNumbers <chr>, firstIndexDate <chr>, …
+#> # A tibble: 600 × 29
+#>    id       source pmid     pmcid  doi   title authorString journalTitle issue journalVolume
+#>    <chr>    <chr>  <chr>    <chr>  <chr> <chr> <chr>        <chr>        <chr> <chr>        
+#>  1 36998097 MED    36998097 PMC10… 10.1… "Abu… Nelkner J, … Environ Mic… 1     18           
+#>  2 36748496 MED    36748496 <NA>   10.1… "<i>… Köller N, H… Int J Syst … 12    72           
+#>  3 36439843 MED    36439843 PMC96… 10.3… "The… Maus I, Wib… Front Micro… <NA>  13           
+#>  4 36305336 MED    36305336 PMC96… 10.2… "Int… Houwaart T,… Euro Survei… 43    27           
+#>  5 36073816 MED    36073816 PMC96… 10.1… "Rcg… Castellani … mBio         5     13           
+#>  6 35151713 MED    35151713 <NA>   10.1… "Two… Steffens T,… J Biotechnol <NA>  347          
+#>  7 34181711 MED    34181711 PMC84… 10.1… "Cha… Walker A, H… Clin Infect… 6     74           
+#>  8 34682252 MED    34682252 PMC85… 10.3… "Gen… Wibberg D, … J Fungi (Ba… 10    7            
+#>  9 34592166 MED    34592166 PMC84… 10.1… "Ear… Krämer B, K… Immunity     11    54           
+#> 10 33589928 MED    33589928 PMC84… 10.1… "Imp… Mayer G, Mü… Brief Bioin… 5     22           
+#> # ℹ 590 more rows
+#> # ℹ 19 more variables: pubYear <chr>, journalIssn <chr>, pageInfo <chr>, pubType <chr>,
+#> #   isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>, hasPDF <chr>, hasBook <chr>,
+#> #   hasSuppl <chr>, citedByCount <int>, hasReferences <chr>, hasTextMinedTerms <chr>,
+#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>, hasTMAccessionNumbers <chr>,
+#> #   firstIndexDate <chr>, firstPublicationDate <chr>, versionNumber <int>
 ```
 
 There is a considerable overlap between common names. The integration of ORCID, a persistent author identifier, allows unambiguous search for personal publications in Europe PMC. For example, here's how to search for publications written by Bernd Weisshaar (ORCID: <https://orcid.org/0000-0002-7635-3473>) sorted by the number of times cited in descending order:
@@ -246,25 +239,24 @@ There is a considerable overlap between common names. The integration of ORCID, 
 ```r
 europepmc::epmc_search('AUTHORID:"0000-0002-7635-3473"', limit = 200, sort = "cited")
 #> # A tibble: 160 × 28
-#>    id     source pmid  doi   title authorString journalTitle issue journalVolume
-#>    <chr>  <chr>  <chr> <chr> <chr> <chr>        <chr>        <chr> <chr>        
-#>  1 20674… MED    2067… 10.1… MYB … Dubos C, St… Trends Plan… 10    15           
-#>  2 21873… MED    2187… 10.1… The … Wang X, Wan… Nat Genet    10    43           
-#>  3 11597… MED    1159… 10.1… The … Stracke R, … Curr Opin P… 5     4            
-#>  4 11906… MED    1190… 10.1… bZIP… Jakoby M, W… Trends Plan… 3     7            
-#>  5 14756… MED    1475… 10.1… An A… Rosso MG, L… Plant Mol B… 1-2   53           
-#>  6 12679… MED    1267… 10.1… The … Heim MA, Ja… Mol Biol Ev… 5     20           
-#>  7 17419… MED    1741… 10.1… Diff… Stracke R, … Plant J      4     50           
-#>  8 15255… MED    1525… 10.1… TT2,… Baudry A, H… Plant J      3     39           
-#>  9 11080… MED    1108… 10.1… Tran… Jin H, Comi… EMBO J       22    19           
-#> 10 15361… MED    1536… 10.1… Comp… Zimmermann … Plant J      1     40           
+#>    id       source pmid    doi   title authorString journalTitle issue journalVolume pubYear
+#>    <chr>    <chr>  <chr>   <chr> <chr> <chr>        <chr>        <chr> <chr>         <chr>  
+#>  1 20674465 MED    206744… 10.1… MYB … Dubos C, St… Trends Plan… 10    15            2010   
+#>  2 21873998 MED    218739… 10.1… The … Wang X, Wan… Nat Genet    10    43            2011   
+#>  3 11597504 MED    115975… 10.1… The … Stracke R, … Curr Opin P… 5     4             2001   
+#>  4 11906833 MED    119068… 10.1… bZIP… Jakoby M, W… Trends Plan… 3     7             2002   
+#>  5 14756321 MED    147563… 10.1… An A… Rosso MG, L… Plant Mol B… 1-2   53            2003   
+#>  6 12679534 MED    126795… 10.1… The … Heim MA, Ja… Mol Biol Ev… 5     20            2003   
+#>  7 17419845 MED    174198… 10.1… Diff… Stracke R, … Plant J      4     50            2007   
+#>  8 15255866 MED    152558… 10.1… TT2,… Baudry A, H… Plant J      3     39            2004   
+#>  9 11080161 MED    110801… 10.1… Tran… Jin H, Comi… EMBO J       22    19            2000   
+#> 10 15361138 MED    153611… 10.1… Comp… Zimmermann … Plant J      1     40            2004   
 #> # ℹ 150 more rows
-#> # ℹ 19 more variables: pubYear <chr>, journalIssn <chr>, pageInfo <chr>,
-#> #   pubType <chr>, isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>, hasPDF <chr>,
-#> #   hasBook <chr>, hasSuppl <chr>, citedByCount <int>, hasReferences <chr>,
-#> #   hasTextMinedTerms <chr>, hasDbCrossReferences <chr>, hasLabsLinks <chr>,
-#> #   hasTMAccessionNumbers <chr>, firstIndexDate <chr>,
-#> #   firstPublicationDate <chr>, pmcid <chr>
+#> # ℹ 18 more variables: journalIssn <chr>, pageInfo <chr>, pubType <chr>,
+#> #   isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>, hasPDF <chr>, hasBook <chr>,
+#> #   hasSuppl <chr>, citedByCount <int>, hasReferences <chr>, hasTextMinedTerms <chr>,
+#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>, hasTMAccessionNumbers <chr>,
+#> #   firstIndexDate <chr>, firstPublicationDate <chr>, pmcid <chr>
 ```
 
 #### Annotations 
@@ -277,20 +269,19 @@ These automatically identified concepts and term can be retrieved at the article
 ```r
 europepmc::epmc_annotations_by_id(c("MED:28585529", "PMC:PMC1664601"))
 #> # A tibble: 724 × 13
-#>    source ext_id   pmcid    prefix exact postfix name  uri   id    type  section
-#>    <chr>  <chr>    <chr>    <chr>  <chr> <chr>   <chr> <chr> <chr> <chr> <chr>  
-#>  1 MED    28585529 PMC5467… "tive… Beta… " allo… Beta… http… http… Clin… Title …
-#>  2 MED    28585529 PMC5467… "nomi… genes ".\nRa… gene  http… http… Sequ… Title …
-#>  3 MED    28585529 PMC5467… "nomi… genes " is o… gene  http… http… Sequ… Abstra…
-#>  4 MED    28585529 PMC5467… " One… genes " are … gene  http… http… Sequ… Abstra…
-#>  5 MED    28585529 PMC5467… " ide… beet  " (Bet… Beta… http… http… Clin… Abstra…
-#>  6 MED    28585529 PMC5467… "ify … Beta… " ssp.… Beta… http… http… Clin… Abstra…
-#>  7 MED    28585529 PMC5467… "ulga… gene  " Rz2 … gene  http… http… Sequ… Abstra…
-#>  8 MED    28585529 PMC5467… "e ge… geno… " sequ… geno… http… http… Sequ… Abstra…
-#>  9 MED    28585529 PMC5467… "eque… beet  ". Our… Beta… http… http… Clin… Abstra…
-#> 10 MED    28585529 PMC5467… "disc… genes " rele… gene  http… http… Sequ… Abstra…
+#>    source ext_id pmcid prefix exact postfix name  uri   id    type  section provider subType
+#>    <chr>  <chr>  <chr> <chr>  <chr> <chr>   <chr> <chr> <chr> <chr> <chr>   <chr>    <chr>  
+#>  1 MED    28585… PMC5… "tive… Beta… " allo… Beta… http… http… Clin… Title … OntoGene <NA>   
+#>  2 MED    28585… PMC5… "nomi… genes ".\nRa… gene  http… http… Sequ… Title … OntoGene <NA>   
+#>  3 MED    28585… PMC5… "nomi… genes " is o… gene  http… http… Sequ… Abstra… OntoGene <NA>   
+#>  4 MED    28585… PMC5… " One… genes " are … gene  http… http… Sequ… Abstra… OntoGene <NA>   
+#>  5 MED    28585… PMC5… " ide… beet  " (Bet… Beta… http… http… Clin… Abstra… OntoGene <NA>   
+#>  6 MED    28585… PMC5… "ify … Beta… " ssp.… Beta… http… http… Clin… Abstra… OntoGene <NA>   
+#>  7 MED    28585… PMC5… "ulga… gene  " Rz2 … gene  http… http… Sequ… Abstra… OntoGene <NA>   
+#>  8 MED    28585… PMC5… "e ge… geno… " sequ… geno… http… http… Sequ… Abstra… OntoGene <NA>   
+#>  9 MED    28585… PMC5… "eque… beet  ". Our… Beta… http… http… Clin… Abstra… OntoGene <NA>   
+#> 10 MED    28585… PMC5… "disc… genes " rele… gene  http… http… Sequ… Abstra… OntoGene <NA>   
 #> # ℹ 714 more rows
-#> # ℹ 2 more variables: provider <chr>, subType <chr>
 ```
 
 To obtain a list of articles where Europe PMC has text-minded annotations, either subset the resulting data.frame 
@@ -299,26 +290,25 @@ To obtain a list of articles where Europe PMC has text-minded annotations, eithe
 ```r
 tt <- epmc_search("malaria")
 tt[tt$hasTextMinedTerms == "Y" | tt$hasTMAccessionNumbers == "Y",]
-#> # A tibble: 76 × 28
-#>    id           source pmid    pmcid doi   title authorString journalTitle issue
-#>    <chr>        <chr>  <chr>   <chr> <chr> <chr> <chr>        <chr>        <chr>
-#>  1 36419237     MED    364192… PMC9… 10.1… Path… Walker IS, … Virulence    1    
-#>  2 37158217     MED    371582… PMC1… 10.1… Mobi… Kollipara A… Glob Health… 1    
-#>  3 37310126     MED    373101… PMC1… 10.1… Clin… Bi D, Huang… Ann Med      1    
-#>  4 37459385     MED    374593… <NA>  10.1… A co… Eisenberg S… Glob Health… 1    
-#>  5 36871259     MED    368712… PMC9… 10.1… Asse… Jantausch B… Med Educ On… 1    
-#>  6 37053493     MED    370534… <NA>  10.1… Opti… Kalula A, M… J Biol Dyn   1    
-#>  7 37191627     MED    371916… PMC1… 10.1… Huma… Ellis R, We… Hum Vaccin … 1    
-#>  8 37165851     MED    371658… PMC1… 10.1… Tria… Cho Y, Awoo… Glob Health… 1    
-#>  9 37074313     MED    370743… PMC9… 10.1… Deng… Asaga Mac P… Ann Med      1    
-#> 10 IND607962262 AGR    <NA>    <NA>  <NA>  Effe… Ojueromi OO… Journal of … 11   
-#> # ℹ 66 more rows
-#> # ℹ 19 more variables: journalVolume <chr>, pubYear <chr>, journalIssn <chr>,
-#> #   pageInfo <chr>, pubType <chr>, isOpenAccess <chr>, inEPMC <chr>,
-#> #   inPMC <chr>, hasPDF <chr>, hasBook <chr>, hasSuppl <chr>,
-#> #   citedByCount <int>, hasReferences <chr>, hasTextMinedTerms <chr>,
-#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>,
-#> #   hasTMAccessionNumbers <chr>, firstIndexDate <chr>, …
+#> # A tibble: 96 × 29
+#>    id       source pmid     pmcid  doi   title authorString journalTitle issue journalVolume
+#>    <chr>    <chr>  <chr>    <chr>  <chr> <chr> <chr>        <chr>        <chr> <chr>        
+#>  1 36419237 MED    36419237 PMC98… 10.1… Path… Walker IS, … Virulence    1     14           
+#>  2 37158217 MED    37158217 PMC10… 10.1… Mobi… Kollipara A… Glob Health… 1     16           
+#>  3 37459385 MED    37459385 PMC10… 10.1… A co… Eisenberg S… Glob Health… 1     16           
+#>  4 37310126 MED    37310126 PMC10… 10.1… Clin… Bi D, Huang… Ann Med      1     55           
+#>  5 36871259 MED    36871259 PMC99… 10.1… Asse… Jantausch B… Med Educ On… 1     28           
+#>  6 37053493 MED    37053493 <NA>   10.1… Opti… Kalula A, M… J Biol Dyn   1     17           
+#>  7 37191627 MED    37191627 PMC10… 10.1… Huma… Ellis R, We… Hum Vaccin … 1     19           
+#>  8 37490025 MED    37490025 PMC10… 10.1… Mort… Oduor C, Om… Glob Health… 1     16           
+#>  9 37165851 MED    37165851 PMC10… 10.1… Tria… Cho Y, Awoo… Glob Health… 1     16           
+#> 10 37074313 MED    37074313 PMC99… 10.1… Deng… Asaga Mac P… Ann Med      1     55           
+#> # ℹ 86 more rows
+#> # ℹ 19 more variables: pubYear <chr>, journalIssn <chr>, pageInfo <chr>, pubType <chr>,
+#> #   isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>, hasPDF <chr>, hasBook <chr>,
+#> #   hasSuppl <chr>, citedByCount <int>, hasReferences <chr>, hasTextMinedTerms <chr>,
+#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>, hasTMAccessionNumbers <chr>,
+#> #   firstIndexDate <chr>, firstPublicationDate <chr>, versionNumber <int>
 ```
 
 or expand the query choosing an annotation type or provider from the [Europe PMC Advanced Search](https://europepmc.org/advancesearch) query builder.
@@ -327,25 +317,24 @@ or expand the query choosing an annotation type or provider from the [Europe PMC
 ```r
 epmc_search('malaria AND (ANNOTATION_TYPE:"Cell") AND (ANNOTATION_PROVIDER:"Europe PMC")')
 #> # A tibble: 100 × 28
-#>    id     source pmid  doi   title authorString journalTitle issue journalVolume
-#>    <chr>  <chr>  <chr> <chr> <chr> <chr>        <chr>        <chr> <chr>        
-#>  1 30925… MED    3092… 10.1… Cong… Fatima S, S… Pediatr Eme… 12    37           
-#>  2 31808… MED    3180… 10.1… Reti… Villaverde … J Pediatric… 5     9            
-#>  3 31782… MED    3178… 10.1… Incr… Jongo SA, C… Clin Infect… 11    71           
-#>  4 30989… MED    3098… 10.1… Clin… Enane LA, S… J Pediatric… 3     9            
-#>  5 31300… MED    3130… 10.1… Blac… Opoka RO, W… Clin Infect… 11    70           
-#>  6 31505… MED    3150… 10.1… Acut… Oshomah-Bel… J Trop Pedi… 2     66           
-#>  7 31687… MED    3168… 10.1… Eval… Ferdinand D… Trans R Soc… 3     114          
-#>  8 31693… MED    3169… 10.1… Redu… Kingston HW… J Infect Dis 9     221          
-#>  9 31843… MED    3184… 10.1… Arte… Pull L, Lup… Malar J      1     18           
-#> 10 31864… MED    3186… 10.1… Unde… Adhikari SR… Malar J      1     18           
+#>    id       source pmid    doi   title authorString journalTitle issue journalVolume pubYear
+#>    <chr>    <chr>  <chr>   <chr> <chr> <chr>        <chr>        <chr> <chr>         <chr>  
+#>  1 30925567 MED    309255… 10.1… Cong… Fatima S, S… Pediatr Eme… 12    37            2021   
+#>  2 31808816 MED    318088… 10.1… Reti… Villaverde … J Pediatric… 5     9             2020   
+#>  3 31782768 MED    317827… 10.1… Incr… Jongo SA, C… Clin Infect… 11    71            2020   
+#>  4 30989220 MED    309892… 10.1… Clin… Enane LA, S… J Pediatric… 3     9             2020   
+#>  5 31300826 MED    313008… 10.1… Blac… Opoka RO, W… Clin Infect… 11    70            2020   
+#>  6 31505001 MED    315050… 10.1… Acut… Oshomah-Bel… J Trop Pedi… 2     66            2020   
+#>  7 31687768 MED    316877… 10.1… Eval… Ferdinand D… Trans R Soc… 3     114           2020   
+#>  8 31693130 MED    316931… 10.1… Redu… Kingston HW… J Infect Dis 9     221           2020   
+#>  9 31843017 MED    318430… 10.1… Arte… Pull L, Lup… Malar J      1     18            2019   
+#> 10 31864353 MED    318643… 10.1… Unde… Adhikari SR… Malar J      1     18            2019   
 #> # ℹ 90 more rows
-#> # ℹ 19 more variables: pubYear <chr>, journalIssn <chr>, pageInfo <chr>,
-#> #   pubType <chr>, isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>, hasPDF <chr>,
-#> #   hasBook <chr>, hasSuppl <chr>, citedByCount <int>, hasReferences <chr>,
-#> #   hasTextMinedTerms <chr>, hasDbCrossReferences <chr>, hasLabsLinks <chr>,
-#> #   hasTMAccessionNumbers <chr>, firstIndexDate <chr>,
-#> #   firstPublicationDate <chr>, pmcid <chr>
+#> # ℹ 18 more variables: journalIssn <chr>, pageInfo <chr>, pubType <chr>,
+#> #   isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>, hasPDF <chr>, hasBook <chr>,
+#> #   hasSuppl <chr>, citedByCount <int>, hasReferences <chr>, hasTextMinedTerms <chr>,
+#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>, hasTMAccessionNumbers <chr>,
+#> #   firstIndexDate <chr>, firstPublicationDate <chr>, pmcid <chr>
 ```
 
 #### Data integrations
@@ -356,25 +345,24 @@ Another nice feature of Europe PMC is to search for cross-references between Eur
 ```r
 europepmc::epmc_search('(HAS_PDB:y) AND FIRST_PDATE:2016')
 #> # A tibble: 100 × 28
-#>    id       source pmid     pmcid    doi   title authorString journalTitle issue
-#>    <chr>    <chr>  <chr>    <chr>    <chr> <chr> <chr>        <chr>        <chr>
-#>  1 28039433 MED    28039433 PMC5255… 10.1… Stru… Su HP, Rick… Proc Natl A… 3    
-#>  2 28036383 MED    28036383 PMC5201… 10.1… Stru… Kovaľ T, Øs… PLoS One     12   
-#>  3 27977122 MED    27977122 <NA>     10.1… Comp… De Deurwaer… ACS Chem Ne… 5    
-#>  4 28144358 MED    28144358 PMC5238… 10.3… Bioc… Ulrich V, B… Beilstein J… <NA> 
-#>  5 28028551 MED    28028551 <NA>     10.1… Stru… Zhou Z, Liu… Appl Microb… 7    
-#>  6 27958736 MED    27958736 <NA>     10.1… Glyc… Hamark C, B… J Am Chem S… 1    
-#>  7 27959534 MED    27959534 PMC6634… 10.1… Stru… Reed AJ, Vy… J Am Chem S… 1    
-#>  8 28083536 MED    28083536 PMC5183… 10.3… Conf… Paoletti F,… Front Mol B… <NA> 
-#>  9 28024148 MED    28024148 <NA>     10.1… Solu… Bibow S, Po… Nat Struct … 2    
-#> 10 28031486 MED    28031486 PMC5255… 10.1… Stru… Sevrioukova… Proc Natl A… 3    
+#>    id       source pmid     pmcid  doi   title authorString journalTitle issue journalVolume
+#>    <chr>    <chr>  <chr>    <chr>  <chr> <chr> <chr>        <chr>        <chr> <chr>        
+#>  1 28039433 MED    28039433 PMC52… 10.1… "Str… Su HP, Rick… Proc Natl A… 3     114          
+#>  2 28036383 MED    28036383 PMC52… 10.1… "Str… Kovaľ T, Øs… PLoS One     12    11           
+#>  3 27977122 MED    27977122 <NA>   10.1… "Com… De Deurwaer… ACS Chem Ne… 5     8            
+#>  4 28144358 MED    28144358 PMC52… 10.3… "Bio… Ulrich V, B… Beilstein J… <NA>  12           
+#>  5 28028551 MED    28028551 <NA>   10.1… "Str… Zhou Z, Liu… Appl Microb… 7     101          
+#>  6 27958736 MED    27958736 <NA>   10.1… "Gly… Hamark C, B… J Am Chem S… 1     139          
+#>  7 27959534 MED    27959534 PMC66… 10.1… "Str… Reed AJ, Vy… J Am Chem S… 1     139          
+#>  8 27989121 MED    27989121 PMC58… 10.1… "Sho… Lin J, Pozh… Biochemistry 2     56           
+#>  9 27815281 MED    27815281 PMC52… 10.1… "Str… Wakamatsu T… Appl Enviro… 2     83           
+#> 10 28083536 MED    28083536 PMC51… 10.3… "Con… Paoletti F,… Front Mol B… <NA>  3            
 #> # ℹ 90 more rows
-#> # ℹ 19 more variables: journalVolume <chr>, pubYear <chr>, journalIssn <chr>,
-#> #   pageInfo <chr>, pubType <chr>, isOpenAccess <chr>, inEPMC <chr>,
-#> #   inPMC <chr>, hasPDF <chr>, hasBook <chr>, hasSuppl <chr>,
-#> #   citedByCount <int>, hasReferences <chr>, hasTextMinedTerms <chr>,
-#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>,
-#> #   hasTMAccessionNumbers <chr>, firstIndexDate <chr>, …
+#> # ℹ 18 more variables: pubYear <chr>, journalIssn <chr>, pageInfo <chr>, pubType <chr>,
+#> #   isOpenAccess <chr>, inEPMC <chr>, inPMC <chr>, hasPDF <chr>, hasBook <chr>,
+#> #   hasSuppl <chr>, citedByCount <int>, hasReferences <chr>, hasTextMinedTerms <chr>,
+#> #   hasDbCrossReferences <chr>, hasLabsLinks <chr>, hasTMAccessionNumbers <chr>,
+#> #   firstIndexDate <chr>, firstPublicationDate <chr>
 ```
 
 The following sources are supported
@@ -398,22 +386,21 @@ Europe PMC let us also obtain citation metadata and reference sections. For retr
 
 ```r
 europepmc::epmc_citations("9338777", limit = 500)
-#> # A tibble: 240 × 11
-#>    id       source citationType   title authorString journalAbbreviation pubYear
-#>    <chr>    <chr>  <chr>          <chr> <chr>        <chr>                 <int>
-#>  1 36883860 MED    research supp… "Iso… Rodrigues C… J Virol                2023
-#>  2 36790562 MED    review; journ… "Por… Liu Y, Niu … Funct Integr Genom…    2023
-#>  3 36417007 MED    research-arti… "Hum… Lowe JWE.    Hist Philos Life S…    2022
-#>  4 35729348 MED    research supp… "Det… Ishihara S,… Sci Rep                2022
-#>  5 35437972 MED    research-arti… "Sca… Chen JQ, Zh… Zool Res               2022
-#>  6 34834962 MED    im; research … "Por… Denner J.    Viruses                2021
-#>  7 34578447 MED    im; research … "Hig… Denner J, S… Viruses                2021
-#>  8 33353186 MED    im; review-ar… "Xen… Galow AM, G… Int J Mol Sci          2020
-#>  9 31565893 MED    research-arti… "Reg… Chung HC, N… J Vet Sci              2019
-#> 10 30230709 MED    research supp… "Bio… Legallais C… Adv Healthc Mater      2018
-#> # ℹ 230 more rows
-#> # ℹ 4 more variables: volume <chr>, issue <chr>, pageInfo <chr>,
-#> #   citedByCount <int>
+#> # A tibble: 241 × 11
+#>    id       source citationType  title authorString journalAbbreviation pubYear volume issue
+#>    <chr>    <chr>  <chr>         <chr> <chr>        <chr>                 <int> <chr>  <chr>
+#>  1 37605152 MED    research sup… "Ana… Flecks M, F… Retrovirology          2023 20     1    
+#>  2 36883860 MED    research sup… "Iso… Rodrigues C… J Virol                2023 97     3    
+#>  3 36790562 MED    review; jour… "Por… Liu Y, Niu … Funct Integr Genom…    2023 23     1    
+#>  4 36417007 MED    research-art… "Hum… Lowe JWE.    Hist Philos Life S…    2022 44     4    
+#>  5 35729348 MED    research sup… "Det… Ishihara S,… Sci Rep                2022 12     1    
+#>  6 35437972 MED    research-art… "Sca… Chen JQ, Zh… Zool Res               2022 43     3    
+#>  7 34834962 MED    im; research… "Por… Denner J.    Viruses                2021 13     11   
+#>  8 34578447 MED    im; research… "Hig… Denner J, S… Viruses                2021 13     9    
+#>  9 33353186 MED    im; review-a… "Xen… Galow AM, G… Int J Mol Sci          2020 21     24   
+#> 10 31565893 MED    research-art… "Reg… Chung HC, N… J Vet Sci              2019 20     5    
+#> # ℹ 231 more rows
+#> # ℹ 2 more variables: pageInfo <chr>, citedByCount <int>
 ```
 
 For reference section from an article:
@@ -422,22 +409,21 @@ For reference section from an article:
 ```r
 europepmc::epmc_refs("28632490", limit = 200)
 #> # A tibble: 169 × 19
-#>    id       source citationType    title  authorString journalAbbreviation issue
-#>    <chr>    <chr>  <chr>           <chr>  <chr>        <chr>               <chr>
-#>  1 12002480 MED    JOURNAL ARTICLE Tricl… Adolfsson-E… Chemosphere         9-10 
-#>  2 18795164 MED    JOURNAL ARTICLE In vi… Ahn KC, Zha… Environ Health Per… 9    
-#>  3 18556606 MED    JOURNAL ARTICLE Effec… Aiello AE, … Am J Public Health  8    
-#>  4 17683018 MED    JOURNAL ARTICLE Consu… Aiello AE, … Clin Infect Dis     <NA> 
-#>  5 15273108 MED    JOURNAL ARTICLE Relat… Aiello AE, … Antimicrob Agents … 8    
-#>  6 18207219 MED    JOURNAL ARTICLE The i… Allmyr M, H… Sci Total Environ   1    
-#>  7 17007908 MED    JOURNAL ARTICLE Tricl… Allmyr M, A… Sci Total Environ   1    
-#>  8 26948762 MED    JOURNAL ARTICLE Press… Alvarez-Riv… J Chromatogr A      <NA> 
-#>  9 23192912 MED    JOURNAL ARTICLE Expos… Anderson SE… Toxicol Sci         1    
-#> 10 25837385 MED    JOURNAL ARTICLE Obser… Vladar EK, … Methods Cell Biol   <NA> 
+#>    id       source citationType  title authorString journalAbbreviation issue pubYear volume
+#>    <chr>    <chr>  <chr>         <chr> <chr>        <chr>               <chr>   <int> <chr> 
+#>  1 12002480 MED    JOURNAL ARTI… Tric… Adolfsson-E… Chemosphere         9-10     2002 46    
+#>  2 18795164 MED    JOURNAL ARTI… In v… Ahn KC, Zha… Environ Health Per… 9        2008 116   
+#>  3 18556606 MED    JOURNAL ARTI… Effe… Aiello AE, … Am J Public Health  8        2008 98    
+#>  4 17683018 MED    JOURNAL ARTI… Cons… Aiello AE, … Clin Infect Dis     <NA>     2007 45 Su…
+#>  5 15273108 MED    JOURNAL ARTI… Rela… Aiello AE, … Antimicrob Agents … 8        2004 48    
+#>  6 18207219 MED    JOURNAL ARTI… The … Allmyr M, H… Sci Total Environ   1        2008 393   
+#>  7 17007908 MED    JOURNAL ARTI… Tric… Allmyr M, A… Sci Total Environ   1        2006 372   
+#>  8 26948762 MED    JOURNAL ARTI… Pres… Alvarez-Riv… J Chromatogr A      <NA>     2016 1440  
+#>  9 23192912 MED    JOURNAL ARTI… Expo… Anderson SE… Toxicol Sci         1        2012 132   
+#> 10 25837385 MED    JOURNAL ARTI… Obse… Vladar EK, … Methods Cell Biol   <NA>     2015 127   
 #> # ℹ 159 more rows
-#> # ℹ 12 more variables: pubYear <int>, volume <chr>, pageInfo <chr>,
-#> #   citedOrder <int>, match <chr>, issn <chr>, essn <chr>,
-#> #   publicationTitle <chr>, publisherLoc <chr>, publisherName <chr>,
+#> # ℹ 10 more variables: pageInfo <chr>, citedOrder <int>, match <chr>, essn <chr>,
+#> #   issn <chr>, publicationTitle <chr>, publisherLoc <chr>, publisherName <chr>,
 #> #   externalLink <chr>, doi <chr>
 ```
 
@@ -452,8 +438,8 @@ Fulltext as xml document can accessed via the PMID or the PubMed Central ID (PMC
 europepmc::epmc_ftxt("PMC3257301")
 #> {xml_document}
 #> <article article-type="research-article" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mml="http://www.w3.org/1998/Math/MathML">
-#> [1] <front>\n  <journal-meta>\n    <journal-id journal-id-type="nlm-ta">PLoS  ...
-#> [2] <body>\n  <sec id="s1">\n    <title>Introduction</title>\n    <p>Atmosphe ...
-#> [3] <back>\n  <ack>\n    <p>We would like to thank Dr. C. Gourlay and Dr. T.  ...
+#> [1] <front>\n  <journal-meta>\n    <journal-id journal-id-type="nlm-ta">PLoS Pathog</jour ...
+#> [2] <body>\n  <sec id="s1">\n    <title>Introduction</title>\n    <p>Atmospheric carbon d ...
+#> [3] <back>\n  <ack>\n    <p>We would like to thank Dr. C. Gourlay and Dr. T. von der Haar ...
 ```
 
