@@ -1,12 +1,12 @@
 Package: europepmc
 Title: R Interface to the Europe PubMed Central RESTful Web Service
-Version: 0.4.2.009
+Version: 0.4.3
 Authors@R: c(
            person("Najko", "Jahn", email = "najko.jahn@gmail.com",
            role = c("aut", "cre", "cph")),
            person("Maëlle", "Salmon", role = c("ctb")))
 License: GPL-3
-Date: 2023-08-20
+Date: 2023-09-20
 URL: https://docs.ropensci.org/europepmc/, https://github.com/ropensci/europepmc/
 BugReports: https://github.com/ropensci/europepmc/issues
 Description: An R Client for the Europe PubMed Central RESTful Web Service

@@ -1,3 +1,7 @@
+# europepmc 0.4.3
+
+- Skip test on CRAN
+
 # europepmc 0.4.2
 
 - Minor fixes documentation
