@@ -1,6 +1,6 @@
-#' Fetch Europe PMC full texts
+#' Fetch Europe PMC full text
 #'
-#' This function loads full texts into R. Full texts are in XML format and are
+#' This function loads one full text into R. Full text is in XML format and is
 #' only provided for the Open Access subset of Europe PMC.
 #'
 #' @param ext_id character, PMCID. 
@@ -15,8 +15,8 @@
 #'   epmc_ftxt("PMC3639880")
 #'   }
 epmc_ftxt <- function(ext_id = NULL) {
-  if (!grepl("^PMC", ext_id))
-    stop("Please provide a PMCID, i.e. ids starting with 'PMC'")
+  if (!grepl("^PMC", ext_id) || length(ext_id) != 1)
+    stop("Please provide one PMCID, i.e. id starting with 'PMC'")
   # call api
   req <-
     httr::RETRY("GET",
