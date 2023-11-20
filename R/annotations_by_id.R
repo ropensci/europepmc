@@ -26,9 +26,9 @@
 #'}
 #'
 #' @examples \dontrun{
-#'   annotations_by_id("MED:28585529")
+#'   epmc_annotations_by_id("MED:28585529")
 #'   # multiple ids
-#'   annotations_by_id(c("MED:28585529", "PMC:PMC1664601"))
+#'   epmc_annotations_by_id(c("MED:28585529", "PMC:PMC1664601"))
 #' }
 #' @export
 epmc_annotations_by_id <- function(ids = NULL) {
